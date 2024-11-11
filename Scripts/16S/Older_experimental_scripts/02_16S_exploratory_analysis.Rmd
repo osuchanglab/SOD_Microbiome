@@ -1,0 +1,409 @@
+---
+title: "16S Exploratory Analysis"
+output: html_document
+date: "2024-06-11"
+---
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/SOD_DADS_microbiome")
+
+library(phyloseq); packageVersion("phyloseq")
+library(ggplot2); packageVersion("ggplot2")
+library(readr); packageVersion("readr")
+library(purrr); packageVersion("purrr")
+library(furrr); packageVersion("furrr")
+library(dplyr); packageVersion("dplyr")
+library(stringr); packageVersion("stringr")
+library(metacoder); packageVersion("metacoder")
+library(data.table); packageVersion("data.table")
+library(Biostrings); packageVersion("Biostrings")
+```
+
+Load data
+```{r load files, include=TRUE}
+#Load DADA2 files
+seqtab_nochim <- read.table("Data/16S/dada2_outputs/16S_seqtab_nochim.out",sep="\t",stringsAsFactors=F,header=T)
+
+#taxa_species <- read.table("Data/16S",sep="\t",stringsAsFactors=F,header=T)
+
+taxa <- read.table("Data/16S/dada2_outputs/16S_taxa_species_separate_minboot60.out",sep="\t",stringsAsFactors=F,header=T)
+
+revise_species <- function(genus, species) {
+  # Combine genus and species with an underscore if species is not NA
+  revised_species <- ifelse(is.na(species), NA, paste(genus, species, sep = "_"))
+  return(revised_species)
+}
+
+# Apply the function to revise Species column
+taxa$Species <- revise_species(taxa$Genus, taxa$Species)
+
+samdf <- read.csv("Data/16S/Metadata_16S_short_mod.csv")
+```
+
+Exploratory analysis-track reads throughout DADA2 analysis
+Track number of reads throughout the pipeline
+```{r track reads through DADA2 analysis, include=TRUE}
+track<-read.csv("Results/16S/ee2_boot60/track_reads16S_allexp.csv", header = TRUE)
+colnames(track)[1] <- "Sample"
+
+track_trim<-track[!(track$Sample %in% c("emptyextraction", "HD4390trim-S1", "HD4397trim-S15", "NTC")), ]
+```
+
+
+```{r format reads, include=TRUE}
+# # For ease of analysis, convert the DADA2 outputs into a Phyloseq object, and filter out any necessary samples
+all(rownames(seqtab_nochim) %in% samdf$Sample_name16S) 
+rownames(samdf) <- samdf$Sample_name16S
+
+samdata.ps <- sample_data(samdf)
+
+taxa.ps <- tax_table(as.matrix(taxa))
+
+seqtab.nochim.ps <- otu_table(seqtab_nochim, taxa_are_rows=FALSE)
+ps <- phyloseq(seqtab.nochim.ps, samdata.ps, taxa.ps)
+
+#Add refseq slot
+dna <- Biostrings::DNAStringSet(taxa_names(ps))
+names(dna) <- taxa_names(ps)
+ps <- merge_phyloseq(ps, dna)
+taxa_names(ps) <- paste0("ASV", seq(ntaxa(ps)))
+
+#I randomly subsampled from two samples that had way more reads. For now I will remove these samples, but it is always an option to use the subsampled samples
+ps_filtered<-subset_samples(ps, ps@sam_data@row.names != "HD4397trim-S15")
+ps_filtered<-subset_samples(ps_filtered, ps@sam_data@row.names != "HD4390trim-S1")
+```
+
+
+Decontamination step using decontam package-this was most necessary for 16S analysis.
+```{r decontam, include=TRUE}
+# Inspect library sizes
+df <- as.data.frame(sample_data(ps_filtered)) # Put sample_data into a ggplot-friendly data.frame
+df$LibrarySize <- sample_sums(ps_filtered)
+df <- df[order(df$LibrarySize),]
+df$Index <- seq(nrow(df))
+ggplot(data=df, aes(x=Index, y=LibrarySize, color=Sample_or_control)) + geom_point()
+
+sample_data(ps_filtered)$is.neg <- sample_data(ps_filtered)$Sample_or_control == "control"
+contamdf.prev <- isContaminant(ps_filtered, method="prevalence", neg="is.neg")
+table(contamdf.prev$contaminant)
+head(which(contamdf.prev$contaminant))
+
+contamdf.prev05 <- isContaminant(ps_filtered, method="prevalence", neg="is.neg", threshold=0.5)
+table(contamdf.prev05$contaminant)
+which(contamdf.prev05$contaminant)
+
+ps.pa <- transform_sample_counts(ps_filtered, function(abund) 1*(abund>0))
+ps.pa.neg <- prune_samples(sample_data(ps.pa)$Sample_or_control == "control", ps.pa)
+ps.pa.pos <- prune_samples(sample_data(ps.pa)$Sample_or_control == "sample", ps.pa)
+
+# Make data.frame of prevalence in positive and negative samples
+df.pa <- data.frame(pa.pos=taxa_sums(ps.pa.pos), pa.neg=taxa_sums(ps.pa.neg),
+                    contaminant=contamdf.prev05$contaminant)
+ggplot(data=df.pa, aes(x=pa.neg, y=pa.pos, color=contaminant)) + geom_point() +
+  xlab("Prevalence (Negative Controls)") + ylab("Prevalence (True Samples)")
+
+#Remove contaminants
+ps.decontam <- prune_taxa(!contamdf.prev05$contaminant, ps_filtered)
+
+ps.decontam <- ps.decontam %>%
+  subset_taxa(
+    Kingdom == "Bacteria" &
+      Family  != "Mitochondria" &
+      Class   != "Chloroplast"
+  )
+
+save(ps.decontam, file = "Data/16S/16S_phyloseq.decontam.RData")
+```
+
+
+Take a first glance at the data. Helpful for deciding how to filter data. Prevelance is how many samples have the ASV, and total abundance is how many times ASV is present across all samples. I don't do any filtering until I split up samples into relevant experiment.
+```{r examine ASV Prevalance, include=TRUE}
+#Prevalence-number of samples in which a taxon appears at least once
+#Total abundance
+prevdf = apply(X = phyloseq::otu_table(ps.decontam),
+               MARGIN = ifelse(taxa_are_rows(ps.decontam), yes = 1, no = 2),
+               FUN = function(x){sum(x > 0)})
+
+# Add taxonomy and total read counts to this data.frame
+prevdf = data.frame(Prevalence = prevdf,
+                    TotalAbundance = taxa_sums(ps.decontam),
+                    tax_table(ps.decontam))
+```
+
+Now I will focus on 100 plot experiment and prepare dataset for further analysis by subsetting these samples from the rest of the sample data. I will also remove allow abundance ASVs not present in at least one sample and not present at least five times
+```{r subsetreads, include=TRUE}
+#Experiment 1-100 plots base of tree
+plot100exp.ps<-phyloseq::subset_samples(ps.decontam, Hundredplot_tree_EP=="1")
+#Prune ASVs not present in at least one sample
+plot100exp.ps<- phyloseq::prune_taxa(taxa_sums(plot100exp.ps) > 0, plot100exp.ps)
+save(plot100exp.ps, file="Data/16S/plot100exp.RData")
+
+#Prune ASVs not present in at least 5 times
+exp1_5_filter.ps<- phyloseq::prune_taxa(taxa_sums(plot100exp.ps) > 5, plot100exp.ps)
+save(exp1_5_filter.ps, file="Data/16S/exp1_5_filter.RData")
+
+#Let's now collect stats for 100 plot experiment
+samples_to_subset <- samdf %>%
+  filter(Hundredplot_tree_EP == 1) %>% 
+  pull(Sample_name16S)
+
+# Filter the track dataframe
+subset_track_reads <- track_trim[track_trim$Sample %in% samples_to_subset, ]
+write.csv(track_trim, file="Data/16S/track_reads16S_100plot.csv",row.names = TRUE)
+# Print summary of the filtered track dataframe
+summary(subset_track_reads)
+```
+
+```{r check prevalence info within different datasets}
+#Double check that the filtering makes sense by making new prevalence dataframe
+prevdf_check = apply(X = phyloseq::otu_table(exp1_5_filter.ps),
+               MARGIN = ifelse(taxa_are_rows(exp1_5_filter.ps), yes = 1, no = 2),
+               FUN = function(x){sum(x > 0)})
+
+# Add taxonomy and total read counts to this data.frame
+prevdf_check = data.frame(Prevalence = prevdf_check,
+                    TotalAbundance = taxa_sums(exp1_5_filter.ps),
+                    tax_table(exp1_5_filter.ps))
+```
+
+```{r Reads sequenced by experiment}
+#Before filtering reads
+sdt = data.table::data.table(as(sample_data(plot100exp.ps), "data.frame"),
+                 TotalReads = sample_sums(plot100exp.ps), keep.rownames = TRUE)
+ps2eqDepth = ggplot(sdt, aes(TotalReads)) + geom_histogram(color="black", fill="lightblue") + ggtitle("Histogram of sequencing depth-before filtering samples with low read depths") + labs(x="Depth", y="Frequency")
+ps2eqDepth
+
+#After filtering reads
+sdt_filt = data.table::data.table(as(sample_data(exp1_5_filter.ps), "data.frame"),
+                 TotalReads = sample_sums(exp1_5_filter.ps), keep.rownames = TRUE)
+ps2eqDepth_filt = ggplot(sdt_filt, aes(TotalReads)) + geom_histogram(color="black", fill="lightblue") + ggtitle("Histogram of sequencing depth after filtering samples with low read depths") + labs(x="Depth", y="Frequency")
+ps2eqDepth_filt
+```
+
+```{r Prevalence df before and after filtering}
+#Total abundance
+prevdf_afterfilt = apply(X = otu_table(exp1_5_filter.ps),
+               MARGIN = ifelse(taxa_are_rows(exp1_5_filter.ps), yes = 1, no = 2),
+               FUN = function(x){sum(x > 0)})
+
+# Add taxonomy and total read counts to this data.frame
+prevdf_afterfilt = data.frame(Prevalence = prevdf_afterfilt,
+                    TotalAbundance = taxa_sums(exp1_5_filter.ps),
+                    tax_table(exp1_5_filter.ps))
+```
+
+```{r prevalence plots organized by phylum, include=TRUE}
+prevdf1 = subset(prevdf_afterfilt, Phylum %in% get_taxa_unique(exp1_5_filter.ps, "Phylum"))
+ggplot(prevdf1, aes(TotalAbundance, Prevalence / nsamples(exp1_5_filter.ps),color=Phylum)) +
+  # Include a guess for parameter
+  geom_hline(yintercept = 0.005, alpha = 0.5, linetype = 2) +  geom_point(size = 2, alpha = 0.7) +
+  scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") +
+  facet_wrap(~Phylum) + theme(legend.position="none")
+```
+
+Bar plot facet wrapped by treatment
+```{r Barplot not agglomerated}
+#The function "transform_sample_counts()" will perform a given function across all taxa counts
+#We will use it to convert the counts to percentages
+ps_transform <- transform_sample_counts(exp1_5_filter.ps,  function(x) x / sum(x))
+
+pdf("Figures/16S/RelAbundance_Plot_Treatment.pdf", width = 22, height = 20)
+plot_bar(ps_transform, fill="Phylum", title = "Proportional Abundance Plot-ASVs Colored-Coded Phylum level and Faceted by Treatment") + facet_wrap(~Treatuntreat_EP, scales="free_x", nrow=1)
+dev.off()
+```
+
+```{r barplot-Relative abundance of taxa vs. sample-agglomerated at genus level}
+
+data16S <- exp1_5_filter.ps %>%
+  tax_glom(taxrank = "Family") %>%                     # agglomerate at Genus level
+  transform_sample_counts(function(x) {x/sum(x)} ) %>% # Transform to rel. abundance
+  psmelt() %>%                                         # Melt to long format
+  #filter(Abundance > 0.05) %>%                       # Filter out low abundance taxa
+  arrange(Family)                                      # Sort data frame alphabetically by Family
+
+# Plot 
+abund_plot <- ggplot(data16S, aes(x = Sample, y = Abundance, fill = Family)) + 
+  geom_bar(stat = "identity", position = "stack", color = "black", size = 0.2) +
+  scale_fill_viridis_d() +
+  scale_color_viridis_d() +
+  theme_minimal() +
+  labs(
+    y = "Relative Abundance",
+    title = "Relative abundance of taxa by sample",
+    fill = "Family"
+  ) +
+  facet_grid(~factor(Treatuntreat_EP, labels = c("Untreated", "Treated")), scales = "free_x") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 14),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.text = element_text(size = 20),
+    legend.title = element_text(size = 20),  # Adjust legend title size
+    legend.key.size = unit(2, "lines"),  # Adjust the size of the legend color key
+    strip.text = element_text(size = 20),
+    strip.background = element_blank()
+  ) +
+  guides(
+    fill = guide_legend(
+      reverse = FALSE,
+      keywidth = 1,
+      keyheight = 1,
+      title.position = "top",
+      title.hjust = 0.5,  # Center the legend title
+      label.theme = element_text(size = 18)  # Adjust the size of the legend labels
+    )
+  )
+
+ggsave("Figures/16S/RelAbundance_Plot_Treatment_Family.pdf", abund_plot, width = 22, height = 20)
+```
+
+e are also curious about top taxa 
+```{r Top taxa}
+new_names <- sapply(strsplit(plot100exp.ps@sam_data$Sample_name16S, "-"), `[`, 1)
+
+# Rename the Sample_name16S column
+plot100exp.ps@sam_data$Sample_name16S <- new_names
+
+plot100exp.ps@sam_data$Treatuntreat_EP <- factor(plot100exp.ps@sam_data$Treatuntreat_EP, labels = c("untreated", "treated"))
+
+top20 <- names(sort(taxa_sums(plot100exp.ps), decreasing=TRUE))[1:20]
+ps.top20 <- transform_sample_counts(plot100exp.ps, function(OTU) OTU/sum(OTU))
+ps.top20<- tax_glom(ps.top20, taxrank = "Species") 
+ps.top20 <- prune_taxa(top20, ps.top20)
+
+pdf("Figures/16S/ee2_top20_species_boot60.pdf", width = 34, height = 20)
+plot_bar(ps.top20, x="Sample_name16S", fill="Family") + facet_wrap(~Treatuntreat_EP, scales="free_x")
+dev.off()
+
+plot_bar(ps.top20, x="Sample_name16S", fill="Species") + facet_wrap(~Treatuntreat_EP, scales="free_x")
+
+data <-
+  plot100exp.ps %>%
+  tax_glom("Species") %>%
+  psmelt() %>%
+  as_tibble()
+
+data1 <-
+  plot100exp.ps %>%
+  tax_glom("Species") %>%
+  transform_sample_counts(function(x) {x/sum(x)} ) %>%
+  psmelt() %>%
+  as_tibble()
+
+data_summed1 <- data1 %>%
+  filter(Abundance > 0) %>%
+  group_by(Treatuntreat_EP, Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) 
+
+write.csv(data_summed1, file="Results/16S/mostabundanttaxa_relativeabundance_untreatedtreated_boot60.csv",row.names = TRUE)
+
+data2 <-
+  plot100exp.ps %>%
+  tax_glom("Species") %>%
+  psmelt() %>%
+  as_tibble()
+
+# Calculate percentages
+data_summed2 <- data2 %>%
+  filter(Abundance > 0) %>%
+  group_by(Treatuntreat_EP, Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(
+    Abundance = sum(Abundance),
+    Prevalence = n_distinct(Sample)
+  ) %>%
+  group_by(Treatuntreat_EP) %>%
+  mutate(
+    Total_Abundance = sum(Abundance),
+    Percent_Abundance = (Abundance / Total_Abundance) * 100
+  )
+
+write.csv(data_summed2, file = "Results/16S/mostabundanttaxa_untreatedtreated_boot60.csv", row.names = TRUE)
+
+data3 <-
+  plot100exp.ps %>%
+  tax_glom("Species") %>%
+  psmelt() %>%
+  as_tibble()
+
+# Calculate percentages
+data_summed3 <- data3 %>%
+  filter(Abundance > 0) %>%
+  group_by(Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(
+    Abundance = sum(Abundance),
+    Total_Abundance = sum(data3$Abundance),
+    Prevalence = n_distinct(Sample),
+    Percent_Abundance = (sum(Abundance) / sum(data3$Abundance)) * 100
+  )
+write.csv(data_summed3, file="Results/16S/mostabundanttaxa_boot60.csv",row.names = TRUE)
+```
+
+```{r Map exploration}
+new_names <- sapply(strsplit(plot100exp.ps@sam_data$Sample_name16S, "-"), `[`, 1)
+
+# Rename the Sample_name16S column so sample names are shorter
+plot100exp.ps@sam_data$Sample_name16S <- new_names
+
+plot100exp.ps@sam_data$Treatuntreat_EP <- factor(plot100exp.ps@sam_data$Treatuntreat_EP, labels = c("untreated", "treated"))
+
+pdf("Figures/16S/location_of_plots.pdf", width = 16, height = 16)
+
+map_plot <- ggplot(plot100exp.ps@sam_data, aes(x = Longitude, y = Latitude, label = Sample_name16S, color = Treatuntreat_EP)) +
+  geom_point(size = 5, alpha = 0.5) +  # Add transparency to points to visualize overlapping points
+  geom_text(size = 4, position = position_jitter(width = 0.025, height = 0.025), check_overlap = TRUE) +  # Jitter labels
+  labs(x = "Longitude", y = "Latitude", title = "Sampling Locations") +
+  scale_color_manual(values = c("untreated" = "blue", "treated" = "red")) +  # Set colors for treated and untreated
+  theme_minimal() +  # Remove gray background and gridlines
+  theme(  # Adjust title and axis label size, and change axis marks color
+    plot.title = element_text(size = 20), 
+    axis.title = element_text(size = 16),
+    axis.text = element_text(color = "black")
+  )
+
+print(map_plot)
+dev.off()
+
+print(map_plot)
+```
+
+Let's now visualize similar relative abundance plots as heat trees for alternative figures
+First convert to taxmap object
+```{r Convert Phyloseq object to taxmap object, include=FALSE}
+obj<-parse_phyloseq(exp1_5_filter.ps)
+```
+
+```{r Heat tree steps}
+sdt2 = data.table::data.table(as(sample_data(exp1_5_filter.ps), "data.frame"),
+                 TotalReads = sample_sums(exp1_5_filter.ps), keep.rownames = TRUE)
+
+lowest_count<-min(sdt2$TotalReads)
+
+#$obj_dada$data$prop <- calc_obs_props(obj_dada, "otu_table", cols = #$obj$data$sample_data$sample_id)
+
+#obj_dada$data$prop <- zero_low_counts(obj_dada, data = 'prop', min_count = 1 / #lowest_count, cols = obj$data$sample_data$sample_id)
+
+obj$data$tax_abund <- calc_taxon_abund(obj, data = "otu_table", cols = obj$data$sample_data$sample_id)
+
+obj$data$abund_prop <- calc_obs_props(obj, data = "otu_table", cols = obj$data$sample_data$sample_id, groups = rep("tax_prop", nrow(obj$data$sample_data)))
+
+obj$data$tax_prop <- calc_taxon_abund(obj, data = "abund_prop", cols = "tax_prop")
+obj$data$abund_prop <- NULL
+
+# Calculate total abundance per sample
+asv_total_abundance <- rowSums(obj$data$tax_abund[, -1])
+
+obj$data$tax_data <- data.frame(lapply(obj$data$tax_data, function(x) ifelse(is.na(x), "Unknown", x)))
+save(obj, file="Data/16S/obj.RData")
+```
+
+Software used
+```{r, software used}
+sessionInfo()
+```
+
+
+```{r}
+sessioninfo::session_info()
+```

@@ -1,0 +1,1296 @@
+---
+title: "ITS SOD Experiments"
+output: html_document
+date: "2024-05-21"
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/SOD_DADS_microbiome")
+library(phyloseq); packageVersion("phyloseq")
+library(ggplot2); packageVersion("ggplot2")
+library(readr); packageVersion("readr")
+library(purrr); packageVersion("purrr")
+library(furrr); packageVersion("furrr")
+library(dplyr); packageVersion("dplyr")
+library(stringr); packageVersion("stringr")
+library(metacoder); packageVersion("metacoder")
+library(data.table); packageVersion("data.table")
+library(Biostrings); packageVersion("Biostrings")
+library(vegan);packageVersion("vegan")
+library(agricolae);packageVersion("agricolae")
+library(magrittr);packageVersion("magrittr")
+library(data.table);packageVersion("data.table")
+library(ggbeeswarm);packageVersion("ggbeeswarm")
+library(DESeq2);packageVersion("DESeq2")
+library(cowplot);packageVersion("cowplot")
+theme_set(theme_cowplot())
+library(doParallel);packageVersion("doParallel")
+library(viridis);packageVersion("viridis")
+library(geosphere)
+```
+
+### Load data
+```{r subset data}
+load("Data/ITS/filtered_data/sodexp.RData")
+load("Data/ITS/filtered_data/sod_5asv.RData")
+
+filtered_read_counts<-read.csv("Data/ITS/filtered_data/ITS_subset_track_reads_sod.csv")
+summary(filtered_read_counts)
+
+new_names <- sapply(strsplit(sod_5asv.ps@sam_data$Sample_nameITS, "-"), function(x) {
+  substr(x[1], 3, nchar(x[1]))
+})
+
+sod_5asv.ps@sam_data$Sample_nameITS <- new_names
+```
+
+### Bar plot agglomerated by species-using filtered dataset and facet wrapped by treatment
+```{r barplot-Relative abundance-treatment-order}
+dataITS <- sod_5asv.ps %>%
+  transform_sample_counts(function(x) {x / sum(x)}) %>% 
+  tax_glom(taxrank = "Order") %>%
+  psmelt() %>% 
+  #mutate(across(Kingdom:Species, ~ ifelse(is.na(.), "Unclassified", .))) %>%  
+  arrange(desc(Abundance))
+
+abund_plot <- ggplot(dataITS, aes(x = Sample_nameITS, y = Abundance, fill = Order)) + 
+  geom_bar(stat = "identity", position = "stack", color = "black", size = 0.2) +
+  scale_fill_viridis_d() +
+  scale_color_viridis_d() +
+  theme_minimal() +
+  labs(
+    y = "Relative Abundance",
+    fill = "Order"
+  ) +
+  facet_grid(~factor(Treatuntreat_EP), scales = "free_x") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 16),
+    axis.text.y = element_text(size = 20),  # Increase y-axis label size
+    axis.title.x = element_blank(),  # Remove the x-axis title if needed
+    axis.title.y = element_text(size = 20), 
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.text = element_text(size = 20),
+    legend.title = element_text(size = 20, face = "bold"),
+    legend.key.size = unit(1, "lines"),
+    strip.text = element_text(size = 24, face= "bold"),
+    strip.background = element_blank()
+  ) +
+  guides(
+    fill = guide_legend(
+      reverse = FALSE,
+      keywidth = 1,
+      keyheight = 1,
+      title.position = "top",
+      title.hjust = 0.5,
+      label.theme = element_text(size = 20)
+    )
+  )
+
+abund_plot <- abund_plot + 
+  scale_x_discrete(labels = function(x) gsub("Sample_nameITS", "", x))  # Remove unwanted text
+
+abund_plot
+
+# Save the plot
+ggsave("Figures/SOD/ITS/relabundance_plot_treatment_relabund_order_sod.pdf", abund_plot, width = 44, height = 28)
+```
+
+### Make a similar plot, but color by Phylum instead
+```{r barplot-Relative abundance-treatment-Phylum}
+dataITS <- sod_5asv.ps %>%
+  transform_sample_counts(function(x) {x / sum(x)}) %>% 
+  tax_glom(taxrank = "Phylum") %>%
+  psmelt() %>% 
+  #mutate(across(Kingdom:Species, ~ ifelse(is.na(.), "Unclassified", .))) %>%  
+  arrange(desc(Abundance))
+
+abund_plot <- ggplot(dataITS, aes(x = Sample_nameITS, y = Abundance, fill = Phylum)) + 
+  geom_bar(stat = "identity", position = "stack", color = "black", size = 0.2) +
+  scale_fill_viridis_d() +
+  scale_color_viridis_d() +
+  theme_minimal() +
+  labs(
+    y = "Relative Abundance",
+    fill = "Phylum"
+  ) +
+  facet_grid(~factor(Treatuntreat_EP), scales = "free_x") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 16),
+    axis.text.y = element_text(size = 20),  # Increase y-axis label size
+    axis.title.x = element_blank(),  # Remove the x-axis title if needed
+    axis.title.y = element_text(size = 20), 
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.text = element_text(size = 20),
+    legend.title = element_text(size = 20, face = "bold"),
+    legend.key.size = unit(1, "lines"),
+    strip.text = element_text(size = 24, face= "bold"),
+    strip.background = element_blank()
+  ) +
+  guides(
+    fill = guide_legend(
+      reverse = FALSE,
+      keywidth = 1,
+      keyheight = 1,
+      title.position = "top",
+      title.hjust = 0.5,
+      label.theme = element_text(size = 20)
+    )
+  )
+
+abund_plot <- abund_plot + 
+  scale_x_discrete(labels = function(x) gsub("Sample_nameITS", "", x))  # Remove unwanted text
+
+abund_plot
+
+# Save the plot
+ggsave("Figures/SOD/ITS/relabundance_plot_treatment_relabund_Phylum_sod.pdf", abund_plot, width = 24, height = 10)
+```
+
+### Bar plot agglomerated by order-facetted by fire factor
+```{r barplot-Relative abundance-fire}
+dataITS <- sod_5asv.ps %>%
+  transform_sample_counts(function(x) {x / sum(x)}) %>% 
+  tax_glom(taxrank = "Order") %>%
+  psmelt() %>% 
+  #mutate(across(Kingdom:Species, ~ ifelse(is.na(.), "Unclassified", .))) %>%  
+  arrange(desc(Abundance))
+
+abund_plot <- ggplot(dataITS, aes(x = Sample_nameITS, y = Abundance, fill = Order)) + 
+  geom_bar(stat = "identity", position = "stack", color = "black", size = 0.2) +
+  scale_fill_viridis_d() +
+  scale_color_viridis_d() +
+  theme_minimal() +
+  labs(
+    y = "Relative Abundance",
+    fill = "Order"
+  ) +
+  facet_grid(~factor(Fire_Mod), scales = "free_x") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 16),
+    axis.text.y = element_text(size = 20),  # Increase y-axis label size
+    axis.title.x = element_blank(),  # Remove the x-axis title if needed
+    axis.title.y = element_text(size = 20), 
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.text = element_text(size = 20),
+    legend.title = element_text(size = 20, face = "bold"),
+    legend.key.size = unit(1, "lines"),
+    strip.text = element_text(size = 24, face= "bold"),
+    strip.background = element_blank()
+  ) +
+  guides(
+    fill = guide_legend(
+      reverse = FALSE,
+      keywidth = 1,
+      keyheight = 1,
+      title.position = "top",
+      title.hjust = 0.5,
+      label.theme = element_text(size = 20)
+    )
+  )
+
+abund_plot <- abund_plot + 
+  scale_x_discrete(labels = function(x) gsub("Sample_nameITS", "", x))  # Remove unwanted text
+
+abund_plot
+
+# Save the plot
+ggsave("Figures/SOD/ITS/relabundance_plot_fire_relabund_order_sod.pdf", abund_plot, width = 44, height = 28)
+```
+
+### Bar plot agglomerated by order-using filtered dataset and faceted by yr since trt
+```{r barplot-Relative abundance-yrtrt}
+dataITS <- sod_5asv.ps %>%
+  transform_sample_counts(function(x) {x / sum(x)}) %>% 
+  tax_glom(taxrank = "Order") %>%
+  psmelt() %>% 
+  #mutate(across(Kingdom:Species, ~ ifelse(is.na(.), "Unclassified", .))) %>%  
+  arrange(desc(Abundance))
+
+abund_plot <- ggplot(dataITS, aes(x = Sample_nameITS, y = Abundance, fill = Order)) + 
+  geom_bar(stat = "identity", position = "stack", color = "black", size = 0.2) +
+  scale_fill_viridis_d() +
+  scale_color_viridis_d() +
+  theme_minimal() +
+  labs(
+    y = "Relative Abundance",
+    fill = "Family"
+  ) +
+  facet_grid(~factor(YrSinceTrt_BR), scales = "free_x") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 16),
+    axis.text.y = element_text(size = 20),  # Increase y-axis label size
+    axis.title.x = element_blank(),  # Remove the x-axis title if needed
+    axis.title.y = element_text(size = 20), 
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.text = element_text(size = 20),
+    legend.title = element_text(size = 20, face = "bold"),
+    legend.key.size = unit(1, "lines"),
+    strip.text = element_text(size = 24, face= "bold"),
+    strip.background = element_blank()
+  ) +
+  guides(
+    fill = guide_legend(
+      reverse = FALSE,
+      keywidth = 1,
+      keyheight = 1,
+      title.position = "top",
+      title.hjust = 0.5,
+      label.theme = element_text(size = 20)
+    )
+  )
+
+abund_plot <- abund_plot + 
+  scale_x_discrete(labels = function(x) gsub("Sample_nameITS", "", x))  # Remove unwanted text
+
+abund_plot
+
+# Save the plot
+ggsave("Figures/SOD/ITS/relabundance_plot_yrsincetrt_relabund_order_sod.pdf", abund_plot, width = 44, height = 28)
+```
+
+### Let's look top taxa at order level
+```{r Top taxa order}
+top40 <- names(sort(taxa_sums(sod_5asv.ps), decreasing=TRUE))[1:40]
+ps.top40 <- transform_sample_counts(sod_5asv.ps, function(OTU) OTU/sum(OTU))
+#ps.top40@tax_table[is.na(ps.top40@tax_table)] <- "Unclassified"
+ps.top40 <- tax_glom(ps.top40, taxrank = "Order")
+ps.top40 <- prune_taxa(top40, ps.top40)
+
+pdf("Figures/SOD/ITS/top40_order_sod.pdf", width = 34, height = 20)
+plot_bar(ps.top40, x="Sample_nameITS", fill="Order") + facet_wrap(~Treatuntreat_EP, scales="free_x")
+dev.off()
+```
+
+### Let's look top taxa at family level
+```{r Top taxa family}
+top40 <- names(sort(taxa_sums(sod_5asv.ps), decreasing=TRUE))[1:40]
+ps.top40 <- transform_sample_counts(sod_5asv.ps, function(OTU) OTU/sum(OTU))
+#ps.top40@tax_table[is.na(ps.top40@tax_table)] <- "Unclassified"
+ps.top40 <- tax_glom(ps.top40, taxrank = "Family")
+ps.top40 <- prune_taxa(top40, ps.top40)
+
+pdf("Figures/SOD/ITS/top40_family_sod.pdf", width = 34, height = 20)
+plot_bar(ps.top40, x="Sample_nameITS", fill="Family") + facet_wrap(~Treatuntreat_EP, scales="free_x")
+dev.off()
+```
+
+### Let's look top taxa at genus level
+```{r Top taxa genus}
+top40 <- names(sort(taxa_sums(sod_5asv.ps), decreasing=TRUE))[1:40]
+ps.top40 <- transform_sample_counts(sod_5asv.ps, function(OTU) OTU/sum(OTU))
+#ps.top40@tax_table[is.na(ps.top40@tax_table)] <- "Unclassified"
+ps.top40 <- tax_glom(ps.top40, taxrank = "Genus")
+ps.top40 <- prune_taxa(top40, ps.top40)
+
+pdf("Figures/SOD/ITS/top40_genus_sod.pdf", width = 34, height = 20)
+plot_bar(ps.top40, x="Sample_nameITS", fill="Genus") + facet_wrap(~Treatuntreat_EP, scales="free_x")
+dev.off()
+```
+
+```{r make data tables-top taxa}
+data <-
+  sod_5asv.ps %>%
+  tax_glom("Species") %>%
+  psmelt() %>%
+  as_tibble()
+
+data_summed <- data %>%
+  filter(Abundance > 0) %>%
+  group_by(Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) %>%
+  ungroup() %>%
+  mutate(Total_Abundance = sum(Abundance)) %>%
+  mutate(Percentage = 100*(Abundance / Total_Abundance))
+  
+write.csv(data_summed, file="Results/SOD/ITS/mostabundanttaxa_abundance_sod_species.csv",row.names = TRUE)
+
+data <-
+  sod_5asv.ps %>%
+  tax_glom("Genus") %>%
+  psmelt() %>%
+  as_tibble()
+
+data_summed <- data %>%
+  filter(Abundance > 0) %>%
+  group_by(Kingdom, Phylum, Class, Order, Family, Genus) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) %>%
+  ungroup() %>%
+  mutate(Total_Abundance = sum(Abundance)) %>%
+  mutate(Percentage = 100*(Abundance / Total_Abundance))
+  
+write.csv(data_summed, file="Results/SOD/ITS/mostabundanttaxa_abundance_sod_genus.csv",row.names = TRUE)
+
+data <-
+  sod_5asv.ps %>%
+  tax_glom("Family") %>%
+  psmelt() %>%
+  as_tibble()
+
+data_summed <- data %>%
+  filter(Abundance > 0) %>%
+  group_by(Kingdom, Phylum, Class, Order, Family) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) %>%
+  ungroup() %>%
+  mutate(Total_Abundance = sum(Abundance)) %>%
+  mutate(Percentage = 100*(Abundance / Total_Abundance))
+  
+write.csv(data_summed, file="Results/SOD/ITS/mostabundanttaxa_abundance_sod_family.csv",row.names = TRUE)
+
+data1 <-
+  sod_5asv.ps %>%
+  tax_glom("Species") %>%
+  transform_sample_counts(function(x) {x/sum(x)} ) %>%
+  psmelt() %>%
+  as_tibble()
+
+data_summed1 <- data1 %>%
+  filter(Abundance > 0) %>%
+  group_by(Treatuntreat_EP, Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) 
+
+write.csv(data_summed1, file="Results/SOD/ITS/mostabundanttaxa_relativeabundance_untreatedtreated_sod.csv",row.names = TRUE)
+
+data2 <-
+  sod_5asv.ps %>%
+  tax_glom("Species") %>%
+  psmelt() %>%
+  as_tibble()
+
+# Calculate percentages
+data_summed2 <- data2 %>%
+  filter(Abundance > 0) %>%
+  group_by(Treatuntreat_EP, Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) %>%
+  ungroup() %>%
+  mutate(Total_Abundance = sum(Abundance)) %>%
+  mutate(Percentage = 100*(Abundance / Total_Abundance))
+
+write.csv(data_summed2, file="Results/SOD/ITS/mostabundanttaxa_untreatedtreated_sod_species.csv",row.names = TRUE)
+
+data3 <-
+  sod_5asv.ps %>%
+  tax_glom("Genus") %>%
+  psmelt() %>%
+  as_tibble()
+
+# Calculate percentages
+data_summed3 <- data3 %>%
+  filter(Abundance > 0) %>%
+  group_by(Treatuntreat_EP, Kingdom, Phylum, Class, Order, Family, Genus) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) %>%
+  ungroup() %>%
+  mutate(Total_Abundance = sum(Abundance)) %>%
+  mutate(Percentage = 100*(Abundance / Total_Abundance))
+
+write.csv(data_summed3, file="Results/SOD/ITS/mostabundanttaxa_untreatedtreated_sod_genus.csv",row.names = TRUE)
+```
+
+### Let's look at spacial placement of different plots
+```{r Map exploration}
+pdf("Figures/SOD/ITS/location_of_plots.pdf", width = 20, height = 12)
+map_plot <- ggplot(sod_5asv.ps@sam_data, aes(x = Longitude, y = Latitude)) +
+  geom_text(aes(color = Fire_Mod, label = Sample_nameITS), size = 2.5, 
+            check_overlap = TRUE) +
+  labs(x = "Longitude", y = "Latitude", title = "Sampling Locations") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 20), 
+    axis.title = element_text(size = 16),
+    axis.text = element_text(color = "black"),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 12)
+  )
+print(map_plot)
+dev.off()
+```
+
+### Let's normalize our data in preparation for beta diversity analyses
+```{r Normalization}
+#Prune ASVs not present in least 5 times (across one more more samples)
+#sod_5asv.ps<- phyloseq::prune_taxa(taxa_sums(sod.ps) > 5, sod.ps)
+sdt = data.table::data.table(as(sample_data(sod_5asv.ps), "data.frame"),
+                 TotalReads = sample_sums(sod_5asv.ps), keep.rownames = TRUE)
+min_reads<-min(sdt$TotalReads)
+
+rarefied.ps <- rarefy_even_depth(sod_5asv.ps, sample.size = min_reads, rngseed = 100)
+
+#Relative abundance
+strat_rel.ps<-transform_sample_counts(sod_5asv.ps, function(x) x / sum(x))
+```
+
+### Alpha diversity-use non-normalized or pruned data
+Let's start with t-test as point of comparison with anova analysis
+```{r alpha diversity analyses-t-test}
+set.seed(1)
+AD <- estimate_richness(sod.ps, measures = c("Observed", "InvSimpson", "Shannon"))
+rownames(AD) <- gsub("\\.", "-", rownames(AD))
+
+# Combine richness estimates with sample metadata
+AD <- cbind(AD, sample_data(sod.ps)[row.names(AD), c("Treatuntreat_EP", "Lineage_EP", "SoilBin", "VegBin")])
+
+# Convert to data.table and keep row names as a column
+AD <- data.table(AD, keep.rownames = TRUE)
+
+# Reshape the data frame
+AD <- melt(AD, id.vars = c('rn', c("Treatuntreat_EP", "Lineage_EP", "SoilBin", "VegBin")))
+
+# Now conduct t-tests (assuming you have appropriate factors)
+factors <- c("Treatuntreat_EP", "Lineage_EP", "SoilBin", "VegBin")
+# Iterate through each factor
+ttest_list <- list()
+
+# Iterate through each factor
+for (factor_name in factors) {
+  # Initialize an empty data.table to store t-test results for each alpha diversity measure
+  ttest <- data.table(alpha_index = character(), pvalue = numeric())
+  
+  # Iterate through each alpha diversity measure
+  for (alphad in c("InvSimpson", "Shannon", "Observed")) {
+    # Perform t-test
+    ttest_res <- t.test(value ~ get(factor_name), data = AD[variable == alphad], var.equal = TRUE)
+    
+    # Extract p-value from t-test results and store it in the data.table
+    p_value <- ttest_res$p.value
+    ttest <- rbind(ttest, data.table(alpha_index = alphad, pvalue = p_value))
+  }
+  
+  # Add t-test results for the current factor to the list
+  ttest_list[[factor_name]] <- ttest
+}
+
+# Print t-test results
+for (factor_name in factors) {
+  cat(paste("T-Test Results for Factor:", factor_name), "\n")
+  print(knitr::kable(ttest_list[[factor_name]], format = "markdown"))
+  cat("\n")
+}
+``` 
+
+### Let's now proceed with ANOVA analyses and then compile our alpha diversity stats
+```{r compiled alpha diversity table}
+# Initialize an empty data.table to store combined ANOVA results for all factors
+set.seed(1)
+anova_list <- list()
+
+AD <- estimate_richness(sod.ps, measures = c("Observed", "InvSimpson", "Shannon"))
+rownames(AD) <- gsub("\\.", "-", rownames(AD))
+
+# Combine richness estimates with sample metadata
+AD <- cbind(AD, sample_data(sod.ps)[row.names(AD), c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")])
+
+# Convert to data.table and keep row names as a column
+AD <- data.table(AD, keep.rownames = TRUE)
+
+# Reshape the data frame
+AD <- melt(AD, id.vars = c('rn', c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")))
+
+factors2 <- c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")
+
+# Initialize a vector to store factor names for which a plot has been created
+plotted_factors <- character()
+ 
+
+final_anova_table <- data.table(factor_name = character(), alpha_index = character(), pvalue = numeric(), df_between = numeric(), df_within = numeric(), ss_between = numeric(), ss_within = numeric(), ms_between = numeric(), ms_within = numeric(), F_value = numeric())
+
+for (factor_name in factors2) {
+  # Initialize an empty data.table to store ANOVA results for each alpha diversity measure
+  anova <- data.table(factor_name = character(), alpha_index = character(), pvalue = numeric(), df_between = numeric(), df_within = numeric(), ss_between = numeric(), ss_within = numeric(), ms_between = numeric(), ms_within = numeric(), F_value = numeric())
+  
+  # Iterate through each alpha diversity measure
+  for (alphad in c("Observed","InvSimpson", "Shannon")) {
+    # Perform ANOVA
+    anova_res <- aov(value ~ get(factor_name), data = AD[variable == alphad])
+    
+    # Extract relevant statistics from ANOVA results
+    anova_summary <- summary(anova_res)
+    
+    # Extract p-value from ANOVA results
+    p_value <- anova_summary[[1]]$`Pr(>F)`[1]
+    
+    # Extract other statistics
+    df_between <- anova_summary[[1]]$"Df"[1]
+    df_within <- anova_summary[[1]]$"Df"[2]
+    ss_between <- anova_summary[[1]]$"Sum Sq"[1]
+    ss_within <- anova_summary[[1]]$"Sum Sq"[2]
+    ms_between <- anova_summary[[1]]$"Mean Sq"[1]
+    ms_within <- anova_summary[[1]]$"Mean Sq"[2]
+    F_value <- anova_summary[[1]]$"F value"[1]
+    
+    # Store statistics in the data.table
+    anova <- rbind(anova, data.table(factor_name = factor_name, alpha_index = alphad, pvalue = p_value, df_between = df_between, df_within = df_within, ss_between = ss_between, ss_within = ss_within, ms_between = ms_between, ms_within = ms_within, F_value = F_value))
+  }
+  
+  # Append ANOVA results for the current factor to the final table
+  final_anova_table <- rbind(final_anova_table, anova)
+}
+
+# Print final ANOVA table
+print(knitr::kable(final_anova_table, format = "markdown"))
+write.csv(final_anova_table, "Results/SOD/ITS/final_anova_table_sod.csv", row.names = FALSE)
+```
+
+### Let's make faceted boxplots for our alpha diversity analyses
+```{r alpha diversity faceted plots}
+# Estimate alpha diversity
+set.seed(1)
+AD <- estimate_richness(sod.ps, measures = c("Observed", "InvSimpson", "Shannon"))
+rownames(AD) <- gsub("\\.", "-", rownames(AD))
+
+# Combine richness estimates with sample metadata
+AD <- cbind(AD, sample_data(sod_5asv.ps)[rownames(AD), c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")])
+
+
+variables <- c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")
+
+
+# Create an empty list to store plots
+plots <- list()
+
+# Loop through each variable and create the plot
+for (variable in variables) {
+  p <- plot_richness(sod.ps, x = variable, measures = c("Shannon", "InvSimpson", "Observed")) + 
+    geom_boxplot()
+  plots[[variable]] <- p
+}
+
+# Arrange plots in a grid
+plots_arrange <- gridExtra::grid.arrange(
+  plots[["Treatuntreat_EP"]], plots[["Fire_Mod"]], plots[["YrSinceTrt_BR"]], plots[["YearSam_EP"]], plots[["Lineage_EP"]], plots[["VegBin"]], plots[["SoilBin"]],ncol=1)
+
+# Add annotations to the top of each plot
+plots_arrange_with_text <- cowplot::ggdraw() +
+  cowplot::draw_plot(plots_arrange) +
+  cowplot::draw_plot("Treatuntreat_EP", x = 0.28, y = 0.98) +
+  cowplot::draw_plot("Fire_EP", x = 0.28, y = 0.98) +
+  cowplot::draw_plot("YrSinceTrt_BR", x = 0.28, y = 0.98) 
+
+# Save the arranged plots
+ggsave(plots_arrange_with_text, path = "Figures/SOD/ITS", filename = "alpha_diversity_each_factor_sod.pdf", 
+       width = 16, height = 24)
+```
+
+### Let's perform TUKEY HSD tests
+```{r alpha diversity compilation with tukey summary}
+# Define your variables of interest
+set.seed(1)
+variables <- c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")
+measures <- c("Observed", "InvSimpson", "Shannon")
+
+# Create an empty list to store ANOVA and Tukey's results
+tukey_results <- list()
+
+# Loop through each variable and measure
+for (variable in variables) {
+  for (measure in measures) {
+    # Subset the data for the current variable and measure
+    data_subset <- AD[, c(variable, measure)]
+    
+    # Perform ANOVA
+    formula <- as.formula(paste(measure, "~ ."))
+    anova_res <- aov(formula, data = data_subset)
+    
+    # Perform Tukey's post-hoc test
+    tukey_result <- HSD.test(anova_res, variable)
+    
+    # Store Tukey's results
+    print(tukey_result)
+  }
+}
+```
+
+### Beta diversity-PERMANOVA analyses-ASV counts transformed (rel. abundance)
+```{r PERMANOVA ANALYSES-relative abundance, include=TRUE}
+#I used the filtered dataset (removed low abundance counts less than 2)
+set.seed(1)
+mapping <- as.data.frame(sample_data(strat_rel.ps))
+
+mapping2=mapping[, c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")]
+
+ASV_tables_bray <- phyloseq::distance(strat_rel.ps, method = "bray")
+
+df_metadata <- data.frame(sample_data(strat_rel.ps))
+
+df_metadata<-df_metadata[, c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")]
+
+pvals <- sapply(colnames(mapping2), function(variable){
+  
+  #Create formula for adonis() 
+  form1<-as.formula(paste("ASV_tables_bray", variable, sep="~"))
+  
+  res <- adonis2(form1, data = df_metadata, permutations = 9999)
+  
+  # extract pvalue from adonis output
+  pval <- res$`Pr(>F)`[[1]] # we take the first p value which corresponds to the variable of interest
+  return(pval)
+})
+
+#Adjust p_values with fdr correction
+pval_adj <- p.adjust(pvals, method = "fdr")
+
+#Find significant variables with lower than 0.05 for their p values
+save.pval.adonis0.05_braycurtis <- pval_adj[pval_adj < 0.05]
+save.pval.adonis0.05_braycurtis
+
+print(pval_adj)
+```
+
+### Compile PERMANOVA stats
+```{r compile PERMANOVA stats}
+# Perform PERMANOVA -main effects
+set.seed(1)
+res <- adonis2(ASV_tables_bray ~Treatuntreat_EP+Fire_Mod+YrSinceTrt_BR, data = df_metadata, permutations = 9999)
+
+# Extract data from res
+res_data <- data.frame(res)
+colnames(res_data)[colnames(res_data) == "Pr..F."] <- "pr_f"
+
+# Remove the last two rows (Residual and Total)
+res_data <- res_data[-c(nrow(res_data)-1, nrow(res_data)),]
+
+# Add FDR and Bonferroni adjusted p-values
+res_data$FDR_adj_p <- p.adjust(res_data$pr_f, method = "fdr")
+res_data$Bonferroni_adj_p <- p.adjust(res_data$pr_f, method = "bonferroni")
+res_data$Factor <- rownames(res_data)
+
+# Reorder columns
+res_data <- res_data[, c("Factor", "Df", "SumOfSqs", "R2", "F", "pr_f", "FDR_adj_p", "Bonferroni_adj_p")]
+rownames(res_data) <- NULL
+
+# Perform beta dispersion analysis for main effects
+beta_disp_results <- lapply(c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR"), function(variable) {
+  res_betadisper <- betadisper(d = ASV_tables_bray, group = df_metadata[[variable]])
+  perm_test_res <- permutest(res_betadisper)
+  pval_betadisper <- perm_test_res$tab$`Pr(>F)`[[1]]
+  
+  data.frame(Factor = variable, P_Value_BetaDispersion = pval_betadisper)
+})
+
+beta_disp_results_df <- do.call(rbind, beta_disp_results)
+
+# Merge PERMANOVA results with beta dispersion results
+final_results <- merge(res_data, beta_disp_results_df, by = "Factor", all.x = TRUE)
+
+# Reorder columns
+final_results <- final_results[, c("Factor", "Df", "SumOfSqs", "R2", "F", "pr_f", "FDR_adj_p", "Bonferroni_adj_p", "P_Value_BetaDispersion")]
+
+# Print the table
+print(final_results, row.names = FALSE)
+
+# Save results
+write.csv(final_results, file = "Results/SOD/ITS/PERMANOVA_interactions_with_betadisper_maineffects.csv", row.names = FALSE)
+```
+
+### Compile PERMANOVA stats-interaction
+```{r compile interaction stats}
+# Perform PERMANOVA -main effects
+set.seed(1)
+res <- adonis2(ASV_tables_bray ~ Treatuntreat_EP*YrSinceTrt_BR*Fire_Mod, data = df_metadata, permutations = 9999)
+# Extract data from res
+res_data <- data.frame(res)
+colnames(res_data)[colnames(res_data) == "Pr..F."] <- "pr_f"
+
+# Remove the last two rows (Residual and Total)
+res_data <- res_data[-c(nrow(res_data)-1, nrow(res_data)),]
+
+# Add FDR and Bonferroni adjusted p-values
+res_data$FDR_adj_p <- p.adjust(res_data$pr_f, method = "fdr")
+res_data$Bonferroni_adj_p <- p.adjust(res_data$pr_f, method = "bonferroni")
+res_data$Factor <- rownames(res_data)
+
+# Reorder columns
+res_data <- res_data[, c("Factor", "Df", "SumOfSqs", "R2", "F", "pr_f", "FDR_adj_p", "Bonferroni_adj_p")]
+rownames(res_data) <- NULL
+
+# Perform beta dispersion analysis for main effects
+beta_disp_results <- lapply(c("Treatuntreat_EP", "Fire_Mod"), function(variable) {
+  res_betadisper <- betadisper(d = ASV_tables_bray, group = df_metadata[[variable]])
+  perm_test_res <- permutest(res_betadisper)
+  pval_betadisper <- perm_test_res$tab$`Pr(>F)`[[1]]
+  
+  data.frame(Factor = variable, P_Value_BetaDispersion = pval_betadisper)
+})
+
+beta_disp_results_df <- do.call(rbind, beta_disp_results)
+
+# Merge PERMANOVA results with beta dispersion results
+final_results <- merge(res_data, beta_disp_results_df, by = "Factor", all.x = TRUE)
+
+# Reorder columns
+final_results <- final_results[, c("Factor", "Df", "SumOfSqs", "R2", "F", "pr_f", "FDR_adj_p", "Bonferroni_adj_p", "P_Value_BetaDispersion")]
+
+# Print the table
+print(final_results, row.names = FALSE)
+
+# Save results
+write.csv(final_results, file = "Results/SOD/ITS/PERMANOVA_interactions_with_betadisper_firemod.csv", row.names = FALSE)
+```
+
+### Let's now examine beta diversity through ordination plots
+We'll will examine outputs for rarefied data as well as data adjusted by relative abundance
+We'll now make ordination plots on data for which we've calculated relative abundance
+```{r Beta diversity-Rel. abundance-treated and untreated samples}
+#Relative abundance
+set.seed(1)
+ps_NMDS = ordinate(strat_rel.ps, 
+                   method="NMDS", 
+                   distance="bray")
+
+plot<- plot_ordination(strat_rel.ps, 
+                         ps_NMDS,
+                         color= "Treatuntreat_EP") +
+  ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Factor") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses<-plot +
+   stat_ellipse(type = "norm", linetype = 2) +
+  theme_bw()
+
+plot_ellipses
+
+#Export NMDS coordinates per sample
+write.csv(ps_NMDS[["points"]], file="Results/SOD/ITS/ITS_NMDS_coordinates_persample.csv",row.names = TRUE)
+```
+
+### Now, we'll look at ordination plot (rel abundance dataset), with Fire_Mod factor
+```{r Beta diversity-Rel. abundance-Fire_Mod}
+#Relative abundance
+set.seed(1)
+ps_NMDS = ordinate(strat_rel.ps, 
+                   method="NMDS",
+                   distance="bray")
+
+plot<- plot_ordination(strat_rel.ps, 
+                         ps_NMDS,
+                         labs(color = "Factor"),
+                         color= "Fire_Mod") +
+  ggtitle("NMDS ordination plot - relative abundance") +
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+
+plot_ellipses<-plot +
+   stat_ellipse(type = "norm", linetype = 2) +
+  theme_bw()
+
+plot_ellipses
+```
+
+### Now, we'll look at ordination plot rel abundance-with YrSinceTrt_BR factor
+```{r Beta diversity-Rel. abundance-YrSinceTrt_BR}
+#Relative abundance
+set.seed(1)
+ps_NMDS = ordinate(strat_rel.ps, 
+                   method="NMDS",
+                   distance="bray")
+
+plot<- plot_ordination(strat_rel.ps, 
+                         ps_NMDS,
+                         labs(color = "Factor"),
+                         color= "YrSinceTrt_BR") +
+  ggtitle("NMDS ordination plot - relative abundance") +
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+
+plot_ellipses<-plot +
+   stat_ellipse(type = "norm", linetype = 2) +
+  theme_bw()
+
+plot_ellipses
+```
+
+
+### Are communities more similar if geographically closeby? Some plots, like wildfire plots are close together, for example
+Very preliminary experiment
+```{r Beta diversity-Rel. abundance-YearSam_EP}
+# Extract OTU table and sample data from phyloseq object
+otu_table <- otu_table(strat_rel.ps)
+sample_data <- sample_data(strat_rel.ps)
+
+# Transpose OTU table for correct format
+otu_table_matrix <- t(as(otu_table, "matrix"))
+
+# Extract longitude and latitude
+lon_lat <- cbind(sample_data$Longitude, sample_data$Latitude)
+
+# Calculate distance matrices
+geo_dist <- distm(lon_lat, fun = distHaversine)
+comm_dist <- vegdist(otu_table_matrix, method = "bray", na.rm = TRUE)
+
+# Convert Bray-Curtis distance to matrix if needed
+comm_dist_matrix <- as.matrix(comm_dist)
+
+# Extract sample IDs
+sample_ids <- rownames(sample_data)
+sample_ids_in_otu <- rownames(otu_table)
+
+# Match sample IDs
+common_samples <- intersect(sample_ids_in_otu, sample_ids)
+common_indices <- which(sample_ids %in% common_samples)
+
+# Subset distance matrices
+geo_dist_aligned <- geo_dist[common_indices, common_indices]
+comm_dist_aligned <- comm_dist_matrix[common_indices, common_indices]
+
+# Check dimensions
+print(dim(geo_dist_aligned))
+print(dim(comm_dist_aligned))
+
+# Perform Mantel test
+mantel_result <- mantel(geo_dist_aligned, comm_dist_aligned, method = "spearman", permutations = 999)
+print(mantel_result)
+
+# Extract OTU table and sample data from phyloseq object
+otu_table <- otu_table(strat_rel.ps)
+sample_data <- sample_data(strat_rel.ps)
+
+# Transpose OTU table for correct format
+otu_table_matrix <- as(otu_table, "matrix")
+
+# Calculate Bray-Curtis dissimilarity matrix
+comm_dist <- vegdist(otu_table_matrix, method = "bray")
+
+# Run NMDS
+nmds_result <- metaMDS(comm_dist, k = 2, trymax = 100)
+
+# Extract NMDS scores
+nmds_scores <- as.data.frame(scores(nmds_result))
+nmds_scores$SampleID <- rownames(nmds_scores)
+
+# Extract sample IDs and coordinates correctly
+sample_ids <- rownames(sample_data(strat_rel.ps))  # Correct sample IDs
+sample_coords <- data.frame(SampleID = sample_ids,
+                             Longitude = sample_data(strat_rel.ps)$Longitude,
+                             Latitude = sample_data(strat_rel.ps)$Latitude, 
+                             Treatuntreat=sample_data(strat_rel.ps)$Treatuntreat_EP,
+                             Fire_Mod=sample_data(strat_rel.ps)$Fire_Mod
+                            )
+
+# Merge NMDS scores with the correct sample coordinates
+nmds_scores <- merge(nmds_scores, sample_coords, by = "SampleID")
+
+
+# Create NMDS plot with color for Latitude and size for Longitude
+nmds_plot <- ggplot(nmds_scores, aes(x = NMDS1, y = NMDS2)) +
+  geom_point(aes(color = Latitude, size = Longitude), alpha = 0.7) +  # Use size for Longitude
+  labs(title = "NMDS Plot with Latitude and Longitude",
+       x = "NMDS Dimension 1",
+       y = "NMDS Dimension 2") +
+  theme_minimal() +
+  scale_color_gradient(low = "blue", high = "red") +  # Color gradient for Latitude
+  scale_size_continuous(range = c(2, 6))  # Adjust size range as needed
+
+print(nmds_plot)
+
+nmds_plot <- ggplot(nmds_scores, aes(x = NMDS1, y = NMDS2)) +
+  geom_point(aes(color = Latitude, size = Longitude), alpha = 0.7) +
+  facet_wrap(~ Fire_Mod) +
+  labs(title = "NMDS Plot with Latitude, Longitude, and Treatment",
+       x = "NMDS Dimension 1",
+       y = "NMDS Dimension 2") +
+  theme_minimal() +
+  scale_color_gradient(low = "blue", high = "red") +
+  scale_size_continuous(range = c(2, 6))
+
+print(nmds_plot)
+
+```
+
+### Functions to prepare to do differential abundance analyses
+```{r organizing data for downstream steps}
+sample.data.table <- function(ps) {
+  as(sample_data(ps), "data.frame") %>%
+    as.data.table(keep.rownames = "Sample") %>% 
+    setkey(Sample) %>%
+    return()
+}
+asv.data.table <- function(ps) {
+  if (taxa_are_rows(ps)) {
+    otu.mat <- t(as(otu_table(ps), "matrix"))
+  } else {
+    otu.mat <- as(otu_table(ps), "matrix")
+  }
+  return(as.data.table(otu.mat, keep.rownames = "Sample") %>% setkey(Sample))
+}
+cat.n <- function(x) cat(x, sep = "\n")
+```
+
+### Now we import data
+```{r data-import-and-prep}
+sod.data <- sample.data.table(sod_5asv.ps)
+sod.asvs <- asv.data.table(sod_5asv.ps)
+sod.asv.ids <- taxa_names(sod_5asv.ps)
+sod.dt <- sod.data[sod.asvs]
+```
+
+### Let's now do a DESEQ2 analysis-firemod
+### DESEQ analysis-Fire_mod
+```{r, diff abundance-deseq2 fire_mod}
+set.seed(1)
+
+sod.deseq <- phyloseq_to_deseq2(sod_5asv.ps, ~ Fire_Mod)
+
+sod.dds <- estimateSizeFactors(sod.deseq, type = 'poscounts')
+
+sod.dds <- DESeq(sod.dds)
+
+all_results <- resultsNames(sod.dds)
+
+all_results <- all_results[all_results != "Intercept"]
+
+process_result <- function(result_name) {
+  res.dt <- as.data.table(results(sod.dds, name = result_name), keep.rownames = "ASV")
+  
+  sig.dt <- res.dt[padj <= 0.05]
+  
+  sig.dt <- cbind(as(sig.dt, "data.frame"), as(tax_table(sod_5asv.ps)[sig.dt$ASV, ], "matrix"))
+  
+  sig.dt <- sig.dt %>% mutate(across(everything(), ~ifelse(is.na(.), "Unclassified", .)))
+  
+  write.csv(sig.dt, file = paste0("Results/SOD/ITS/deseq_", result_name, ".csv"), row.names = TRUE)
+  
+  plot <- ggplot(sig.dt, aes(y = reorder(ASV, log2FoldChange), x = log2FoldChange, fill = Genus)) +
+    geom_vline(xintercept = 0.0, color = "gray", size = 0.5, linetype = "dashed") +
+    geom_bar(stat = "identity", position = "dodge", width = 0.8) +
+    scale_fill_viridis(discrete = TRUE, option = "D") +
+    coord_flip() +
+    labs(x = "Log2 Fold Change",
+         y = "ASV",
+         title = paste("Differential Abundance Analysis:", result_name)) +
+    theme_minimal() +
+    theme(
+      axis.text.y = element_text(size = 12),
+      axis.text.x = element_text(angle = 45, size=12),
+      axis.title = element_text(face = "bold"),
+      legend.position = "right",
+      legend.title = element_text(face = "bold"),
+      plot.title = element_text(size = 16, face = "bold"),
+      plot.subtitle = element_text(size = 12),
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor = element_blank()
+    )
+  
+  ggsave(paste0("Figures/SOD/ITS/deseq_", result_name, "_barplot.pdf"), plot, width = 34, height = 12)
+  
+  print(plot)
+}
+lapply(all_results, process_result)
+```
+
+### Let's now do a DESEQ2 analysis-firemod2
+### DESEQ analysis-Fire_mod
+```{r, diff abundance-deseq2 fire_mod2}
+set.seed(1)
+
+sod_5asv.ps@sam_data$Fire_Mod <- factor(sod_5asv.ps@sam_data$Fire_Mod, levels = c( "wildfire", "untreated", "SODtrt"))
+
+sod.deseq <- phyloseq_to_deseq2(sod_5asv.ps, ~ Fire_Mod)
+
+sod.dds <- estimateSizeFactors(sod.deseq, type = 'poscounts')
+
+sod.dds <- DESeq(sod.dds)
+
+all_results <- resultsNames(sod.dds)
+
+all_results <- all_results[all_results != "Intercept"]
+
+process_result <- function(result_name) {
+  res.dt <- as.data.table(results(sod.dds, name = result_name), keep.rownames = "ASV")
+  
+  sig.dt <- res.dt[padj <= 0.05]
+  
+  sig.dt <- cbind(as(sig.dt, "data.frame"), as(tax_table(sod_5asv.ps)[sig.dt$ASV, ], "matrix"))
+  
+  sig.dt <- sig.dt %>% mutate(across(everything(), ~ifelse(is.na(.), "Unclassified", .)))
+  
+  write.csv(sig.dt, file = paste0("Results/SOD/ITS/deseq_", result_name, ".csv"), row.names = TRUE)
+  
+  plot <- ggplot(sig.dt, aes(y = reorder(ASV, log2FoldChange), x = log2FoldChange, fill = Genus)) +
+    geom_vline(xintercept = 0.0, color = "gray", size = 0.5, linetype = "dashed") +
+    geom_bar(stat = "identity", position = "dodge", width = 0.8) +
+    scale_fill_viridis(discrete = TRUE, option = "D") +
+    coord_flip() +
+    labs(x = "Log2 Fold Change",
+         y = "ASV",
+         title = paste("Differential Abundance Analysis:", result_name)) +
+    theme_minimal() +
+    theme(
+      axis.text.y = element_text(size = 12),
+      axis.text.x = element_text(angle = 45, size=12),
+      axis.title = element_text(face = "bold"),
+      legend.position = "right",
+      legend.title = element_text(face = "bold"),
+      plot.title = element_text(size = 16, face = "bold"),
+      plot.subtitle = element_text(size = 12),
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor = element_blank()
+    )
+  
+  ggsave(paste0("Figures/SOD/ITS/deseq_", result_name, "_barplot.pdf"), plot, width = 20, height = 12)
+  
+  print(plot)
+}
+lapply(all_results, process_result)
+```
+### DESEQ analysis-treatuntreat
+```{r, diff abundance-deseq2 treatuntreat}
+set.seed(1)
+
+sod.deseq <- phyloseq_to_deseq2(sod_5asv.ps, ~ Treatuntreat_EP)
+
+sod.dds <- estimateSizeFactors(sod.deseq, type = 'poscounts')
+
+sod.dds <- DESeq(sod.dds)
+
+all_results <- resultsNames(sod.dds)
+
+all_results <- all_results[all_results != "Intercept"]
+
+process_result <- function(result_name) {
+  res.dt <- as.data.table(results(sod.dds, name = result_name), keep.rownames = "ASV")
+  
+  sig.dt <- res.dt[padj <= 0.05]
+  
+  sig.dt <- cbind(as(sig.dt, "data.frame"), as(tax_table(sod_5asv.ps)[sig.dt$ASV, ], "matrix"))
+  
+  sig.dt <- sig.dt %>% mutate(across(everything(), ~ifelse(is.na(.), "Unclassified", .)))
+  
+  write.csv(sig.dt, file = paste0("Results/SOD/ITS/deseq_", result_name, ".csv"), row.names = TRUE)
+  
+  plot <- ggplot(sig.dt, aes(y = reorder(ASV, log2FoldChange), x = log2FoldChange, fill = Genus)) +
+    geom_vline(xintercept = 0.0, color = "gray", size = 0.5, linetype = "dashed") +
+    geom_bar(stat = "identity", position = "dodge", width = 0.8) +
+    scale_fill_viridis(discrete = TRUE, option = "D") +
+    coord_flip() +
+    labs(x = "Log2 Fold Change",
+         y = "ASV",
+         title = paste("Differential Abundance Analysis:", result_name)) +
+    theme_minimal() +
+    theme(
+      axis.text.y = element_text(size = 12),
+      axis.text.x = element_text(angle = 45, size=12),
+      axis.title = element_text(face = "bold"),
+      legend.position = "right",
+      legend.title = element_text(face = "bold"),
+      plot.title = element_text(size = 16, face = "bold"),
+      plot.subtitle = element_text(size = 12),
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor = element_blank()
+    )
+  
+  ggsave(paste0("Figures/SOD/ITS/deseq_", result_name, "_barplot.pdf"), plot, width = 20, height = 12)
+  
+  print(plot)
+}
+lapply(all_results, process_result)
+```
+
+
+### DESEQ analysis-yearsincetrt
+```{r, diff abundance-deseq2 yearsincetrt}
+set.seed(1)
+sod_5asv.ps@sam_data$YrSinceTrt_BR <- factor(sod_5asv.ps@sam_data$YrSinceTrt_BR, levels = c("5to8","3to4","10to12","untreated","1to2"))
+
+sod.deseq <- phyloseq_to_deseq2(sod_5asv.ps, ~ YrSinceTrt_BR)
+
+sod.dds <- estimateSizeFactors(sod.deseq, type = 'poscounts')
+
+sod.dds <- DESeq(sod.dds)
+
+all_results <- resultsNames(sod.dds)
+
+all_results <- all_results[all_results != "Intercept"]
+
+process_result <- function(result_name) {
+  res.dt <- as.data.table(results(sod.dds, name = result_name), keep.rownames = "ASV")
+  
+  sig.dt <- res.dt[padj <= 0.05]
+  
+  sig.dt <- cbind(as(sig.dt, "data.frame"), as(tax_table(sod_5asv.ps)[sig.dt$ASV, ], "matrix"))
+  
+  sig.dt <- sig.dt %>% mutate(across(everything(), ~ifelse(is.na(.), "Unclassified", .)))
+  
+  write.csv(sig.dt, file = paste0("Results/SOD/ITS/deseq_", result_name, ".csv"), row.names = TRUE)
+  
+  plot <- ggplot(sig.dt, aes(y = reorder(ASV, log2FoldChange), x = log2FoldChange, fill = Genus)) +
+    geom_vline(xintercept = 0.0, color = "gray", size = 0.5, linetype = "dashed") +
+    geom_bar(stat = "identity", position = "dodge", width = 0.8) +
+    scale_fill_viridis(discrete = TRUE, option = "D") +
+    coord_flip() +
+    labs(x = "Log2 Fold Change",
+         y = "ASV",
+         title = paste("Differential Abundance Analysis:", result_name)) +
+    theme_minimal() +
+    theme(
+      axis.text.y = element_text(size = 12),
+      axis.text.x = element_text(angle = 45, size=12),
+      axis.title = element_text(face = "bold"),
+      legend.position = "right",
+      legend.title = element_text(face = "bold"),
+      plot.title = element_text(size = 16, face = "bold"),
+      plot.subtitle = element_text(size = 12),
+      panel.grid.major.y = element_blank(),
+      panel.grid.minor = element_blank()
+    )
+  
+  ggsave(paste0("Figures/SOD/ITS/deseq_", result_name, "_barplot.pdf"), plot, width = 20, height = 12)
+  
+  print(plot)
+}
+lapply(all_results, process_result)
+```
+
+### For nicer visuals, let's make heat trees (specifically the comparison between untreated and treated samples), and we'll start with Wilcoxon rank sum-treatment
+
+### Convert taxmap to phyloseq obj
+```{r, convert to phyloseq obj}
+remove_boot_columns <- function(x) {
+  x <- x[, !grepl("boot", colnames(x))]
+  return(x)
+}
+
+sod_5asv_tax <- tax_table(sod_5asv.ps) %>%
+  as.data.frame() %>%
+  remove_boot_columns() %>%
+  as.matrix() %>%
+  tax_table()
+
+tax_table(sod_5asv.ps) <- sod_5asv_tax
+
+obj_ITS<-parse_phyloseq(sod_5asv.ps)
+obj_ITS_rarefy <-parse_phyloseq(rarefied.ps)
+
+obj_ITS$data$tax_abund <- calc_taxon_abund(obj_ITS, data = "otu_table", cols = obj_ITS$data$sample_data$sample_id)
+obj_ITS_rarefy$data$tax_abund <- calc_taxon_abund(obj_ITS_rarefy , data = "otu_table", cols = obj_ITS_rarefy$data$sample_data$sample_id)
+
+obj_ITS$data$abund_prop <- calc_obs_props(obj_ITS, data = "otu_table", cols = obj_ITS$data$sample_data$sample_id)
+
+obj_ITS$data$tax_prop <- calc_taxon_abund(obj_ITS, data = "abund_prop", cols = obj_ITS$data$sample_data$sample_id)
+
+obj_ITS$data$tax_prop$all_samples <- rowMeans(obj_ITS$data$tax_prop[,obj_ITS$data$sample_data$sample_id])
+```
+
+
+### We'll then do DESEQ analysis on untreated vs. untreated samples
+```{r, diff abundance trees-deseq}
+# set.seed(1)
+# obj_ITS$data$diff_table_deseq <- metacoder::calc_diff_abund_deseq2(obj_ITS,
+#                                       data = "tax_abund",
+#                                       cols = obj_ITS$data$sample_data$sample_id, # What columns of sample data to
+#                                       groups = obj_ITS$data$sample_data$Treatuntreat_EP) # What category each sample is assigned to
+# 
+# obj_ITS$data$diff_table_deseq$log2FoldChange[obj_ITS$data$diff_table_deseq$padj > 0.05] <- 0
+# 
+# range(obj_ITS$obj_ITS$data$diff_table_deseq$padj, finite = TRUE) 
+# range(obj_ITS$data$diff_table_deseq$log2FoldChange, finite = TRUE) 
+# 
+# obj_ITS<- metacoder::filter_taxa(obj_ITS, taxon_names != "None", reassign_obs = FALSE)
+# obj_ITS <- metacoder::filter_taxa(obj_ITS, taxon_names != "", reassign_obs = FALSE)
+# obj_ITS <- metacoder::filter_taxa(obj_ITS, taxon_names != "NA", reassign_obs = FALSE)
+# 
+# 
+# obj_ITS %>%
+#   metacoder::filter_taxa(taxon_ranks == "Species", supertaxa = TRUE, reassign_obs = FALSE) %>%
+#   heat_tree_matrix(data = "diff_table_deseq",
+#                    node_label = taxon_names,
+#                    node_size = n_obs, # number of OTUs
+#                    node_color = log2FoldChange, # difference between groups
+#                    node_color_trans = "linear",
+#                    node_color_interval = c(-1, 1)*max(abs(range(obj_ITS$data$diff_table_deseq$log2FoldChange))), 
+#                    edge_color_interval = c(-1, 1)*max(abs(range(obj_ITS$data$diff_table_deseq$log2FoldChange))),  
+#                    node_color_range = diverging_palette(), # diverging colors
+#                    node_size_axis_label = "ASV count",
+#                    node_color_axis_label = "Log 2 Fold Change",
+#                    layout = "da", initial_layout = "re",
+#                    key_size = 0.4,
+#                    output_file = "Figures/SOD/ITS/diff_abundance_heattree_deseq_sod_ITS_trtuntreat.pdf") # The layout algorithm that initializes node locations
+```
+
+### Make tree-deseq-Fire_Mod
+```{r, diff abundance trees-Wilcoxon rank sum fire}
+# set.seed(1)
+# obj_ITS$data$diff_table_deseq <- metacoder::calc_diff_abund_deseq2(obj_ITS,
+#                                       data = "tax_abund",
+#                                       cols = obj_ITS$data$sample_data$sample_id, # What columns of sample data to
+#                                       groups = obj_ITS$data$sample_data$Fire_EP) # What category each sample is assigned to
+# 
+# obj_ITS$data$diff_table_deseq$log2FoldChange[obj_ITS$data$diff_table_deseq$padj > 0.05] <- 0
+# 
+# range(obj_ITS$obj_ITS$data$diff_table_deseq$padj, finite = TRUE) 
+# range(obj_ITS$data$diff_table_deseq$log2FoldChange, finite = TRUE) 
+# 
+# obj_ITS<- metacoder::filter_taxa(obj_ITS, taxon_names != "None", reassign_obs = FALSE)
+# obj_ITS <- metacoder::filter_taxa(obj_ITS, taxon_names != "", reassign_obs = FALSE)
+# obj_ITS <- metacoder::filter_taxa(obj_ITS, taxon_names != "NA", reassign_obs = FALSE)
+# 
+# 
+# obj_ITS %>%
+#   metacoder::filter_taxa(taxon_ranks == "Species", supertaxa = TRUE, reassign_obs = FALSE) %>%
+#   heat_tree_matrix(data = "diff_table_deseq",
+#                    node_label = taxon_names,
+#                    node_size = n_obs, # number of OTUs
+#                    node_color = log2FoldChange, # difference between groups
+#                    node_color_trans = "linear",
+#                    node_color_interval = c(-28, 28), # symmetric interval
+#                    edge_color_interval = c(-28, 28), # symmetric interval
+#                    node_color_range = diverging_palette(), # diverging colors
+#                    node_size_axis_label = "ASV count",
+#                    node_color_axis_label = "Log 2 Fold Change",
+#                    layout = "da", initial_layout = "re",
+#                    key_size = 0.4,
+#                    output_file = "Figures/SOD/ITS/diff_abundance_heattree_deseq_sod_ITS_firemod.pdf") # The layout algorithm that initializes node locations
+```
+
+### We'll then do DESEQ analysis on YearSinceTrt_BR
+```{r, diff abundance trees-deseq-yrsincetrt_BR}
+# set.seed(1)
+# obj_ITS$data$diff_table_deseq <- metacoder::calc_diff_abund_deseq2(obj_ITS,
+#                                       data = "tax_abund",
+#                                       cols = obj_ITS$data$sample_data$sample_id, # What columns of sample data to
+#                                       groups = obj_ITS$data$sample_data$YrSinceTrt_BR) # What category each sample is assigned to
+# 
+# obj_ITS$data$diff_table_deseq$log2FoldChange[obj_ITS$data$diff_table_deseq$padj > 0.05] <- 0
+# 
+# range(obj_ITS$obj_ITS$data$diff_table_deseq$padj, finite = TRUE) 
+# range(obj_ITS$data$diff_table_deseq$log2FoldChange, finite = TRUE) 
+# 
+# obj_ITS<- metacoder::filter_taxa(obj_ITS, taxon_names != "None", reassign_obs = FALSE)
+# obj_ITS <- metacoder::filter_taxa(obj_ITS, taxon_names != "", reassign_obs = FALSE)
+# obj_ITS <- metacoder::filter_taxa(obj_ITS, taxon_names != "NA", reassign_obs = FALSE)
+# 
+# 
+# obj_ITS %>%
+#   metacoder::filter_taxa(taxon_ranks == "Species", supertaxa = TRUE, reassign_obs = FALSE) %>%
+#   heat_tree_matrix(data = "diff_table_deseq",
+#                    node_label = taxon_names,
+#                    node_size = n_obs, # number of OTUs
+#                    node_color = log2FoldChange, # difference between groups
+#                    node_color_trans = "linear",
+#                    node_color_interval = c(-38, 38), # symmetric interval
+#                    edge_color_interval = c(-38, 38), # symmetric interval
+#                    node_color_range = diverging_palette(), # diverging colors
+#                    node_size_axis_label = "ASV count",
+#                    node_color_axis_label = "Log 2 Fold Change",
+#                    layout = "da", initial_layout = "re",
+#                    key_size = 0.4,
+#                    output_file = "Figures/SOD/ITS/diff_abundance_heattree_deseq_sod_ITS_YrsincetrtBr.pdf") # The layout algorithm that initializes node locations
+```
+
+### Software used
+```{r software used}
+sessioninfo::session_info()
+```

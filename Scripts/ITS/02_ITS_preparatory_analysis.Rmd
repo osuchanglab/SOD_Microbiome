@@ -1,0 +1,224 @@
+---
+title: "ITS SOD Preparation Steps"
+output: html_document
+date: "2024-06-11"
+---
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/SOD_DADS_microbiome")
+
+library(phyloseq); packageVersion("phyloseq")
+library(ggplot2); packageVersion("ggplot2")
+library(readr); packageVersion("readr")
+library(purrr); packageVersion("purrr")
+library(furrr); packageVersion("furrr")
+library(dplyr); packageVersion("dplyr")
+library(stringr); packageVersion("stringr")
+library(metacoder); packageVersion("metacoder")
+library(data.table); packageVersion("data.table")
+library(decontam); packageVersion("decontam")
+```
+
+### Load data in order to make phyloseq and taxmap objects
+```{r load files, include=TRUE}
+seqtab.nochim <- read.table("Data/ITS/dada2_outputs/its_seqtab_nochim.out",sep="\t",stringsAsFactors=F,header=T)
+rownames(seqtab.nochim) <- gsub("__", "_", rownames(seqtab.nochim))
+
+taxa<- read.table("Data/ITS/dada2_outputs/its_taxa_07_2023.out", sep="\t", stringsAsFactors=F,header=T)
+
+taxa_filt <- taxa %>%
+  mutate(across(starts_with("tax."), ~ ifelse(get(str_replace(cur_column(), "tax.", "boot.")) < 60, NA, .))) %>%
+  set_names(str_replace(names(.), "tax.", ""))
+
+
+#I want to rename tax input so more in line with other two datasets for final figures
+remove_prefix <- function(data) {
+  data <- gsub("[a-z]__", "", data)  
+  return(data)
+}
+
+# Apply the function to each column in the table
+taxa_filt[] <- lapply(taxa_filt, remove_prefix)
+
+revise_species <- function(genus, species) {
+  # Combine genus and species with an underscore if species is not NA
+  revised_species <- ifelse(is.na(species), NA, paste(genus, species, sep = "_"))
+  return(revised_species)
+}
+
+# Apply the function to revise Species column
+taxa_filt$Species <- revise_species(taxa_filt$Genus, taxa_filt$Species)
+
+samdf <- read.csv("Data/ITS/metadata_dbs/Metadata_ITS_short_mod.csv")
+```
+
+
+### Track number of reads throughout the pipeline
+```{r track reads through DADA2 analysis, include=TRUE}
+track <- read.table("Data/ITS/dada2_outputs/its_trackreads.out", sep="\t", stringsAsFactors = F, header=T)
+rownames(track) <- gsub("__", "_", rownames(track))
+```
+
+### For ease of analysis, convert the DADA2 outputs into a Phyloseq object, and filter out any necessary samples
+```{r Phyloseq object, include=TRUE}
+all(rownames(seqtab.nochim) %in% samdf$Sample_nameITS)
+
+rownames(samdf) <- samdf$Sample_nameITS
+
+samdata.ps <- sample_data(samdf)
+
+taxa.ps <- tax_table(as.matrix(taxa_filt))
+
+seqtab.nochim.ps <- otu_table(seqtab.nochim, taxa_are_rows=FALSE)
+ps <- phyloseq(seqtab.nochim.ps, samdata.ps, taxa.ps)
+
+#Add refseq slot
+dna <- Biostrings::DNAStringSet(taxa_names(ps))
+names(dna) <- taxa_names(ps)
+ps <- merge_phyloseq(ps, dna)
+taxa_names(ps) <- paste0("ASV", seq(ntaxa(ps)))
+```
+
+### Decontamination step using decontam package-this was most necessary for 16S analysis. ITS control samples don't have reads, so I skipped this.
+```{r Decontam, include=TRUE}
+#Inspect library sizes
+df <- as.data.frame(sample_data(ps)) # Put sample_data into a ggplot-friendly data.frame
+df$LibrarySize <- sample_sums(ps)
+df <- df[order(df$LibrarySize),]
+df$Index <- seq(nrow(df))
+ggplot(data=df, aes(x=Index, y=LibrarySize, color=Sample_or_control)) + geom_point()
+
+sample_data(ps)$is.neg <- sample_data(ps)$Sample_or_control == "control"
+contamdf.prev <- isContaminant(ps, method="prevalence", neg="is.neg")
+table(contamdf.prev$contaminant)
+# head(which(contamdf.prev$contaminant))
+
+contamdf.prev05 <- isContaminant(ps, method="prevalence", neg="is.neg", threshold=0.5)
+table(contamdf.prev05$contaminant)
+which(contamdf.prev05$contaminant)
+
+ps.pa <- transform_sample_counts(ps, function(abund) 1*(abund>0))
+ps.pa.neg <- prune_samples(sample_data(ps.pa)$Sample_or_control == "control", ps.pa)
+ps.pa.pos <- prune_samples(sample_data(ps.pa)$Sample_or_control == "sample", ps.pa)
+
+# Make data.frame of prevalence in positive and negative samples
+df.pa <- data.frame(pa.pos=taxa_sums(ps.pa.pos), pa.neg=taxa_sums(ps.pa.neg),
+                    contaminant=contamdf.prev05$contaminant)
+ggplot(data=df.pa, aes(x=pa.neg, y=pa.pos, color=contaminant)) + geom_point() +
+  xlab("Prevalence (Negative Controls)") + ylab("Prevalence (True Samples)")
+
+#Remove contaminants
+ps.decontam <- prune_taxa(!contamdf.prev05$contaminant, ps)
+
+ps.decontam <- ps.decontam %>%
+  subset_taxa(
+    Kingdom == "Fungi" 
+  )
+
+#Save for use with other analyses
+save(ps.decontam, file = "Data/ITS/filtered_data/ITS_phyloseq.decontam.RData")
+```
+
+###Take a first glance at the data
+
+Helpful for deciding how to filter data. Prevelance is how many samples have the ASV, and total abundance is how many times ASV is present across all samples. I don't do any filtering until I split up samples into relevant experiment.
+```{r A look at prevalence}
+#Prevalence-number of samples in which a taxon appears at least once
+#Total abundance
+prevdf = apply(X = phyloseq::otu_table(ps.decontam),
+               MARGIN = ifelse(taxa_are_rows(ps.decontam), yes = 1, no = 2),
+               FUN = function(x){sum(x > 0)})
+
+# Add taxonomy and total read counts to this data.frame
+prevdf = data.frame(Prevalence = prevdf,
+                    TotalAbundance = taxa_sums(ps.decontam),
+                    tax_table(ps.decontam))
+```
+
+Now I will focus on sod experiment and prepare dataset for further analysis by subsetting these samples from the rest of the sample data. I will also remove allow abundance ASVs not present in at least one sample and not present at least five times
+```{r Subset dataset, include=TRUE}
+sod.ps<-subset_samples(ps.decontam, Experiment=="basetree_100plots")
+sod.ps<- prune_taxa(taxa_sums(sod.ps) > 0, sod.ps)
+
+sod.ps@sam_data$Treatuntreat_EP<-factor(sod.ps@sam_data$Treatuntreat_EP, levels = c(0, 1), labels = c("untreated", "treated"))
+sod.ps@sam_data$YearSam_EP <- as.factor(sod.ps@sam_data$YearSam_EP)
+sod.ps@sam_data$YrSinceTrt_BR <- as.factor(sod.ps@sam_data$YrSinceTrt_BR)
+sod.ps@sam_data$YrSinceTrt_BR <- factor(sod.ps@sam_data$YrSinceTrt_BR, levels = c("untreated", "1to2", "3to4", "5to8", "10to12"))
+sod.ps@sam_data$Fire_Mod <- factor(sod.ps@sam_data$Fire_Mod, levels = c("untreated", "wildfire", "SODtrt"))
+sod.ps@sam_data$VegBin <- as.factor(sod.ps@sam_data$VegBin)
+sod.ps@sam_data$SoilBin <- as.factor(sod.ps@sam_data$SoilBin)
+
+readsums<-sort(sample_sums(sod.ps))
+median(readsums)
+
+#Let's filter an ASVs not present at least 5 times
+sod_5asv.ps <- prune_taxa(taxa_sums(sod.ps) > 5, sod.ps)
+sod_5asv.ps<- prune_taxa(taxa_sums(sod_5asv.ps) > 0, sod_5asv.ps)
+
+save(sod.ps, file="Data/ITS/filtered_data/sodexp.RData")
+save(sod_5asv.ps, file="Data/ITS/filtered_data/sod_5asv.RData")
+
+readsums<-sort(sample_sums(sod.ps))
+median(readsums)
+summary(readsums)
+```
+
+
+### Check prevalence after filtering
+```{r check prevalence dataframes after filterig}
+#Double check that the filtering makes sense by making new prevalence dataframe
+prevdf_check = apply(X = phyloseq::otu_table(sod_5asv.ps),
+               MARGIN = ifelse(taxa_are_rows(sod_5asv.ps), yes = 1, no = 2),
+               FUN = function(x){sum(x > 0)})
+
+# Add taxonomy and total read counts to this data.frame
+prevdf_check = data.frame(Prevalence = prevdf_check,
+                    TotalAbundance = taxa_sums(sod_5asv.ps),
+                    tax_table(sod_5asv.ps))
+
+```
+
+### Subset read counts so we are just looking at sod samples
+```{r subset tracked reads}
+samples_to_subset <- samdf %>%
+  filter(Experiment=="basetree_100plots") %>% 
+  pull(Sample_nameITS)
+# Filter the track dataframe
+
+#track$sample <- rownames(track)
+subset_track_reads <- track[rownames(track) %in% samples_to_subset, ]
+write.csv(subset_track_reads, file="Data/ITS/filtered_data/ITS_subset_track_reads_sod.csv",row.names = TRUE)
+# Print summary of the filtered track dataframe
+summary(subset_track_reads)
+```
+
+### Create prevalance plots (Rel abundance vs. total abundance) facetted by genus
+```{r prevalence plots organized by phylum}
+prevdf1 = subset(prevdf_check, Genus %in% get_taxa_unique(sod_5asv.ps, "Phylum"))
+ggplot(prevdf1, aes(TotalAbundance, Prevalence / nsamples(sod_5asv.ps),color=Phylum)) +
+  # Include a guess for parameter
+  geom_hline(yintercept = 0.005, alpha = 0.5, linetype = 2) +  geom_point(size = 2, alpha = 0.7) +
+  scale_x_log10() +  xlab("Total Abundance") + ylab("Prevalence [Frac. Samples]") +
+  facet_wrap(~Phylum) + theme(legend.position="none")
+```
+
+### Let's make histograms of read counts before and after filtering
+```{r Reads sequenced by experiment}
+#Before filtering reads
+sdt = data.table::data.table(as(sample_data(sod.ps), "data.frame"),
+                 TotalReads = sample_sums(sod.ps), keep.rownames = TRUE)
+pseqDepth = ggplot(sdt, aes(TotalReads)) + geom_histogram(color="black", fill="lightblue") + ggtitle("Histogram of sequencing depth-before filtering samples with low read depths") + labs(x="Depth", y="Frequency")
+pseqDepth
+
+#After filtering reads
+sdt_filt = data.table::data.table(as(sample_data(sod_5asv.ps), "data.frame"),
+                 TotalReads = sample_sums(sod_5asv.ps), keep.rownames = TRUE)
+pseqDepth_filt = ggplot(sdt_filt, aes(TotalReads)) + geom_histogram(color="black", fill="lightblue") + ggtitle("Histogram of sequencing depth after filtering samples with low read depths") + labs(x="Depth", y="Frequency")
+pseqDepth_filt
+```
+
+### Software used
+```{r, software used}
+sessionInfo()
+```

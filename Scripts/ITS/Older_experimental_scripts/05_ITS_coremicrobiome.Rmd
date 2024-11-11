@@ -1,0 +1,94 @@
+---
+title: "ITS core microbiome followup"
+output: html_document
+date: "2024-03-13"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/SOD_microbiome/")
+
+library(phyloseq); packageVersion("phyloseq")
+library(ggplot2); packageVersion("ggplot2")
+library(readr); packageVersion("readr")
+library(purrr); packageVersion("purrr")
+library(furrr); packageVersion("furrr")
+library(dplyr); packageVersion("dplyr")
+library(stringr); packageVersion("stringr")
+library(metacoder); packageVersion("metacoder")
+library(data.table); packageVersion("data.table")
+library(Biostrings); packageVersion("Biostrings")
+library(phylosmith); packageVersion("phylosmith")
+```
+
+Load filtered phyloseq objects
+```{r Make additional taxmap objects asvs not present 5 percent of time filtered}
+load("Data/ITS/ee2_boot60/exp1_5_filter.RData")
+
+exp1_5percent_filter.ps = phyloseq::filter_taxa(exp1_5_filter.ps, function(x) sum(x > 5) >= (0.05*length(x)), TRUE)
+
+exp1_10percent_filter.ps = phyloseq::filter_taxa(exp1_5_filter.ps, function(x) sum(x > 5) >= (0.10*length(x)), TRUE)
+
+exp1_25percent_filter.ps = phyloseq::filter_taxa(exp1_5_filter.ps, function(x) sum(x > 5) >= (0.25*length(x)), TRUE)
+
+exp1_50percent_filter.ps = phyloseq::filter_taxa(exp1_5_filter.ps, function(x) sum(x > 5) >= (0.50*length(x)), TRUE)
+```
+
+These subsequent analysis are an attempt to understand what my constitute the core microbiome of treated vs. untreated samples. This is in addition to analysis in the first script. 
+
+Towards a core microbiome analysis
+
+Let's look at common taxa in both treated and untreated samples and taxa that are unique to each
+```{r common taxa}
+#Samples filtered if less than 4k reads and ASVs not present at least 5 times
+phylosmith::common_taxa(exp1_5_filter.ps, treatment = "treatuntreat_EP", subset = NULL, n = 'all')
+
+#Samples filtered above, and any additional ASVs filtered if not present at least 5% of time
+phylosmith::common_taxa(exp1_5percent_filter.ps, treatment = "treatuntreat_EP", subset = NULL, n = 'all')
+
+#Samples filtered above, and any additional ASVs filtered if not present at least 10% of time
+phylosmith::common_taxa(exp1_10percent_filter.ps, treatment = "treatuntreat_EP", subset = NULL, n = 'all')
+```
+
+
+Let's look at core taxa-it doesn't seem there are any core taxa across treatments with these particular frequency and abundance threshold values
+```{r core taxa}
+coretaxa.ps<-taxa_core(exp1_5_filter.ps, subset = NULL, frequency = 0.05, abundance_threshold = 0.01)
+
+taxa_core_graph(exp1_5_filter.ps, treatment = NULL, subset = NULL,
+abundance_thresholds = seq(0.01, 0.5, 0.01), frequencies = seq(0.05, 0.3, 0.01), colors = 'default', treatment_labels = "treatuntreat_EP", sample_labels = NULL, classification_labels= NULL)
+```
+
+```{r unique taxa}
+#Let's identify taxa only present in treated vs. untreated samples
+uniquetaxa<-phylosmith::unique_taxa(exp1_5_filter.ps, "treatuntreat_EP", subset = NULL)
+data.frame(lapply(uniquetaxa, "length<-", max(lengths(uniquetaxa))))
+
+#Let's identify taxa only present in treated vs. untreated samples in dataset where ASVs filtered if not at least 5% of samples
+uniquetaxa_5percent<-phylosmith::unique_taxa(exp1_5percent_filter.ps, "treatuntreat_EP", subset = NULL)
+data.frame(lapply(uniquetaxa_5percent, "length<-", max(lengths(uniquetaxa_5percent))))
+```
+
+```{r Abundance heatmaps, fig.width=40, fig.height=25}
+# Applying the function to each name in the list
+
+#There aren't any taxa only in treated vs. untreated samples
+abundance_heatmap(exp1_5_filter.ps, classification = "Genus", "treatuntreat_EP", subset = NULL, treatment_labels=c("Untreated", "Treated"), transformation = 'log2', colors = 'default')
+
+#There aren't any taxa only in treated vs. untreated samples not present 5% of the time
+abundance_heatmap(exp1_5percent_filter.ps, classification = "Genus", "treatuntreat_EP", subset = NULL, treatment_labels=c("Untreated", "Treated"), transformation = 'log2', colors = 'default')
+
+
+
+#There aren't any taxa only in treated vs. untreated samples not present 10% of the time
+abundance_heatmap(exp1_10percent_filter.ps, classification = "Genus", "treatuntreat_EP", subset = NULL, treatment_labels=c("Untreated", "Treated"), transformation = 'log2', colors = 'default')
+
+abundance_heatmap(exp1_25percent_filter.ps, classification = "Genus", "treatuntreat_EP", subset = NULL, treatment_labels=c("Untreated", "Treated"), transformation = 'log2', colors = 'default')
+
+abundance_heatmap(exp1_50percent_filter.ps, classification = "Genus", "treatuntreat_EP", subset = NULL, treatment_labels=c("Untreated", "Treated"), transformation = 'log2', colors = 'default')
+```
+
+
+```{r}
+sessioninfo::session_info()
+```

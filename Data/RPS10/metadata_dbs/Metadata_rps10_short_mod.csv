@@ -1,0 +1,261 @@
+Sample_nameRps10,Experiment,Sample_or_Control,Hundredplot_tree_EP,PrePost_sam_EP,PrePost_EP,Treatuntreat_EP,Lineage_EP,YearSam_EP,YearTrt_EP,YrSinceTrt_EP,YrSinceTrt_Range,YrSinceTrt_BR,Fire_EP,Fire_Mod,Burned1-0_EP,YrSinceBurn_EP,Latitude,Longitude,VegBin,SoilBin,Incubation,Soil,Treatment
+Dung1_1_S222,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,madras,untreated
+Dung1_2_S223,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,madras,untreated
+Dung1_3_S224,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,madras,untreated
+Dung2_1_S225,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,madras,DADS_1gal_A
+Dung2_2_S226,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,madras,DADS_1gal_A
+Dung2_3_S227,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,madras,DADS_1gal_A
+Dung3_1_S228,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,tulelake,untreated
+Dung3_2_S229,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,tulelake,untreated
+Dung3_3_S230,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,tulelake,untreated
+Dung4_1_S231,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,tulelake,DADS_1gal_A
+Dung4_2_S232,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,tulelake,DADS_1gal_A
+Dung4_3_S233,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,anaerobic,tulelake,DADS_1gal_A
+Dung5_1_S234,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,madras,untreated
+Dung5_2_S235,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,madras,untreated
+Dung5_3_S236,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,madras,untreated
+Dung6_1_S237,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,madras,DADS_1gal_A
+Dung6_2_S238,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,madras,DADS_1gal_A
+Dung6_3_S239,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,madras,DADS_1gal_A
+Dung7_1_S240,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,tulelake,untreated
+Dung7_2_S241,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,tulelake,untreated
+Dung7_3_S242,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,tulelake,untreated
+Dung8_1_S243,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,tulelake,DADS_1gal_A
+Dung8_2_S244,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,tulelake,DADS_1gal_A
+Dung8_3_S245,dunglabsamples,sample,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,aerobic,tulelake,DADS_1gal_A
+10gHD4379_S219,10g,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+10gHD4397_S220,10g,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4337-S1_S37,basetree_100plots,sample,1,0,NA,1,EU1,2018,2017,1,<3,1to2,SODtrt,SODtrt,1,1,42.33597,-124.36069,1,0,NA,NA,NA
+HD4339-S1_S39,basetree_100plots,sample,1,0,NA,1,EU1,2018,2016,2,<3,1to2,SODtrt,SODtrt,1,2,42.29124,-124.39883,0,0,NA,NA,NA
+HD4340-S1_S40,basetree_100plots,sample,1,0,NA,1,NA1,2019,2007,12,>3,10to12,SODtrt,SODtrt,1,12,42.12464,-124.27197,1,1,NA,NA,NA
+HD4341-S1_S41,basetree_100plots,sample,1,0,NA,1,NA1,2019,2007,12,>3,10to12,SODtrt,SODtrt,1,12,42.12455,-124.27132,1,0,NA,NA,NA
+HD4343-S1_S43,basetree_100plots,sample,1,0,NA,1,NA1,2019,2012,7,>3,5to8,SODtrt,SODtrt,1,7,42.04178,-124.10239,0,0,NA,NA,NA
+HD4349-S1_S49,basetree_100plots,sample,1,0,NA,1,NA1,2019,2012,7,>3,5to8,SODtrt,SODtrt,1,7,42.17562,-124.34475,0,0,NA,NA,NA
+HD4355-S1_S55,basetree_100plots,sample,1,0,NA,1,NA1,2019,2007,12,>3,10to12,SODtrt,SODtrt,1,12,42.12313,-124.26237,1,0,NA,NA,NA
+HD4356-S1_S56,basetree_100plots,sample,1,0,NA,1,NA1,2019,2007,12,>3,10to12,SODtrt,SODtrt,1,12,42.122,-124.25945,1,1,NA,NA,NA
+HD4357-S1_S57,basetree_100plots,sample,1,0,NA,1,NA1,2019,2009,10,>3,10to12,SODtrt,SODtrt,1,10,42.15398,-124.26584,0,0,NA,NA,NA
+HD4358-S1_S58,basetree_100plots,sample,1,0,NA,1,NA1,2019,2008,11,>3,10to12,SODtrt,SODtrt,1,11,42.13894,-124.25471,0,0,NA,NA,NA
+HD4359-S1_S59,basetree_100plots,sample,1,0,NA,1,NA1,2019,2009,10,>3,10to12,SODtrt,SODtrt,1,10,42.13223,-124.26122,1,0,NA,NA,NA
+HD4360-S1_S60,basetree_100plots,sample,1,0,NA,1,NA1,2019,2011,8,>3,5to8,SODtrt,SODtrt,1,8,42.13082,-124.26263,1,0,NA,NA,NA
+HD4365-S1_S65,basetree_100plots,sample,1,0,NA,1,NA1,2019,2014,5,>3,5to8,SODtrt,SODtrt,1,5,42.10868,-124.28326,0,0,NA,NA,NA
+HD4366-S1_S66,basetree_100plots,sample,1,0,NA,1,NA1,2019,2014,5,>3,5to8,SODtrt,SODtrt,1,5,42.10656,-124.28467,0,0,NA,NA,NA
+HD4367-S1_S67,basetree_100plots,sample,1,0,NA,1,NA1,2019,2014,5,>3,5to8,SODtrt,SODtrt,1,5,42.10814,-124.28308,0,0,NA,NA,NA
+HD4368-S1_S68,basetree_100plots,sample,1,0,NA,1,NA1,2019,2014,5,>3,5to8,SODtrt,SODtrt,1,5,42.10531,-124.28574,0,0,NA,NA,NA
+HD4369-S1_S69,basetree_100plots,sample,1,0,NA,1,NA1,2019,2017,2,<3,1to2,SODtrt,SODtrt,1,2,42.10585,-124.28612,1,0,NA,NA,NA
+HD4377-S1_S77,basetree_100plots,sample,1,0,NA,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.29337,-124.39236,0,0,NA,NA,NA
+HD4379-S10_S150,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S11_S151,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S112_2_S79,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S12_S152,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S13_S153,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S14_S154,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S15_S155,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S16_S156,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S17_S157,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S18_S158,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S19_S159,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S2_S142,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S20_S160,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S3_S143,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S4_S144,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S5_S145,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S6_S146,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S7_S147,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S8_S148,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4379-S9_S149,plots5_samples20,sample,0,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4380-S1_S80,basetree_100plots,sample,1,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.33895,-124.4087,1,1,NA,NA,NA
+HD4381-S1_S81,basetree_100plots,sample,1,0,NA,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.33172,-124.3946,0,0,NA,NA,NA
+HD4385-S1_S85,basetree_100plots,sample,1,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.3103,-124.39847,0,0,NA,NA,NA
+HD4386-S1_S86,basetree_100plots,sample,1,0,NA,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.33622,-124.35783,1,0,NA,NA,NA
+HD4387-S1_S87,basetree_100plots,sample,1,0,NA,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.33622,-124.35761,1,1,NA,NA,NA
+HD4389-S1_S89,basetree_100plots,sample,1,0,NA,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.34534,-124.41411,0,0,NA,NA,NA
+HD4390-S1_S90,basetree_100plots,sample,1,0,NA,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.33229,-124.38386,1,0,NA,NA,NA
+HD4391-S1_S91,basetree_100plots,sample,1,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32713,-124.40679,0,0,NA,NA,NA
+HD4392-S1_S92,basetree_100plots,sample,1,0,NA,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.30636,-124.40015,0,0,NA,NA,NA
+HD4396-S1_S96,basetree_100plots,sample,1,0,NA,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.33277,-124.38366,1,0,NA,NA,NA
+HD4397-S1_S181,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S10_S190,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S11_S191,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S12_S192,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S13_S193,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S14_S194,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S15_S195,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S16_S196,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S17_S197,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S18_S198,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S19_S199,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S2_S182,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S20_S200,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S3_S183,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S4_S184,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S5_S185,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S6_S186,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S7_S187,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S8_S188,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4397-S9_S189,plots5_samples20,sample,0,0,NA,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4376-S1_S76,basetree_100plots,sample,1,1,post,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.29333,-124.39407,0,0,NA,NA,NA
+HD4378-S1_S78,basetree_100plots,sample,1,1,post,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.30084,-124.38645,0,0,NA,NA,NA
+HD4379-S1_S141,basetree_100plots,sample,1,1,post,1,EU1,2020,2017,3,>3,3to4,SODtrt,SODtrt,1,3,42.32142,-124.40442,1,1,NA,NA,NA
+HD4382-S1_S82,basetree_100plots,sample,1,1,post,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.3536,-124.40678,0,1,NA,NA,NA
+HD4383-S1_S83,basetree_100plots,sample,1,1,post,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.297,-124.38137,0,0,NA,NA,NA
+HD4384-S1_S84,basetree_100plots,sample,1,1,post,1,EU1,2020,2018,2,<3,1to2,SODtrt,SODtrt,1,2,42.29542,-124.38308,0,0,NA,NA,NA
+HD4388-S1_S88,basetree_100plots,sample,1,1,post,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.29096,-124.38458,0,0,NA,NA,NA
+HD4397-S1_S97,basetree_100plots,sample,1,1,post,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
+HD4398-S1_S98,basetree_100plots,sample,1,1,post,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.333081,-124.400605,0,0,NA,NA,NA
+HD4399-S1_S99,basetree_100plots,sample,1,1,post,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.334215,-124.40015,0,0,NA,NA,NA
+10gEP114_S221,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+10gHD4371_S218,10g,sample,0,0,NA,0,uninfested,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+114-2152-PSME_2_S259,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2152-PSME_S215,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2164-PSME_2_S256,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2164-PSME_S212,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2170-4-NODE3_2_S255,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2170-4-NODE3_S211,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2177-1-NODE3_2_S253,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2177-1-NODE3_S209,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2191-1-ARME_2_S258,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2191-1-ARME_S214,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2203-1-NODE3_2_S252,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2203-1-NODE3_S208,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2211-2-NODE3_2_S251,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2211-2-NODE3_S207,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2228-2-ARME_2_S260,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2228-2-ARME_S216,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2237-PSME_2_S257,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2237-PSME_S213,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2277-NODE3_2_S254,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2277-NODE3_S210,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-center-rebar_2_S250,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-center-rebar_S206,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-east-rebar_2_S247,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-east-rebar_S203,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-north-rebar_2_S246,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-north-rebar_S202,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-south-rebar_2_S248,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-south-rebar_S204,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-west-rebar_2_S249,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-west-rebar_S205,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+HD3901-S1_4401_S1,basetree_100plots,sample,1,0,NA,0,EU1,2020,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.332505,-124.399209,1,1,NA,NA,NA
+HD3902-S1_4400_S100,basetree_100plots,sample,1,0,NA,0,EU1,2020,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.41881,-124.349987,1,0,NA,NA,NA
+HD4301-S1_S2,basetree_100plots,sample,1,0,NA,0,NA1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.19457,-124.3507,1,1,NA,NA,NA
+HD4308-S1_S8,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.13775,-124.16682,1,0,NA,NA,NA
+HD4309-S1_S9,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.13796,-124.16514,1,0,NA,NA,NA
+HD4310-S1_S10,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.13193,-124.19671,1,0,NA,NA,NA
+HD4311-S1_S11,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.12821,-124.19627,1,0,NA,NA,NA
+HD4312-S1_S12,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.11756,-124.1955,1,0,NA,NA,NA
+HD4313-S1_S13,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.26913,-124.28152,1,0,NA,NA,NA
+HD4314-S1_S14,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.27436,-124.29751,0,0,NA,NA,NA
+HD4315-S1_S15,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.28407,-124.32211,1,0,NA,NA,NA
+HD4316-S1_S16,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.27922,-124.32102,0,0,NA,NA,NA
+HD4319-S1_S19,basetree_100plots,sample,1,0,NA,0,NA1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.18637,-124.34256,1,1,NA,NA,NA
+HD4320-S1_S20,basetree_100plots,sample,1,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.33258,-124.38381,1,0,NA,NA,NA
+HD4321-S1_S121,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S10_S130,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S11_S131,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S12_S132,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S13_S133,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S14_S134,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S15_S135,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S16_S136,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S17_S137,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S18_S138,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S19_S139,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S2_S122,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S20_S140,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S3_S123,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S4_S124,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S5_S125,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S6_S126,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S7_S127,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S8_S128,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4321-S9_S129,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4325-S1_S25,basetree_100plots,sample,1,0,NA,0,NA1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.05423,-124.27666,1,0,NA,NA,NA
+HD4326-S1_S26,basetree_100plots,sample,1,0,NA,0,NA1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.17954,-124.34254,1,0,NA,NA,NA
+HD4327-S1_S27,basetree_100plots,sample,1,0,NA,0,NA1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.15498,-124.29518,0,0,NA,NA,NA
+HD4329-S1_S29,basetree_100plots,sample,1,0,NA,0,EU1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.345979,-124.41295,0,0,NA,NA,NA
+HD4330-S1_S30,basetree_100plots,sample,1,0,NA,1,EU1,2018,2017,1,<3,1to2,unburned,SODtrt,0,unburned,42.3264,-124.40685,1,1,NA,NA,NA
+HD4336-S10_S170,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S11_S171,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S111_23_S36,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S12_S172,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S13_S173,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S14_S174,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S15_S175,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S16_S176,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S17_S177,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S18_S178,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S19_S179,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S2_S162,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S20_S180,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S3_S163,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S4_S164,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S5_S165,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S6_S166,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S7_S167,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S8_S168,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4336-S9_S169,plots5_samples20,sample,0,0,NA,0,EU1,2018,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4338-S1_S38,basetree_100plots,sample,1,0,NA,0,NA1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.30704,-124.39725,1,0,NA,NA,NA
+HD4344-S1_S44,basetree_100plots,sample,1,0,NA,0,EU1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.04176,-124.1024,1,0,NA,NA,NA
+HD4345-S1_S45,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.04669,-124.09534,1,0,NA,NA,NA
+HD4346-S1_S46,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.04251,-124.10088,0,0,NA,NA,NA
+HD4347-S1_S47,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.2671,-124.308,0,0,NA,NA,NA
+HD4348-S1_S48,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.26547,-124.3096,1,0,NA,NA,NA
+HD4350-S1_S50,basetree_100plots,sample,1,0,NA,0,EU1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.29327,-124.38197,0,0,NA,NA,NA
+HD4351-S1_S51,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.28273,-124.30651,1,0,NA,NA,NA
+HD4352-S1_S52,basetree_100plots,sample,1,0,NA,0,EU1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.30655,-124.39801,1,1,NA,NA,NA
+HD4353-S1_S53,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.05744,-124.19982,1,0,NA,NA,NA
+HD4370-S1_S70,control_plot,sample,1,0,NA,0,uninfested,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.48899,-124.23937,0,0,NA,NA,NA
+HD4371-S1_S101,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S10_S110,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S11_S111,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S111_19_S71,control_plot,sample,1,0,NA,0,uninfested,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S12_S112,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S13_S113,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S14_S114,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S15_S115,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S16_S116,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S17_S117,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S18_S118,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S19_S119,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S2_S102,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S20_S120,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S3_S103,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S4_S104,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S5_S105,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S6_S106,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S7_S107,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S8_S108,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4371-S9_S109,plots5_samples20,sample,0,0,NA,0,uninfested,2019,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
+HD4372-S1_S72,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.29204,-124.32932,1,1,NA,NA,NA
+HD4373-S1_S73,basetree_100plots,sample,1,0,NA,0,NA1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.29474,-124.32393,1,0,NA,NA,NA
+HD4374-S1_S74,basetree_100plots,sample,1,0,NA,0,EU1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32526,-124.38251,1,0,NA,NA,NA
+HD4375-S1_S75,basetree_100plots,sample,1,0,NA,0,EU1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32048,-124.37257,0,0,NA,NA,NA
+HD4393-S1_S93,basetree_100plots,sample,1,0,NA,0,EU1,2020,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.31258,-124.40617,1,0,NA,NA,NA
+HD4394-S1_S94,basetree_100plots,sample,1,0,NA,0,EU1,2020,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.30941,-124.40005,1,1,NA,NA,NA
+HD4395-S1_S95,basetree_100plots,sample,1,0,NA,0,EU1,2020,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.30888,-124.39334,1,0,NA,NA,NA
+HD4317-S1_S17,basetree_100plots,sample,1,1,pre,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.29568,-124.38348,1,0,NA,NA,NA
+HD4318-S1_S18,basetree_100plots,sample,1,1,pre,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.29694,-124.3813,1,0,NA,NA,NA
+HD4321-S111_19_S21,basetree_100plots,sample,1,1,pre,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.32148,-124.40437,1,0,NA,NA,NA
+HD4322-S1_S22,basetree_100plots,sample,1,1,pre,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.29334,-124.39408,1,1,NA,NA,NA
+HD4323-S1_S23,basetree_100plots,sample,1,1,pre,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.30105,-124.38664,1,1,NA,NA,NA
+HD4328-S1_S28,basetree_100plots,sample,1,1,pre,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.33312,-124.40082,1,1,NA,NA,NA
+HD4335-S1_S35,basetree_100plots,sample,1,1,pre,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.333,-124.40105,1,0,NA,NA,NA
+HD4336-S1_S161,basetree_100plots,sample,1,1,pre,0,EU1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.33195,-124.40257,1,0,NA,NA,NA
+HD4342-S1_S42,basetree_100plots,sample,1,1,pre,0,EU1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.29095,-124.38474,0,1,NA,NA,NA
+HD4354-S1_S54,basetree_100plots,sample,1,1,pre,0,EU1,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.35349,-124.40664,1,1,NA,NA,NA
+HD4303-S1_S3,basetree_100plots,sample,1,0,NA,1,NA1,2018,2017,1,<3,1to2,wildfire,wildfire,1,1,42.14574,-124.1485,0,0,NA,NA,NA
+HD4304-S1_S4,basetree_100plots,sample,1,0,NA,1,NA1,2018,2017,1,<3,1to2,wildfire,wildfire,1,1,42.14574,-124.1485,1,1,NA,NA,NA
+HD4305-S1_S5,basetree_100plots,sample,1,0,NA,1,NA1,2018,2017,1,<3,1to2,wildfire,wildfire,1,1,42.14503,-124.15112,0,0,NA,NA,NA
+HD4306-S1_S6,basetree_100plots,sample,1,0,NA,1,NA1,2018,2017,1,<3,1to2,wildfire,wildfire,1,1,42.14556,-124.15621,1,1,NA,NA,NA
+HD4307-S1_S7,basetree_100plots,sample,1,0,NA,1,NA1,2018,2017,1,<3,1to2,wildfire,wildfire,1,1,42.15566,-124.144,1,0,NA,NA,NA
+HD4324-S1_S24,basetree_100plots,sample,1,0,NA,1,NA1,2018,2017,1,<3,1to2,wildfire,wildfire,1,1,42.13819,-124.16406,1,1,NA,NA,NA
+HD4331-S1_S31,basetree_100plots,sample,1,0,NA,1,NA1,2018,2016,2,<3,1to2,wildfire,wildfire,1,1,42.16726,-124.14046,0,0,NA,NA,NA
+HD4332-S1_S32,basetree_100plots,sample,1,0,NA,1,NA1,2018,2016,2,<3,1to2,wildfire,wildfire,1,1,42.1672,-124.14009,0,0,NA,NA,NA
+HD4333-S1_S33,basetree_100plots,sample,1,0,NA,1,NA1,2018,2016,2,<3,1to2,wildfire,wildfire,1,1,42.16854,-124.13562,0,0,NA,NA,NA
+HD4334-S1_S34,basetree_100plots,sample,1,0,NA,1,NA1,2018,2015,3,>3,3to4,wildfire,wildfire,1,1,42.16843,-124.13837,0,0,NA,NA,NA
+HD4361-S1_S61,basetree_100plots,sample,1,0,NA,1,NA1,2019,2015,4,>3,3to4,wildfire,wildfire,1,2,42.16951,-124.13448,1,0,NA,NA,NA
+HD4362-S1_S62,basetree_100plots,sample,1,0,NA,1,NA1,2019,2014,5,>3,5to8,wildfire,wildfire,1,2,42.16633,-124.14064,0,0,NA,NA,NA
+HD4363-S1_S63,basetree_100plots,sample,1,0,NA,1,NA1,2019,2015,4,>3,3to4,wildfire,wildfire,1,2,42.14356,-124.15952,0,0,NA,NA,NA
+HD4364-S1_S64,basetree_100plots,sample,1,0,NA,1,NA1,2019,2015,4,>3,3to4,wildfire,wildfire,1,2,42.14111,-124.16058,0,0,NA,NA,NA
+emptyextraction_S201,control,control,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA
+NTC_S217,control,control,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA,NA

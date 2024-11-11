@@ -1,0 +1,79 @@
+---
+title: "05_rps10_phylogeny.Rmd"
+output: html_document
+date: "2024-05-29"
+---
+
+```{r setup, include=TRUE}
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome")
+library(ape); packageVersion("ape")
+library(phangorn); packageVersion("phangorn")
+library(ggtree); packageVersion("ggtree")
+library(ggplot2); packageVersion("ggplot2")
+library(ggnewscale); packageVersion("ggnewscale")
+```
+
+```{r, load files}
+datasettable <- read.table("Data/RPS10/ee5/asv_phylogeny_input_rps10.txt", sep = "\t", header=T, stringsAsFactors = F, quote = "")
+datasettable$species<-datasettable$dada2_species
+
+temptree<-ape::read.tree("Data/RPS10/ee5/rps10_asv_unique_gp1000_trim2.fasta.treefile")
+asv_tree<-midpoint(temptree)
+tips<-asv_tree$tip.label
+asv_tree$tip.label<-tips
+
+# Extract tip labels from the asv_tree
+asv_tips <- asv_tree$tip.label
+
+# Check if the tip labels in datasettable match the order in asv_tree
+if (!identical(asv_tips, datasettable$asv_id)) {
+  # If they don't match, reorder datasettable to match the order of asv_tree
+  datasettable <- datasettable[match(asv_tips, datasettable$asv_id), ]
+}
+
+asv_tree$tip.label<-paste0(asv_tree$tip.label, "_", datasettable$dada2_species_pid)
+
+datasettable$asv_id <- paste0(datasettable$asv_id, "_", datasettable$dada2_species_pid)
+```
+
+
+```{r, make trees}
+#original root from midpointing gets set as NA by phangorn midpoint
+asv_tree$node.label[is.na(asv_tree$node.label)] <- "100/100"
+#set value for tip labels, only for plotting bootstrap as color
+asv_tree$node.label[asv_tree$node.label == ""] <- "100/100"
+
+bootsup=c(1,0.4)
+names(bootsup)<-c("TRUE","FALSE")
+bootcol<-c("black","gray")
+names(bootcol)<-c("TRUE","FALSE")
+
+pdf("Figures/RPS10/ee5/Figure_rps10_rect_phylo.pdf",width=34, height=44, useDingbats=FALSE)
+#iqtree has bootstrap support as 100/100 for UFbootstrap/SH-aLRT tests
+ggtree(asv_tree,size=1.5, layout="rectangular") %<+% datasettable + 
+
+	scale_color_manual("Bootstrap support",values=bootcol,labels=c("UFBoot > 95% & SH-aLRT > 80%","unsupported")) +
+	guides(color = FALSE) +
+	guides(fill = FALSE) +
+	guides(shape = FALSE) +
+	new_scale("color") +
+	
+	geom_tiplab(size=2.5) +
+	geom_tippoint(aes(color=species,fill=species),size=3) +
+	
+	#ggtitle("ASV Phylogeny tree") +
+	
+	theme(legend.position="middle") +
+	#theme(plot.title = element_text(hjust = 0.5)) +
+	
+	#guides(color = guide_legend(override.aes = list(size=3),title="ASV Phylogeny",order=1)) +
+	geom_treescale() 
+
+dev.off()
+```
+
+```{r}
+sessioninfo::session_info()
+```

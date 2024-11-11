@@ -1,0 +1,234 @@
+---
+title: "03_rps10_differential_abundance2"
+output: html_document
+date: "2024-05-23"
+---
+```{r setup, include=FALSE}
+library(gt)
+library(magrittr)
+library(data.table)
+library(phyloseq)
+library(DESeq2)
+library(cplm)
+library(ggplot2)
+library(cowplot)
+theme_set(theme_cowplot())
+library(ggbeeswarm)
+library(doParallel)
+library(foreach)
+library(metacoder)
+
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome")
+inDir <- "." # may need to change
+```
+
+```{r ad-hoc-functions}
+load("Data/RPS10/rps10_pruned3k_5asvs.RData")
+
+sample.data.table <- function(ps) {
+  as(sample_data(ps), "data.frame") %>%
+    as.data.table(keep.rownames = "Sample") %>% 
+    setkey(Sample) %>%
+    return()
+}
+asv.data.table <- function(ps) {
+  if (taxa_are_rows(ps)) {
+    otu.mat <- t(as(otu_table(ps), "matrix"))
+  } else {
+    otu.mat <- as(otu_table(ps), "matrix")
+  }
+  return(as.data.table(otu.mat, keep.rownames = "Sample") %>% setkey(Sample))
+}
+cat.n <- function(x) cat(x, sep = "\n")
+```
+
+Below, we import the data we'll be using for the rest of the practical, and put it into a format that makes working with it easier. This section shouldn't need to be modified.
+```{r data-import-and-prep}
+exp1_5.data <- sample.data.table(exp1_5_filter.ps)
+exp1_5.asvs <- asv.data.table(exp1_5_filter.ps)
+exp1_5.asv.ids <- taxa_names(exp1_5_filter.ps)
+exp1_5.dt <- exp1_5.data[exp1_5.asvs]
+# Assuming you have the factor as "Untreated" and "Treated" currently
+exp1_5_filter.ps@sam_data$treatuntreat_EP <- factor(exp1_5_filter.ps@sam_data$treatuntreat_EP, levels = c("untreated", "treated"))
+
+exp1_5_filter.ps@sam_data$Fire_EP <- factor(exp1_5_filter.ps@sam_data$Fire_EP, levels = c("Unburned", "SODTrt", "Wildfire"))
+```
+
+
+For differential abundance analyses of treated vs. untreated plots: we will serially conduct Wilcoxon tests on the exp1_5 data set. This test is the non-parametric (distribution-free) version of the Student's *t*-test and will tell us if the abundances of each taxon different significantly between our two groups: Unexposed vs Exposed. After running the tests, we correct for multiple tests by adjusting the p-values. There are two examples of methods for adjusting the p-values provided.
+```{r wilcoxon-tests}
+wilcox.tests <- lapply(exp1_5.asv.ids, function(asv) {
+  frm <- paste(asv, "~ treatuntreat_EP") # this combined with the as.formula() function below makes it possible to generate formulas in R programmatically
+  return(
+    wilcox.test(as.formula(frm), data = exp1_5.dt)
+  )
+})
+exp1_5.raw.pvals <- sapply(wilcox.tests, function(mod) {return(mod$p.value)})
+
+exp1_5.bon.pvals <- p.adjust(exp1_5.raw.pvals, method = "bonferroni")
+# Printing the number of associations with adjusted p-values below our 0.05 cutoff. This value can be adjusted depending on your data and expectations
+paste("Significant associations:", length(exp1_5.bon.pvals[exp1_5.bon.pvals <= 0.05])) %>%
+  cat.n()
+
+exp1_5.fdr.pvals <- p.adjust(exp1_5.raw.pvals, method = "fdr")
+paste("Significant associations:", length(exp1_5.fdr.pvals[exp1_5.fdr.pvals <= 0.05])) %>%
+  cat.n()
+```
+
+We will now plot the results
+```{r plot }
+exp1_5.melt.dt <- melt(
+  exp1_5.dt, 
+  measure.vars = exp1_5.asv.ids, 
+  variable.name = "ASV", 
+  value.name = "Abundance"
+)
+sig.asv <- exp1_5.asv.ids[exp1_5.bon.pvals <= 0.05]
+exp1_5.plot.dt <- exp1_5.melt.dt[ASV %in% sig.asv]
+exp1_5.plot.dt[, treatuntreat_EP := factor(treatuntreat_EP, levels = c("untreated", "treated"))] # the default is for levels to be in alphanumeric order, this way the control group, Unexposed, will be first along the x-axes
+
+exp1_5.plot <- ggplot(exp1_5.plot.dt, aes(x = treatuntreat_EP, y = Abundance)) + 
+  geom_beeswarm(alpha = 0.6) + 
+  stat_summary(
+    fun.data = "mean_cl_boot", # This summary statistical calculates the 95% C.I. of the mean via non-parametric methods
+    color = "red", 
+    geom = "errorbar", 
+    width = 0.8
+
+  ) + 
+  facet_wrap(~ ASV, scales = "free_y") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+
+#Cannot plot as now sig associations
+#exp1_5.plot 
+```
+
+Now we will look at an example where we have more than two factors and use kruskal wallis test
+```{r kw test}
+kw.tests <- lapply(exp1_5.asv.ids, function(asv) {
+  frm <- paste(asv, "~ Fire_EP")
+  return(
+    kruskal.test(as.formula(frm), data = exp1_5.dt)
+  )
+})
+
+exp1_5.raw.pvals <- sapply(kw.tests, function(mod) {return(mod$p.value)})
+
+exp1_5.bon.pvals <- p.adjust(exp1_5.raw.pvals, method = "bonferroni")
+paste(
+  "Significant associations:", 
+  length(exp1_5.bon.pvals[exp1_5.bon.pvals <= 0.05])
+) %>% 
+  cat.n()
+
+
+exp1_5.fdr.pvals <- p.adjust(exp1_5.raw.pvals, method = "fdr")
+paste(
+  "Significant associations:", 
+  length(exp1_5.fdr.pvals[exp1_5.fdr.pvals <= 0.05])
+) %>% 
+  cat.n()
+```
+
+```{r plotting-kruskal-wallis-tests}
+exp1_5.melt.dt <- melt(
+  exp1_5.dt, 
+  measure.vars = exp1_5.asv.ids, 
+  variable.name = "ASV", 
+  value.name = "Abundance"
+)
+#sig.asvs <- exp1_5.asv.ids[exp1_5.bon.pvals <= 0.05] # or exp1_5.fdr.pvals, Their choice
+#exp1_5.plot.dt <- exp1_5.melt.dt[ASV %in% sig.asvs]
+
+#ggplot(exp1_5.plot.dt, aes(x = Fire_EP, y = Abundance)) + 
+  #geom_beeswarm(alpha = 0.6) + 
+  #stat_summary(
+    #fun.data = "mean_cl_boot", 
+    #color = "red", 
+    #geom = "errorbar", 
+    #width = 0.8
+  #) + 
+  #facet_wrap(~ ASV, scales = "free_y")
+```
+
+
+```{r deseq2-treatuntreat}
+exp1_5.deseq <- phyloseq_to_deseq2(exp1_5_filter.ps, ~ treatuntreat_EP) # this function does all the heavy lifting for us to turn a phyloseq object into a DESeq2 object
+
+#This was required so DESEQ doesn't error out (there are several approaches, but the deseq developer recommended this most recently, if going from phyloseq to deseq option)
+exp1_5.dds <- estimateSizeFactors(exp1_5.deseq, type = 'poscounts')
+exp1_5.dds = DESeq(exp1_5.dds)
+exp1_5.res.dt <- results(exp1_5.dds) %>% as.data.table(keep.rownames = "ASV")
+
+exp1_5.sig.dt <- exp1_5.res.dt[padj <= 0.05]
+
+exp1_5.sig.dt = cbind(as(exp1_5.sig.dt, "data.frame"), as(tax_table(exp1_5_filter.ps)[exp1_5.sig.dt$ASV, ], "matrix"))
+
+deseqplot2 <- ggplot(exp1_5.sig.dt,  aes(y = reorder(Species, log2FoldChange), x = log2FoldChange, fill=Family)) +
+  geom_vline(xintercept = 0.0, color = "gray", size = 0.5) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.8) +  
+  labs(x = "ASV", y = "Log2 Fold Change", title = "Treated vs Untreated Plots") + 
+  theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5))
+ggsave("Figures/RPS10/deseq_trtuntrt_barplot.pdf", deseqplot2, width = 10, height = 12)
+
+write.csv(exp1_5.sig.dt, file="Results/RPS10/deseq_treatuntreat.csv",row.names = TRUE)
+```
+
+Heat tree results have some slight differences from above, due in part to how the ASV abundance data is input into DESEQ2. I tried to make a heat tree using same DESEQ results as above but need to return to this as it was becoming time consuming. For now, please note the slight discrepancies in the results.
+```{r deseq2-fire}
+exp1_5_filter.ps@sam_data$Fire_EP <- factor(exp1_5_filter.ps@sam_data$Fire_EP, levels = c("Unburned", "SODTrt", "Wildfire"))
+
+exp1_5.deseq <- phyloseq_to_deseq2(exp1_5_filter.ps, ~ Fire_EP)
+
+exp1_5.dds <- estimateSizeFactors(exp1_5.deseq, type = 'poscounts')
+exp1_5.dds = DESeq(exp1_5.dds, test="Wald", fitType="parametric")
+
+resultsNames(exp1_5.dds) # the second and thirds names here indicate the comparisons we want to make below
+
+exp1_5.SvU.res.dt <- as.data.table(
+  results(exp1_5.dds, name = "Fire_EP_SODTrt_vs_Unburned"), 
+  keep.rownames = "ASV"
+)
+
+# instead of typing out the full name yourself, you could point to the correct name programmatically by saving the output from resultsNames(exp1_5.dds) and using that in the results() function. If you're up for it, go ahead and do so.
+
+exp1_5.SvU.sig.dt <- exp1_5.SvU.res.dt[padj <= 0.05]
+#gt(exp1_5.SvU.sig.dt[order(log2FoldChange)]) %>% 
+  #tab_header(title = "Fire- SODTrt vs Unburned") %>%
+  #fmt_number(columns = 2:ncol(exp1_5.SvU.sig.dt), decimals = 3)
+
+exp1_5.SvU.sig.dt = cbind(as(exp1_5.SvU.sig.dt, "data.frame"), as(tax_table(exp1_5_filter.ps)[exp1_5.SvU.sig.dt$ASV, ], "matrix"))
+
+deseqplot3 <- ggplot(exp1_5.SvU.sig.dt, aes(y = reorder(Species, log2FoldChange), x = log2FoldChange, fill=Family)) +
+  geom_vline(xintercept = 0.0, color = "gray", size = 0.5) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.8) +  # Use geom_bar for bar plot
+  labs(x = "ASV", y = "Log2 Fold Change", title = "Fire-SODtrt vs Untreated") +
+  theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5))
+ggsave("Figures/RPS10/deseq_fire1_barplot.pdf", deseqplot2, width = 10, height = 12)
+deseqplot3 
+
+exp1_5.WvU.res.dt <- as.data.table(
+  results(exp1_5.dds, name = "Fire_EP_Wildfire_vs_Unburned"), 
+  keep.rownames = "ASV"
+)
+exp1_5.WvU.sig.dt <- exp1_5.WvU.res.dt[padj <= 0.05]
+
+#gt(exp1_5.WvU.sig.dt[order(log2FoldChange)]) %>% 
+  #tab_header(title = "Wildfire vs Unburned") %>%
+  #fmt_number(columns = 2:ncol(exp1_5.WvU.sig.dt), decimals = 3)
+
+exp1_5.WvU.sig.dt = cbind(as(exp1_5.WvU.sig.dt, "data.frame"), as(tax_table(exp1_5_filter.ps)[exp1_5.WvU.sig.dt$ASV, ], "matrix"))
+
+deseqplot4 <- ggplot(exp1_5.WvU.sig.dt,aes(y = reorder(Species, log2FoldChange), x = log2FoldChange, fill=Family)) +
+  geom_vline(xintercept = 0.0, color = "gray", size = 0.5) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.8) +  # Use geom_bar for bar plot
+  labs(x = "ASV", y = "Log2 Fold Change", title = "Fire-Wildfire vs Untreated") +
+  theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5))
+ggsave("Figures/RPS10/deseq_fire2_barplot.pdf", deseqplot2, width = 10, height = 12)
+deseqplot4
+
+plot_grid(deseqplot3, deseqplot4, ncol = 1)
+
+write.csv(exp1_5.SvU.sig.dt, file="Results/RPS10/deseq_fireSvU.csv",row.names = TRUE)
+write.csv(exp1_5.WvU.sig.dt, file="Results/RPS10/deseq_fireWvU.csv",row.names = TRUE)
+```

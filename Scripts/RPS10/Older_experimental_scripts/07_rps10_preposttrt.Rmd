@@ -1,0 +1,999 @@
+---
+title: "06_preposttrtexp"
+output: html_document
+date: "2024-05-21"
+---
+```{r setup, include=TRUE}
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome")
+library(phyloseq); packageVersion("phyloseq")
+library(ggplot2); packageVersion("ggplot2")
+library(readr); packageVersion("readr")
+library(purrr); packageVersion("purrr")
+library(furrr); packageVersion("furrr")
+library(dplyr); packageVersion("dplyr")
+library(stringr); packageVersion("stringr")
+library(metacoder); packageVersion("metacoder")
+library(data.table); packageVersion("data.table")
+library(Biostrings); packageVersion("Biostrings")
+library(vegan);packageVersion("vegan")
+library(agricolae);packageVersion("agricolae")
+library(gt);packageVersion("gt")
+library(magrittr);packageVersion("magrittr")
+library(data.table);packageVersion("data.table")
+library(DESeq2);packageVersion("DESeq2")
+library(cplm);packageVersion("cplm")
+library(cowplot);packageVersion("cowplot")
+theme_set(theme_cowplot())
+library(ggbeeswarm);packageVersion("ggbeeswarm")
+library(doParallel);packageVersion("doParallel")
+library(foreach);packageVersion("foreach")
+```
+
+```{r subset data, include=TRUE}
+load("Data/RPS10/rps10_pruned3k.RData")
+
+pre_post.ps<-subset_samples(exp1_prune3kreads.ps, PrePost_sam_EP=="1")
+pre_post.ps<- prune_taxa(taxa_sums(pre_post.ps) > 0, pre_post.ps)
+
+readsums<-sort(sample_sums(pre_post.ps))
+median(readsums)
+
+#Let's also load data where any ASVs present less than 5 times are filtered
+#load("Data/RPS10/rps10_pruned3k_5asvs.RData")
+pre_post_5asv.ps<- prune_taxa(taxa_sums(pre_post.ps) > 5, pre_post.ps)
+```
+
+```{r Normalization experiment 1, include=TRUE}
+#Could rarefy read counts, but will focus just on normalizing using the methods below. 
+
+#Relative abundance
+strat_rel_prepost.ps<-transform_sample_counts(pre_post_5asv.ps, function(x) x / sum(x))
+```
+
+
+Bar plot conglomerated by Genus-using filtered dataset and facet wrapped by treatment
+```{r Barplot conglomerated by Genus}
+#The function "transform_sample_counts()" will perform a given function across all taxa counts
+#We will use it to convert the counts to percentages
+ps_transform <- transform_sample_counts(pre_post_5asv.ps,  function(x) x / sum(x))
+pdf("Figures/RPS10/relabundance_plot_treatment_prepost.pdf", width = 16, height = 16)
+bar_plot<-plot_bar(ps_transform, fill="Genus", title = "Proportional Abundance Plot-ASVs Agglomerated at Family level and Faceted by Treatment") + facet_wrap(~Treatuntreat_EP, scales="free_x", nrow=1)
+dev.off()
+
+bar_plot
+```
+
+Another relative abundance barplot (must view PDF figure since it is a larger fig)
+```{r barplot-Relative abundance of taxa vs. sample-not agglomerated}
+rps10data <- pre_post_5asv.ps %>%
+  tax_glom(taxrank = "Species") %>%                     # agglomerate at Genus level
+  transform_sample_counts(function(x) {x/sum(x)} ) %>% # Transform to rel. abundance
+  psmelt() %>%                                         # Melt to long format
+  #filter(Abundance > 0.05) %>%                       # Filter out low abundance taxa
+  arrange(desc(Abundance))
+                                # Sort data frame alphabetically by phylum
+
+# Plot 
+abund_plot <- ggplot(rps10data, aes(x = Sample, y = Abundance, fill = Species)) + 
+  geom_bar(stat = "identity", position = "stack", color = "black", size = 0.2) +
+  scale_fill_viridis_d() +
+  scale_color_viridis_d() +
+  theme_minimal() +
+  labs(
+    y = "Relative Abundance",
+    title = "Relative abundance of taxa by sample",
+    fill = "Species"
+  ) +
+  facet_grid(~factor(Treatuntreat_EP, labels = c("untreated", "treated")), scales = "free_x") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 14),
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.text = element_text(size = 20),
+    legend.title = element_text(size = 20),  # Adjust legend title size
+    legend.key.size = unit(2, "lines"),  # Adjust the size of the legend color key
+    strip.text = element_text(size = 20),
+    strip.background = element_blank()
+  ) +
+  guides(
+    fill = guide_legend(
+      reverse = TRUE,
+      keywidth = 1,
+      keyheight = 1,
+      title.position = "top",
+      title.hjust = 3,  # Center the legend title
+      label.theme = element_text(size = 18)  # Adjust the size of the legend labels
+    )
+  )
+
+abund_plot
+
+ggsave("Figures/RPS10/relabundance_plot_treatment_Species_prepost.pdf", abund_plot, width = 22, height = 16)
+```
+
+We are also curious about top taxa 
+```{r Top taxa}
+new_names <- sapply(strsplit(pre_post.ps@sam_data$Sample_nameRPS10, "-"), `[`, 1)
+
+# Rename the Sample_nameRPS10 column
+pre_post.ps@sam_data$Sample_nameRPS10 <- new_names
+
+pre_post.ps@sam_data$Treatuntreat_EP <- factor(pre_post.ps@sam_data$Treatuntreat_EP, labels = c("untreated", "treated"))
+
+top20 <- names(sort(taxa_sums(pre_post.ps), decreasing=TRUE))[1:20]
+ps.top20 <- transform_sample_counts(pre_post.ps, function(OTU) OTU/sum(OTU))
+ps.top20<- tax_glom(ps.top20, taxrank = "Species") 
+ps.top20 <- prune_taxa(top20, ps.top20)
+
+pdf("Figures/RPS10/ee5_top20_species_boot60_prepost.pdf", width = 34, height = 20)
+plot_bar(ps.top20, x="Sample_nameRPS10", fill="Species") + facet_wrap(~Treatuntreat_EP, scales="free_x")
+dev.off()
+
+plot_bar(ps.top20, x="Sample_nameRPS10", fill="Species") + facet_wrap(~Treatuntreat_EP, scales="free_x")
+
+data <-
+  pre_post.ps %>%
+  tax_glom("Species") %>%
+  psmelt() %>%
+  as_tibble()
+
+data1 <-
+  pre_post.ps %>%
+  tax_glom("Species") %>%
+  transform_sample_counts(function(x) {x/sum(x)} ) %>%
+  psmelt() %>%
+  as_tibble()
+
+data_summed1 <- data1 %>%
+  filter(Abundance > 0) %>%
+  group_by(Treatuntreat_EP, Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) 
+
+write.csv(data_summed1, file="Results/RPS10/mostabundanttaxa_relativeabundance_untreatedtreated_boot60_prepost.csv",row.names = TRUE)
+
+data2 <-
+  pre_post.ps %>%
+  tax_glom("Species") %>%
+  psmelt() %>%
+  as_tibble()
+
+# Calculate percentages
+data_summed2 <- data2 %>%
+  filter(Abundance > 0) %>%
+  group_by(Treatuntreat_EP, Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(
+    Abundance = sum(Abundance),
+    Prevalence = n_distinct(Sample)
+  ) %>%
+  group_by(Treatuntreat_EP) %>%
+  mutate(
+    Total_Abundance = sum(Abundance),
+    Percent_Abundance = (Abundance / Total_Abundance) * 100
+  )
+
+write.csv(data_summed2, file = "Results/RPS10/mostabundanttaxa_untreatedtreated_boot60_prepost.csv", row.names = TRUE)
+
+data3 <-
+  pre_post.ps %>%
+  tax_glom("Species") %>%
+  psmelt() %>%
+  as_tibble()
+
+# Calculate percentages
+data_summed3 <- data3 %>%
+  filter(Abundance > 0) %>%
+  group_by(Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(
+    Abundance = sum(Abundance),
+    Total_Abundance = sum(data3$Abundance),
+    Prevalence = n_distinct(Sample),
+    Percent_Abundance = (sum(Abundance) / sum(data3$Abundance)) * 100
+  )
+write.csv(data_summed3, file="Results/RPS10/mostabundanttaxa_boot60_prepost.csv",row.names = TRUE)
+```
+
+
+```{r Map exploration}
+new_names <- sapply(strsplit(pre_post_5asv.ps@sam_data$Sample_nameRps10, "-"), `[`, 1)
+
+# Rename the Sample_nameRps10 column so sample names are shorter
+pre_post_5asv.ps@sam_data$Sample_nameRps10 <- new_names
+
+pre_post_5asv.ps@sam_data$Treatuntreat_EP <- factor(pre_post_5asv.ps@sam_data$Treatuntreat_EP, labels = c("untreated", "treated"))
+
+pdf("Figures/RPS10/location_of_plots_prepost.pdf", width = 16, height = 16)
+
+map_plot <- ggplot(pre_post_5asv.ps@sam_data, aes(x = Longitude, y = Latitude, label = Sample_nameRps10, color = Treatuntreat_EP)) +
+  geom_point(size = 5, alpha = 0.5) +  # Add transparency to points to visualize overlapping points
+  geom_text(size = 4, position = position_jitter(width = 0.025, height = 0.025), check_overlap = TRUE) +  # Jitter labels
+  labs(x = "Longitude", y = "Latitude", title = "Sampling Locations") +
+  scale_color_manual(values = c("untreated" = "blue", "treated" = "red")) +  # Set colors for treated and untreated
+  theme_minimal() +  # Remove gray background and gridlines
+  theme(  # Adjust title and axis label size, and change axis marks color
+    plot.title = element_text(size = 20), 
+    axis.title = element_text(size = 16),
+    axis.text = element_text(color = "black")
+  )
+
+print(map_plot)
+dev.off()
+
+print(map_plot)
+```
+
+Let's now visualize similar relative abundance plots as heat trees for alternative figures
+First convert to taxmap object
+```{r Convert Phyloseq object to taxmap object, include=FALSE}
+obj<-parse_phyloseq(pre_post_5asv.ps)
+```
+
+```{r Heat tree steps}
+sdt2 = data.table::data.table(as(sample_data(pre_post_5asv.ps), "data.frame"),
+                 TotalReads = sample_sums(pre_post_5asv.ps), keep.rownames = TRUE)
+
+lowest_count<-min(sdt2$TotalReads)
+
+obj$data$tax_abund <- calc_taxon_abund(obj, data = "otu_table", cols = obj$data$sample_data$sample_id)
+
+obj$data$abund_prop <- calc_obs_props(obj, data = "otu_table", cols = obj$data$sample_data$sample_id, groups = rep("tax_prop", nrow(obj$data$sample_data)))
+
+obj$data$tax_prop <- calc_taxon_abund(obj, data = "abund_prop", cols = "tax_prop")
+obj$data$abund_prop <- NULL
+
+# Calculate total abundance per sample
+asv_total_abundance <- rowSums(obj$data$tax_abund[, -1])
+
+obj$data$tax_data <- data.frame(lapply(obj$data$tax_data, function(x) ifelse(is.na(x), "Unknown", x)))
+
+save(obj, file="Data/RPS10/obj_prepost.RData")
+```
+
+```{r Heat tree for all samples}
+set.seed(1)
+heat_tree(obj,
+          node_label = taxon_names,
+          node_size = n_obs,
+          node_color = n_obs,
+          node_color_axis_label = "ASV count",
+          node_size_axis_label = "Total Abundance of Taxa",
+          layout = "da", initial_layout = "re",
+          output_file = "Figures/RPS10/plot_heattree_rps10_prepost.pdf")
+```
+
+Now I will make more trees that better shows differences between treated and untreated samples
+Let's first look at taxa present in treated samples
+```{r Heat tree treated samples}
+#help me make the heat tree in below code chunk but just treated samples
+obj$data$tax_occ <- calc_n_samples(obj, "tax_abund", groups = obj$data$sample_data$Treatuntreat_EP, cols = obj$data$sample_data$sample_id)
+
+set.seed(1) # This makes the plot appear the same each time it is run 
+heat_tree(obj, 
+          node_label = taxon_names,
+          node_size = n_obs,
+          node_color = obj$data$tax_occ$"treated", 
+          node_size_axis_label = "ASV count",
+          node_color_axis_label = "Treated samples with reads",
+          layout = "davidson-harel",
+          initial_layout = "reingold-tilford",
+          output_file = "Figures/RPS10/plot_heattree_treated_plots_rps10_prepost.pdf")
+```
+
+Let's look at taxa present in untreated samples
+```{r Heat tree untreated samples}
+#help me make the heat tree in below code chunk but just treated samples
+
+set.seed(1) # This makes the plot appear the same each time it is run 
+heat_tree(obj, 
+          node_label = taxon_names,
+          node_size = n_obs,
+          node_color = obj$data$tax_occ$"untreated", 
+          node_size_axis_label = "ASV count",
+          node_color_axis_label = "Untreated samples with reads",
+          layout = "davidson-harel", # The primary layout algorithm
+          initial_layout = "reingold-tilford",
+          output_file = "Figures/RPS10/plot_heattree_untreated_plots_rps10_prepost.pdf")
+```
+
+Let's look at taxon abundance in treated samples
+We first need to add more information to our taxmap object
+```{r Heat tree untreated samples relative abundance}
+obj$data$otu_props <- calc_obs_props(obj, "otu_table", cols = obj$data$sample_data$sample_id)
+
+obj$data$tax_abund_prop <- calc_taxon_abund(obj, "otu_props")
+
+obj$data$type_abund <- calc_group_mean(obj, "tax_abund_prop",
+                                       cols =obj$data$sample_data$sample_id,
+                                       groups = obj$data$sample_data$Treatuntreat_EP)
+```
+
+Let's look at taxon relative abundance in untreated samples
+```{r Heat tree illustrating taxa in untreated samples}
+set.seed(1)
+obj %>%
+  heat_tree(node_label = taxon_names,
+            node_size = obj$data$type_abund$"untreated", 
+            node_color = obj$data$type_abund$"untreated", 
+            layout = "da", initial_layout = "re", 
+            node_color_axis_label = "Untreated samples",
+            title = "Taxa in untreated samples",
+            output_file = "Figures/RPS10/plot_heattree_rel_abund_taxa_untreated_plots_rps10_prepost.pdf")
+```
+
+Let's look at taxon relative abundance in treated samples
+```{r Heat tree illustrating taxa in treated samples}
+set.seed(1)
+obj %>%
+  heat_tree(node_label = taxon_names,
+            node_size = obj$data$type_abund$"treated", 
+            node_color = obj$data$type_abund$"treated", 
+            layout = "da", initial_layout = "re", 
+            node_color_axis_label = "Treated samples",
+            title = "Taxa in treated samples",
+            output_file = "Figures/RPS10/plot_heattree_rel_abund_taxa_treated_plots_rps10_prepost.pdf")
+```
+
+```{r Normalization, include=TRUE}
+#Prune ASVs not present in least 5 times (across one more more samples)
+#pre_post_5asv.ps<- phyloseq::prune_taxa(taxa_sums(pre_post.ps) > 5, pre_post.ps)
+sdt = data.table::data.table(as(sample_data(pre_post_5asv.ps), "data.frame"),
+                 TotalReads = sample_sums(pre_post_5asv.ps), keep.rownames = TRUE)
+min_reads<-min(sdt$TotalReads)
+rarefied.ps <- rarefy_even_depth(pre_post_5asv.ps, sample.size = min_reads, rngseed = 100)
+
+#Relative abundance
+strat_rel_prepost.ps<-transform_sample_counts(pre_post_5asv.ps, function(x) x / sum(x))
+```
+
+Alpha diversity
+```{r alpha diversity analyses 1, include=TRUE}
+AD <- estimate_richness(pre_post.ps, measures = c("Observed", "InvSimpson", "Shannon"))
+rownames(AD) <- gsub("\\.", "-", rownames(AD))
+
+pre_post.ps@sam_data$YearSam_EP <- as.factor(pre_post.ps@sam_data$YearSam_EP)
+
+pre_post.ps@sam_data$Burned1.0_EP <- as.factor(pre_post.ps@sam_data$Burned1.0_EP)
+
+pre_post.ps@sam_data$VegBin <- as.factor(pre_post.ps@sam_data$VegBin)
+
+pre_post.ps@sam_data$SoilBin <- as.factor(pre_post.ps@sam_data$SoilBin)
+
+# Combine richness estimates with sample metadata
+AD <- cbind(AD, sample_data(pre_post.ps)[row.names(AD), c("Treatuntreat_EP", "YearSam_EP", "Fire_EP", "Burned1.0_EP", "VegBin", "SoilBin")])
+
+# Convert to data.table and keep row names as a column
+AD <- data.table(AD, keep.rownames = TRUE)
+
+# Reshape the data frame
+AD <- melt(AD, id.vars = c('rn', c("Treatuntreat_EP", "YearSam_EP", "Fire_EP", "Burned1.0_EP", "VegBin", "SoilBin")))
+
+# Now conduct t-tests (assuming you have appropriate factors)
+factors <- c("Treatuntreat_EP", "Fire_EP", "Burned1.0_EP", "VegBin", "SoilBin")
+# Iterate through each factor
+ttest_list <- list()
+
+# Iterate through each factor
+for (factor_name in factors) {
+  # Initialize an empty data.table to store t-test results for each alpha diversity measure
+  ttest <- data.table(alpha_index = character(), pvalue = numeric())
+  
+  # Iterate through each alpha diversity measure
+  for (alphad in c("InvSimpson", "Shannon", "Observed")) {
+    # Perform t-test
+    ttest_res <- t.test(value ~ get(factor_name), data = AD[variable == alphad], var.equal = TRUE)
+    
+    # Extract p-value from t-test results and store it in the data.table
+    p_value <- ttest_res$p.value
+    ttest <- rbind(ttest, data.table(alpha_index = alphad, pvalue = p_value))
+  }
+  
+  # Add t-test results for the current factor to the list
+  ttest_list[[factor_name]] <- ttest
+}
+
+# Print t-test results
+for (factor_name in factors) {
+  cat(paste("T-Test Results for Factor:", factor_name), "\n")
+  print(knitr::kable(ttest_list[[factor_name]], format = "markdown"))
+  cat("\n")
+}
+``` 
+
+Let's try ANOVAs now
+```{r alpha diversity analyses 2, include=TRUE}
+# Initialize an empty list to store ANOVA results
+anova_list <- list()
+
+factors2 <- c("Treatuntreat_EP", "YearSam_EP", "Fire_EP", "Burned1.0_EP", "VegBin", "SoilBin")
+
+# Initialize a vector to store factor names for which a plot has been created
+plotted_factors <- character()
+ 
+for (factor_name in factors2) {
+  # Initialize an empty data.table to store ANOVA results for each alpha diversity measure
+  anova <- data.table(alpha_index = character(), pvalue = numeric(), df_between = numeric(),
+                      df_within = numeric(), ss_between = numeric(), ss_within = numeric(),
+                      ms_between = numeric(), ms_within = numeric(), F_value = numeric())
+  
+  # Iterate through each alpha diversity measure
+  for (alphad in c("InvSimpson", "Shannon", "Observed")) {
+    # Perform ANOVA
+    anova_res <- aov(value ~ get(factor_name), data = AD[variable == alphad])
+    
+    # Extract relevant statistics from ANOVA results
+    anova_summary <- summary(anova_res)
+    
+    # Extract p-value from ANOVA results and store it in the data.table
+    p_value <- anova_summary[[1]]$`Pr(>F)`[1]
+    
+    # Extract other statistics
+    df_between <- anova_summary[[1]]$"Df"[1]
+    df_within <- anova_summary[[1]]$"Df"[2]
+    ss_between <- anova_summary[[1]]$"Sum Sq"[1]
+    ss_within <- anova_summary[[1]]$"Sum Sq"[2]
+    ms_between <- anova_summary[[1]]$"Mean Sq"[1]
+    ms_within <- anova_summary[[1]]$"Mean Sq"[2]
+    F_value <- anova_summary[[1]]$"F value"[1]
+    
+    # Store statistics in the data.table
+    anova <- rbind(anova, data.table(alpha_index = alphad, pvalue = p_value, df_between = df_between, df_within = df_within, ss_between = ss_between, ss_within = ss_within, ms_between = ms_between, ms_within = ms_within, F_value = F_value))
+    
+    # Check if p-value < 0.05 and plot has not been created for this factor yet
+    if (p_value < 0.05 && !(factor_name %in% plotted_factors)) {
+      # Subset data for InvSimpson and the significant factor
+      data_subset <- AD[variable == "InvSimpson", .(value, factor_value = get(factor_name), variable = "InvSimpson")]
+      
+      # Convert factor_value to a factor
+      data_subset$factor_value <- factor(data_subset$factor_value)
+      
+      # Plot box plot
+      set.seed(123)
+      plot_AD <- ggplot(data = data_subset, aes(x = factor_value, y = value, fill = factor_value)) +
+        geom_boxplot(width = 0.7, outlier.colour = 'white', position = position_dodge(width = 0.75)) +
+        geom_jitter(size = 1, position = position_jitter(width = 0.1)) +
+        ylab('Inverse Simpson Index') +
+        theme_minimal() +
+        facet_grid(~variable, scales = "free_x", switch = "y") +
+        theme(
+          strip.text.y = element_blank(),
+          strip.text.x = element_blank(),
+          axis.text.y = element_text(size = 8),
+          axis.ticks.y = element_blank()
+        ) +
+        labs(title = paste("Boxplot for", factor_name))
+      
+      # Save plot
+      print(plot_AD)
+      ggsave(paste0("Figures/RPS10/", factor_name, "alphadiversity_invsimp_boxplot_prepost.pdf"), plot_AD, width = 10, height = 12)
+      
+      # Add factor name to the plotted factors vector
+      plotted_factors <- c(plotted_factors, factor_name)
+    }
+  }
+  
+  # Add ANOVA results for the current factor to the list
+  anova_list[[factor_name]] <- anova
+}
+
+# Print ANOVA results
+for (factor_name in factors2) {
+  cat(paste("ANOVA Results for Factor:", factor_name), "\n")
+  print(knitr::kable(anova_list[[factor_name]], format = "markdown"))
+  cat("\n")
+}
+```
+
+```{r compiled alpha diversity table}
+# Initialize an empty data.table to store combined ANOVA results for all factors
+final_anova_table <- data.table(factor_name = character(), alpha_index = character(), pvalue = numeric(), df_between = numeric(), df_within = numeric(), ss_between = numeric(), ss_within = numeric(), ms_between = numeric(), ms_within = numeric(), F_value = numeric())
+
+for (factor_name in factors2) {
+  # Initialize an empty data.table to store ANOVA results for each alpha diversity measure
+  anova <- data.table(factor_name = character(), alpha_index = character(), pvalue = numeric(), df_between = numeric(), df_within = numeric(), ss_between = numeric(), ss_within = numeric(), ms_between = numeric(), ms_within = numeric(), F_value = numeric())
+  
+  # Iterate through each alpha diversity measure
+  for (alphad in c("Observed","InvSimpson", "Shannon")) {
+    # Perform ANOVA
+    anova_res <- aov(value ~ get(factor_name), data = AD[variable == alphad])
+    
+    # Extract relevant statistics from ANOVA results
+    anova_summary <- summary(anova_res)
+    
+    # Extract p-value from ANOVA results
+    p_value <- anova_summary[[1]]$`Pr(>F)`[1]
+    
+    # Extract other statistics
+    df_between <- anova_summary[[1]]$"Df"[1]
+    df_within <- anova_summary[[1]]$"Df"[2]
+    ss_between <- anova_summary[[1]]$"Sum Sq"[1]
+    ss_within <- anova_summary[[1]]$"Sum Sq"[2]
+    ms_between <- anova_summary[[1]]$"Mean Sq"[1]
+    ms_within <- anova_summary[[1]]$"Mean Sq"[2]
+    F_value <- anova_summary[[1]]$"F value"[1]
+    
+    # Store statistics in the data.table
+    anova <- rbind(anova, data.table(factor_name = factor_name, alpha_index = alphad, pvalue = p_value, df_between = df_between, df_within = df_within, ss_between = ss_between, ss_within = ss_within, ms_between = ms_between, ms_within = ms_within, F_value = F_value))
+  }
+  
+  # Append ANOVA results for the current factor to the final table
+  final_anova_table <- rbind(final_anova_table, anova)
+}
+
+# Print final ANOVA table
+print(knitr::kable(final_anova_table, format = "markdown"))
+write.csv(final_anova_table, "Results/RPS10/final_anova_table_prepost.csv", row.names = FALSE)
+```
+
+```{r alpha diversity faceted plots}
+# Estimate alpha diversity
+
+AD <- estimate_richness(pre_post.ps, measures = c("Observed", "InvSimpson", "Shannon"))
+rownames(AD) <- gsub("\\.", "-", rownames(AD))
+
+# Combine richness estimates with sample metadata
+AD <- cbind(AD, sample_data(pre_post.ps)[rownames(AD), c("YearSam_EP")])
+
+
+variables <- c("YearSam_EP")
+
+pre_post.ps@sam_data$YearSam_EP <- as.factor(pre_post.ps@sam_data$YearSam_EP)
+
+# Create an empty list to store plots
+plots <- list()
+
+# Loop through each variable and create the plot
+for (variable in variables) {
+  p <- plot_richness(pre_post.ps, x = variable, measures = c("Shannon", "InvSimpson", "Observed")) + 
+    geom_boxplot()
+  plots[[variable]] <- p
+}
+
+# Arrange plots in a grid
+plots_arrange <- gridExtra::grid.arrange(
+  plots[["YearSam_EP"]],
+  nrow = length(variables)
+)
+
+# Add annotations to the top of each plot
+plots_arrange_with_text <- cowplot::ggdraw() +
+  cowplot::draw_plot(plots_arrange) +
+  cowplot::draw_plot("YearSam_EP", x = 0.28, y = 0.98)
+
+# Save the arranged plots
+ggsave(plots_arrange_with_text, path = "Figures/RPS10", filename = "alpha_diversity_each_factor_prepost.pdf", 
+       width = 12, height = 16)
+```
+
+```{r alpha diversity compilation with tukey summary}
+# Define your variables of interest
+# Define your variables of interest
+variables <- c("YearSam_EP")
+measures <- c("Observed", "InvSimpson", "Shannon")
+
+# Create an empty list to store ANOVA and Tukey's results
+tukey_results <- list()
+
+# Loop through each variable and measure
+for (variable in variables) {
+  for (measure in measures) {
+    # Subset the data for the current variable and measure
+    data_subset <- AD[, c(variable, measure)]
+    
+    # Perform ANOVA
+    formula <- as.formula(paste(measure, "~ ."))
+    anova_res <- aov(formula, data = data_subset)
+    
+    # Perform Tukey's post-hoc test
+    tukey_result <- HSD.test(anova_res, variable)
+    
+    # Store Tukey's results
+    print(tukey_result)
+  }
+}
+```
+
+Beta diversity
+
+Let's now examine beta diversity through ordination plots.
+PERMANOVA analyses-ASV counts transformed to rel. abundance
+```{r PERMANOVA ANALYSES-relative abundance, include=TRUE}
+#I used the filtered dataset (removed low abundance counts less than 2)
+mapping <- as.data.frame(sample_data(strat_rel_prepost.ps))
+
+mapping2=mapping[, c("Treatuntreat_EP", "YearSam_EP", "Fire_EP", "Burned1.0_EP", "VegBin", "SoilBin")]
+
+# use an sapply loop as it's much more efficient than a for loop! sapply is a function that goes through each element of the first parameter (in our case colnames(mapping)), and passes each one to a custom function.
+# You can declare the custom function in the sapply function RPS10elf, using the following syntax:
+
+ASV_tables_bray <- phyloseq::distance(strat_rel_prepost.ps, method = "bray")
+
+df_metadata <- data.frame(sample_data(strat_rel_prepost.ps))
+
+df_metadata<-df_metadata[, c("Treatuntreat_EP", "YearSam_EP", "Fire_EP", "Burned1.0_EP", "VegBin", "SoilBin")]
+
+pvals <- sapply(colnames(mapping2), function(variable){
+  
+  #Create formula for adonis() 
+  form1<-as.formula(paste("ASV_tables_bray", variable, sep="~"))
+  
+  #run adonis with formula (ASV distance table ~ variable of interest) with sample information, for 9999 permutaions
+  res <- adonis2(form1, data = df_metadata, permutations = 9999)
+  
+  # extract pvalue from adonis output
+  pval <- res$`Pr(>F)`[[1]] # we take the first p value which corresponds to the variable of interest
+  return(pval)
+})
+
+#Adjust p_values with fdr correction
+pval_adj <- p.adjust(pvals, method = "fdr")
+
+#Find significant variables with lower than 0.05 for their p values
+save.pval.adonis0.05_braycurtis <- pval_adj[pval_adj < 0.05]
+save.pval.adonis0.05_braycurtis
+
+print(pval_adj)
+```
+
+```{r compile the stats}
+ASV_tables_bray <- phyloseq::distance(strat_rel_prepost.ps, method = "bray")
+df_metadata <- data.frame(sample_data(strat_rel_prepost.ps))
+df_metadata <- df_metadata[, c("Treatuntreat_EP", "YearSam_EP", "Fire_EP", "Burned1.0_EP", "VegBin", "SoilBin")]
+
+# Perform PERMANOVA and beta dispersion analysis, and extract statistics
+permanova_results <- lapply(colnames(df_metadata), function(variable) {
+  # PERMANOVA
+  res_permanova <- adonis2(ASV_tables_bray ~ ., data = df_metadata[, variable, drop = FALSE], permutations = 9999)
+  r_squared <- res_permanova$R2[1] # Extract R-squared value for PERMANOVA
+  f_value <- res_permanova$F[1] # Extract F-value for PERMANOVA
+  pval_permanova <- res_permanova$`Pr(>F)`[[1]] # Extract p-value for PERMANOVA
+  
+  # Beta dispersion analysis
+  res_betadisper <- betadisper(d = ASV_tables_bray, group = df_metadata[, variable])
+  perm_test_res <- permutest(res_betadisper)
+  pval_betadisper <- perm_test_res$tab$`Pr(>F)`[[1]] # Extract p-value for beta dispersion
+  
+  # Combine results
+  results <- data.frame(Factor = variable, F_Value = f_value, R_Squared = r_squared, P_Value_BetaDispersion = pval_betadisper, P_Value_PERMANOVA = pval_permanova)
+  return(results)
+})
+
+# Combine results into a data frame
+permanova_results_df <- do.call(rbind, permanova_results)
+
+# Adjust p-values for PERMANOVA
+permanova_results_df$Adjusted_P_Value_PERMANOVA_fdr <- p.adjust(permanova_results_df$P_Value_PERMANOVA, method = "fdr")
+
+permanova_results_df$Adjusted_P_Value_PERMANOVA_bonferroni <- p.adjust(permanova_results_df$P_Value_PERMANOVA, method = "bonferroni")
+
+# Save as CSV file
+write.csv(permanova_results_df, file = "Results/RPS10/PERMANOVA_results_prepost.csv", row.names = FALSE)
+```
+
+What about interactions between factors?
+```{r pairwise comparisons}
+# Calculate PERMANOVA
+ASV_tables_bray <- phyloseq::distance(strat_rel_prepost.ps, method = "bray")
+df_metadata <- data.frame(sample_data(strat_rel_prepost.ps))
+df_metadata <- df_metadata[, c("Treatuntreat_EP", "YearSam_EP", "Fire_EP", "Burned1.0_EP", "VegBin", "SoilBin")]
+
+# Define function to perform PERMANOVA for pairwise combinations of factors
+perform_permutation <- function(factor1, factor2) {
+  interaction <- paste(factor1, factor2, sep = " * ")
+  res <- adonis2(ASV_tables_bray ~ ., data = df_metadata[, c(factor1, factor2)], permutations = 9999)
+  return(list(interaction = interaction, p_value = res$`Pr(>F)`[[1]]))
+}
+
+# Perform pairwise comparisons between factors
+significant_interactions <- sapply(names(df_metadata), function(factor1) {
+  sapply(names(df_metadata), function(factor2) {
+    if (factor1 != factor2) {
+      perform_permutation(factor1, factor2)
+    } else {
+      NULL
+    }
+  })
+}, simplify = "array")
+
+# Filter out NULLs and combine results
+significant_interactions <- significant_interactions[!sapply(significant_interactions, is.null)]
+
+# Print significant interactions
+print(significant_interactions)
+
+interactions_df <- do.call(rbind.data.frame, significant_interactions)
+print(significant_interactions)
+
+interactions_df <- do.call(rbind.data.frame, significant_interactions)
+
+
+adjusted_p_values <- p.adjust(interactions_df$p_value, method = "fdr")
+# Add adjusted p-values to the data frame
+interactions_df$p_value <- adjusted_p_values
+
+
+# Extract unique factors
+unique_factors <- unique(unlist(strsplit(interactions_df$interaction, " \\* ")))
+
+# Create an empty matrix to store p-values
+interaction_matrix <- matrix(NA, nrow = length(unique_factors), ncol = length(unique_factors), dimnames = list(unique_factors, unique_factors))
+
+# Fill the matrix with p-values
+for (i in 1:nrow(interactions_df)) {
+  factors <- unlist(strsplit(interactions_df$interaction[i], " \\* "))
+  interaction_matrix[factors[1], factors[2]] <- interactions_df$p_value[i]
+  interaction_matrix[factors[2], factors[1]] <- interactions_df$p_value[i]
+}
+
+rownames(interaction_matrix) <- unique_factors 
+colnames(interaction_matrix) <- unique_factors 
+
+
+# Convert the matrix to a data frame for ggplot
+interaction_df <- as.data.frame(as.table(interaction_matrix))
+interaction_df <- as.data.frame(as.table(interaction_matrix))
+interaction_df$color <- ifelse(is.na(interaction_df$Freq), "gray",
+                               ifelse(interaction_df$Freq <= 0.01, "darkblue",
+                                      ifelse(interaction_df$Freq <= 0.05, "lightblue", "white")))
+
+# Plot heatmap with continuous color scale
+heatmap <- ggplot(data = interaction_df, aes(x = Var1, y = Var2, fill = color)) +
+  geom_tile(color = "black") +  # Add border for each tile
+  scale_fill_manual(values = c("gray", "darkblue", "white"),
+                    name = "P-value",
+                    labels = c("NA", "P < 0.01", "P > 0.05"),
+                    na.value = "gray") +  # Set manual color scale and legend labels
+  scale_fill_identity(name = NULL) +  # Use identity scale for custom colors
+  theme_minimal() +
+  theme(axis.text.x = element_text(angle = 45, hjust = 1, size = 10),  # Adjust x-axis text angle and size
+        axis.text.y = element_text(size = 10),  # Adjust y-axis text size
+        panel.grid = element_blank(),  # Remove gridlines
+        panel.border = element_blank(),  # Remove border around the plot
+        axis.line = element_blank(),  # Remove axis lines
+        legend.position = "bottom",  # Position legend at the bottom
+        legend.direction = "horizontal",  # Horizontal legend
+        legend.key.size = unit(0.5, "cm"),  # Adjust legend key size
+        legend.title = element_blank(),  # Remove legend title
+        legend.text = element_text(size = 8))  # Adjust legend text font size
+
+# Assign row and column names
+heatmap <- heatmap + labs(x = NULL, y = NULL)
+
+# Print heatmap
+print(heatmap)
+
+# Save the heatmap as a PDF file
+ggsave("Results/RPS10/permanova_interactions_heatmap_prepost.pdf", plot = heatmap, width = 8, height = 6)
+```
+
+Let's now examine beta diversity through ordination plots. We'll will examine outputs for rarefied data as well as data adjusted by relative abundance
+
+We'll now make ordination plots on data for which we've calculated relative abundance
+```{r Beta diversity-Rel. abundance treated and untreated samples}
+#Relative abundance
+ps_NMDS3 = ordinate(strat_rel_prepost.ps, 
+                   method="NMDS", 
+                   distance="bray")
+
+plot_3<- plot_ordination(strat_rel_prepost.ps, 
+                         ps_NMDS3,
+                         color= "Treatuntreat_EP") +
+  ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Factor") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses<-plot_3 +
+   stat_ellipse(type = "norm", linetype = 2) +
+  theme_bw()
+
+ggsave("Figures/RPS10/NMDS_ordination_treatuntreat_prepost.pdf", plot_ellipses, width = 10, height = 10)
+
+plot_ellipses
+
+#Export NMDS coordinates per sample
+write.csv(ps_NMDS3[["points"]], file="Results/RPS10/RPS10_NMDS_coordinates_persample.csv",row.names = TRUE)
+```
+
+Now, we'll look at ordination plot (rel abundance dataset), with fire factor
+```{r Beta diversity-Rel. abundance by YrSinceTrt_EP factor}
+#Relative abundance
+ps_NMDS3 = ordinate(strat_rel_prepost.ps, 
+                   method="NMDS",
+                   distance="bray")
+
+plot_4<- plot_ordination(strat_rel_prepost.ps, 
+                         ps_NMDS3,
+                         labs(color = "Factor"),
+                         color= "Fire_EP") +
+  ggtitle("NMDS ordination plot - relative abundance") +
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+
+plot_ellipses<-plot_4 +
+   stat_ellipse(type = "norm", linetype = 2) +
+  theme_bw()
+
+plot_ellipses
+```
+
+```{r ad-hoc-functions}
+sample.data.table <- function(ps) {
+  as(sample_data(ps), "data.frame") %>%
+    as.data.table(keep.rownames = "Sample") %>% 
+    setkey(Sample) %>%
+    return()
+}
+asv.data.table <- function(ps) {
+  if (taxa_are_rows(ps)) {
+    otu.mat <- t(as(otu_table(ps), "matrix"))
+  } else {
+    otu.mat <- as(otu_table(ps), "matrix")
+  }
+  return(as.data.table(otu.mat, keep.rownames = "Sample") %>% setkey(Sample))
+}
+cat.n <- function(x) cat(x, sep = "\n")
+```
+
+Below, we import the data we'll be using for the rest of the practical, and put it into a format that makes working with it easier. This section shouldn't need to be modified.
+```{r data-import-and-prep}
+pre_post.data <- sample.data.table(pre_post_5asv.ps)
+pre_post.asvs <- asv.data.table(pre_post_5asv.ps)
+pre_post.asv.ids <- taxa_names(pre_post_5asv.ps)
+pre_post.dt <- pre_post.data[pre_post.asvs]
+# Assuming you have the factor as "Untreated" and "Treated" currently
+pre_post_5asv.ps@sam_data$Treatuntreat_EP <- factor(pre_post_5asv.ps@sam_data$Treatuntreat_EP, levels = c("untreated", "treated"))
+
+pre_post_5asv.ps@sam_data$Fire_EP <- factor(pre_post_5asv.ps@sam_data$Fire_EP, levels = c("Unburned", "SODTrt"))
+```
+
+For differential abundance analyses of treated vs. untreated plots: we will serially conduct Wilcoxon tests on the pre_post data set. This test is the non-parametric (distribution-free) version of the Student's *t*-test and will tell us if the abundances of each taxon different significantly between our two groups: Unexposed vs Exposed. After running the tests, we correct for multiple tests by adjusting the p-values. There are two examples of methods for adjusting the p-values provided.
+```{r wilcoxon-tests}
+wilcox.tests <- lapply(pre_post.asv.ids, function(asv) {
+  frm <- paste(asv, "~ Fire_EP") # this combined with the as.formula() function below makes it possible to generate formulas in R programmatically
+  return(
+    wilcox.test(as.formula(frm), data = pre_post.dt)
+  )
+})
+pre_post.raw.pvals <- sapply(wilcox.tests, function(mod) {return(mod$p.value)})
+
+pre_post.bon.pvals <- p.adjust(pre_post.raw.pvals, method = "bonferroni")
+# Printing the number of associations with adjusted p-values below our 0.05 cutoff. This value can be adjusted depending on your data and expectations
+paste("Significant associations:", length(pre_post.bon.pvals[pre_post.bon.pvals <= 0.05])) %>%
+  cat.n()
+
+pre_post.fdr.pvals <- p.adjust(pre_post.raw.pvals, method = "fdr")
+paste("Significant associations:", length(pre_post.fdr.pvals[pre_post.fdr.pvals <= 0.05])) %>%
+  cat.n()
+```
+
+We will now plot the results
+```{r plot}
+pre_post.melt.dt <- melt(
+  pre_post.dt, 
+  measure.vars = pre_post.asv.ids, 
+  variable.name = "ASV", 
+  value.name = "Abundance"
+)
+sig.asv <- pre_post.asv.ids[pre_post.bon.pvals <= 0.05]
+
+pre_post.plot.dt <- pre_post.melt.dt[ASV %in% sig.asv]
+pre_post.plot.dt[, Treatuntreat_EP := factor(Treatuntreat_EP, levels = c("untreated", "treated"))] # the default is for levels to be in alphanumeric order, this way the control group, Unexposed, will be first along the x-axes
+
+pre_post.plot <- ggplot(pre_post.plot.dt, aes(x = Fire_EP, y = Abundance)) + 
+  geom_beeswarm(alpha = 0.6) + 
+  stat_summary(
+    fun.data = "mean_cl_boot", # This summary statistical calculates the 95% C.I. of the mean via non-parametric methods
+    color = "red", 
+    geom = "errorbar", 
+    width = 0.8
+
+  ) + 
+  facet_wrap(~ ASV, scales = "free_y") +
+  theme(axis.text.x = element_text(angle = 30, hjust = 1))
+
+#Cannot plot as now sig associations
+#pre_post.plot 
+```
+
+Now we will look at an example where we have more than two factors and use kruskal wallis test
+```{r kw test1}
+kw.tests <- lapply(pre_post.asv.ids, function(asv) {
+  frm <- paste(asv, "~ Fire_EP")
+  return(
+    kruskal.test(as.formula(frm), data = pre_post.dt)
+  )
+})
+
+pre_post.raw.pvals <- sapply(kw.tests, function(mod) {return(mod$p.value)})
+
+pre_post.bon.pvals <- p.adjust(pre_post.raw.pvals, method = "bonferroni")
+paste(
+  "Significant associations:", 
+  length(pre_post.bon.pvals[pre_post.bon.pvals <= 0.05])
+) %>% 
+  cat.n()
+
+
+pre_post.fdr.pvals <- p.adjust(pre_post.raw.pvals, method = "fdr")
+paste(
+  "Significant associations:", 
+  length(pre_post.fdr.pvals[pre_post.fdr.pvals <= 0.05])
+) %>% 
+  cat.n()
+```
+
+```{r plotting-kruskal-wallis-tests}
+#pre_post.melt.dt <- melt(
+  #pre_post.dt, 
+  #measure.vars = pre_post.asv.ids, 
+  #variable.name = "ASV", 
+  #value.name = "Abundance"
+#)
+#sig.asvs <- pre_post.asv.ids[pre_post.fdr.pvals <= 0.05] # or pre_post.fdr.pvals, Their choice
+#pre_post.plot.dt <- pre_post.melt.dt[ASV %in% sig.asvs]
+
+#ggplot(pre_post.plot.dt, aes(x = YearSam_EP, y = Abundance)) + 
+  #geom_beeswarm(alpha = 0.6) + 
+  #stat_summary(
+    #fun.data = "mean_cl_boot", 
+    #color = "red", 
+    #geom = "errorbar", 
+    #width = 0.8
+  #) + 
+  #facet_wrap(~ ASV, scales = "free_y")
+```
+
+```{r deseq2-treatuntreat}
+pre_post_5asv.ps@sam_data$Treatuntreat_EP <- factor(pre_post_5asv.ps@sam_data$Treatuntreat_EP, labels = c("untreated", "treated"))
+
+pre_post.deseq <- phyloseq_to_deseq2(pre_post_5asv.ps, ~ Treatuntreat_EP) # this function does all the heavy lifting for us to turn a phyloseq object into a DESeq2 object
+
+
+#This was required so DESEQ doesn't error out (there are several approaches, but the deseq developer recommended this most recently, if going from phyloseq to deseq option)
+pre_post.dds <- estimateSizeFactors(pre_post.deseq, type = 'poscounts')
+pre_post.dds = DESeq(pre_post.dds)
+pre_post.res.dt <- results(pre_post.dds) %>% as.data.table(keep.rownames = "ASV")
+
+pre_post.sig.dt <- pre_post.res.dt[padj <= 0.05]
+
+pre_post.sig.dt = cbind(as(pre_post.sig.dt, "data.frame"), as(tax_table(pre_post_5asv.ps)[pre_post.sig.dt$ASV, ], "matrix"))
+
+deseqplot2 <- ggplot(pre_post.sig.dt,  aes(y = reorder(Species, log2FoldChange), x = log2FoldChange, fill=Family)) +
+  geom_vline(xintercept = 0.0, color = "gray", size = 0.5) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.8) +  
+  labs(x = "ASV", y = "Log2 Fold Change", title = "Treated vs Untreated Plots") + 
+  theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5))
+ggsave("Figures/RPS10/deseq_trtuntrt_barplot_prepost.pdf", deseqplot2, width = 10, height = 12)
+
+deseqplot2
+```
+```{r deseq2-treatuntreat_2}
+pre_post_5asv.ps@sam_data$Treatuntreat_EP <- factor(pre_post_5asv.ps@sam_data$Fire_EP, labels = c("Unburned", "SODTrt"))
+
+pre_post.deseq <- phyloseq_to_deseq2(pre_post_5asv.ps, ~ Fire_EP) # this function does all the heavy lifting for us to turn a phyloseq object into a DESeq2 object
+
+
+#This was required so DESEQ doesn't error out (there are several approaches, but the deseq developer recommended this most recently, if going from phyloseq to deseq option)
+pre_post.dds <- estimateSizeFactors(pre_post.deseq, type = 'poscounts')
+pre_post.dds = DESeq(pre_post.dds)
+pre_post.res.dt <- results(pre_post.dds) %>% as.data.table(keep.rownames = "ASV")
+
+pre_post.sig.dt <- pre_post.res.dt[padj <= 0.05]
+
+pre_post.sig.dt = cbind(as(pre_post.sig.dt, "data.frame"), as(tax_table(pre_post_5asv.ps)[pre_post.sig.dt$ASV, ], "matrix"))
+
+deseqplot3 <- ggplot(pre_post.sig.dt,  aes(y = reorder(Species, log2FoldChange), x = log2FoldChange, fill=Family)) +
+  geom_vline(xintercept = 0.0, color = "gray", size = 0.5) +
+  geom_bar(stat = "identity", position = "dodge", width = 0.8) +  
+  labs(x = "ASV", y = "Log2 Fold Change", title = "Unburned vs SODtrt plots") + 
+  theme(axis.text.x = element_text(angle = -90, hjust = 0, vjust = 0.5))
+ggsave("Figures/RPS10/deseq_unburned_sodtrt_barplot_prepost.pdf", deseqplot3, width = 10, height = 12)
+
+deseqplot3
+```
+## Software used
+```{r}
+sessioninfo::session_info()
+```

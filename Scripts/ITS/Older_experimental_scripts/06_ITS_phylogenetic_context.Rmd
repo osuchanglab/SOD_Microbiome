@@ -1,0 +1,116 @@
+---
+title: "05_rps10_phylogeny.Rmd"
+output: html_document
+date: "2024-05-29"
+---
+
+```{r setup, include=TRUE}
+
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome")
+library(ape); packageVersion("ape")
+library(phangorn); packageVersion("phangorn")
+library(ggtree); packageVersion("ggtree")
+library(ggplot2); packageVersion("ggplot2")
+library(ggnewscale); packageVersion("ggnewscale")
+```
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome")
+library(ape); packageVersion("ape")
+library(phangorn); packageVersion("phangorn")
+library(ggtree); packageVersion("ggtree")
+library(ggplot2); packageVersion("ggplot2")
+library(ggnewscale); packageVersion("ggnewscale")
+```
+
+```{r, load files}
+datasettable <- read.table("Data/ITS/ee2_boot60/asv_phylogeny_input_its.txt", sep = "\t", header=T, stringsAsFactors = F, quote = "")
+
+datasettable[is.na(datasettable)] <- "unknown"
+
+datasettable$genus_species<-paste0(datasettable$Genus, "_", datasettable$Species)
+
+temptree<-ape::read.tree("Data/ITS/ee2_boot60/its_asv_unique_gp1000_trim2.fasta.treefile")
+asv_tree<-midpoint(temptree)
+tips<-asv_tree$tip.label
+
+# Check if the tip labels in datasettable match the order in asv_tree
+if (!identical(tips, datasettable$asv)) {
+  # If they don't match, reorder datasettable to match the order of asv_tree
+  datasettable <- datasettable[match(tips, datasettable$asv), ]
+}
+
+asv_tree$tip.label<-paste0(asv_tree$tip.label, "_", datasettable$genus_species)
+datasettable$asv <- paste0(datasettable$asv, "_", datasettable$genus_species)
+```
+
+
+```{r, make trees}
+#original root from midpointing gets set as NA by phangorn midpoint
+asv_tree$node.label[is.na(asv_tree$node.label)] <- "100/100"
+#set value for tip labels, only for plotting bootstrap as color
+asv_tree$node.label[asv_tree$node.label == ""] <- "100/100"
+
+
+pdf("Figures/ITS/ee2_boot60/Figure_ITS_circ_phylo.pdf",width=40, height=32, useDingbats=FALSE)
+#iqtree has bootstrap support as 100/100 for UFbootstrap/SH-aLRT tests
+ggtree(asv_tree,size=1.5, layout="circular") %<+% datasettable + 
+
+	guides(color = FALSE) +
+	guides(fill = FALSE) +
+	guides(shape = FALSE) +
+	new_scale("color") +
+	
+	geom_tiplab(size=2.5) +
+	geom_tippoint(aes(color=Phylum,fill=Phylum),size=3) +
+	
+	#ggtitle("ASV Phylogeny tree") +
+	
+	theme(legend.position="right") +
+	#theme(plot.title = element_text(hjust = 0.5)) +
+	
+	guides(color = guide_legend(override.aes = list(size=6),title="Phylum",order=1)) +
+	geom_treescale() 
+
+dev.off()
+```
+
+```{r, subset trees}
+# Assuming asv_tree is your subsetted tree and datasettable is your original dataframe
+# Find tip labels containing "unknown"
+tips_to_exclude <- grep("unknown_unknown", asv_tree$tip.label, ignore.case = TRUE)
+
+# Subset subset_tree to exclude tips with _unknown_unknown
+subset_tree <- drop.tip(asv_tree, tips_to_exclude)
+
+
+# Define PDF output
+pdf("Figures/ITS/ee2_boot60/Figure_ITS_circ_phylo_subset.pdf", width = 43, height = 40, useDingbats = FALSE)
+
+ggtree(subset_tree,size=1, layout="circular") +
+
+	guides(color = FALSE) +
+	guides(fill = FALSE) +
+	guides(shape = FALSE) +
+	new_scale("color") +
+	
+	geom_tiplab(size=2) +
+	#geom_tippoint(aes(color=Phylum,fill=Phylum),size=3) +
+	
+	#ggtitle("ASV Phylogeny tree") +
+	
+	theme(legend.position="right") +
+	#theme(plot.title = element_text(hjust = 0.5)) +
+	
+	guides(color = guide_legend(override.aes = list(size=6),title="Phylum",order=1)) +
+	geom_treescale() 
+
+
+dev.off()
+```
+
+```{r}
+sessioninfo::session_info()
+```

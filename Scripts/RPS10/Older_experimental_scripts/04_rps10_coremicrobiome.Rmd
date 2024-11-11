@@ -1,0 +1,91 @@
+---
+title: "RPS10 core microbiome followup"
+output: html_document
+date: "2023-11-06"
+---
+
+```{r setup, include=FALSE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome/")
+
+library(phyloseq); packageVersion("phyloseq")
+library(ggplot2); packageVersion("ggplot2")
+library(readr); packageVersion("readr")
+library(purrr); packageVersion("purrr")
+library(furrr); packageVersion("furrr")
+library(dplyr); packageVersion("dplyr")
+library(stringr); packageVersion("stringr")
+library(metacoder); packageVersion("metacoder")
+library(data.table); packageVersion("data.table")
+library(Biostrings); packageVersion("Biostrings")
+library(phylosmith); packageVersion("phylosmith")
+```
+
+Load filtered phyloseq objects
+```{r Make additional taxmap objects asvs not present 5 percent of time filtered}
+load("Data/RPS10/rps10_ee7/rps10_pruned3k_5asvs.RData")
+load("Data/RPS10/rps10_ee7/exp1_5percent_filter.RData")
+load("Data/RPS10/rps10_ee7/exp1_10percent_filter.RData")
+```
+
+These subsequent analysis are an attempt to understand what my constitute the core microbiome of treated vs. untreated samples. This is in addition to analysis in the first script. 
+
+Towards a core microbiome analysis
+
+Let's look at common taxa in both treated and untreated samples and taxa that are unique to each
+```{r common taxa}
+#Samples filtered if less than 3k reads and ASVs not present at least 5 times
+phylosmith::common_taxa(exp1_5_filter.ps, treatment = "treatuntreat_EP", subset = NULL, n = 'all')
+
+#Samples filtered above, and any additional ASVs filtered if not present at least 5% of time
+phylosmith::common_taxa(exp1_5percent_filter.ps, treatment = "treatuntreat_EP", subset = NULL, n = 'all')
+
+#Samples filtered above, and any additional ASVs filtered if not present at least 10% of time
+phylosmith::common_taxa(exp1_10percent_filter.ps, treatment = "treatuntreat_EP", subset = NULL, n = 'all')
+```
+
+
+Let's look at core taxa-it doesn't seem there are any core taxa across treatments with these particular frequency and abundance threshold values
+```{r core taxa}
+coretaxa.ps<-taxa_core(exp1_5_filter.ps, subset = NULL, frequency = 0.05, abundance_threshold = 0.01)
+
+taxa_core_graph(exp1_5_filter.ps, treatment = NULL, subset = NULL,
+abundance_thresholds = seq(0.01, 1, 0.01), frequencies = seq(0.05, 0.3, 0.01), colors = 'default', treatment_labels = "treatuntreat_EP", sample_labels = NULL, classification_labels= NULL)
+```
+
+```{r unique taxa}
+#Let's identify taxa only present in treated vs. untreated samples
+uniquetaxa<-phylosmith::unique_taxa(exp1_5_filter.ps, "treatuntreat_EP", subset = NULL)
+data.frame(lapply(uniquetaxa, "length<-", max(lengths(uniquetaxa))))
+
+#Let's identify taxa only present in treated vs. untreated samples in dataset where ASVs filtered if not at least 5% of samples
+uniquetaxa_5percent<-phylosmith::unique_taxa(exp1_5percent_filter.ps, "treatuntreat_EP", subset = NULL)
+data.frame(lapply(uniquetaxa_5percent, "length<-", max(lengths(uniquetaxa_5percent))))
+```
+
+```{r Abundance heatmaps, fig.width=22, fig.height=15}
+#Let's create a tidier vector of sample names
+samp_names<-exp1_5_filter.ps@sam_data$Sample_nameRps10
+# Function to extract the first part before underscore
+extract_first_part <- function(name) {
+  parts <- unlist(strsplit(name, "[-_]"))
+  return(parts[1])
+}
+
+# Applying the function to each name in the list
+first_part_names <- sapply(samp_names, extract_first_part)
+
+pdf("Figures/RPS10/phylosmith_abundance_heatmp.pdf", width = 40, height = 30)
+#There aren't any taxa only in treated vs. untreated samples
+abundance_heatmap(exp1_5_filter.ps, classification = "Species", "treatuntreat_EP", subset = NULL, treatment_labels=c("Untreated", "Treated"), sample_labels=first_part_names, transformation = 'log2', colors = 'default')
+dev.off()
+
+abundance_heatmap(exp1_5percent_filter.ps, classification = "Species", "treatuntreat_EP", subset = NULL, treatment_labels=c("Untreated", "Treated"), sample_labels=first_part_names, transformation = 'log2', colors = 'default')
+
+abundance_heatmap(exp1_10percent_filter.ps, classification = "Species", "treatuntreat_EP", subset = NULL, treatment_labels=c("Untreated", "Treated"), sample_labels=first_part_names, transformation = 'log2', colors = 'default')
+```
+
+
+```{r}
+sessioninfo::session_info()
+```
