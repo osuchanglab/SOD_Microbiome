@@ -6,8 +6,7 @@ date: "2024-06-26"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "~/SOD_DADS_microbiome/Data/16S")
-
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome_analysis/Data/16S")
 library(phyloseq); packageVersion("phyloseq")
 library(ggplot2); packageVersion("ggplot2")
 library(dada2); packageVersion("dada2")
@@ -24,7 +23,6 @@ list.files(path)
 fnFs <- sort(list.files(path, pattern="_R1.fastq.gz", full.names = TRUE))
 fnRs <- sort(list.files(path, pattern="_R2.fastq.gz", full.names = TRUE))
 
-#Extract sample names, assuming filenames have format: SAMPLENAME_XXX.fastq
 sample.names <- gsub("_R1.fastq.gz", "", basename(fnFs))
 
 #Set up directory structure of output files
@@ -42,7 +40,7 @@ REV <- "GGACTACNVGGGTWTCTAAT"
 allOrients <- function(primer) {
     # Create all orientations of the input sequence
     require(Biostrings)
-    dna <- DNAString(primer)  # The Biostrings works w/ DNAString objects rather than character vectors
+    dna <- DNAString(primer)  
     orients <- c(Forward = dna, Complement = Biostrings::complement(dna), Reverse = Biostrings::reverse(dna),
         RevComp = Biostrings::reverseComplement(dna))
     return(sapply(orients, toString))  # Convert back to character vector
@@ -52,9 +50,8 @@ REV.orients <- allOrients(REV)
 FWD.orients
 
 primerHits <- function(primer, fn) {
-    # Counts number of reads in which the primer is found
-    nh16S <- vcountPattern(primer, sread(readFastq(fn)), fixed = FALSE)
-    return(sum(nh16S > 0))
+    nhits <- vcountPattern(primer, sread(readFastq(fn)), fixed = FALSE)
+    return(sum(nhits > 0))
 }
 
 rbind(FWD.ForwardReads = sapply(FWD.orients, primerHits, fn = fnFs.prefilt[[1]]), FWD.ReverseReads = sapply(FWD.orients,
@@ -65,7 +62,7 @@ rbind(FWD.ForwardReads = sapply(FWD.orients, primerHits, fn = fnFs.prefilt[[1]])
 ### Run Cutadapt to remove any residual primers (there shouldn't be many because Earth Microbiome protocol was followed)
 ```{r run cutadapt}
 cutadapt <- "/usr/bin/cutadapt"
-system2(cutadapt, args = "--version") # Run shell commands from R
+system2(cutadapt, args = "--version") 
 
 path.cut <- file.path(path, "cutadapt")
 if(!dir.exists(path.cut)) dir.create(path.cut)
@@ -149,7 +146,6 @@ dim(seqtab)
 seqtab.nochim <- removeBimeraDenovo(seqtab, method="consensus", multithread=TRUE, verbose=TRUE)
 table(nchar(getSequences(seqtab.nochim)))
 
-
 write.table(seqtab.nochim, file="dada2_outputs/16S_seqtab_nochim.out",sep="\t",quote=F)
 ```
 
@@ -170,7 +166,7 @@ write.table(track, file="dada2_outputs/16S_trackreads.out",sep="\t",quote=F)
 ### If everything look good, let's assign taxonomy
 ``` {r assignTaxonomy without tryRC}
 set.seed(1)
-sixteensdb.ref <- "metadata_dbs/silva_nr99_v138.1_wSpecies_train_set.fa"  # CHANGE ME to location on your machine
+sixteensdb.ref <- "metadata_dbs/silva_nr99_v138.1_wSpecies_train_set.fa"
 taxa <- assignTaxonomy(seqtab.nochim, sixteensdb.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = FALSE)
 
 taxa.print <- taxa  # Removing sequence rownames for display only
@@ -182,7 +178,7 @@ write.table(taxa, file="dada2_outputs/16S_taxa.out",sep="\t",quote=F)
 ### If everything look good, let's assign taxonomy but with tryRC option
 ``` {r assignTaxonomy with tryRC}
 set.seed(1)
-sixteensdb.ref <- "metadata_dbs/silva_nr99_v138.1_wSpecies_train_set.fa"  # CHANGE ME to location on your machine
+sixteensdb.ref <- "metadata_dbs/silva_nr99_v138.1_wSpecies_train_set.fa"  
 taxa <- assignTaxonomy(seqtab.nochim, sixteensdb.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = TRUE)
 
 taxa.print <- taxa  # Removing sequence rownames for display only
@@ -194,7 +190,7 @@ write.table(taxa, file="dada2_outputs/16S_taxa_RC.out",sep="\t",quote=F)
 ### Let's try again with separate species specific db
 ``` {r assignTaxonomy with separate species db}
 set.seed(1)
-sixteensdb_nospecies.ref <- "metadata_dbs/silva_nr99_v138.1_train_set.fa"  # CHANGE ME to location on your machine
+sixteensdb_nospecies.ref <- "metadata_dbs/silva_nr99_v138.1_train_set.fa"  
 species.ref <- "metadata_dbs/silva_species_assignment_v138.1.fa"
 taxa2 <- assignTaxonomy(seqtab.nochim, sixteensdb_nospecies.ref, multithread = TRUE, minBoot = 0, verbose=TRUE, tryRC = FALSE)
 taxa2 <- addSpecies(taxa2, species.ref)
@@ -208,12 +204,12 @@ write.table(taxa2, file="dada2_outputs/16S_taxa_species_separate.out",sep="\t",q
 ### Let's try again with separate species specific db and tryRC=TRUE
 ``` {r assignTaxonomy with separate species db and tryRC is TRUE}
 set.seed(1)
-sixteensdb_nospecies.ref <- "metadata_dbs/silva_nr99_v138.1_train_set.fa"  # CHANGE ME to location on your machine
+sixteensdb_nospecies.ref <- "metadata_dbs/silva_nr99_v138.1_train_set.fa" 
 species.ref <- "metadata_dbs/silva_species_assignment_v138.1.fa"
 taxa2 <- assignTaxonomy(seqtab.nochim, sixteensdb_nospecies.ref, multithread = TRUE, minBoot = 0, verbose=TRUE, tryRC = TRUE)
 taxa2 <- addSpecies(taxa2, species.ref)
 
-taxa.print2 <- taxa  # Removing sequence rownames for display only
+taxa.print2 <- taxa  
 rownames(taxa.print2) <- NULL
 
 write.table(taxa2, file="dada2_outputs/16S_taxa_species_separate_rctrue.out",sep="\t",quote=F)
@@ -222,12 +218,12 @@ write.table(taxa2, file="dada2_outputs/16S_taxa_species_separate_rctrue.out",sep
 ### If everything look good, let's assign taxonomy but with minBoot set to 60
 ``` {r assignTaxonomy with minBoot at 60 and separate species db}
 set.seed(1)
-sixteensdb_nospecies.ref <- "metadata_dbs/silva_nr99_v138.1_train_set.fa"  # CHANGE ME to location on your machine
+sixteensdb_nospecies.ref <- "metadata_dbs/silva_nr99_v138.1_train_set.fa" 
 species.ref <- "metadata_dbs/silva_species_assignment_v138.1.fa"
 taxa2 <- assignTaxonomy(seqtab.nochim, sixteensdb_nospecies.ref, multithread = TRUE, minBoot = 60, verbose=TRUE, tryRC = FALSE)
 taxa2 <- addSpecies(taxa2, species.ref)
 
-taxa.print2 <- taxa  # Removing sequence rownames for display only
+taxa.print2 <- taxa 
 rownames(taxa.print2) <- NULL
 
 write.table(taxa2, file="dada2_outputs/16S_taxa_species_separate_minboot60.out",sep="\t",quote=F)
@@ -236,12 +232,12 @@ write.table(taxa2, file="dada2_outputs/16S_taxa_species_separate_minboot60.out",
 ### If everything look good, let's assign taxonomy but with minBoot set to 60 and try RC
 ``` {r assignTaxonomy with minBoot at 60}
 set.seed(1)
-sixteensdb_nospecies.ref <- "metadata_dbs/silva_nr99_v138.1_train_set.fa"  # CHANGE ME to location on your machine
+sixteensdb_nospecies.ref <- "metadata_dbs/silva_nr99_v138.1_train_set.fa"  
 species.ref <- "metadata_dbs/silva_species_assignment_v138.1.fa"
 taxa2 <- assignTaxonomy(seqtab.nochim, sixteensdb_nospecies.ref, multithread = TRUE, minBoot = 60, verbose=TRUE, tryRC = TRUE)
 taxa2 <- addSpecies(taxa2, species.ref)
 
-taxa.print2 <- taxa  # Removing sequence rownames for display only
+taxa.print2 <- taxa 
 rownames(taxa.print2) <- NULL
 
 write.table(taxa2, file="dada2_outputs/16S_taxa_species_separate_minboot60_RC.out",sep="\t",quote=F)

@@ -1,0 +1,15 @@
+"","Treatuntreat_EP","Kingdom","Phylum","Class","Order","Family","Genus","Abundance","Prevalence","Total_Abundance","Percentage"
+"1","Untreated","Stramenopila","Oomycota","Oomycetes","Peronosporales","Peronosporaceae","Phytophthora",25492,10,1289332,1.97714785640937
+"2","Untreated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Elongisporangium",36742,3,1289332,2.84969270909277
+"3","Untreated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium",394093,22,1289332,30.5656727669832
+"4","Untreated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium",96405,19,1289332,7.47712769092833
+"5","Untreated","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Leptolegniaceae","Aphanomyces",13398,8,1289332,1.03914274988909
+"6","Untreated","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Achlya",19400,5,1289332,1.50465512373849
+"7","Untreated","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Saprolegnia",5204,2,1289332,0.403619858965728
+"8","Treated","Stramenopila","Oomycota","Oomycetes","Peronosporales","Peronosporaceae","Phytophthora",54036,11,1289332,4.19100743640893
+"9","Treated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Elongisporangium",26615,4,1289332,2.06424722259278
+"10","Treated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium",441118,23,1289332,34.2129102511998
+"11","Treated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium",141484,17,1289332,10.9734343055163
+"12","Treated","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Leptolegniaceae","Aphanomyces",7577,12,1289332,0.587668653225081
+"13","Treated","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Achlya",181,1,1289332,0.0140382771853952
+"14","Treated","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Saprolegnia",27587,7,1289332,2.13963509786463

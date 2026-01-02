@@ -1,0 +1,874 @@
+---
+title: "SOD compiled figure and tables--alpha and beta diversity"
+output:
+  html_document: default
+  pdf_document: default
+date: "2025-11-17"
+---
+
+```{r setup}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome_analysis")
+library(phyloseq); packageVersion("phyloseq")
+library(ggplot2); packageVersion("ggplot2")
+library(readr); packageVersion("readr")
+library(purrr); packageVersion("purrr")
+library(furrr); packageVersion("furrr")
+library(dplyr); packageVersion("dplyr")
+library(stringr); packageVersion("stringr")
+library(metacoder); packageVersion("metacoder")
+library(data.table); packageVersion("data.table")
+library(Biostrings); packageVersion("Biostrings")
+library(vegan);packageVersion("vegan")
+library(agricolae);packageVersion("agricolae")
+library(magrittr);packageVersion("magrittr")
+library(data.table);packageVersion("data.table")
+library(cowplot);packageVersion("cowplot")
+library(ggpubr);packageVersion("ggpubr")
+library(viridis);packageVersion("viridis")
+
+```
+
+### Load data 16S
+```{r subset data 16S, include=TRUE}
+load("Data/16S/filtered_data/sod_5asv_nowildfire.RData")
+sod_5asv_16S_nowf.ps<-sod_5asv_nowildfire.ps
+
+sod_5asv_16S_nowf.ps@sam_data$Treatuntreat_EP <- factor(sod_5asv_16S_nowf.ps@sam_data$Treatuntreat_EP, 
+                                            levels = c("untreated", "treated"), 
+                                                  labels=c("Unmitigated", "Mitigated"))
+
+sod_5asv_16S_nowf.ps@sam_data$YrSinceTrt_BR <- factor(sod_5asv_16S_nowf.ps@sam_data$YrSinceTrt_BR, 
+                                            levels = c("untreated", "1to2", "3to4", "5to8", "10to12"), 
+                                                  labels=c("Unmitigated", "1 to 2", "3 to 4", "5 to 8", "10 to 12"))
+
+
+load("Data/16S/filtered_data/sodexp.RData")
+sod_16S.ps<-sod.ps
+sod_16S.ps@sam_data$Fire_Mod <- factor(sod_16S.ps@sam_data$Fire_Mod, 
+                                              levels = c("untreated","SODtrt","wildfire"), 
+                                                  labels=c("Unmitigated","Mitigated","Wildfire"))
+
+
+load("Data/16S/filtered_data/sod_5asv.RData")
+sod_5asv_16S.ps<-sod_5asv.ps
+sod_5asv_16S.ps@sam_data$Fire_Mod <- factor(sod_5asv_16S.ps@sam_data$Fire_Mod,
+                                            levels = c("untreated","SODtrt","wildfire"), 
+                                                  labels=c("Unmitigated","Mitigated","Wildfire"))
+
+load("Data/16S/filtered_data/sodexp_nowildfire.RData")
+sod_16S_nowf.ps<-sod_nowildfire.ps
+sod_16S_nowf.ps@sam_data$Fire_Mod <- factor(sod_16S_nowf.ps@sam_data$Fire_Mod, 
+                                       levels = c("untreated", "SODtrt","wildfire"), 
+                                                  labels=c("Unmitigated", "Mitigated","Wildfire"))
+```
+
+### Load data ITS
+```{r subset data ITS, include=TRUE}
+load("Data/ITS/filtered_data/sod_5asv_nowildfire.RData")
+sod_5asv_its_nowf.ps<-sod_5asv_nowildfire.ps
+
+sod_5asv_its_nowf.ps@sam_data$Treatuntreat_EP <- factor(sod_5asv_its_nowf.ps@sam_data$Treatuntreat_EP, 
+                                            levels = c("untreated", "treated"), 
+                                                  labels=c("Unmitigated", "Mitigated"))
+
+sod_5asv_its_nowf.ps@sam_data$YrSinceTrt_BR <- factor(sod_5asv_its_nowf.ps@sam_data$YrSinceTrt_BR, 
+                                            levels = c("untreated", "1to2", "3to4", "5to8", "10to12"), 
+                                                  labels=c("Unmitigated", "1 to 2", "3 to 4", "5 to 8", "10 to 12"))
+
+load("Data/ITS/filtered_data/sodexp.RData")
+sod_its.ps<-sod.ps
+sod_its.ps@sam_data$Fire_Mod <- factor(sod_its.ps@sam_data$Fire_Mod, 
+                                       levels = c("untreated", "SODtrt","wildfire"), 
+                                                  labels=c("Unmitigated", "Mitigated","Wildfire"))
+
+load("Data/ITS/filtered_data/sod_5asv.RData")
+sod_5asv_its.ps<-sod_5asv.ps
+sod_5asv_its.ps@sam_data$Fire_Mod <- factor(sod_5asv_its.ps@sam_data$Fire_Mod, 
+                                            levels = c("untreated","SODtrt","wildfire"), 
+                                                  labels=c("Unmitigated","Mitigated","Wildfire"))
+
+load("Data/ITS/filtered_data/sodexp_nowildfire.RData")
+sod_its_nowf.ps<-sod_nowildfire.ps
+sod_its_nowf.ps@sam_data$Fire_Mod <- factor(sod_its_nowf.ps@sam_data$Fire_Mod, 
+                                       levels = c("untreated", "SODtrt","wildfire"), 
+                                                  labels=c("Unmitigated", "Mitigated","Wildfire"))
+```
+
+
+### Load data rps10
+```{r load data rps10, include=TRUE}
+load("Data/RPS10/filtered_data/sod_5asv_nowildfire.RData")
+sod_5asv_rps10_nowf.ps<-sod_5asv_nowildfire.ps
+
+sod_5asv_rps10_nowf.ps@sam_data$Treatuntreat_EP <- factor(sod_5asv_rps10_nowf.ps@sam_data$Treatuntreat_EP, 
+                                            levels = c("untreated", "treated"), 
+                                                  labels=c("Unmitigated", "Mitigated"))
+
+sod_5asv_rps10_nowf.ps@sam_data$YrSinceTrt_BR <- factor(sod_5asv_rps10_nowf.ps@sam_data$YrSinceTrt_BR, 
+                                            levels = c("untreated", "1to2", "3to4", "5to8", "10to12"), 
+                                                  labels=c("Unmitigated", "1 to 2", "3 to 4", "5 to 8", "10 to 12"))
+
+load("Data/RPS10/filtered_data/sod_pruned.RData")
+sod_rps10.ps<-sod_prunereads.ps
+sod_rps10.ps@sam_data$Fire_Mod <- factor(sod_rps10.ps@sam_data$Fire_Mod, 
+                                                levels = c("untreated","SODtrt","wildfire"), 
+                                                  labels=c("Unmitigated","Mitigated","Wildfire"))
+
+
+load("Data/RPS10/filtered_data/sod_prunereads_5asv.RData")
+sod_5asv_rps10.ps<-sod_prunereads_5asv.ps
+sod_5asv_rps10.ps@sam_data$Fire_Mod <- factor(sod_5asv_rps10.ps@sam_data$Fire_Mod, 
+                                                     levels=
+                                                c("untreated","SODtrt","wildfire"),
+                                              labels=c("Unmitigated","Mitigated","Wildfire"))
+
+load("Data/RPS10/filtered_data/sodexp_nowildfire.RData")
+sod_rps10_nowf.ps<-sod_nowildfire.ps
+sod_rps10_nowf.ps@sam_data$Fire_Mod <- factor(sod_rps10_nowf.ps@sam_data$Fire_Mod, 
+                                       levels = c("untreated", "SODtrt","wildfire"), 
+                                                  labels=c("Unmitigated", "Mitigated","Wildfire"))
+```
+
+### Let's calculate alpha diversity metrics for ITS dataset
+```{r, combine alpha diversity boxplots its}
+set.seed(1)
+
+estimate_and_clean <- function(ps_obj) {
+  richness <- estimate_richness(ps_obj, measures = c("InvSimpson"))
+  rownames(richness) <- gsub("\\.", "-", rownames(richness))
+  return(richness)
+}
+
+AD_its_nowf <- estimate_and_clean(sod_its_nowf.ps)
+AD_its <- estimate_and_clean(sod_its.ps)
+
+AD_its_nowf <- cbind(AD_its_nowf, sample_data(sod_5asv_its_nowf.ps)[row.names(AD_its_nowf), c("Treatuntreat_EP", "YrSinceTrt_BR")])
+AD_its <- cbind(AD_its, sample_data(sod_its.ps)[row.names(AD_its), "Fire_Mod"])
+
+variables <- list(nowf = c("Treatuntreat_EP", "YrSinceTrt_BR"), wf = c("Fire_Mod"))
+measures <- c("InvSimpson")
+
+create_plot <- function(ps_obj, variable) {
+  phyloseq::plot_richness(ps_obj, x = variable, measures = c("InvSimpson")) + 
+    geom_boxplot() +
+    theme_classic() +  
+    theme(
+      panel.border = element_rect(color = "black", fill = NA, size = 1),  
+      axis.line = element_blank(),  
+      plot.margin = unit(c(1, 1, 1, 1), "lines"),  
+      plot.title = element_text(margin = margin(b = 10)),  
+      axis.title.x = element_text(margin = margin(t = 10)),  
+      axis.title.y = element_text(margin = margin(r = 10)), 
+      axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)
+    )
+}
+
+plots_its <- list()
+for (variable in variables$nowf) {
+  plots_its[[variable]] <- create_plot(sod_5asv_its_nowf.ps, variable)
+}
+for (variable in variables$wf) {
+  plots_its[[variable]] <- create_plot(sod_its.ps, variable)
+}
+
+get_tukey_and_anova <- function(data, measure, variable) {
+  formula <- as.formula(paste(measure, "~", variable))
+  aov_result <- aov(formula, data = data)
+  tukey_result <- HSD.test(aov_result, variable, group = TRUE)
+  letters <- tukey_result$groups$groups
+  names(letters) <- rownames(tukey_result$groups)  
+  return(list(letters = letters, anova = summary(aov_result)))
+}
+
+perform_tukey_tests <- function(data, variables, measures) {
+  results <- list()
+  for (variable in variables) {
+    for (measure in measures) {
+      tryCatch({
+        result <- get_tukey_and_anova(data, measure, variable)
+        results[[paste(measure, variable, sep = "_")]] <- result
+      }, error = function(e) {
+        message("Error in Tukey test for ", measure, " by ", variable, ": ", e$message)
+      })
+    }
+  }
+  return(results)
+}
+
+tukey_results_ITS <- perform_tukey_tests(AD_its, variables$wf, measures)
+tukey_results_ITS_nowf <- perform_tukey_tests(AD_its_nowf, variables$nowf, measures)
+
+print(tukey_results_ITS)
+print(tukey_results_ITS_nowf)
+
+# Function to print ANOVA stats
+print_anova_stats <- function(results) {
+  for (key in names(results)) {
+    cat("ANOVA results for", key, ":\n")
+    print(results[[key]]$anova)
+    cat("\n")
+  }
+}
+
+print_anova_stats(tukey_results_ITS)
+print_anova_stats(tukey_results_ITS_nowf)
+```
+
+### Let's calculate alpha diversity metrics for 16S dataset
+```{r, combine alpha diversity boxplots 16S}
+set.seed(1)
+
+estimate_and_clean <- function(ps_obj) {
+  richness <- estimate_richness(ps_obj, measures = c("InvSimpson"))
+  rownames(richness) <- gsub("\\.", "-", rownames(richness))
+  return(richness)
+}
+
+AD_16S_nowf <- estimate_and_clean(sod_16S_nowf.ps)
+AD_16S <- estimate_and_clean(sod_16S.ps)
+
+AD_16S_nowf <- cbind(AD_16S_nowf, sample_data(sod_5asv_16S_nowf.ps)[row.names(AD_16S_nowf), c("Treatuntreat_EP", "YrSinceTrt_BR")])
+AD_16S <- cbind(AD_16S, sample_data(sod_16S.ps)[row.names(AD_16S), "Fire_Mod"])
+
+variables <- list(nowf = c("Treatuntreat_EP", "YrSinceTrt_BR"), wf = c("Fire_Mod"))
+measures <- c("InvSimpson")
+
+create_plot <- function(ps_obj, variable) {
+  phyloseq::plot_richness(ps_obj, x = variable, measures = c("InvSimpson")) + 
+    geom_boxplot() +
+    theme_classic() +  
+    theme(
+      panel.border = element_rect(color = "black", fill = NA, size = 1),  
+      axis.line = element_blank(),  
+      plot.margin = unit(c(1, 1, 1, 1), "lines"),  
+      plot.title = element_text(margin = margin(b = 10)),  
+      axis.title.x = element_text(margin = margin(t = 10)),  
+      axis.title.y = element_text(margin = margin(r = 10)), 
+      axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)
+    )
+}
+
+plots_16S <- list()
+for (variable in variables$nowf) {
+  plots_16S[[variable]] <- create_plot(sod_5asv_16S_nowf.ps, variable)
+}
+for (variable in variables$wf) {
+  plots_16S[[variable]] <- create_plot(sod_16S.ps, variable)
+}
+
+get_tukey_and_anova <- function(data, measure, variable) {
+  formula <- as.formula(paste(measure, "~", variable))
+  aov_result <- aov(formula, data = data)
+  tukey_result <- HSD.test(aov_result, variable, group = TRUE)
+  letters <- tukey_result$groups$groups
+  names(letters) <- rownames(tukey_result$groups) 
+  return(list(letters = letters, anova = summary(aov_result)))
+}
+
+
+perform_tukey_tests <- function(data, variables, measures) {
+  results <- list()
+  for (variable in variables) {
+    for (measure in measures) {
+      tryCatch({
+        result <- get_tukey_and_anova(data, measure, variable)
+        results[[paste(measure, variable, sep = "_")]] <- result
+      }, error = function(e) {
+        message("Error in Tukey test for ", measure, " by ", variable, ": ", e$message)
+      })
+    }
+  }
+  return(results)
+}
+
+tukey_results_16S <- perform_tukey_tests(AD_16S, variables$wf, measures)
+tukey_results_16S_nowf <- perform_tukey_tests(AD_16S_nowf, variables$nowf, measures)
+
+print(tukey_results_16S)
+print(tukey_results_16S_nowf)
+
+# Function to print ANOVA stats
+print_anova_stats <- function(results) {
+  for (key in names(results)) {
+    cat("ANOVA results for", key, ":\n")
+    print(results[[key]]$anova)
+    cat("\n")
+  }
+}
+
+print_anova_stats(tukey_results_16S)
+print_anova_stats(tukey_results_16S_nowf)
+```
+
+### Let's calculate alpha diversity metrics for rps10 dataset
+```{r, combine alpha diversity boxplots rps10}
+set.seed(1)
+
+estimate_and_clean <- function(ps_obj) {
+  richness <- estimate_richness(ps_obj, measures = c("InvSimpson"))
+  rownames(richness) <- gsub("\\.", "-", rownames(richness))
+  return(richness)
+}
+
+AD_rps10_nowf <- estimate_and_clean(sod_rps10_nowf.ps)
+AD_rps10 <- estimate_and_clean(sod_rps10.ps)
+
+AD_rps10_nowf <- cbind(AD_rps10_nowf, sample_data(sod_5asv_rps10_nowf.ps)[row.names(AD_rps10_nowf), c("Treatuntreat_EP", "YrSinceTrt_BR")])
+AD_rps10 <- cbind(AD_rps10, sample_data(sod_rps10.ps)[row.names(AD_rps10), "Fire_Mod"])
+
+variables <- list(nowf = c("Treatuntreat_EP", "YrSinceTrt_BR"), wf = c("Fire_Mod"))
+measures <- c("InvSimpson")
+
+create_plot <- function(ps_obj, variable) {
+  phyloseq::plot_richness(ps_obj, x = variable, measures = c("InvSimpson")) + 
+    geom_boxplot() +
+    theme_classic() +  
+    theme(
+      panel.border = element_rect(color = "black", fill = NA, size = 1),  
+      axis.line = element_blank(),  
+      plot.margin = unit(c(1, 1, 1, 1), "lines"),  
+      plot.title = element_text(margin = margin(b = 10)),  
+      axis.title.x = element_text(margin = margin(t = 10)),  
+      axis.title.y = element_text(margin = margin(r = 10)), 
+      axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1)
+    )
+}
+
+plots_rps10 <- list()
+for (variable in variables$nowf) {
+  plots_rps10[[variable]] <- create_plot(sod_5asv_rps10_nowf.ps, variable)
+}
+for (variable in variables$wf) {
+  plots_rps10[[variable]] <- create_plot(sod_rps10.ps, variable)
+}
+
+get_tukey_and_anova <- function(data, measure, variable) {
+  formula <- as.formula(paste(measure, "~", variable))
+  aov_result <- aov(formula, data = data)
+  tukey_result <- HSD.test(aov_result, variable, group = TRUE)
+  letters <- tukey_result$groups$groups
+  names(letters) <- rownames(tukey_result$groups) 
+  return(list(letters = letters, anova = summary(aov_result)))
+}
+
+perform_tukey_tests <- function(data, variables, measures) {
+  results <- list()
+  for (variable in variables) {
+    for (measure in measures) {
+      tryCatch({
+        result <- get_tukey_and_anova(data, measure, variable)
+        results[[paste(measure, variable, sep = "_")]] <- result
+      }, error = function(e) {
+        message("Error in Tukey test for ", measure, " by ", variable, ": ", e$message)
+      })
+    }
+  }
+  return(results)
+}
+
+tukey_results_rps10 <- perform_tukey_tests(AD_rps10, variables$wf, measures)
+tukey_results_rps10_nowf <- perform_tukey_tests(AD_rps10_nowf, variables$nowf, measures)
+
+print(tukey_results_rps10)
+print(tukey_results_rps10_nowf)
+
+# Function to print ANOVA stats
+print_anova_stats <- function(results) {
+  for (key in names(results)) {
+    cat("ANOVA results for", key, ":\n")
+    print(results[[key]]$anova)
+    cat("\n")
+  }
+}
+
+print_anova_stats(tukey_results_rps10)
+print_anova_stats(tukey_results_rps10_nowf)
+```
+
+### Let's make a more publication ready figure
+```{r, combine all alpha trt box plots}
+colors_treatuntreat <- c("Unmitigated" = turbo(7)[7], "Mitigated" = turbo(7)[1])  
+colors_yrsince <- c(
+  "Unmitigated" = turbo(7)[7],  
+  "1 to 2"    = turbo(7)[2],
+  "3 to 4"    = turbo(7)[3],
+  "5 to 8"    = turbo(7)[4], 
+  "10 to 12"  = turbo(7)[5]  
+)
+colors_fire <- c(
+  "Unmitigated" = turbo(7)[7], 
+  "Mitigated" = turbo(7)[1], 
+  "Wildfire" = turbo(7)[6]  
+)
+
+modify_plot <- function(plot, remove_y_title = FALSE, colors, x_var, tukey_result = NULL, ylim = NULL, panel_label = NULL) {
+  p <- plot +
+    geom_boxplot(aes(fill = .data[[x_var]]), alpha = 0.8) +
+    scale_fill_manual(values = colors) +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(color = "black", fill = NA, size = 0.5),
+      axis.line = element_blank(),
+      plot.margin = unit(c(0.5, 0.3, 0.3, 0.8), "lines"), # reduced bottom margin
+      axis.text.x = element_text(angle = 45, hjust = 1, vjust = 1, size = 12), # changed vjust to 1
+      axis.text.y = element_text(size = 12),
+      axis.title.x = element_blank(),
+      axis.title.y = element_blank(),
+      legend.position = "none",
+      plot.title = element_blank(),
+      strip.text = element_blank(),
+      strip.background = element_blank()
+    )
+  
+  if (remove_y_title) {
+    p <- p + theme(axis.text.y = element_blank(), axis.ticks.y = element_blank())
+  }
+  
+  if (!is.null(tukey_result)) {
+    letters_df <- data.frame(group = names(tukey_result$letters), letter = tukey_result$letters)
+    y_max <- if (!is.null(ylim)) ylim[2] else max(layer_data(p, 2)$ymax, na.rm = TRUE)
+    range_span <- if (!is.null(ylim)) diff(ylim) else y_max
+    if (range_span <= 12) {
+      upper_limit <- y_max + 2.5
+      letters_y <- upper_limit - 0.8
+    } else {
+      upper_limit <- y_max * 1.25
+      letters_y <- upper_limit * 0.96
+    }
+    p <- p + coord_cartesian(ylim = c(ylim[1], upper_limit), clip = "off") + # added clip = "off"
+      geom_text(data = letters_df, aes(x = group, y = letters_y, label = letter), inherit.aes = FALSE, size = 4)
+  } else if (!is.null(ylim)) {
+    p <- p + coord_cartesian(ylim = ylim, clip = "off") # added clip = "off"
+  }
+  
+  if (!is.null(ylim) && ylim[2] == 9) {
+    p <- p + scale_y_continuous(breaks = c(0, 5, 10))
+  }
+  
+  # Add panel label inside plot
+  if (!is.null(panel_label)) {
+    label_y <- if (!is.null(ylim)) ylim[2] * 1.20 else y_max * 1.20
+    p <- p + annotate("text", x = -Inf, y = label_y, label = panel_label,
+                      fontface = "bold", size = 6, hjust = -0.2)
+  }
+  
+  return(p)
+}
+
+ylim_16S <- c(0, 230)
+ylim_ITS <- c(0, 65)
+ylim_RPS10 <- c(0, 9)
+
+plots_16S_mod <- list(
+  modify_plot(plots_16S[["Treatuntreat_EP"]], FALSE, colors_treatuntreat, "Treatuntreat_EP",
+              tukey_result = tukey_results_16S_nowf$InvSimpson_Treatuntreat_EP, ylim = ylim_16S, panel_label = "A"),
+  modify_plot(plots_16S[["YrSinceTrt_BR"]], TRUE, colors_yrsince, "YrSinceTrt_BR",
+              tukey_result = tukey_results_16S_nowf$InvSimpson_YrSinceTrt_BR, ylim = ylim_16S, panel_label = "B"),
+  modify_plot(plots_16S[["Fire_Mod"]], TRUE, colors_fire, "Fire_Mod",
+              tukey_result = tukey_results_16S$InvSimpson_Fire_Mod, ylim = ylim_16S, panel_label = "C")
+)
+
+plots_its_mod <- list(
+  modify_plot(plots_its[["Treatuntreat_EP"]], FALSE, colors_treatuntreat, "Treatuntreat_EP",
+              tukey_result = tukey_results_ITS_nowf$InvSimpson_Treatuntreat_EP, ylim = ylim_ITS, panel_label = "D"),
+  modify_plot(plots_its[["YrSinceTrt_BR"]], TRUE, colors_yrsince, "YrSinceTrt_BR",
+              tukey_result = tukey_results_ITS_nowf$InvSimpson_YrSinceTrt_BR, ylim = ylim_ITS, panel_label = "E"),
+  modify_plot(plots_its[["Fire_Mod"]], TRUE, colors_fire, "Fire_Mod",
+              tukey_result = tukey_results_ITS$InvSimpson_Fire_Mod, ylim = ylim_ITS, panel_label = "F")
+)
+
+plots_rps10_mod <- list(
+  modify_plot(plots_rps10[["Treatuntreat_EP"]], FALSE, colors_treatuntreat, "Treatuntreat_EP",
+              tukey_result = tukey_results_rps10_nowf$InvSimpson_Treatuntreat_EP, ylim = ylim_RPS10, panel_label = "G"),
+  modify_plot(plots_rps10[["YrSinceTrt_BR"]], TRUE, colors_yrsince, "YrSinceTrt_BR",
+              tukey_result = tukey_results_rps10_nowf$InvSimpson_YrSinceTrt_BR, ylim = ylim_RPS10, panel_label = "H"),
+  modify_plot(plots_rps10[["Fire_Mod"]], TRUE, colors_fire, "Fire_Mod",
+              tukey_result = tukey_results_rps10$InvSimpson_Fire_Mod, ylim = ylim_RPS10, panel_label = "I")
+)
+
+create_header <- function(text) {
+  ggdraw() + draw_label(text, fontface = 'bold', x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5, size = 14)
+}
+header_1 <- create_header("SOD Mitigation")
+header_2 <- create_header("Years Since SOD Mitigation")
+header_3 <- create_header("Chetco Bar Fire")
+
+header_row <- plot_grid(NULL, header_1, header_2, header_3, ncol = 4, rel_widths = c(0.05, 1, 1, 1))
+
+row_16S <- plot_grid(
+  plots_16S_mod[[1]], plots_16S_mod[[2]], plots_16S_mod[[3]],
+  ncol = 3, rel_widths = c(1, 1, 1), align = "h", axis = "lr"
+)
+
+row_ITS <- plot_grid(
+  plots_its_mod[[1]], plots_its_mod[[2]], plots_its_mod[[3]],
+  ncol = 3, rel_widths = c(1, 1, 1), align = "h", axis = "lr"
+)
+
+row_RPS10 <- plot_grid(
+  plots_rps10_mod[[1]], plots_rps10_mod[[2]], plots_rps10_mod[[3]],
+  ncol = 3, rel_widths = c(1, 1, 1), align = "h", axis = "lr"
+)
+
+plot_panel <- plot_grid(
+  header_row, row_16S, row_ITS, row_RPS10,
+  nrow = 4, rel_heights = c(0.08, 1, 1, 1),
+  align = "hv", axis = "tblr"
+)
+
+facetted_figure_final <- plot_grid(
+  ggdraw() + draw_label("Inverse Simpson Index", angle = 90, fontface = 'bold', size = 14),
+  plot_panel, ncol = 2, rel_widths = c(0.03, 1), align = "hv", axis = "tblr"
+)
+
+ggsave("Figures/Figure1_alpha_diversity_faceted.png", facetted_figure_final, width = 9, height = 9, dpi = 600)
+ggsave("Figures/Figure1_alpha_diversity_faceted.pdf", facetted_figure_final, width = 9, height = 9, dpi = 600)
+
+facetted_figure_final
+
+```
+### Let's proceed with ordination for the ITS dataset-NMDS
+```{r, ordination plots its NMDS}
+set.seed(1)
+strat_rel_sod_its_nowf.ps<-transform_sample_counts(sod_5asv_its_nowf.ps, function(x) x / sum(x))
+
+strat_rel_sod_its.ps<-transform_sample_counts(sod_5asv_its.ps, function(x) x / sum(x))
+
+ps_NMDS_its = ordinate(strat_rel_sod_its_nowf.ps, 
+                   method="NMDS", 
+                   distance="bray")
+
+plot_its_trt<- plot_ordination(strat_rel_sod_its_nowf.ps, 
+                         ps_NMDS_its ,
+                         color= "Treatuntreat_EP") +
+  #ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Untreated vs. Treated") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses_its_trt<-plot_its_trt +
+   stat_ellipse(linetype = 2) +
+  theme_bw()
+
+plot_ellipses_its_trt
+
+
+
+plot_its_yrtrt<- plot_ordination(strat_rel_sod_its_nowf.ps, 
+                         ps_NMDS_its ,
+                         color= "YrSinceTrt_BR") +
+  #ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Year Since Treatment") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses_its_yrtrt<-plot_its_yrtrt +
+   stat_ellipse(linetype = 2) +
+  theme_bw()
+
+plot_ellipses_its_yrtrt
+
+# Now we use dataset with wildfire samples
+ps_NMDS_its_wf = ordinate(strat_rel_sod_its.ps, 
+                   method="NMDS", 
+                   distance="bray")
+
+plot_its_fire<- plot_ordination(strat_rel_sod_its.ps, 
+                         ps_NMDS_its_wf,
+                         color= "Fire_Mod") +
+  #ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Chetco Bar Fire") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses_its_fire<-plot_its_fire +
+   stat_ellipse(linetype =2) +
+  theme_bw()
+
+plot_ellipses_its_fire
+```
+
+### Let's proceed with ordination for the 16S dataset-NMDS
+```{r, ordination plots 16s NMDS}
+set.seed(1)
+strat_rel_sod_16S_nowf.ps<-transform_sample_counts(sod_5asv_16S_nowf.ps, function(x) x / sum(x))
+
+strat_rel_sod_16S.ps<-transform_sample_counts(sod_5asv_16S.ps, function(x) x / sum(x))
+
+
+ps_NMDS_16S = ordinate(strat_rel_sod_16S_nowf.ps, 
+                   method="NMDS", 
+                   distance="bray")
+
+plot_16S_trt<- plot_ordination(strat_rel_sod_16S_nowf.ps, 
+                         ps_NMDS_16S,
+                         color= "Treatuntreat_EP") +
+  #ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Treatment") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses_16S_trt<-plot_16S_trt +
+   stat_ellipse(linetype = 2) +
+  theme_bw()
+
+plot_ellipses_16S_trt
+
+plot_16S_yrtrt<- plot_ordination(strat_rel_sod_16S_nowf.ps, 
+                         ps_NMDS_16S,
+                         color= "YrSinceTrt_BR") +
+  #ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Year Since Treatment") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses_16S_yrtrt<-plot_16S_yrtrt +
+   stat_ellipse(linetype = 2) +
+  theme_bw()
+
+plot_ellipses_16S_yrtrt
+
+ps_NMDS_16S_wf = ordinate(strat_rel_sod_16S.ps, 
+                   method="NMDS", 
+                   distance="bray")
+
+plot_16S_fire<- plot_ordination(strat_rel_sod_16S.ps, 
+                         ps_NMDS_16S_wf,
+                         color= "Fire_Mod") +
+  #ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Chetco Bar Fire") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses_16S_fire<-plot_16S_fire +
+   stat_ellipse(linetype = 2) +
+  theme_bw()
+
+plot_ellipses_16S_fire
+```
+
+### Let's proceed with ordination for the RPS10 dataset-NMDS
+```{r, ordination plots rps10 NMDS}
+set.seed(1)
+strat_rel_sod_rps10_nowf.ps<-transform_sample_counts(sod_5asv_rps10_nowf.ps, function(x) x / sum(x))
+
+strat_rel_sod_rps10.ps<-transform_sample_counts(sod_5asv_rps10.ps, function(x) x / sum(x))
+
+
+ps_NMDS_rps10 = ordinate(strat_rel_sod_rps10_nowf.ps, 
+                   method="NMDS", 
+                   distance="bray")
+
+plot_rps10_trt<- plot_ordination(strat_rel_sod_rps10_nowf.ps, 
+                         ps_NMDS_rps10,
+                         color= "Treatuntreat_EP") +
+  #ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Treatment") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses_rps10_trt<-plot_rps10_trt +
+   stat_ellipse(linetype = 2) +
+  theme_bw()
+
+plot_ellipses_rps10_trt
+
+plot_rps10_yrtrt<- plot_ordination(strat_rel_sod_rps10_nowf.ps, 
+                         ps_NMDS_rps10,
+                         color= "YrSinceTrt_BR") +
+  #ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Year Since Treatment") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses_rps10_yrtrt<-plot_rps10_yrtrt +
+   stat_ellipse(linetype = 2) +
+  theme_bw()
+
+plot_ellipses_rps10_yrtrt
+
+ps_NMDS_rps10_wf = ordinate(strat_rel_sod_rps10.ps, 
+                   method="NMDS", 
+                   distance="bray")
+
+plot_rps10_fire<- plot_ordination(strat_rel_sod_rps10.ps, 
+                         ps_NMDS_rps10_wf,
+                         color= "Fire_Mod") +
+  #ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Chetco Bar Fire") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses_rps10_fire<-plot_rps10_fire +
+   stat_ellipse(linetype = 2) +
+  theme_bw()
+
+plot_ellipses_rps10_fire
+```
+
+### Let's combine plots into facetted plot
+```{r, plots ordination pcoa}
+### Let's combine plots into facetted plot
+create_column <- function(ord_plot) {
+  plot_grid(
+    ord_plot,
+    nrow = 1,
+    align = 'v',
+    axis = 'l',
+    rel_heights = c(1)
+  )
+}
+
+col_16S_treatment <- create_column(plot_ellipses_16S_trt)
+col_16S_yrtrt <- create_column(plot_ellipses_16S_yrtrt)
+col_16S_fire <- create_column(plot_ellipses_16S_fire)
+col_its_treatment <- create_column(plot_ellipses_its_trt)
+col_its_yrtrt <- create_column(plot_ellipses_its_yrtrt)
+col_its_fire <- create_column(plot_ellipses_its_fire)
+col_rps10_treatment <- create_column(plot_ellipses_rps10_trt)
+col_rps10_yrtrt <- create_column(plot_ellipses_rps10_yrtrt)
+col_rps10_fire <- create_column(plot_ellipses_rps10_fire)
+
+create_header <- function(text) {
+  ggplot() +
+    geom_hline(yintercept = 0.8, color = "black", size = 0.5) +
+    geom_text(aes(x = 0.02, y = 0.4, label = text), size = 5, fontface = "bold", hjust = 0) +
+    theme_void() +
+    theme(plot.margin = margin(5, 0, 0, 10, "pt")) +
+    xlim(0, 1) + ylim(0, 1)
+}
+
+row_16S <- plot_grid(col_16S_treatment, col_16S_yrtrt, col_16S_fire,
+                     ncol = 3, labels = "A.", label_size = 14, hjust = -0.5, vjust = 2)
+row_its <- plot_grid(col_its_treatment, col_its_yrtrt, col_its_fire,
+                     ncol = 3, labels = "B.", label_size = 14, hjust = -0.5, vjust = 2)
+row_rps10 <- plot_grid(col_rps10_treatment, col_rps10_yrtrt, col_rps10_fire,
+                       ncol = 3, labels = "C.", label_size = 14, hjust = -0.5, vjust = 2)
+
+facetted_figure <- plot_grid(
+  row_16S,
+  row_its,
+  row_rps10,
+  nrow = 3,
+  align = 'v',
+  axis = 'l',
+  rel_heights = c(1.1, 1, 1)  # Slightly more height for the first row
+)
+
+facetted_figure
+
+# Save the figure
+ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.svg", facetted_figure, width = 16, height = 12)
+ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.pdf", facetted_figure, width = 16, height = 12)
+```
+
+### Revised figure
+```{r revised figures}
+colors_treatuntreat <- c("Unmitigated" = turbo(7)[7], "Mitigated" = turbo(7)[1])  
+colors_yrsince <- c("Unmitigated" = turbo(7)[7], "1 to 2" = turbo(7)[2], "3 to 4" = turbo(7)[3], "5 to 8" = turbo(7)[4], "10 to 12" = turbo(7)[5])
+colors_fire <- c("Unmitigated" = turbo(7)[7], "Mitigated" = turbo(7)[1], "Wildfire" = turbo(7)[6])
+
+modify_ordination_plot <- function(plot, colors, remove_y_label = FALSE, remove_x_label = FALSE,
+                                   show_legend = FALSE, xlim = NULL, ylim = NULL, panel_label = NULL, legend_nrow = 1) {
+  p <- plot +
+    scale_color_manual(values = colors) +
+    scale_fill_manual(values = colors) +
+    stat_ellipse(aes(fill = NULL), linetype = 2, size = 0.8) +
+    theme_classic() +
+    theme(
+      panel.border = element_rect(color = "black", fill = NA, size = 0.5),
+      axis.line = element_blank(),
+      plot.margin = unit(c(0.2, 0.3, 0.2, 0.3), "lines"),
+      axis.text.x = element_text(size = 12),
+      axis.text.y = element_text(size = 12),
+      axis.title.x = element_text(size = 12, face = "bold", margin = margin(t = 8)),
+      axis.title.y = element_text(size = 12, face = "bold", margin = margin(r = 8)),
+      legend.position = if(show_legend) "bottom" else "none",
+      legend.title = element_blank(),
+      legend.text = element_text(size = 9),
+      legend.key.size = unit(0.4, "cm"),
+      plot.title = element_blank(),
+      strip.text = element_blank(),
+      strip.background = element_blank()
+    )
+
+  if (remove_y_label) p <- p + theme(axis.title.y = element_blank())
+  if (remove_x_label) p <- p + theme(axis.title.x = element_blank())
+
+  if (!is.null(xlim) || !is.null(ylim)) {
+    p <- p + coord_cartesian(xlim = xlim, ylim = ylim, clip = "off") +
+             scale_x_continuous(expand = expansion(mult = c(0.02, 0.02))) +
+             scale_y_continuous(expand = expansion(mult = c(0.02, 0.02)))
+  }
+
+  if (identical(xlim, c(-1, 1)) && identical(ylim, c(-1, 1))) {
+    p <- p + scale_x_continuous(breaks = seq(-1, 1, 1), labels = seq(-1, 1, 1)) +
+             scale_y_continuous(breaks = seq(-1, 1, 1), labels = seq(-1, 1, 1))
+  }
+
+  if (show_legend) {
+    p <- p + guides(
+      color = guide_legend(nrow = legend_nrow, byrow = TRUE),
+      fill = guide_legend(nrow = legend_nrow, byrow = TRUE)
+    ) +
+    theme(
+      legend.box = "horizontal",
+      legend.spacing.x = unit(1, "pt"),
+      legend.spacing.y = unit(0, "pt"),
+      legend.margin = margin(t = 3, r = 0, b = 0, l = 0),
+      legend.box.margin = margin(t = 0, r = 0, b = 0, l = 0)
+    )
+  }
+
+  if (!is.null(panel_label)) {
+    label_y <- if (!is.null(ylim)) ylim[2] * 0.98 else Inf
+    p <- p + annotate("text", x = -Inf, y = label_y, label = panel_label,
+                      fontface = "bold", size = 6, hjust = -0.2, vjust = 1)
+  }
+
+  return(p)
+}
+
+xlim_16S <- c(-2, 4); ylim_16S <- c(-3, 2)
+xlim_ITS <- c(-1, 1); ylim_ITS <- c(-1, 1)
+xlim_RPS10 <- c(-3, 3); ylim_RPS10 <- c(-3, 3)
+
+plot_16S_trt_mod    <- modify_ordination_plot(plot_16S_trt, colors_treatuntreat, TRUE, TRUE, FALSE, xlim_16S, ylim_16S, panel_label = "A")
+plot_16S_yrtrt_mod  <- modify_ordination_plot(plot_16S_yrtrt, colors_yrsince, TRUE, TRUE, FALSE, xlim_16S, ylim_16S, panel_label = "B")
+plot_16S_fire_mod   <- modify_ordination_plot(plot_16S_fire, colors_fire, TRUE, TRUE, FALSE, xlim_16S, ylim_16S, panel_label = "C")
+
+plot_its_trt_mod    <- modify_ordination_plot(plot_its_trt, colors_treatuntreat, TRUE, TRUE, FALSE, xlim_ITS, ylim_ITS, panel_label = "D")
+plot_its_yrtrt_mod  <- modify_ordination_plot(plot_its_yrtrt, colors_yrsince, TRUE, TRUE, FALSE, xlim_ITS, ylim_ITS, panel_label = "E")
+plot_its_fire_mod   <- modify_ordination_plot(plot_its_fire, colors_fire, TRUE, TRUE, FALSE, xlim_ITS, ylim_ITS, panel_label = "F")
+
+plot_rps10_trt_mod  <- modify_ordination_plot(plot_rps10_trt, colors_treatuntreat, TRUE, TRUE, TRUE, xlim_RPS10, ylim_RPS10, panel_label = "G", legend_nrow = 1)
+plot_rps10_yrtrt_mod<- modify_ordination_plot(plot_rps10_yrtrt, colors_yrsince, TRUE, TRUE, TRUE, xlim_RPS10, ylim_RPS10, panel_label = "H", legend_nrow = 2)
+plot_rps10_fire_mod <- modify_ordination_plot(plot_rps10_fire, colors_fire, TRUE, TRUE, TRUE, xlim_RPS10, ylim_RPS10, panel_label = "I", legend_nrow = 1)
+
+create_header <- function(text) {
+  ggdraw() + draw_label(text, fontface = 'bold', x = 0.5, y = 0.5, hjust = 0.5, vjust = 0.5, size = 14)
+}
+header_1 <- create_header("SOD Mitigation")
+header_2 <- create_header("Years Since SOD Mitigation")
+header_3 <- create_header("Chetco Bar Fire")
+
+header_row <- plot_grid(NULL, header_1, header_2, header_3, ncol = 4, rel_widths = c(0.05, 1, 1, 1))
+
+row_16S   <- plot_grid(plot_16S_trt_mod, plot_16S_yrtrt_mod, plot_16S_fire_mod, ncol = 3, rel_widths = c(1,1,1), align = "h", axis = "tb")
+row_ITS   <- plot_grid(plot_its_trt_mod, plot_its_yrtrt_mod, plot_its_fire_mod, ncol = 3, rel_widths = c(1,1,1), align = "h", axis = "tb")
+row_RPS10 <- plot_grid(plot_rps10_trt_mod, plot_rps10_yrtrt_mod, plot_rps10_fire_mod, ncol = 3, rel_widths = c(1,1,1), align = "h", axis = "tb")
+
+plot_panel <- plot_grid(header_row, row_16S, row_ITS, row_RPS10,
+                        nrow = 4, rel_heights = c(0.08, 1, 1, 1.12),  # more space for 2-row legend
+                        align = "v", axis = "lr")
+
+y_axis_label <- ggdraw() + draw_label("NMDS2", angle = 90, fontface = 'bold', size = 14)
+x_axis_label <- ggdraw() + draw_label("NMDS1", fontface = 'bold', size = 14)
+
+plot_with_x_label <- plot_grid(plot_panel, x_axis_label, nrow = 2, rel_heights = c(1, 0.04))
+
+facetted_figure_final <- plot_grid(y_axis_label, plot_with_x_label,
+                                   ncol = 2, rel_widths = c(0.03, 1))
+
+ggsave("Figures/Figure2_beta_diversity_NMDS_faceted.png", facetted_figure_final, width = 9, height = 9, dpi = 600)
+ggsave("Figures/Figure2_beta_diversity_NMDS_faceted.pdf", facetted_figure_final, width = 9, height = 9, dpi = 600)
+
+facetted_figure_final
+```
+
+### Software used
+```{r software used}
+sessioninfo::session_info()
+```

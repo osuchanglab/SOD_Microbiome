@@ -1,0 +1,550 @@
+---
+title: "ITS SOD Experiments"
+output: html_document
+date: "2024-05-21"
+---
+
+```{r setup, include=TRUE}
+knitr::opts_chunk$set(echo = TRUE)
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome_analysis")
+library(phyloseq); packageVersion("phyloseq")
+library(ggplot2); packageVersion("ggplot2")
+library(readr); packageVersion("readr")
+library(purrr); packageVersion("purrr")
+library(furrr); packageVersion("furrr")
+library(dplyr); packageVersion("dplyr")
+library(stringr); packageVersion("stringr")
+library(metacoder); packageVersion("metacoder")
+library(Biostrings); packageVersion("Biostrings")
+library(vegan);packageVersion("vegan")
+library(agricolae);packageVersion("agricolae")
+library(magrittr);packageVersion("magrittr")
+library(data.table);packageVersion("data.table")
+library(ggbeeswarm);packageVersion("ggbeeswarm")
+library(DESeq2);packageVersion("DESeq2")
+library(cowplot);packageVersion("cowplot")
+library(doParallel);packageVersion("doParallel")
+library(viridis);packageVersion("viridis")
+library(ggpubr); packageVersion("ggpubr")
+library(geosphere); packageVersion("geosphere")
+theme_set(theme_cowplot())
+```
+
+### Load data
+```{r subset data}
+load("Data/ITS/filtered_data/sodexp.RData")
+load("Data/ITS/filtered_data/sod_5asv.RData")
+
+sod.ps@sam_data$Fire_Mod <- factor(sod.ps@sam_data$Fire_Mod, 
+                                              levels = c("untreated","SODtrt","wildfire"), 
+                                                  labels=c("Untreated","Treated","Wildfire"))
+
+sod_5asv.ps@sam_data$Fire_Mod <- factor(sod_5asv.ps@sam_data$Fire_Mod, 
+                                              levels = c("untreated","SODtrt","wildfire"), 
+                                                  labels=c("Untreated","Treated","Wildfire"))
+
+
+filtered_read_counts<-read.csv("Data/ITS/filtered_data/ITS_subset_track_reads_sod.csv")
+summary(filtered_read_counts)
+
+new_names <- sapply(strsplit(sod_5asv.ps@sam_data$Sample_nameITS, "-"), function(x) {
+  substr(x[1], 3, nchar(x[1]))
+})
+
+sod_5asv.ps@sam_data$Sample_nameITS <- new_names
+```
+
+### Bar plot agglomerated by order-facetted by fire factor
+```{r barplot-Relative abundance-fire}
+dataITS <- sod_5asv.ps %>%
+  tax_glom(taxrank = "Phylum") %>% 
+  transform_sample_counts(function(x) {x / sum(x)}) %>% 
+  psmelt() %>% 
+  filter(Abundance > 0.05) %>%
+  #mutate(across(Kingdom:Species, ~ ifelse(is.na(.), "Unclassified", .))) %>%  
+  arrange(desc(Abundance))
+
+abund_plot <- ggplot(dataITS, aes(x = Sample_nameITS, y = Abundance, fill = Phylum)) + 
+  geom_bar(stat = "identity", position = "stack", color = "black", size = 0.2) +
+  scale_fill_viridis_d() +
+  scale_color_viridis_d() +
+  theme_minimal() +
+  labs(
+    y = "Relative Abundance",
+    fill = "Phylum"
+  ) +
+  facet_grid(~factor(Fire_Mod), scales = "free_x") +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 16),
+    axis.text.y = element_text(size = 20),  # Increase y-axis label size
+    axis.title.x = element_blank(),  # Remove the x-axis title if needed
+    axis.title.y = element_text(size = 20), 
+    panel.grid.major = element_blank(),
+    panel.grid.minor = element_blank(),
+    legend.position = "bottom",
+    legend.text = element_text(size = 20),
+    legend.title = element_text(size = 20, face = "bold"),
+    legend.key.size = unit(1, "lines"),
+    strip.text = element_text(size = 24, face= "bold"),
+    strip.background = element_blank()
+  ) +
+  guides(
+    fill = guide_legend(
+      reverse = FALSE,
+      keywidth = 1,
+      keyheight = 1,
+      title.position = "top",
+      title.hjust = 0.5,
+      label.theme = element_text(size = 20)
+    )
+  )
+
+abund_plot <- abund_plot + 
+  scale_x_discrete(labels = function(x) gsub("Sample_nameITS", "", x))  # Remove unwanted text
+
+abund_plot
+
+ggsave("Figures/ITS/relabundance_plot_relabund_phylum_wildfire_samples.pdf", abund_plot, width = 30, height = 16)
+```
+
+### Let's summarize with boxplot 
+```{r, boxplot summary}
+dataITS <- sod_5asv.ps %>%
+  tax_glom(taxrank = "Phylum") %>% 
+  transform_sample_counts(function(x) {x / sum(x)}) %>% 
+  psmelt() %>% 
+
+  filter(Abundance > 0.05) %>%
+  #mutate(across(Kingdom:Species, ~ ifelse(is.na(.), "Unclassified", .))) %>%  
+  arrange(desc(Abundance))
+
+combined_plot <- ggplot(dataITS, aes(x = Fire_Mod, y = Abundance, fill = Phylum)) +
+  geom_boxplot(outlier.shape = NA, alpha = 0.5) +  # Boxplot with no outliers and some transparency
+  geom_jitter(color = "black", width = 0.2, size = 2) +  # Jittered black dots
+  scale_fill_viridis_d(option="H") +
+  theme_minimal() +
+  labs(
+    y = "Relative Abundance"
+  ) +
+  theme(
+    axis.text.x = element_text(angle = 90, hjust = 1, vjust = 0.5, size = 20, face = "bold"),
+    axis.text.y = element_text(size = 24),
+    axis.title.x = element_blank(),
+    axis.title.y = element_text(size = 24),
+    legend.position = "none",  # Remove the legend
+    strip.text = element_text(size = 24, face= "bold"),
+    strip.background = element_blank()
+  ) +
+  facet_wrap(~ Phylum, scales = "free_y") +
+  stat_compare_means(method = "anova", label.y = 40)
+
+ggsave("Figures/ITS/relabundance_plot_combined_facet_boxplot_phylum_wildfire_samples.pdf", combined_plot, width = 30, height = 16)
+```
+
+### Let's look top taxa at order level
+```{r Top taxa order}
+top40 <- names(sort(taxa_sums(sod_5asv.ps), decreasing=TRUE))[1:40]
+ps.top40 <- transform_sample_counts(sod_5asv.ps, function(OTU) OTU/sum(OTU))
+#ps.top40@tax_table[is.na(ps.top40@tax_table)] <- "Unclassified"
+ps.top40 <- tax_glom(ps.top40, taxrank = "Order")
+ps.top40 <- prune_taxa(top40, ps.top40)
+
+pdf("Figures/ITS/top40_order_sod_wildfire_samples.pdf", width = 34, height = 20)
+plot_bar(ps.top40, x="Sample_nameITS", fill="Order") + facet_wrap(~Fire_Mod, scales="free_x")
+dev.off()
+```
+
+### Let's look top taxa at family level
+```{r Top taxa family}
+top40 <- names(sort(taxa_sums(sod_5asv.ps), decreasing=TRUE))[1:40]
+ps.top40 <- transform_sample_counts(sod_5asv.ps, function(OTU) OTU/sum(OTU))
+#ps.top40@tax_table[is.na(ps.top40@tax_table)] <- "Unclassified"
+ps.top40 <- tax_glom(ps.top40, taxrank = "Family")
+ps.top40 <- prune_taxa(top40, ps.top40)
+
+pdf("Figures/ITS/top40_family_sod_wildfire_samples.pdf", width = 34, height = 20)
+plot_bar(ps.top40, x="Sample_nameITS", fill="Family") + facet_wrap(~Fire_Mod, scales="free_x")
+dev.off()
+```
+
+### Let's look top taxa at genus level
+```{r Top taxa genus}
+top40 <- names(sort(taxa_sums(sod_5asv.ps), decreasing=TRUE))[1:40]
+ps.top40 <- transform_sample_counts(sod_5asv.ps, function(OTU) OTU/sum(OTU))
+#ps.top40@tax_table[is.na(ps.top40@tax_table)] <- "Unclassified"
+ps.top40 <- tax_glom(ps.top40, taxrank = "Genus")
+ps.top40 <- prune_taxa(top40, ps.top40)
+
+pdf("Figures/ITS/top40_genus_sod_wildfire_samples.pdf", width = 34, height = 20)
+plot_bar(ps.top40, x="Sample_nameITS", fill="Genus") + facet_wrap(~Fire_Mod, scales="free_x")
+dev.off()
+```
+
+### Let's make a table of top taxa. 
+```{r make data tables-top taxa}
+data <-
+  sod_5asv.ps %>%
+  tax_glom("Phylum") %>%
+  psmelt() %>%
+  as_tibble()
+
+data_summed <- data %>%
+  filter(Abundance > 0) %>%
+  group_by(Fire_Mod, Kingdom, Phylum) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) %>%
+  ungroup() %>%
+  mutate(Total_Abundance = sum(Abundance)) %>%
+  mutate(Percentage = 100*(Abundance / Total_Abundance))
+  
+write.csv(data_summed, file="Results/ITS/mostabundanttaxa_abundance_phylum_wildfire_samples.csv",row.names = TRUE)
+
+data1 <-
+  sod_5asv.ps %>%
+  tax_glom("Genus") %>%
+  psmelt() %>%
+  as_tibble()
+
+data_summed1 <- data1 %>%
+  filter(Abundance > 0) %>%
+  group_by(Fire_Mod, Kingdom, Phylum, Class, Order, Family, Genus) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) %>%
+  ungroup() %>%
+  mutate(Total_Abundance = sum(Abundance)) %>%
+  mutate(Percentage = 100*(Abundance / Total_Abundance))
+
+write.csv(data_summed1, file="Results/ITS/mostabundanttaxa_genus_wildfire_samples.csv",row.names = TRUE)
+
+data2 <-
+  sod_5asv.ps %>%
+  tax_glom("Species") %>%
+  psmelt() %>%
+  as_tibble()
+
+data_summed2 <- data2 %>%
+  filter(Abundance > 0) %>%
+  group_by(Fire_Mod, Kingdom, Phylum, Class, Order, Family, Genus, Species) %>%
+  summarise(Abundance = sum(Abundance),
+            Prevalence = n_distinct(Sample)) %>%
+  ungroup() %>%
+  mutate(Total_Abundance = sum(Abundance)) %>%
+  mutate(Percentage = 100*(Abundance / Total_Abundance))
+
+write.csv(data_summed2, file="Results/ITS/mostabundanttaxa_species_wildfire_samples.csv",row.names = TRUE)
+```
+
+### Let's look at spacial placement of different plots
+```{r Map exploration}
+pdf("Figures/ITS/location_of_plots_wildfire_samples.pdf", width = 20, height = 12)
+map_plot <- ggplot(sod_5asv.ps@sam_data, aes(x = Longitude, y = Latitude)) +
+  geom_text(aes(color = Fire_Mod, label = Sample_nameITS), size = 2.5, 
+            check_overlap = FALSE) +
+  labs(x = "Longitude", y = "Latitude", title = "Sampling Locations") +
+  theme_minimal() +
+  theme(
+    plot.title = element_text(size = 20), 
+    axis.title = element_text(size = 16),
+    axis.text = element_text(color = "black"),
+    legend.title = element_text(size = 14),
+    legend.text = element_text(size = 12)
+  )
+print(map_plot)
+dev.off()
+```
+
+### Let's normalize our data in preparation for beta diversity analyses
+```{r Normalization}
+sdt = data.table::data.table(as(sample_data(sod_5asv.ps), "data.frame"),
+                 TotalReads = sample_sums(sod_5asv.ps), keep.rownames = TRUE)
+min_reads<-min(sdt$TotalReads)
+
+ied.ps <- rarefy_even_depth(sod_5asv.ps, sample.size = min_reads, rngseed = 100)
+
+strat_rel.ps<-transform_sample_counts(sod_5asv.ps, function(x) x / sum(x))
+
+strat_rel.ps@sam_data$Fire_Mod<-as.factor(strat_rel.ps@sam_data$Fire_Mod)
+strat_rel.ps@sam_data$YrSinceTrt_BR<-as.factor(strat_rel.ps@sam_data$YrSinceTrt_BR)
+strat_rel.ps@sam_data$Treatuntreat_EP<-as.factor(strat_rel.ps@sam_data$Treatuntreat_EP)
+```
+
+### Alpha diversity-use non-normalized or pruned data
+Let's start with t-test as point of comparison with anova analysis
+```{r alpha diversity analyses-t-test}
+set.seed(1)
+AD <- estimate_richness(sod.ps, measures = c("Observed", "InvSimpson", "Shannon"))
+rownames(AD) <- gsub("\\.", "-", rownames(AD))
+
+AD <- cbind(AD, sample_data(sod.ps)[row.names(AD), c("Treatuntreat_EP", "Lineage_EP", "SoilBin", "VegBin")])
+
+AD <- data.table(AD, keep.rownames = TRUE)
+
+AD <- melt(AD, id.vars = c('rn', c("Treatuntreat_EP", "Lineage_EP", "SoilBin", "VegBin")))
+
+factors <- c("Treatuntreat_EP", "Lineage_EP", "SoilBin", "VegBin")
+ttest_list <- list()
+
+for (factor_name in factors) {
+  ttest <- data.table(alpha_index = character(), pvalue = numeric())
+  for (alphad in c("InvSimpson", "Shannon", "Observed")) {
+    ttest_res <- t.test(value ~ get(factor_name), data = AD[variable == alphad], var.equal = TRUE)
+    p_value <- ttest_res$p.value
+    ttest <- rbind(ttest, data.table(alpha_index = alphad, pvalue = p_value))
+  }
+  
+  ttest_list[[factor_name]] <- ttest
+}
+
+for (factor_name in factors) {
+  cat(paste("T-Test Results for Factor:", factor_name), "\n")
+  print(knitr::kable(ttest_list[[factor_name]], format = "markdown"))
+  cat("\n")
+}
+``` 
+
+### Let's now proceed with ANOVA analyses and then compile our alpha diversity stats
+```{r compiled alpha diversity table}
+set.seed(1)
+anova_list <- list()
+
+AD <- estimate_richness(sod.ps, measures = c("Observed", "InvSimpson", "Shannon"))
+rownames(AD) <- gsub("\\.", "-", rownames(AD))
+
+AD <- cbind(AD, sample_data(sod.ps)[row.names(AD), c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")])
+
+AD <- data.table(AD, keep.rownames = TRUE)
+
+AD <- melt(AD, id.vars = c('rn', c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")))
+
+factors2 <- c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")
+
+plotted_factors <- character()
+ 
+final_anova_table <- data.table(factor_name = character(), alpha_index = character(), pvalue = numeric(), df_between = numeric(), df_within = numeric(), ss_between = numeric(), ss_within = numeric(), ms_between = numeric(), ms_within = numeric(), F_value = numeric())
+
+for (factor_name in factors2) {
+  # Initialize an empty data.table to store ANOVA results for each alpha diversity measure
+  anova <- data.table(factor_name = character(), alpha_index = character(), pvalue = numeric(), df_between = numeric(), df_within = numeric(), ss_between = numeric(), ss_within = numeric(), ms_between = numeric(), ms_within = numeric(), F_value = numeric())
+  
+  for (alphad in c("Observed","InvSimpson", "Shannon")) {
+    anova_res <- aov(value ~ get(factor_name), data = AD[variable == alphad])
+    anova_summary <- summary(anova_res)
+    p_value <- anova_summary[[1]]$`Pr(>F)`[1]
+    df_between <- anova_summary[[1]]$"Df"[1]
+    df_within <- anova_summary[[1]]$"Df"[2]
+    ss_between <- anova_summary[[1]]$"Sum Sq"[1]
+    ss_within <- anova_summary[[1]]$"Sum Sq"[2]
+    ms_between <- anova_summary[[1]]$"Mean Sq"[1]
+    ms_within <- anova_summary[[1]]$"Mean Sq"[2]
+    F_value <- anova_summary[[1]]$"F value"[1]
+    
+    anova <- rbind(anova, data.table(factor_name = factor_name, alpha_index = alphad, pvalue = p_value, df_between = df_between, df_within = df_within, ss_between = ss_between, ss_within = ss_within, ms_between = ms_between, ms_within = ms_within, F_value = F_value))
+  }
+  
+  final_anova_table <- rbind(final_anova_table, anova)
+}
+
+print(knitr::kable(final_anova_table, format = "markdown"))
+write.csv(final_anova_table, "Results/ITS/final_anova_table_wildfire_samples.csv", row.names = FALSE)
+```
+
+### Let's make faceted boxplots for our alpha diversity analyses
+```{r alpha diversity faceted plots}
+set.seed(1)
+AD <- estimate_richness(sod.ps, measures = c("Observed", "InvSimpson", "Shannon"))
+rownames(AD) <- gsub("\\.", "-", rownames(AD))
+
+AD <- cbind(AD, sample_data(sod_5asv.ps)[rownames(AD), c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")])
+
+variables <- c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")
+
+plots <- list()
+
+for (variable in variables) {
+  p <- plot_richness(sod.ps, x = variable, measures = c("Shannon", "InvSimpson", "Observed")) + 
+    geom_boxplot()
+  plots[[variable]] <- p
+}
+
+plots_arrange <- gridExtra::grid.arrange(
+  plots[["Treatuntreat_EP"]], plots[["Fire_Mod"]], plots[["YrSinceTrt_BR"]],ncol=1)
+
+plots_arrange_with_text <- cowplot::ggdraw() +
+  cowplot::draw_plot(plots_arrange) +
+  cowplot::draw_plot("Treatuntreat_EP", x = 0.28, y = 0.98) +
+  cowplot::draw_plot("Fire_Mod", x = 0.28, y = 0.98) +
+  cowplot::draw_plot("YrSinceTrt_BR", x = 0.28, y = 0.98) 
+
+ggsave(plots_arrange_with_text, path = "Figures/ITS", filename = "alpha_diversity_each_factor_wildfire_samples.pdf", 
+       width = 16, height = 24)
+```
+
+### Let's perform TUKEY HSD tests
+```{r alpha diversity compilation with tukey summary}
+set.seed(1)
+variables <- c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")
+measures <- c("Observed", "InvSimpson", "Shannon")
+
+tukey_results <- list()
+
+for (variable in variables) {
+  for (measure in measures) {
+    data_subset <- AD[, c(variable, measure)]
+    formula <- as.formula(paste(measure, "~ ."))
+    anova_res <- aov(formula, data = data_subset)
+    tukey_result <- HSD.test(anova_res, variable)
+    print(tukey_result)
+  }
+}
+```
+
+### Let's visualize alpha diversity results with action curve
+```{r, action curve}
+sample_data <- data.frame(sample_data(sod.ps))
+otu_data <- as(otu_table(sod.ps), "matrix")
+sample_data$Fire_Mod <- factor(sample_data$Fire_Mod, levels = c("Untreated", "Treated", "Wildfire"))
+
+colors <- ifelse(sample_data$Fire_Mod == "Untreated", "blue",
+                 ifelse(sample_data$Fire_Mod == "Treated", "red", "green"))
+
+raremax <- min(rowSums(otu_data))
+
+pdf("Figures/ITS/action_curve_wildfire_samples.pdf", width = 10, height = 8)
+rarecurve(otu_data, step = 10, sample = raremax, col = colors, cex = 0.6, label = FALSE, xlab = "Sequencing Depth", ylab = "Number of ASVs")
+legend("topright", legend = levels(sample_data$Fire_Mod), col = c("blue", "red", "green"), lty = 1, title = "Treatuntreat_EP")
+dev.off()
+```
+
+### Beta diversity-PERMANOVA analyses-ASV counts transformed (rel. abundance)
+```{r PERMANOVA ANALYSES-relative abundance, include=TRUE}
+set.seed(1)
+mapping <- as.data.frame(sample_data(strat_rel.ps))
+
+mapping2=mapping[, c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")]
+
+ASV_tables_bray <- phyloseq::distance(strat_rel.ps, method = "bray")
+
+df_metadata <- data.frame(sample_data(strat_rel.ps))
+
+df_metadata<-df_metadata[, c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR")]
+
+pvals <- sapply(colnames(mapping2), function(variable){
+  form1<-as.formula(paste("ASV_tables_bray", variable, sep="~"))
+  res <- adonis2(form1, data = df_metadata, permutations = 9999)
+  pval <- res$`Pr(>F)`[[1]] 
+  return(pval)
+})
+
+pval_adj <- p.adjust(pvals, method = "fdr")
+
+save.pval.adonis0.05_braycurtis <- pval_adj[pval_adj < 0.05]
+save.pval.adonis0.05_braycurtis
+
+print(pval_adj)
+```
+
+### Compile PERMANOVA stats
+```{r compile PERMANOVA stats}
+set.seed(1)
+res <- adonis2(ASV_tables_bray~Fire_Mod, data = df_metadata, permutations = 9999, by="terms")
+res_data <- data.frame(res)
+colnames(res_data)[colnames(res_data) == "Pr..F."] <- "pr_f"
+res_data <- res_data[-c(nrow(res_data)-1, nrow(res_data)),]
+
+res_data$FDR_adj_p <- p.adjust(res_data$pr_f, method = "fdr")
+res_data$Bonferroni_adj_p <- p.adjust(res_data$pr_f, method = "bonferroni")
+res_data$Factor <- rownames(res_data)
+
+res_data <- res_data[, c("Factor", "Df", "SumOfSqs", "R2", "F", "pr_f", "FDR_adj_p", "Bonferroni_adj_p")]
+rownames(res_data) <- NULL
+
+beta_disp_results <- lapply(c("Treatuntreat_EP", "Fire_Mod", "YrSinceTrt_BR"), function(variable) {
+  res_betadisper <- betadisper(d = ASV_tables_bray, group = df_metadata[[variable]])
+  perm_test_res <- permutest(res_betadisper)
+  pval_betadisper <- perm_test_res$tab$`Pr(>F)`[[1]]
+  
+  data.frame(Factor = variable, P_Value_BetaDispersion = pval_betadisper)
+})
+
+beta_disp_results_df <- do.call(rbind, beta_disp_results)
+
+final_results <- merge(res_data, beta_disp_results_df, by = "Factor", all.x = TRUE)
+
+final_results <- final_results[, c("Factor", "Df", "SumOfSqs", "R2", "F", "pr_f", "FDR_adj_p", "Bonferroni_adj_p", "P_Value_BetaDispersion")]
+
+print(final_results, row.names = FALSE)
+
+write.csv(final_results, file = "Results/ITS/PERMANOVA_with_betadisper_maineffects_wildfire_samples.csv", row.names = FALSE)
+```
+
+### Let's now examine beta diversity through ordination plots
+```{r Beta diversity-Rel. abundance-treated and untreated samples}
+set.seed(1)
+ps_NMDS = ordinate(strat_rel.ps, 
+                   method="NMDS", 
+                   distance="bray")
+
+plot<- plot_ordination(strat_rel.ps, 
+                         ps_NMDS,
+                         color= "Treatuntreat_EP") +
+  ggtitle("NMDS ordination plot - relative abundance") +
+  labs(color = "Factor") + 
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+plot_ellipses<-plot +
+   stat_ellipse(type = "norm", linetype = 2) +
+  theme_bw()
+
+plot_ellipses
+
+write.csv(ps_NMDS[["points"]], file="Results/ITS/ITS_NMDS_coordinates_persample_wildfire_samples.csv",row.names = TRUE)
+```
+
+### Now, we'll look at ordination plot (rel abundance dataset), with Fire_Mod factor
+```{r Beta diversity-Rel. abundance-Fire_Mod}
+set.seed(1)
+ps_NMDS = ordinate(strat_rel.ps, 
+                   method="NMDS",
+                   distance="bray")
+
+plot<- plot_ordination(strat_rel.ps, 
+                         ps_NMDS,
+                         labs(color = "Factor"),
+                         color= "Fire_Mod") +
+  ggtitle("NMDS ordination plot - relative abundance") +
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+
+plot_ellipses<-plot +
+   stat_ellipse(type = "norm", linetype = 2) +
+  theme_bw()
+
+plot_ellipses
+```
+
+### Now, we'll look at ordination plot rel abundance-with YrSinceTrt_BR factor
+```{r Beta diversity-Rel. abundance-YrSinceTrt_BR}
+set.seed(1)
+ps_NMDS = ordinate(strat_rel.ps, 
+                   method="NMDS",
+                   distance="bray")
+
+plot<- plot_ordination(strat_rel.ps, 
+                         ps_NMDS,
+                         labs(color = "Factor"),
+                         color= "YrSinceTrt_BR") +
+  ggtitle("NMDS ordination plot - relative abundance") +
+  theme(axis.text=element_text(size=14), axis.title=element_text(size=14), title =  element_text(size=13), legend.text = element_text(size = 18))
+
+
+plot_ellipses<-plot +
+   stat_ellipse(type = "norm", linetype = 2) +
+  theme_bw()
+
+plot_ellipses
+```
+
+### Software used
+```{r software used}
+sessioninfo::session_info()
+```

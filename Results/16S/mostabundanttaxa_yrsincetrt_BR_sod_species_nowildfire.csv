@@ -1,0 +1,219 @@
+"","YrSinceTrt_BR","Kingdom","Phylum","Class","Order","Family","Genus","Species","Abundance","Prevalence","Total_Abundance","Percentage"
+"1","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Acidicapsa","Acidicapsa_acidisoli",30,2,30495,0.0983767830791933
+"2","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_mallensis",166,3,30495,0.544351533038203
+"3","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_paludicola",89,3,30495,0.29185112313494
+"4","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Terracidiphilus","Terracidiphilus_gabretensis",32,1,30495,0.104935235284473
+"5","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Catenulisporaceae","Catenulispora","Catenulispora_acidiphila",40,3,30495,0.131169044105591
+"6","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Catenulisporaceae","Catenulispora","Catenulispora_graminis",6,1,30495,0.0196753566158387
+"7","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Catenulisporaceae","Catenulispora","Catenulispora_rubra",20,1,30495,0.0655845220527955
+"8","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Mycobacteriaceae","Mycobacterium","Mycobacterium_conspicuum",49,1,30495,0.160682079029349
+"9","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Mycobacteriaceae","Mycobacterium","Mycobacterium_madagascariense",389,10,30495,1.27561895392687
+"10","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Nocardiaceae","Nocardia","Nocardia_pseudobrasiliensis",6,1,30495,0.0196753566158387
+"11","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Nocardiaceae","Rhodococcus","Rhodococcus_tukisamuensis",33,2,30495,0.108214461387113
+"12","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Frankiaceae","Frankia","Frankia_inefficax",15,1,30495,0.0491883915395967
+"13","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Nakamurellaceae","Nakamurella","Nakamurella_flavida",66,2,30495,0.216428922774225
+"14","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Nakamurellaceae","Nakamurella","Nakamurella_panacisegetis",6,1,30495,0.0196753566158387
+"15","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Kineosporiales","Kineosporiaceae","Kineosporia","Kineosporia_rhamnosa",54,1,30495,0.177078209542548
+"16","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Marmoricola","Marmoricola_ginsengisoli",30,3,30495,0.0983767830791933
+"17","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Actinophytocola","Actinophytocola_xanthii",14,1,30495,0.0459091654369569
+"18","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Amycolatopsis","Amycolatopsis_saalfeldensis",37,1,30495,0.121331365797672
+"19","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Pseudonocardia","Pseudonocardia_spinosispora",29,1,30495,0.0950975569765535
+"20","Untreated","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Conexibacter","Conexibacter_woesei",59,2,30495,0.193474340055747
+"21","Untreated","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Solirubrobacter","Solirubrobacter_phytolaccae",28,1,30495,0.0918183308739138
+"22","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Sediminibacterium","Sediminibacterium_aquarii",18,1,30495,0.059026069847516
+"23","Untreated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Cytophagaceae","Cytophaga","Cytophaga_hutchinsonii",11,1,30495,0.0360714871290375
+"24","Untreated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Spirosomaceae","Dyadobacter","Dyadobacter_hamtensis",9,1,30495,0.029513034923758
+"25","Untreated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_frigoritolerans",414,8,30495,1.35759960649287
+"26","Untreated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_gracilis",49,1,30495,0.160682079029349
+"27","Untreated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_jinjuensis",5,1,30495,0.0163961305131989
+"28","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","Ktedonobacter","Ktedonobacter_racemifer",7,1,30495,0.0229545827184784
+"29","Untreated","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Alicyclobacillus","Alicyclobacillus_pomorum",4483,33,30495,14.7007706181341
+"30","Untreated","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Tumebacillus","Tumebacillus_ginsengisoli",15,2,30495,0.0491883915395967
+"31","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Psychrobacillus","Psychrobacillus_soli",69,2,30495,0.226266601082145
+"32","Untreated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_alginolyticus",86,3,30495,0.282013444827021
+"33","Untreated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_baekrokdamisoli",15,1,30495,0.0491883915395967
+"34","Untreated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_glacialis",24,1,30495,0.0787014264633547
+"35","Untreated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_pectinilyticus",133,5,30495,0.43613707165109
+"36","Untreated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_rhizoryzae",40,3,30495,0.131169044105591
+"37","Untreated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_wynnii",19,1,30495,0.0623052959501558
+"38","Untreated","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Aetherobacter","Aetherobacter_rufus",168,3,30495,0.550909985243483
+"39","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Phenylobacterium","Phenylobacterium_mobile",29,2,30495,0.0950975569765535
+"40","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylovirgula","Methylovirgula_ligni",39,1,30495,0.127889818002951
+"41","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Hyphomicrobiaceae","Hyphomicrobium","Hyphomicrobium_facile",87,2,30495,0.285292670929661
+"42","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Kaistiaceae","Kaistia","Kaistia_granuli",14,1,30495,0.0459091654369569
+"43","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhodomicrobiaceae","Rhodomicrobium","Rhodomicrobium_vannielii",1293,34,30495,4.24003935071323
+"44","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Bradyrhizobium","Bradyrhizobium_canariense",307,5,30495,1.00672241351041
+"45","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Pseudolabrys","Pseudolabrys_taiwanensis",102,5,30495,0.334481062469257
+"46","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","Nitrosospira","Nitrosospira_multiformis",75,4,30495,0.245941957697983
+"47","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Duganella","Duganella_zoogloeoides",163,5,30495,0.534513854730284
+"48","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Noviherbaspirillum","Noviherbaspirillum_suwonense",32,1,30495,0.104935235284473
+"49","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Rugamonas","Rugamonas_rubra",5,1,30495,0.0163961305131989
+"50","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Undibacterium","Undibacterium_arcticum",13,1,30495,0.0426299393343171
+"51","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Diplorickettsiales","Diplorickettsiaceae","Rickettsiella","Rickettsiella_isopodorum",5,1,30495,0.0163961305131989
+"52","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Alkanindiges","Alkanindiges_illinoisensis",72,4,30495,0.236104279390064
+"53","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Dyella","Dyella_flava",177,1,30495,0.58042302016724
+"54","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Arenimonas","Arenimonas_daechungensis",12,1,30495,0.0393507132316773
+"55","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Lysobacter","Lysobacter_dokdonensis",9,1,30495,0.029513034923758
+"56","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Lacunisphaera","Lacunisphaera_anatis",90,3,30495,0.29513034923758
+"57","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Lacunisphaera","Lacunisphaera_limnophila",252,12,30495,0.826364977865224
+"58","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Verrucomicrobiales","Rubritaleaceae","Luteolibacter","Luteolibacter_gellanilyticus",5,1,30495,0.0163961305131989
+"59","1 to 2","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_mallensis",65,3,30495,0.213149696671586
+"60","1 to 2","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_paludicola",37,1,30495,0.121331365797672
+"61","1 to 2","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Catenulisporaceae","Catenulispora","Catenulispora_acidiphila",27,1,30495,0.088539104771274
+"62","1 to 2","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Mycobacteriaceae","Mycobacterium","Mycobacterium_madagascariense",624,9,30495,2.04623708804722
+"63","1 to 2","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Nakamurellaceae","Nakamurella","Nakamurella_flavida",57,1,30495,0.186915887850467
+"64","1 to 2","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Nocardioides","Nocardioides_alpinus",26,1,30495,0.0852598786686342
+"65","1 to 2","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Amycolatopsis","Amycolatopsis_saalfeldensis",12,1,30495,0.0393507132316773
+"66","1 to 2","Bacteria","Actinobacteriota","Actinobacteria","Streptomycetales","Streptomycetaceae","Streptomyces","Streptomyces_niveus",84,1,30495,0.275454992621741
+"67","1 to 2","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Streptosporangiaceae","Microbispora","Microbispora_rosea",2,1,30495,0.00655845220527955
+"68","1 to 2","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Conexibacter","Conexibacter_woesei",42,2,30495,0.137727496310871
+"69","1 to 2","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Solirubrobacter","Solirubrobacter_phytolaccae",11,1,30495,0.0360714871290375
+"70","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Chitinophaga","Chitinophaga_soli",13,1,30495,0.0426299393343171
+"71","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Parasegetibacter","Parasegetibacter_luojiensis",18,1,30495,0.059026069847516
+"72","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Sediminibacterium","Sediminibacterium_aquarii",136,4,30495,0.44597474995901
+"73","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Sediminibacterium","Sediminibacterium_salmoneum",11,1,30495,0.0360714871290375
+"74","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_aquaedulcis",12,1,30495,0.0393507132316773
+"75","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_frigoritolerans",689,5,30495,2.25938678471881
+"76","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_pineti",70,1,30495,0.229545827184784
+"77","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_rigui",80,1,30495,0.262338088211182
+"78","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Pedobacter","Pedobacter_jamesrossensis",8,1,30495,0.0262338088211182
+"79","1 to 2","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Pedobacter","Pedobacter_luteus",37,2,30495,0.121331365797672
+"80","1 to 2","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","Ktedonobacter","Ktedonobacter_racemifer",22,1,30495,0.0721429742580751
+"81","1 to 2","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Alicyclobacillus","Alicyclobacillus_pomorum",4662,18,30495,15.2877520905066
+"82","1 to 2","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Tumebacillus","Tumebacillus_ginsengisoli",18,2,30495,0.059026069847516
+"83","1 to 2","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Tumebacillus","Tumebacillus_permanentifrigoris",22,1,30495,0.0721429742580751
+"84","1 to 2","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Domibacillus","Domibacillus_tundrae",13,1,30495,0.0426299393343171
+"85","1 to 2","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Psychrobacillus","Psychrobacillus_soli",122,2,30495,0.400065584522053
+"86","1 to 2","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_agarexedens",14,1,30495,0.0459091654369569
+"87","1 to 2","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_alginolyticus",47,1,30495,0.15412362682407
+"88","1 to 2","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_baekrokdamisoli",31,1,30495,0.101656009181833
+"89","1 to 2","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_pectinilyticus",167,5,30495,0.547630759140843
+"90","1 to 2","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_rhizoryzae",37,2,30495,0.121331365797672
+"91","1 to 2","Bacteria","Firmicutes","Desulfitobacteriia","Desulfitobacteriales","Desulfitobacteriaceae","Desulfosporosinus","Desulfosporosinus_fructosivorans",3,1,30495,0.00983767830791933
+"92","1 to 2","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Aetherobacter","Aetherobacter_rufus",182,4,30495,0.596819150680439
+"93","1 to 2","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Phenylobacterium","Phenylobacterium_mobile",145,5,30495,0.475487784882768
+"94","1 to 2","Bacteria","Proteobacteria","Alphaproteobacteria","Reyranellales","Reyranellaceae","Reyranella","Reyranella_aquatilis",40,1,30495,0.131169044105591
+"95","1 to 2","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Devosiaceae","Devosia","Devosia_limi",92,1,30495,0.30168880144286
+"96","1 to 2","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Hyphomicrobiaceae","Hyphomicrobium","Hyphomicrobium_facile",270,6,30495,0.88539104771274
+"97","1 to 2","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhodomicrobiaceae","Rhodomicrobium","Rhodomicrobium_vannielii",1143,14,30495,3.74815543531727
+"98","1 to 2","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Bradyrhizobium","Bradyrhizobium_canariense",123,1,30495,0.403344810624693
+"99","1 to 2","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Tardiphaga","Tardiphaga_robiniae",28,1,30495,0.0918183308739138
+"100","1 to 2","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Sphingomonas","Sphingomonas_fennica",8,1,30495,0.0262338088211182
+"101","1 to 2","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Sphingomonas","Sphingomonas_hengshuiensis",25,1,30495,0.0819806525659944
+"102","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Hydrogenophaga","Hydrogenophaga_palleronii",28,1,30495,0.0918183308739138
+"103","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Polaromonas","Polaromonas_eurypsychrophila",25,1,30495,0.0819806525659944
+"104","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Rhodoferax","Rhodoferax_saidenbachensis",48,1,30495,0.157402852926709
+"105","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Methylophilaceae","Methylotenera","Methylotenera_versatilis",26,1,30495,0.0852598786686342
+"106","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","Nitrosospira","Nitrosospira_multiformis",111,6,30495,0.363994097393015
+"107","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Duganella","Duganella_zoogloeoides",83,2,30495,0.272175766519102
+"108","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Massilia","Massilia_brevitalea",18,1,30495,0.059026069847516
+"109","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Noviherbaspirillum","Noviherbaspirillum_suwonense",362,5,30495,1.1870798491556
+"110","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Rugamonas","Rugamonas_rubra",88,2,30495,0.2885718970323
+"111","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Undibacterium","Undibacterium_arcticum",9,1,30495,0.029513034923758
+"112","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Rhodocyclaceae","Georgfuchsia","Georgfuchsia_toluolica",45,1,30495,0.14756517461879
+"113","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Cellvibrionaceae","Cellvibrio","Cellvibrio_gandavensis",111,3,30495,0.363994097393015
+"114","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Alkanindiges","Alkanindiges_illinoisensis",6,1,30495,0.0196753566158387
+"115","1 to 2","Bacteria","Proteobacteria","Gammaproteobacteria","Steroidobacterales","Steroidobacteraceae","Steroidobacter","Steroidobacter_flavus",60,1,30495,0.196753566158387
+"116","1 to 2","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Lacunisphaera","Lacunisphaera_anatis",170,7,30495,0.557468437448762
+"117","1 to 2","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Lacunisphaera","Lacunisphaera_limnophila",80,2,30495,0.262338088211182
+"118","1 to 2","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","Pedosphaera","Pedosphaera_parvula",94,2,30495,0.308247253648139
+"119","3 to 4","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_mallensis",127,1,30495,0.416461715035252
+"120","3 to 4","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_paludicola",252,1,30495,0.826364977865224
+"121","3 to 4","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Catenulisporaceae","Catenulispora","Catenulispora_rubra",35,1,30495,0.114772913592392
+"122","3 to 4","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Mycobacteriaceae","Mycobacterium","Mycobacterium_conspicuum",46,1,30495,0.15084440072143
+"123","3 to 4","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Mycobacteriaceae","Mycobacterium","Mycobacterium_madagascariense",162,3,30495,0.531234628627644
+"124","3 to 4","Bacteria","Actinobacteriota","Actinobacteria","Kineosporiales","Kineosporiaceae","Kineosporia","Kineosporia_rhamnosa",16,1,30495,0.0524676176422364
+"125","3 to 4","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Amycolatopsis","Amycolatopsis_saalfeldensis",13,1,30495,0.0426299393343171
+"126","3 to 4","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Sediminibacterium","Sediminibacterium_aquarii",95,1,30495,0.311526479750779
+"127","3 to 4","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Terrimonas","Terrimonas_crocea",20,1,30495,0.0655845220527955
+"128","3 to 4","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Spirosomaceae","Dyadobacter","Dyadobacter_hamtensis",23,1,30495,0.0754222003607149
+"129","3 to 4","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_frigoritolerans",480,3,30495,1.57402852926709
+"130","3 to 4","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_myungsuensis",23,1,30495,0.0754222003607149
+"131","3 to 4","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_pineti",32,1,30495,0.104935235284473
+"132","3 to 4","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","Ktedonobacter","Ktedonobacter_racemifer",40,2,30495,0.131169044105591
+"133","3 to 4","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Alicyclobacillus","Alicyclobacillus_pomorum",1262,3,30495,4.1383833415314
+"134","3 to 4","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Tumebacillus","Tumebacillus_permanentifrigoris",15,2,30495,0.0491883915395967
+"135","3 to 4","Bacteria","Firmicutes","Bacilli","Bacillales","Bacillaceae","Oceanobacillus","Oceanobacillus_chungangensis",9,1,30495,0.029513034923758
+"136","3 to 4","Bacteria","Firmicutes","Bacilli","Thermoactinomycetales","Thermoactinomycetaceae","Shimazuella","Shimazuella_kribbensis",10,1,30495,0.0327922610263978
+"137","3 to 4","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Roseomonas","Roseomonas_aquatica",29,1,30495,0.0950975569765535
+"138","3 to 4","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Phenylobacterium","Phenylobacterium_mobile",18,1,30495,0.059026069847516
+"139","3 to 4","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Devosiaceae","Devosia","Devosia_geojensis",100,1,30495,0.327922610263978
+"140","3 to 4","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Devosiaceae","Devosia","Devosia_limi",12,1,30495,0.0393507132316773
+"141","3 to 4","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Hyphomicrobiaceae","Hyphomicrobium","Hyphomicrobium_facile",9,1,30495,0.029513034923758
+"142","3 to 4","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhodomicrobiaceae","Rhodomicrobium","Rhodomicrobium_vannielii",306,4,30495,1.00344318740777
+"143","3 to 4","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Tardiphaga","Tardiphaga_robiniae",56,1,30495,0.183636661747828
+"144","3 to 4","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Piscinibacter","Piscinibacter_aquaticus",48,1,30495,0.157402852926709
+"145","3 to 4","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Massilia","Massilia_brevitalea",32,1,30495,0.104935235284473
+"146","3 to 4","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Noviherbaspirillum","Noviherbaspirillum_suwonense",285,1,30495,0.934579439252336
+"147","3 to 4","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Rugamonas","Rugamonas_rubra",32,1,30495,0.104935235284473
+"148","3 to 4","Bacteria","Proteobacteria","Gammaproteobacteria","Diplorickettsiales","Diplorickettsiaceae","Rickettsiella","Rickettsiella_isopodorum",34,1,30495,0.111493687489752
+"149","3 to 4","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Cellvibrionaceae","Cellvibrio","Cellvibrio_gandavensis",53,2,30495,0.173798983439908
+"150","3 to 4","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Alkanindiges","Alkanindiges_illinoisensis",101,3,30495,0.331201836366617
+"151","5 to 8","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_mallensis",17,1,30495,0.0557468437448762
+"152","5 to 8","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_paludicola",11,1,30495,0.0360714871290375
+"153","5 to 8","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Catenulisporaceae","Catenulispora","Catenulispora_acidiphila",22,1,30495,0.0721429742580751
+"154","5 to 8","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Mycobacteriaceae","Mycobacterium","Mycobacterium_madagascariense",227,1,30495,0.744384325299229
+"155","5 to 8","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Nakamurellaceae","Nakamurella","Nakamurella_flavida",27,1,30495,0.088539104771274
+"156","5 to 8","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Nakamurellaceae","Nakamurella","Nakamurella_panacisegetis",27,1,30495,0.088539104771274
+"157","5 to 8","Bacteria","Actinobacteriota","Actinobacteria","Kineosporiales","Kineosporiaceae","Kineosporia","Kineosporia_rhamnosa",31,1,30495,0.101656009181833
+"158","5 to 8","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Marmoricola","Marmoricola_ginsengisoli",34,1,30495,0.111493687489752
+"159","5 to 8","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Amycolatopsis","Amycolatopsis_saalfeldensis",176,3,30495,0.577143794064601
+"160","5 to 8","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Conexibacter","Conexibacter_woesei",59,2,30495,0.193474340055747
+"161","5 to 8","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Solirubrobacter","Solirubrobacter_phytolaccae",78,1,30495,0.255779636005903
+"162","5 to 8","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Chitinophaga","Chitinophaga_oryziterrae",11,1,30495,0.0360714871290375
+"163","5 to 8","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Sediminibacterium","Sediminibacterium_aquarii",119,2,30495,0.390227906214133
+"164","5 to 8","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_frigoritolerans",197,3,30495,0.646007542220036
+"165","5 to 8","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_pineti",50,1,30495,0.163961305131989
+"166","5 to 8","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","Ktedonobacter","Ktedonobacter_racemifer",5,1,30495,0.0163961305131989
+"167","5 to 8","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Alicyclobacillus","Alicyclobacillus_pomorum",769,5,30495,2.52172487292999
+"168","5 to 8","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Tumebacillus","Tumebacillus_permanentifrigoris",15,1,30495,0.0491883915395967
+"169","5 to 8","Bacteria","Firmicutes","Bacilli","Bacillales","Bacillaceae","Bacillus","Bacillus_psychrosaccharolyticus",15,1,30495,0.0491883915395967
+"170","5 to 8","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Domibacillus","Domibacillus_tundrae",15,1,30495,0.0491883915395967
+"171","5 to 8","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_alginolyticus",42,1,30495,0.137727496310871
+"172","5 to 8","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_rhizoryzae",13,1,30495,0.0426299393343171
+"173","5 to 8","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Aetherobacter","Aetherobacter_rufus",30,1,30495,0.0983767830791933
+"174","5 to 8","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Phenylobacterium","Phenylobacterium_mobile",98,2,30495,0.321364158058698
+"175","5 to 8","Bacteria","Proteobacteria","Alphaproteobacteria","Reyranellales","Reyranellaceae","Reyranella","Reyranella_aquatilis",191,2,30495,0.626332185604197
+"176","5 to 8","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylovirgula","Methylovirgula_ligni",10,1,30495,0.0327922610263978
+"177","5 to 8","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Devosiaceae","Devosia","Devosia_limi",10,1,30495,0.0327922610263978
+"178","5 to 8","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Hyphomicrobiaceae","Hyphomicrobium","Hyphomicrobium_facile",243,3,30495,0.796851942941466
+"179","5 to 8","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhodomicrobiaceae","Rhodomicrobium","Rhodomicrobium_vannielii",249,5,30495,0.816527299557305
+"180","5 to 8","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Bradyrhizobium","Bradyrhizobium_canariense",262,3,30495,0.859157238891622
+"181","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","Nitrosospira","Nitrosospira_multiformis",33,1,30495,0.108214461387113
+"182","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Duganella","Duganella_zoogloeoides",306,3,30495,1.00344318740777
+"183","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Massilia","Massilia_eurypsychrophila",170,1,30495,0.557468437448762
+"184","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Rugamonas","Rugamonas_rubra",99,2,30495,0.324643384161338
+"185","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Rhodocyclaceae","Ferribacterium","Ferribacterium_limneticum",10,1,30495,0.0327922610263978
+"186","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Diplorickettsiales","Diplorickettsiaceae","Rickettsiella","Rickettsiella_isopodorum",12,1,30495,0.0393507132316773
+"187","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Cellvibrionaceae","Cellvibrio","Cellvibrio_gandavensis",88,1,30495,0.2885718970323
+"188","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Alkanindiges","Alkanindiges_illinoisensis",303,3,30495,0.993605509099852
+"189","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Steroidobacterales","Steroidobacteraceae","Steroidobacter","Steroidobacter_flavus",26,1,30495,0.0852598786686342
+"190","5 to 8","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Rudaea","Rudaea_cellulosilytica",6,1,30495,0.0196753566158387
+"191","5 to 8","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Lacunisphaera","Lacunisphaera_anatis",57,1,30495,0.186915887850467
+"192","5 to 8","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Lacunisphaera","Lacunisphaera_limnophila",222,3,30495,0.72798819478603
+"193","10 to 12","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_mallensis",21,1,30495,0.0688637481554353
+"194","10 to 12","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella","Granulicella_paludicola",29,1,30495,0.0950975569765535
+"195","10 to 12","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Nakamurellaceae","Nakamurella","Nakamurella_flavida",44,1,30495,0.14428594851615
+"196","10 to 12","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Sediminibacterium","Sediminibacterium_aquarii",36,1,30495,0.118052139695032
+"197","10 to 12","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Sediminibacterium","Sediminibacterium_salmoneum",24,1,30495,0.0787014264633547
+"198","10 to 12","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_frigoritolerans",79,2,30495,0.259058862108542
+"199","10 to 12","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter","Mucilaginibacter_jinjuensis",15,1,30495,0.0491883915395967
+"200","10 to 12","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","Ktedonobacter","Ktedonobacter_racemifer",18,2,30495,0.059026069847516
+"201","10 to 12","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Alicyclobacillus","Alicyclobacillus_pomorum",673,5,30495,2.20691916707657
+"202","10 to 12","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Tumebacillus","Tumebacillus_ginsengisoli",139,3,30495,0.455812428266929
+"203","10 to 12","Bacteria","Firmicutes","Bacilli","Bacillales","Bacillaceae","Bacillus","Bacillus_psychrosaccharolyticus",9,1,30495,0.029513034923758
+"204","10 to 12","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_agarexedens",26,1,30495,0.0852598786686342
+"205","10 to 12","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_pectinilyticus",70,1,30495,0.229545827184784
+"206","10 to 12","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus","Paenibacillus_rhizoryzae",17,1,30495,0.0557468437448762
+"207","10 to 12","Bacteria","Firmicutes","Clostridia","Peptostreptococcales-Tissierellales","Peptostreptococcaceae","Romboutsia","Romboutsia_hominis",14,1,30495,0.0459091654369569
+"208","10 to 12","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Phenylobacterium","Phenylobacterium_mobile",12,1,30495,0.0393507132316773
+"209","10 to 12","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylovirgula","Methylovirgula_ligni",50,2,30495,0.163961305131989
+"210","10 to 12","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Hyphomicrobiaceae","Hyphomicrobium","Hyphomicrobium_facile",35,1,30495,0.114772913592392
+"211","10 to 12","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhodomicrobiaceae","Rhodomicrobium","Rhodomicrobium_vannielii",270,5,30495,0.88539104771274
+"212","10 to 12","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Duganella","Duganella_zoogloeoides",322,4,30495,1.05591080505001
+"213","10 to 12","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Rugamonas","Rugamonas_rubra",71,1,30495,0.232825053287424
+"214","10 to 12","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Undibacterium","Undibacterium_arcticum",8,1,30495,0.0262338088211182
+"215","10 to 12","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Cellvibrionaceae","Cellvibrio","Cellvibrio_gandavensis",10,1,30495,0.0327922610263978
+"216","10 to 12","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Alkanindiges","Alkanindiges_illinoisensis",9,1,30495,0.029513034923758
+"217","10 to 12","Bacteria","Proteobacteria","Gammaproteobacteria","Salinisphaerales","Solimonadaceae","Nevskia","Nevskia_soli",6,1,30495,0.0196753566158387
+"218","10 to 12","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Lacunisphaera","Lacunisphaera_limnophila",145,5,30495,0.475487784882768

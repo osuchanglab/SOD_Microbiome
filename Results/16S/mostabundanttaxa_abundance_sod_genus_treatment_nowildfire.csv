@@ -1,0 +1,663 @@
+"","Treatuntreat_EP","Kingdom","Phylum","Class","Order","Family","Genus","Raw_Abundance","Prevalence","Relative_Abundance","Percentage"
+"1","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Chthoniobacteraceae","Candidatus Udaeobacter",64932,43,7.77750603823606,17.2833467516357
+"2","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Pseudolabrys",20080,42,2.48235180701118,5.51633734891373
+"3","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylocapsa",17853,44,2.28187198483942,5.07082663297648
+"4","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Bradyrhizobium",16056,45,2.02831778862971,4.50737286362158
+"5","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Acidothermaceae","Acidothermus",15530,45,1.86586345620761,4.1463632360169
+"6","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Gammaproteobacteria Incertae Sedis","Unknown Family","Acidibacter",12585,45,1.62716799783905,3.61592888408678
+"7","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Xiphinematobacteraceae","Candidatus Xiphinematobacter",12919,45,1.60848096770089,3.57440215044642
+"8","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Roseiarcus",10995,44,1.47475069729289,3.27722377176198
+"9","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Bryobacterales","Bryobacteraceae","Bryobacter",11348,45,1.43580004406534,3.19066676458964
+"10","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella",9272,43,1.12024407969538,2.48943128821196
+"11","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Mycobacteriaceae","Mycobacterium",8731,41,1.02684914272538,2.28188698383419
+"12","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Puia",7677,45,1.00876036513887,2.24168970030861
+"13","Untreated","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Conexibacter",7344,43,0.897561861634381,1.99458191474307
+"14","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","ADurb.Bin063-1",6726,41,0.861915392573174,1.9153675390515
+"15","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Acidipila-Silvibacterium",7466,39,0.859331432017596,1.90962540448355
+"16","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Burkholderiaceae","Burkholderia-Caballeronia-Paraburkholderia",6577,43,0.791710025955022,1.75935561323338
+"17","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Solibacterales","Solibacteraceae","Candidatus Solibacter",5707,44,0.710576358580204,1.57905857462268
+"18","Untreated","Bacteria","Myxococcota","Polyangia","Haliangiales","Haliangiaceae","Haliangium",5377,44,0.645818376377687,1.43515194750597
+"19","Untreated","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Alicyclobacillus",5049,33,0.634520268885647,1.4100450419681
+"20","Untreated","Bacteria","Planctomycetota","Planctomycetes","Isosphaerales","Isosphaeraceae","Aquisphaera",5182,45,0.630445182266028,1.40098929392451
+"21","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Koribacteraceae","Candidatus Koribacter",4579,40,0.579692085214287,1.28820463380953
+"22","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Reyranellales","Reyranellaceae","Reyranella",4171,44,0.524316869153963,1.16514859811992
+"23","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Rhodoplanes",4084,37,0.475648712704479,1.05699713934329
+"24","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Occallatibacter",3637,37,0.435625235598565,0.968056079107922
+"25","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","HSB OF53-F07",2988,38,0.374484418275758,0.832187596168352
+"26","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","MND1",2975,39,0.365910919062925,0.813135375695388
+"27","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Chthoniobacteraceae","Chthoniobacter",2717,42,0.364063885924488,0.809030857609974
+"28","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","GOUTA6",2613,33,0.335609558592937,0.745799019095416
+"29","Untreated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter",2848,36,0.325091871956753,0.722426382126118
+"30","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Hyphomicrobiaceae","Pedomicrobium",2523,38,0.318158044343059,0.707017876317908
+"31","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","Pedosphaera",2318,30,0.301009688321179,0.668910418491508
+"32","Untreated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus",2409,38,0.29035049663186,0.645223325848577
+"33","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Edaphobacter",2052,24,0.250206290134344,0.55601397807632
+"34","Untreated","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Pajaroellobacter",1956,37,0.24329925205535,0.540665004567444
+"35","Untreated","Bacteria","Acidobacteriota","Thermoanaerobaculia","Thermoanaerobaculales","Thermoanaerobaculaceae","Subgroup 10",1903,37,0.240677355794963,0.534838568433252
+"36","Untreated","Bacteria","Myxococcota","Myxococcia","Myxococcales","Anaeromyxobacteraceae","Anaeromyxobacter",1894,35,0.240036730548327,0.533414956774059
+"37","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Rhodovastum",1747,34,0.220398195199856,0.48977376711079
+"38","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","Ellin6067",1672,35,0.206197730835246,0.45821717963388
+"39","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Hyphomicrobiaceae","Hyphomicrobium",1702,21,0.202992658519113,0.45109479670914
+"40","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Phenylobacterium",1495,36,0.201413972794838,0.447586606210752
+"41","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhodomicrobiaceae","Rhodomicrobium",1548,38,0.197472849027841,0.438828553395202
+"42","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","IS-44",1480,25,0.182794074003483,0.406209053341073
+"43","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","1959-1",1443,37,0.182399465002014,0.405332144448921
+"44","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Pseudomonadaceae","Pseudomonas",1459,27,0.181534438924043,0.403409864275651
+"45","Untreated","Bacteria","Nitrospirota","Nitrospiria","Nitrospirales","Nitrospiraceae","Nitrospira",1367,31,0.169710716190269,0.377134924867264
+"46","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Edaphobaculum",1146,34,0.154793884445915,0.343986409879811
+"47","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Enterobacterales","Enterobacteriaceae","Escherichia-Shigella",1292,1,0.14721969006381,0.327154866808468
+"48","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Salinisphaerales","Solimonadaceae","Alkanibacter",1170,20,0.146915049475449,0.326477887723219
+"49","Untreated","Bacteria","Acidobacteriota","Blastocatellia","Pyrinomonadales","Pyrinomonadaceae","RB41",1119,22,0.139947738610726,0.310994974690501
+"50","Untreated","Bacteria","Gemmatimonadota","Gemmatimonadetes","Gemmatimonadales","Gemmatimonadaceae","Gemmatimonas",1079,35,0.129122473759745,0.286938830577211
+"51","Untreated","Bacteria","Actinobacteriota","Thermoleophilia","Gaiellales","Gaiellaceae","Gaiella",920,17,0.121120720447553,0.269157156550117
+"52","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Opitutus",865,25,0.119458504213366,0.26546334269637
+"53","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","Ellin516",885,27,0.118846650669049,0.264103668153443
+"54","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Sphingomonas",979,28,0.117514896144899,0.261144213655331
+"55","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Acidocella",783,21,0.11104758724776,0.246772416106133
+"56","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Massilia",869,26,0.109554676996729,0.243454837770509
+"57","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylocella",824,16,0.104030422327452,0.231178716283226
+"58","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","FCPS473",798,28,0.103996706652159,0.231103792560354
+"59","Untreated","Bacteria","Myxococcota","Polyangia","Polyangiales","Phaselicystidaceae","Phaselicystis",861,24,0.102868147330639,0.228595882956976
+"60","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Terrimonas",803,22,0.0986840487159237,0.219297886035386
+"61","Untreated","Bacteria","Planctomycetota","Planctomycetes","Pirellulales","Pirellulaceae","Pir4 lineage",775,32,0.0980053831193507,0.217789740265224
+"62","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylovirgula",765,12,0.0961154753147682,0.213589945143929
+"63","Untreated","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Tumebacillus",723,25,0.0930729401582195,0.206828755907154
+"64","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Piscinibacter",656,16,0.0834674829070554,0.185483295349012
+"65","Untreated","Bacteria","Bdellovibrionota","Bdellovibrionia","Bdellovibrionales","Bdellovibrionaceae","Bdellovibrio",630,36,0.0819648507241154,0.182144112720256
+"66","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Diplorickettsiales","Diplorickettsiaceae","Aquicella",588,25,0.0756827371776411,0.168183860394758
+"67","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Ferruginibacter",527,19,0.075163814855574,0.167030699679053
+"68","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Lacunisphaera",562,25,0.074428718059575,0.1653971512435
+"69","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Crossiella",656,16,0.074138493656653,0.164752208125896
+"70","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Paenisporosarcina",529,13,0.0733246470634948,0.1629436601411
+"71","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Rhodanobacter",510,22,0.0728799972592398,0.161955549464977
+"72","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Caenimonas",545,12,0.0701846135483417,0.155965807885204
+"73","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Legionellales","Legionellaceae","Legionella",563,23,0.0700504528531444,0.155667673006988
+"74","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Collimonas",602,13,0.0696500945006402,0.1547779877792
+"75","Untreated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Microscillaceae","OLB12",534,14,0.0690519893118828,0.153448865137517
+"76","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Allorhizobium-Neorhizobium-Pararhizobium-Rhizobium",546,23,0.0675986197000332,0.150219154888963
+"77","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","JG30a-KF-32",515,22,0.0673529995495262,0.14967333233228
+"78","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Bacillaceae","Bacillus",479,18,0.0622456325520111,0.138323627893358
+"79","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Devosiaceae","Devosia",503,20,0.0610984497168491,0.135774332704109
+"80","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Actimicrobium",580,10,0.0604595992347003,0.134354664966001
+"81","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","mle1-7",514,14,0.0600087282427223,0.133352729428272
+"82","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Actinospicaceae","Actinospica",536,19,0.0582002087568088,0.129333797237353
+"83","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","Ktedonobacter",443,28,0.0574462883492944,0.127658418553987
+"84","Untreated","Bacteria","Acidobacteriota","Blastocatellia","Blastocatellales","Blastocatellaceae","JGI 0001001-H03",469,18,0.0567238836087541,0.12605307468612
+"85","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Labraceae","Labrys",397,20,0.0554066166858574,0.123125814857461
+"86","Untreated","Bacteria","Planctomycetota","Planctomycetes","Gemmatales","Gemmataceae","Gemmata",433,24,0.0546415112582236,0.12142558057383
+"87","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Rhizobacter",401,12,0.0523808941450579,0.116401986989018
+"88","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Steroidobacterales","Steroidobacteraceae","Steroidobacter",409,13,0.0518949044034759,0.115322009785502
+"89","Untreated","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Minicystis",442,12,0.050485493238767,0.112189984975038
+"90","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Dyella",294,7,0.0493216894514524,0.109603754336561
+"91","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Streptomycetales","Streptomycetaceae","Streptacidiphilus",435,10,0.0485884061299337,0.107974235844297
+"92","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Enterobacterales","Enterobacteriaceae","Buttiauxella",418,1,0.0476298997265269,0.105844221614504
+"93","Untreated","Bacteria","Planctomycetota","Planctomycetes","Pirellulales","Pirellulaceae","Pirellula",372,22,0.0473488036404613,0.10521956364547
+"94","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Coxiellales","Coxiellaceae","Coxiella",376,26,0.0469740557389539,0.104386790531009
+"95","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Azospirillales","Inquilinaceae","Inquilinus",395,20,0.0465822743248403,0.103516165166312
+"96","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Nocardioides",398,16,0.0459680819158124,0.10215129314625
+"97","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Dongiales","Dongiaceae","Dongia",360,22,0.04487332144568,0.0997184921015112
+"98","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Duganella",345,8,0.0435743735644334,0.0968319412542966
+"99","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Streptomycetales","Streptomycetaceae","Streptomyces",381,11,0.0417930094565976,0.0928733543479947
+"100","Untreated","Bacteria","Bacteroidota","Bacteroidia","Flavobacteriales","Flavobacteriaceae","Flavobacterium",327,10,0.0415074885727192,0.0922388634949315
+"101","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","Thermosporothrix",280,12,0.0411318758402467,0.0914041685338815
+"102","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Acidicaldus",306,6,0.0402927039882241,0.0895393421960536
+"103","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Luedemannella",341,9,0.0401553356092427,0.0892340791316504
+"104","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Hyphomonadaceae","SWB02",340,15,0.0396642209444069,0.088142713209793
+"105","Untreated","Bacteria","Planctomycetota","Planctomycetes","Isosphaerales","Isosphaeraceae","Singulisphaera",293,18,0.0392250171926796,0.0871667048726213
+"106","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Gammaproteobacteria Incertae Sedis","Unknown Family","Candidatus Ovatusbacter",280,22,0.034023242657556,0.07560720590568
+"107","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Mesorhizobium",254,12,0.0315670750674101,0.0701490557053558
+"108","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Alkanindiges",236,11,0.0312157688526069,0.0693683752280154
+"109","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Amycolatopsis",297,9,0.0303143018731185,0.0673651152735966
+"110","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Ellin6055",198,5,0.0275110617879083,0.0611356928620186
+"111","Untreated","Bacteria","Planctomycetota","Planctomycetes","Isosphaerales","Isosphaeraceae","Tundrisphaera",234,4,0.0270493617992094,0.0601096928871321
+"112","Untreated","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Aetherobacter",230,5,0.0267979191368769,0.059550931415282
+"113","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Domibacillus",175,10,0.0266599878151588,0.0592444173670196
+"114","Untreated","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Solirubrobacter",235,6,0.0262486220734219,0.0583302712742709
+"115","Untreated","Bacteria","Acidobacteriota","Blastocatellia","Blastocatellales","Blastocatellaceae","Stenotrophobacter",202,7,0.0252373982247218,0.0560831071660485
+"116","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiales Incertae Sedis","Bauldia",194,12,0.0251682719094958,0.055929493132213
+"117","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Rugosimonospora",172,9,0.0242687498376016,0.0539305551946701
+"118","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Rudaea",176,7,0.0242034455748741,0.0537854346108313
+"119","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Dokdonella",192,9,0.0239458071410617,0.0532129047579149
+"120","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Cellvibrionaceae","Cellvibrio",168,7,0.0223334699593081,0.0496299332429069
+"121","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Ramlibacter",175,3,0.0220752069580187,0.0490560154622639
+"122","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Frankiaceae","Jatrophihabitans",174,7,0.0217553953331082,0.0483453229624627
+"123","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Sporolactobacillaceae","Pullulanibacillus",194,9,0.0209402052338631,0.0465337894085846
+"124","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Novosphingobium",173,12,0.020551140606256,0.0456692013472355
+"125","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Psychrobacillus",137,6,0.0192867836223893,0.0428595191608651
+"126","Untreated","Bacteria","Planctomycetota","Planctomycetes","Isosphaerales","Isosphaeraceae","Candidatus Nostocoida",225,6,0.0188392854629954,0.0418650788066564
+"127","Untreated","Bacteria","Fibrobacterota","Fibrobacteria","Fibrobacterales","Fibrobacteraceae","possible genus 04",132,13,0.0177888934751342,0.0395308743891871
+"128","Untreated","Bacteria","Planctomycetota","Planctomycetes","Gemmatales","Gemmataceae","Fimbriiglobus",135,17,0.017080601940563,0.0379568932012511
+"129","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Nakamurellaceae","Nakamurella",132,5,0.0163813699584827,0.0364030443521837
+"130","Untreated","Bacteria","Planctomycetota","Planctomycetes","Gemmatales","Gemmataceae","Zavarzinella",128,10,0.0162602166999192,0.0361338148887093
+"131","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Aminobacter",138,7,0.0156891735358784,0.0348648300797298
+"132","Untreated","Bacteria","Armatimonadota","Chthonomonadetes","Chthonomonadales","Chthonomonadaceae","Chthonomonas",115,10,0.0149669059063407,0.0332597909029793
+"133","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Viridibacillus",107,3,0.0134413535165372,0.0298696744811937
+"134","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Marmoricola",99,6,0.0131980938788887,0.0293290975086416
+"135","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Terracidiphilus",100,3,0.0131783145957545,0.0292851435461211
+"136","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Aquabacterium",76,3,0.0131446366854267,0.0292103037453927
+"137","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","Ellin517",99,8,0.0130518409902543,0.029004091089454
+"138","Untreated","Bacteria","Myxococcota","Myxococcia","Myxococcales","Myxococcaceae","P3OB-42",110,11,0.0123841951330443,0.0275204336289874
+"139","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Frankiaceae","Frankia",87,4,0.012134761236564,0.0269661360812534
+"140","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiales Incertae Sedis","Nordella",95,6,0.0121238377340787,0.0269418616312859
+"141","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Parafilimonas",95,8,0.0117395840475487,0.0260879645501083
+"142","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Acidicapsa",72,5,0.0112605760721953,0.0250235023826563
+"143","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Thermomonosporaceae","Actinoallomurus",101,2,0.0112367349796461,0.0249705221769914
+"144","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Nocardiaceae","Rhodococcus",96,3,0.011231425563014,0.0249587234733644
+"145","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","ADurb.Bin118",85,6,0.0111954648844535,0.0248788108543412
+"146","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Pseudoflavitalea",87,6,0.0110792987598664,0.0246206639108143
+"147","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Salinisphaerales","Solimonadaceae","Nevskia",72,7,0.0106655991865016,0.0237013315255592
+"148","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Lysinibacillus",79,2,0.010547379335787,0.0234386207461934
+"149","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Streptomycetales","Streptomycetaceae","Kitasatospora",98,2,0.0104294371780371,0.0231765270623047
+"150","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","Nitrosospira",93,5,0.0102809408479666,0.0228465352177035
+"151","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Pseudaminobacter",87,2,0.00996436456791416,0.0221430323731426
+"152","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Catenulisporaceae","Catenulispora",91,7,0.00981732406605641,0.0218162757023476
+"153","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","1921-2",78,5,0.0097428653205917,0.0216508118235371
+"154","Untreated","Bacteria","Acidobacteriota","Vicinamibacteria","Vicinamibacterales","Vicinamibacteraceae","Vicinamibacter",66,2,0.00916060619387777,0.0203569026530617
+"155","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Variovorax",99,2,0.00880402121434978,0.019564491587444
+"156","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Nocardiaceae","Nocardia",84,6,0.00878917364485663,0.0195314969885703
+"157","Untreated","Bacteria","Verrucomicrobiota","Chlamydiae","Chlamydiales","Parachlamydiaceae","Candidatus Protochlamydia",88,4,0.0087405106903924,0.0194233570897609
+"158","Untreated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Cytophagaceae","Cytophaga",64,7,0.00846640231102377,0.0188142273578306
+"159","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Asticcacaulis",60,7,0.00829428478144473,0.0184317439587661
+"160","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Rhodocyclaceae","Uliginosibacterium",54,5,0.00816548997654804,0.0181455332812179
+"161","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Hyphomonadaceae","Hirschia",63,7,0.00804771770527447,0.0178838171228322
+"162","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","[Aquaspirillum] arcticum group",59,1,0.00800868738971087,0.0177970830882464
+"163","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Galbitalea",51,3,0.0078109474311659,0.0173576609581465
+"164","Untreated","Bacteria","Firmicutes","Clostridia","Peptostreptococcales-Tissierellales","Peptostreptococcaceae","Romboutsia",55,3,0.0076605735314081,0.0170234967364625
+"165","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Plot4-2H12",49,5,0.00734022464483375,0.0163116103218528
+"166","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Solibacillus",67,2,0.00723637440947976,0.0160808320210661
+"167","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Dactylosporangium",55,3,0.00722669300028889,0.0160593177784198
+"168","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Kineosporiales","Kineosporiaceae","Kineosporia",68,2,0.00720395932189288,0.0160087984930953
+"169","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","G12-WMSP1",51,8,0.00671193401844527,0.0149154089298784
+"170","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Diplorickettsiales","Diplorickettsiaceae","Diplorickettsia",57,1,0.00639371845204711,0.0142082632267714
+"171","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Devosiaceae","Arsenicitalea",63,3,0.00634152180043126,0.014092270667625
+"172","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Verrucomicrobiales","Verrucomicrobiaceae","Roseimicrobium",47,8,0.00630359061288057,0.0140079791397346
+"173","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Pseudorhodoplanes",37,1,0.00619973190348525,0.013777182007745
+"174","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Noviherbaspirillum",50,2,0.00607676990077522,0.0135039331128338
+"175","Untreated","Bacteria","Firmicutes","Bacilli","Thermoactinomycetales","Thermoactinomycetaceae","Thermoactinomyces",51,6,0.00595202778894584,0.0132267284198797
+"176","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Frateuria",45,3,0.00591488491666636,0.013144188703703
+"177","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhodobacterales","Rhodobacteraceae","Rhodobacter",38,3,0.00589654660582652,0.0131034369018367
+"178","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Cavicella",36,4,0.00574311335044254,0.0127624741120945
+"179","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Elsterales","Elsteraceae","Aliidongia",40,4,0.00561818988187278,0.0124848664041617
+"180","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Rhodoferax",49,1,0.00558340929808569,0.0124075762179682
+"181","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Chitinimonadaceae","Chitinimonas",38,1,0.00515813764083073,0.011462528090735
+"182","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Gammaproteobacteria Incertae Sedis","Unknown Family","Candidatus Berkiella",32,5,0.00507513907791125,0.0112780868398028
+"183","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Pseudonocardia",51,2,0.00491758063918477,0.0109279569759661
+"184","Untreated","Bacteria","Myxococcota","Myxococcia","Myxococcales","Myxococcaceae","KD3-10",44,6,0.00488289441992628,0.0108508764887251
+"185","Untreated","Bacteria","Myxococcota","Polyangia","Polyangiales","Sandaracinaceae","Sandaracinus",42,7,0.00469878292441525,0.0104417398320339
+"186","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Sphaerotilus",40,2,0.00454334754280169,0.0100963278728926
+"187","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","SH3-11",34,4,0.00442504179257303,0.00983342620571785
+"188","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Paracaedibacterales","Paracaedibacteraceae","Candidatus Paracaedibacter",41,6,0.004346821627172,0.00965960361593779
+"189","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Burkholderiaceae","Robbsia",64,1,0.00412238325281804,0.00916085167292897
+"190","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Luteibacter",34,4,0.00399727807486541,0.00888284016636758
+"191","Untreated","Bacteria","Desulfobacterota","Desulfuromonadia","Geobacterales","Geobacteraceae","Geobacter",25,2,0.00397803552346386,0.00884007894103081
+"192","Untreated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Cytophagaceae","Sporocytophaga",27,5,0.00396056857266854,0.00880126349481898
+"193","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Bacillaceae","Fictibacillus",29,1,0.00393647346273924,0.00874771880608721
+"194","Untreated","Bacteria","Verrucomicrobiota","Chlamydiae","Chlamydiales","Parachlamydiaceae","Neochlamydia",24,2,0.00389336614846086,0.00865192477435747
+"195","Untreated","Bacteria","Planctomycetota","Phycisphaerae","Phycisphaerales","Phycisphaeraceae","SM1A02",26,3,0.00380995070420575,0.00846655712045722
+"196","Untreated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Pedobacter",28,1,0.00380073299850685,0.00844607333001523
+"197","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Kribbella",40,3,0.0037805233243263,0.00840116294294733
+"198","Untreated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Solitalea",31,3,0.00376536855259366,0.00836748567243035
+"199","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Sediminibacterium",30,2,0.00366936672887431,0.00815414828638735
+"200","Untreated","Bacteria","Firmicutes","Bacilli","Bacillales","Bacillaceae","Falsibacillus",40,2,0.00355936830387092,0.00790970734193538
+"201","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Oxalicibacterium",25,1,0.00354609929078014,0.00788022064617809
+"202","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Streptosporangiaceae","Streptosporangium",20,1,0.00349895031490553,0.00777544514423451
+"203","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Pseudohongiellaceae","BIyi10",29,2,0.00347371982142487,0.00771937738094417
+"204","Untreated","Bacteria","Acidobacteriota","Blastocatellia","Blastocatellales","Blastocatellaceae","Blastocatella",24,1,0.00340425531914894,0.00756501182033097
+"205","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Acidiferrobacterales","Acidiferrobacteraceae","Sulfurifustis",27,3,0.00338112979279351,0.00751362176176337
+"206","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Stenotrophomonas",20,1,0.0033698399326032,0.00748853318356267
+"207","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Rhodocyclaceae","Georgfuchsia",23,1,0.00326241134751773,0.00724980299448385
+"208","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Diplorickettsiales","Diplorickettsiaceae","Rickettsiella",23,3,0.00324233203431117,0.00720518229846927
+"209","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Parasegetibacter",24,1,0.00324061571698623,0.0072013682599694
+"210","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Variibacter",27,2,0.00306335831919899,0.00680746293155332
+"211","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","DEV008",23,4,0.00300811479403588,0.00668469954230195
+"212","Untreated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Cohnella",34,2,0.00273530269832621,0.0060784504407249
+"213","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Phyllobacterium",19,1,0.00269503546099291,0.00598896769109535
+"214","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Terrimicrobiaceae","Terrimicrobium",20,2,0.00262859839750421,0.00584132977223157
+"215","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Nitrosococcales","Nitrosococcaceae","wb1-P19",25,2,0.00254330210435439,0.00565178245412087
+"216","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Verrucomicrobiales","Verrucomicrobiaceae","Prosthecobacter",23,3,0.00245827979356104,0.0054628439856912
+"217","Untreated","Bacteria","Planctomycetota","Planctomycetes","Planctomycetales","Schlesneriaceae","Schlesneria",16,2,0.00245603972109197,0.00545786604687105
+"218","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Steroidobacterales","Woeseiaceae","JTB255 marine benthic group",17,1,0.0024113475177305,0.0053585500394011
+"219","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Janthinobacterium",21,1,0.00239288969917958,0.00531753266484351
+"220","Untreated","Bacteria","Verrucomicrobiota","Chlamydiae","Chlamydiales","Simkaniaceae","Candidatus Rhabdochlamydia",15,2,0.00229811922266799,0.00510693160592888
+"221","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Frondihabitans",26,1,0.00228390723822909,0.00507534941828688
+"222","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Undibacterium",23,2,0.00227011657932711,0.00504470350961579
+"223","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Halieaceae","OM60(NOR5) clade",16,3,0.00221102479799366,0.00491338843998592
+"224","Untreated","Bacteria","Firmicutes","Clostridia","Peptostreptococcales-Tissierellales","Peptostreptococcaceae","Clostridioides",17,1,0.00220951390694047,0.00491003090431216
+"225","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Geodermatophilaceae","Blastococcus",14,2,0.00217481585984365,0.00483292413298589
+"226","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Dinghuibacter",15,1,0.00212765957446809,0.00472813238770686
+"227","Untreated","Bacteria","Firmicutes","Desulfitobacteriia","Desulfitobacteriales","Desulfitobacteriaceae","Desulfitobacterium",15,1,0.00212434499362697,0.00472076665250437
+"228","Untreated","Bacteria","Firmicutes","Clostridia","Clostridiales","Clostridiaceae","Clostridium sensu stricto 1",16,2,0.00210359658540925,0.00467465907868722
+"229","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Arenimonas",12,1,0.00202190395956192,0.0044931199101376
+"230","Untreated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","1921-3",15,4,0.00200596927696365,0.00445770950436367
+"231","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Actinophytocola",14,1,0.00198581560283688,0.00441292356185973
+"232","Untreated","Bacteria","Myxococcota","Myxococcia","Myxococcales","Vulgatibacteraceae","Vulgatibacter",23,2,0.00195828014972679,0.00435173366605954
+"233","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","DEV114",15,1,0.00194957109435924,0.0043323802096872
+"234","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Actinomycetospora",16,1,0.00193587416817907,0.00430194259595349
+"235","Untreated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Microscillaceae","Chryseolinea",11,1,0.00192442267319804,0.00427649482932898
+"236","Untreated","Bacteria","Planctomycetota","Planctomycetes","Planctomycetales","Rubinisphaeraceae","SH-PL14",14,3,0.00191113621285529,0.00424696936190065
+"237","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Sutterellaceae","AAP99",7,1,0.00189907759088443,0.00422017242418762
+"238","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Salinisphaerales","Solimonadaceae","Hydrocarboniphaga",9,1,0.00186258278145695,0.00413907284768212
+"239","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Rhodoblastus",11,1,0.00185341196293176,0.00411869325095947
+"240","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Sphingobium",16,1,0.00182315405651778,0.00405145345892839
+"241","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Acidisoma",14,1,0.00181959968806862,0.00404355486237472
+"242","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Sporichthyaceae","Sporichthya",23,1,0.00181502525252525,0.00403338945005612
+"243","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Kineosporiales","Kineosporiaceae","Angustibacter",20,1,0.00175685172171469,0.00390411493714375
+"244","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","alphaI cluster",19,1,0.00171032496174273,0.00380072213720607
+"245","Untreated","Bacteria","Firmicutes","Clostridia","Clostridiales","Clostridiaceae","Clostridium sensu stricto 13",15,1,0.00170920692798541,0.00379823761774537
+"246","Untreated","Bacteria","Bdellovibrionota","Bdellovibrionia","Bacteriovoracales","Bacteriovoracaceae","Bacteriovorax",14,1,0.00159525979945305,0.00354502177656234
+"247","Untreated","Bacteria","Firmicutes","Bacilli","Lactobacillales","Streptococcaceae","Streptococcus",14,1,0.00159525979945305,0.00354502177656234
+"248","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Verrucomicrobiales","Rubritaleaceae","Luteolibacter",12,2,0.00156264344408024,0.00347254098684499
+"249","Untreated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Terriglobus",24,1,0.00154589371980676,0.00343531937734836
+"250","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Lysobacter",9,1,0.00152490681125042,0.00338868180277872
+"251","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","1174-901-12",9,1,0.00150804289544236,0.00335120643431635
+"252","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Micrococcaceae","Pseudarthrobacter",11,1,0.00148528220361869,0.00330062711915264
+"253","Untreated","Bacteria","Spirochaetota","Brevinematia","Brevinematales","Brevinemataceae","Brevinema",7,1,0.00144359661785935,0.0032079924841319
+"254","Untreated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Chthoniobacteraceae","LD29",17,2,0.0014341958633734,0.00318710191860755
+"255","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Flavisolibacter",9,1,0.00140361821584529,0.00311915159076731
+"256","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Rugamonas",5,1,0.00135648399348888,0.00301440887441973
+"257","Untreated","Bacteria","Firmicutes","Clostridia","Lachnospirales","Lachnospiraceae","Cellulosilyticum",8,1,0.00135547272111149,0.00301216160246997
+"258","Untreated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Spirosomaceae","Dyadobacter",9,1,0.00127659574468085,0.00283687943262411
+"259","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Kaistiaceae","Kaistia",14,1,0.00126023944549464,0.00280053210109921
+"260","Untreated","Bacteria","Acidobacteriota","Blastocatellia","Blastocatellales","Blastocatellaceae","Aridibacter",11,1,0.00121802679658952,0.00270672621464339
+"261","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Sanguibacteraceae","Sanguibacter-Flavimobilis",10,1,0.00113947128532361,0.00253215841183024
+"262","Untreated","Bacteria","Firmicutes","Bacilli","Lactobacillales","Lactobacillaceae","Ligilactobacillus",10,1,0.00113947128532361,0.00253215841183024
+"263","Untreated","Bacteria","Acidobacteriota","Holophagae","Holophagales","Holophagaceae","Holophaga",12,2,0.00109169979094668,0.00242599953543706
+"264","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Actinoplanes",9,1,0.00108892921960073,0.00241984271022384
+"265","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Luteimonas",8,1,0.00108020523899541,0.00240045608665647
+"266","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Burkholderiaceae","Limnobacter",6,1,0.00104968509447166,0.00233263354327035
+"267","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Enterobacterales","Yersiniaceae","Yersinia",12,3,0.00103144435732574,0.00229209857183498
+"268","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Amnibacterium",6,1,0.000935745477230193,0.00207943439384487
+"269","Untreated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Nubsella",7,1,0.000909799844034312,0.00202177743118736
+"270","Untreated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Microscillaceae","Ohtaekwangia",8,1,0.000885837670246927,0.00196852815610428
+"271","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Aeromicrobium",6,1,0.000849737997450786,0.00188830666100175
+"272","Untreated","Bacteria","Spirochaetota","Leptospirae","Leptospirales","Leptospiraceae","Turneriella",9,1,0.000832870627429206,0.00185082361650935
+"273","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Tahibacter",6,1,0.000810153929246557,0.00180034206499235
+"274","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Intrasporangiaceae","Pedococcus-Phycicoccus",7,1,0.000797629899726527,0.00177251088828117
+"275","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Aurantisolimonas",5,1,0.000709219858156028,0.00157604412923562
+"276","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","UTBCD1",5,1,0.000638162093171666,0.00141813798482592
+"277","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Cellulomonadaceae","Cellulomonas",7,1,0.000630119722747322,0.0014002660505496
+"278","Untreated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Taibaiella",9,1,0.000579710144927536,0.00128824476650564
+"279","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Caulobacter",5,1,0.000556049822064057,0.00123566627125346
+"280","Untreated","Bacteria","Firmicutes","Desulfitobacteriia","Desulfitobacteriales","Desulfitobacteriaceae","Desulfosporosinus",7,1,0.000525407190572694,0.00116757153460599
+"281","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Hyphomonadaceae","UKL13-1",4,1,0.000519885625162464,0.00115530138924992
+"282","Untreated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Spongiibacteraceae","BD1-7 clade",3,1,0.000404258186228271,0.000898351524951714
+"283","Untreated","Bacteria","Sumerlaeota","Sumerlaeia","Sumerlaeales","Sumerlaeaceae","Sumerlaea",4,1,0.000392772977219167,0.000872828838264816
+"284","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Streptosporangiaceae","Sphaerisporangium",3,1,0.000389914218871848,0.00086647604193744
+"285","Untreated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Intrasporangiaceae","Oryzihumus",4,1,0.000372058413170868,0.00082679647371304
+"286","Untreated","Bacteria","Verrucomicrobiota","Chlamydiae","Chlamydiales","Simkaniaceae","Ga0074140",3,1,0.000263527758257203,0.000585617240571562
+"287","Untreated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylobacterium-Methylorubrum",2,1,0.000259942812581232,0.00057765069462496
+"288","Untreated","Bacteria","Acidobacteriota","Holophagae","Holophagales","Holophagaceae","Geothrix",2,1,0.000157828282828283,0.000350729517396184
+"289","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Chthoniobacteraceae","Candidatus Udaeobacter",56837,39,5.58041980348809,14.3087687268925
+"290","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Pseudolabrys",15242,37,1.6507110303901,4.23259238561563
+"291","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Bradyrhizobium",14708,39,1.57395231944534,4.03577517806497
+"292","Treated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Acidothermaceae","Acidothermus",14989,38,1.47458120485844,3.78097744835497
+"293","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Xiphinematobacteraceae","Candidatus Xiphinematobacter",12756,38,1.18522700922977,3.03904361340966
+"294","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylocapsa",11887,38,1.16415536305002,2.98501375141031
+"295","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Gammaproteobacteria Incertae Sedis","Unknown Family","Acidibacter",11060,39,1.14876656794084,2.9455553024124
+"296","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Bryobacterales","Bryobacteraceae","Bryobacter",10264,39,1.00772332020651,2.58390594924745
+"297","Treated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Mucilaginibacter",11705,35,0.943744972078729,2.41985890276597
+"298","Treated","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Conexibacter",9862,36,0.937056684817324,2.40270944824955
+"299","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Roseiarcus",8645,37,0.923695380733017,2.36844969418722
+"300","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Puia",9651,39,0.870229112733147,2.23135669931576
+"301","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Granulicella",9662,37,0.865953955380341,2.22039475738549
+"302","Treated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Mycobacteriaceae","Mycobacterium",8828,39,0.78262232327569,2.0067239058351
+"303","Treated","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Alicyclobacillus",8632,32,0.703365789195658,1.80350202357861
+"304","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Burkholderiaceae","Burkholderia-Caballeronia-Paraburkholderia",7418,37,0.689376777104318,1.76763276180594
+"305","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Solibacterales","Solibacteraceae","Candidatus Solibacter",7018,39,0.685680364512101,1.75815478080026
+"306","Treated","Bacteria","Myxococcota","Polyangia","Haliangiales","Haliangiaceae","Haliangium",6620,39,0.646193841133115,1.6569072849567
+"307","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Acidipila-Silvibacterium",6768,34,0.592888782842836,1.52022764831496
+"308","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","ADurb.Bin063-1",6428,35,0.590250101511084,1.51346179874637
+"309","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Koribacteraceae","Candidatus Koribacter",5463,35,0.518813575272826,1.33029121864827
+"310","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Pseudomonadaceae","Pseudomonas",7087,29,0.451854717667773,1.15860184017378
+"311","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Reyranellales","Reyranellaceae","Reyranella",4320,37,0.438385743981832,1.12406601020982
+"312","Treated","Bacteria","Planctomycetota","Planctomycetes","Isosphaerales","Isosphaeraceae","Aquisphaera",4291,34,0.428112258715421,1.09772374029595
+"313","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Chthoniobacteraceae","Chthoniobacter",4750,37,0.417333858181421,1.0700868158498
+"314","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Massilia",4771,34,0.400907238330323,1.02796727777006
+"315","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Rhodoplanes",3871,35,0.36349193103509,0.932030592397666
+"316","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","MND1",3362,31,0.349167552397873,0.895301416404802
+"317","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Occallatibacter",3077,33,0.347871067235677,0.891977095476096
+"318","Treated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Paenibacillus",3093,35,0.309013875968706,0.792343271714632
+"319","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","Pedosphaera",3277,34,0.292362739113286,0.749648049008425
+"320","Treated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","HSB OF53-F07",3167,31,0.291127690610284,0.746481257975086
+"321","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Sphingomonas",3037,35,0.277413411874149,0.711316440702947
+"322","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Edaphobaculum",2725,34,0.229531293626375,0.588541778529166
+"323","Treated","Bacteria","Myxococcota","Myxococcia","Myxococcales","Anaeromyxobacteraceae","Anaeromyxobacter",2495,35,0.226072603243132,0.579673341649057
+"324","Treated","Bacteria","Gemmatimonadota","Gemmatimonadetes","Gemmatimonadales","Gemmatimonadaceae","Gemmatimonas",2406,36,0.216348120290113,0.554738769974649
+"325","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","Ellin6067",2219,31,0.21286055742356,0.54579630108605
+"326","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","IS-44",2228,24,0.210825971363938,0.540579413753688
+"327","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Hyphomicrobiaceae","Hyphomicrobium",2077,22,0.209164036768292,0.536318042995621
+"328","Treated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","FCPS473",2370,28,0.203803592982344,0.522573315339343
+"329","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Hyphomicrobiaceae","Pedomicrobium",2023,32,0.202841480571656,0.520106360440144
+"330","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhodomicrobiaceae","Rhodomicrobium",2278,34,0.200027212672333,0.512890288903418
+"331","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Ramlibacter",2312,17,0.199786252323444,0.512272441854985
+"332","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","GOUTA6",1882,20,0.193914520900134,0.497216720256754
+"333","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Phenylobacterium",2298,29,0.192216927747099,0.492863917300254
+"334","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Opitutus",2130,31,0.18810369229251,0.482317159724385
+"335","Treated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Amycolatopsis",2135,23,0.186261966111877,0.477594784902248
+"336","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Rhodovastum",2040,32,0.182882609027913,0.468929766738238
+"337","Treated","Bacteria","Acidobacteriota","Thermoanaerobaculia","Thermoanaerobaculales","Thermoanaerobaculaceae","Subgroup 10",1777,32,0.180469259600618,0.462741691283635
+"338","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Ferruginibacter",2055,23,0.162283643656416,0.416111906811324
+"339","Treated","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Pajaroellobacter",1610,33,0.157402502634328,0.403596160600842
+"340","Treated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Crossiella",1804,18,0.157263674775971,0.403240191733259
+"341","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Caenimonas",1852,17,0.14901573298254,0.382091623032153
+"342","Treated","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Tumebacillus",1625,30,0.14602980212836,0.374435390072717
+"343","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Lacunisphaera",1442,31,0.135990894141931,0.348694600363925
+"344","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","Ellin516",1403,24,0.134972183198202,0.346082521021031
+"345","Treated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","1959-1",1324,32,0.131915876390982,0.338245836899954
+"346","Treated","Bacteria","Nitrospirota","Nitrospiria","Nitrospirales","Nitrospiraceae","Nitrospira",1371,22,0.127850414349048,0.327821575253969
+"347","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Allorhizobium-Neorhizobium-Pararhizobium-Rhizobium",1284,23,0.120069090579699,0.30786946302487
+"348","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Edaphobacter",1132,22,0.119986519452969,0.307657742187101
+"349","Treated","Bacteria","Acidobacteriota","Blastocatellia","Pyrinomonadales","Pyrinomonadaceae","RB41",1261,23,0.116775848930222,0.299425253667237
+"350","Treated","Bacteria","Myxococcota","Polyangia","Polyangiales","Phaselicystidaceae","Phaselicystis",1017,26,0.102819974975001,0.263640961474362
+"351","Treated","Bacteria","Actinobacteriota","Thermoleophilia","Gaiellales","Gaiellaceae","Gaiella",834,16,0.0998332124750203,0.255982596089796
+"352","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Paenisporosarcina",937,13,0.0973994695392387,0.249742229587792
+"353","Treated","Bacteria","Bdellovibrionota","Bdellovibrionia","Bdellovibrionales","Bdellovibrionaceae","Bdellovibrio",972,34,0.0970530941734193,0.248854087624152
+"354","Treated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","JG30a-KF-32",1079,26,0.0957065657876431,0.245401450737546
+"355","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Alkanindiges",1336,12,0.094306702851351,0.241812058593208
+"356","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Devosiaceae","Devosia",967,18,0.0932076065136496,0.238993862855512
+"357","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptomycetales","Streptomycetaceae","Streptomyces",720,14,0.0911519504009224,0.233722949745955
+"358","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Terrimonas",1038,16,0.0903333877457864,0.231624071143042
+"359","Treated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","Ktedonobacter",954,30,0.089158466059395,0.228611451434346
+"360","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Piscinibacter",941,18,0.0868063388440363,0.22258035601035
+"361","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylovirgula",822,16,0.0800052337685197,0.205141625047486
+"362","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Duganella",839,12,0.0793018085526813,0.203337970647901
+"363","Treated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Frankiaceae","Jatrophihabitans",879,18,0.078258068006624,0.200661712837498
+"364","Treated","Bacteria","Bacteroidota","Bacteroidia","Flavobacteriales","Flavobacteriaceae","Flavobacterium",979,17,0.0767725944741024,0.196852806343852
+"365","Treated","Bacteria","Planctomycetota","Planctomycetes","Pirellulales","Pirellulaceae","Pir4 lineage",669,26,0.0754398023742194,0.193435390703127
+"366","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Bacillaceae","Bacillus",665,14,0.0725416317696659,0.186004184024784
+"367","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Ellin6055",905,15,0.0690737819619195,0.177112261440819
+"368","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Noviherbaspirillum",807,7,0.0661735398803856,0.16967574328304
+"369","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptomycetales","Streptomycetaceae","Streptacidiphilus",802,15,0.0654524839597225,0.167826881948006
+"370","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylocella",690,13,0.0619715010553993,0.158901284757434
+"371","Treated","Bacteria","Acidobacteriota","Blastocatellia","Blastocatellales","Blastocatellaceae","JGI 0001001-H03",521,19,0.0593464900291431,0.152170487254213
+"372","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Salinisphaerales","Solimonadaceae","Alkanibacter",778,16,0.0563227205136837,0.144417232086368
+"373","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","mle1-7",633,13,0.0552827668172681,0.141750684146841
+"374","Treated","Bacteria","Planctomycetota","Planctomycetes","Isosphaerales","Isosphaeraceae","Singulisphaera",635,19,0.0541886276836139,0.138945199188754
+"375","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Rhodanobacter",514,21,0.0536064883878715,0.137452534327876
+"376","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Diplorickettsiales","Diplorickettsiaceae","Aquicella",536,22,0.0513218244126015,0.131594421570773
+"377","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Cellvibrionaceae","Cellvibrio",640,17,0.0504066787969532,0.129247894351162
+"378","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Legionellales","Legionellaceae","Legionella",525,22,0.050161462461862,0.128619134517595
+"379","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Variovorax",549,9,0.0491924543417794,0.126134498312255
+"380","Treated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Pedobacter",724,9,0.0488860363910255,0.12534881125904
+"381","Treated","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Minicystis",449,11,0.0483477968405764,0.123968709847632
+"382","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Azospirillales","Inquilinaceae","Inquilinus",497,21,0.0480296921589009,0.123153056817695
+"383","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Rhizobacter",520,12,0.0466662931482296,0.119657161918537
+"384","Treated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Geodermatophilaceae","Blastococcus",547,14,0.0450160861583861,0.11542586194458
+"385","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Luedemannella",454,10,0.0446008292129092,0.114361100545921
+"386","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Cytophagaceae","Cytophaga",540,22,0.0439360027582336,0.112656417328804
+"387","Treated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Nakamurellaceae","Nakamurella",458,11,0.0431586698038001,0.11066325590718
+"388","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Sediminibacterium",535,12,0.0428083207824526,0.109764925083212
+"389","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Rugosimonospora",520,11,0.0425824943516536,0.109185882952958
+"390","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","Ellin517",530,15,0.0425823600268625,0.109185538530417
+"391","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Acidicaldus",406,8,0.0421543432564837,0.108088059632009
+"392","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Dongiales","Dongiaceae","Dongia",431,16,0.041575473264907,0.106603777602326
+"393","Treated","Bacteria","Planctomycetota","Planctomycetes","Pirellulales","Pirellulaceae","Pirellula",394,21,0.041567098857201,0.106582304762054
+"394","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Flavisolibacter",517,10,0.0411678387186503,0.105558560817052
+"395","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Hyphomonadaceae","SWB02",459,18,0.0396649224762507,0.101704929426284
+"396","Treated","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Actinospicaceae","Actinospica",431,15,0.0390920917334339,0.100236132649831
+"397","Treated","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Aetherobacter",403,10,0.0386295036676127,0.0990500094041352
+"398","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylorosula",436,7,0.036164533492627,0.0927295730580178
+"399","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Microscillaceae","OLB12",418,10,0.0352597106681067,0.090409514533607
+"400","Treated","Bacteria","Planctomycetota","Planctomycetes","Gemmatales","Gemmataceae","Gemmata",333,24,0.0351902967181418,0.0902315300465173
+"401","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Domibacillus",409,17,0.0338009579444687,0.086669122934535
+"402","Treated","Bacteria","Fibrobacterota","Fibrobacteria","Fibrobacterales","Fibrobacteraceae","possible genus 04",364,13,0.0332926469902908,0.0853657615135662
+"403","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Sporolactobacillaceae","Pullulanibacillus",329,10,0.0332140699364387,0.0851642818883044
+"404","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Mesorhizobium",343,12,0.0328459815030517,0.0842204653924402
+"405","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Rugamonas",290,6,0.0319171867567753,0.081838940401988
+"406","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Collimonas",365,7,0.0312608092239166,0.0801559210869657
+"407","Treated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Geodermatophilaceae","Modestobacter",414,6,0.0309862593177223,0.0794519469685188
+"408","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Actimicrobium",366,8,0.030308186339101,0.0777132983053872
+"409","Treated","Bacteria","Armatimonadota","Chthonomonadetes","Chthonomonadales","Chthonomonadaceae","Chthonomonas",378,20,0.0303072652709691,0.0777109365922285
+"410","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Labraceae","Labrys",286,18,0.0299516127664943,0.076799007093575
+"411","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Acidocella",234,10,0.0298571115053325,0.0765566961675193
+"412","Treated","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Solirubrobacter",262,11,0.0297094601832115,0.0761781030338756
+"413","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Rudaea",139,4,0.028391588121911,0.0727989439023359
+"414","Treated","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Nocardioides",282,12,0.0280137093242756,0.0718300239083991
+"415","Treated","Bacteria","Acidobacteriota","Blastocatellia","Blastocatellales","Blastocatellaceae","Aridibacter",388,2,0.0274154796422421,0.0702961016467746
+"416","Treated","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Kribbella",238,7,0.0272702447848939,0.0699237045766509
+"417","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Steroidobacterales","Steroidobacteraceae","Steroidobacter",276,8,0.0270608874623563,0.0693868909291188
+"418","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Rhodoferax",366,7,0.0269155019165419,0.0690141074783126
+"419","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Bacillaceae","Fictibacillus",249,2,0.0264842331465965,0.0679082901194782
+"420","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Novosphingobium",305,10,0.0259364913583881,0.0665038239958669
+"421","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Flavitalea",310,7,0.0259097241063946,0.0664351900163965
+"422","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Coxiellales","Coxiellaceae","Coxiella",229,19,0.0258529116270646,0.0662895169924733
+"423","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiales Incertae Sedis","Bauldia",270,15,0.0257504523679573,0.0660268009434802
+"424","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Micrococcaceae","Pseudarthrobacter",250,5,0.0257135719830668,0.0659322358540173
+"425","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Intrasporangiaceae","Oryzihumus",260,6,0.0239202687087405,0.0613340223301039
+"426","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Acidicapsa",250,6,0.023081685250741,0.0591838083352332
+"427","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Asticcacaulis",201,11,0.0230542956034028,0.0591135784702635
+"428","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Thermomonosporaceae","Actinoallomurus",297,8,0.0227221943218241,0.0582620367226258
+"429","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Sphaerotilus",239,8,0.0226926903465885,0.0581863855040732
+"430","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Galbitalea",245,7,0.0226478779762897,0.0580714819904865
+"431","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Caulobacter",279,10,0.0225667484484838,0.0578634575602148
+"432","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Janthinobacterium",198,3,0.0220420001812568,0.0565179491827099
+"433","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Amnibacterium",273,3,0.0204557386908133,0.0524506120277263
+"434","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Aminobacter",258,9,0.0196644585757809,0.0504216886558486
+"435","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Psychrobacillus",202,4,0.0191664679543866,0.0491447896266324
+"436","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Verrucomicrobiales","Verrucomicrobiaceae","Prosthecobacter",272,10,0.0181873745030856,0.0466342935976553
+"437","Treated","Bacteria","Acidobacteriota","Blastocatellia","Blastocatellales","Blastocatellaceae","Stenotrophobacter",198,5,0.0181727384047881,0.0465967651404823
+"438","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Hyphomonadaceae","Hirschia",188,9,0.0178860487669125,0.0458616635049038
+"439","Treated","Bacteria","Planctomycetota","Planctomycetes","Gemmatales","Gemmataceae","Fimbriiglobus",159,12,0.0178333777923257,0.0457266097239121
+"440","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Gammaproteobacteria Incertae Sedis","Unknown Family","Candidatus Ovatusbacter",190,17,0.0177020775117483,0.0453899423378161
+"441","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Pseudohongiellaceae","BIyi10",180,7,0.0174341246391959,0.0447028836902459
+"442","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Pseudoduganella",301,1,0.0169243744728704,0.043395831981719
+"443","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Tardiphaga",199,5,0.0162422456177061,0.0416467836351439
+"444","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Dyella",129,6,0.0158265510195917,0.0405809000502352
+"445","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Terracidiphilus",290,2,0.0157466380440007,0.0403759949846171
+"446","Treated","Bacteria","Myxococcota","Myxococcia","Myxococcales","Myxococcaceae","P3OB-42",211,12,0.0155384711351133,0.0398422336797778
+"447","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiales Incertae Sedis","Nordella",149,9,0.0155136959970557,0.0397787076847581
+"448","Treated","Bacteria","Planctomycetota","Planctomycetes","Isosphaerales","Isosphaeraceae","Candidatus Nostocoida",152,5,0.0152965705388258,0.0392219757405791
+"449","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Plot4-2H12",211,10,0.0152000062030116,0.038974374879517
+"450","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Leptothrix",177,2,0.0150125049875812,0.0384936025322596
+"451","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Afipia",150,5,0.014852508958602,0.0380833563041076
+"452","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Segetibacter",193,5,0.0145222741740273,0.037236600446224
+"453","Treated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Cohnella",163,9,0.014515532190985,0.037219313310218
+"454","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","Nitrosospira",151,8,0.0138651403893161,0.0355516420238874
+"455","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Viridibacillus",111,3,0.0135555587490335,0.0347578429462397
+"456","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Oxalobacter",173,5,0.0132523464004271,0.0339803753857104
+"457","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Dokdonella",117,7,0.0130271310282917,0.0334029000725428
+"458","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Parafilimonas",140,11,0.0128745194232803,0.0330115882648213
+"459","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Solibacillus",134,3,0.0125457532555281,0.0321685980910976
+"460","Treated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Actinomycetospora",152,4,0.0124312497000853,0.0318749992309881
+"461","Treated","Bacteria","Gemmatimonadota","Longimicrobia","Longimicrobiales","Longimicrobiaceae","Longimicrobium",88,1,0.0114717768217964,0.0294148123635804
+"462","Treated","Bacteria","Actinobacteriota","Actinobacteria","Catenulisporales","Catenulisporaceae","Catenulispora",128,5,0.0114034880746658,0.0292397130119637
+"463","Treated","Bacteria","Bacteroidota","Bacteroidia","Flavobacteriales","Weeksellaceae","Chryseobacterium",183,3,0.0110304204773932,0.0282831294292135
+"464","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Spirosomaceae","Dyadobacter",127,4,0.0108095500973152,0.0277167951213209
+"465","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Microscillaceae","Chryseolinea",140,7,0.0107803396580808,0.0276418965591814
+"466","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Niastella",98,7,0.0106681729694945,0.0273542896653706
+"467","Treated","Bacteria","Firmicutes","Bacilli","Thermoactinomycetales","Thermoactinomycetaceae","Thermoactinomyces",106,6,0.0104630918150192,0.0268284405513312
+"468","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Verrucomicrobiales","Verrucomicrobiaceae","Roseimicrobium",125,14,0.0104413295014337,0.0267726397472658
+"469","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Arenimonas",112,4,0.0103564957991928,0.0265551174338276
+"470","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Pseudaminobacter",82,3,0.00991097595910082,0.0254127588694893
+"471","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Rhodocyclaceae","Uliginosibacterium",126,8,0.00980105177536933,0.0251309019881265
+"472","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Xylophilus",74,1,0.00964672141832877,0.0247351831239199
+"473","Treated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","1921-3",112,5,0.00957364346632441,0.0245478037598062
+"474","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Pseudoflavitalea",103,7,0.00950685511902542,0.0243765515872447
+"475","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Micrococcaceae","Paenarthrobacter",146,2,0.009109114869446,0.0233567047934513
+"476","Treated","Bacteria","Acidobacteriota","Blastocatellia","Blastocatellales","Blastocatellaceae","OLB17",129,3,0.00886684316403996,0.0227354952924102
+"477","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Hylemonella",108,3,0.00879499282513413,0.0225512636541901
+"478","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Devosiaceae","Arsenicitalea",96,4,0.00878908962044824,0.0225361272319186
+"479","Treated","Bacteria","Verrucomicrobiota","Chlamydiae","Chlamydiales","Parachlamydiaceae","Candidatus Protochlamydia",117,7,0.00868049569770372,0.0222576812761634
+"480","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Acidiferrobacterales","Acidiferrobacteraceae","Sulfurifustis",73,7,0.0085282610626488,0.0218673360580739
+"481","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Cytophagaceae","Sporocytophaga",102,8,0.00845646433128618,0.0216832418750928
+"482","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Paracaedibacterales","Paracaedibacteraceae","Candidatus Paracaedibacter",126,8,0.00840046135474521,0.0215396444993467
+"483","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Taibaiella",138,5,0.00838294682878455,0.0214947354584219
+"484","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Phyllobacterium",95,3,0.00788073757655213,0.0202070194270567
+"485","Treated","Bacteria","Planctomycetota","Planctomycetes","Gemmatales","Gemmataceae","Zavarzinella",58,2,0.00769921058884472,0.0197415656124223
+"486","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Terrimicrobiaceae","Terrimicrobium",104,4,0.00753830609091459,0.0193289899767041
+"487","Treated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","Thermosporothrix",89,10,0.0075047848855581,0.0192430381680977
+"488","Treated","Bacteria","Actinobacteriota","Actinobacteria","Propionibacteriales","Nocardioidaceae","Marmoricola",100,4,0.007366980060702,0.0188896924633385
+"489","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Sphingobium",102,5,0.00728457983857286,0.0186784098424945
+"490","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Parablastomonas",95,2,0.00716476941913138,0.0183712036387984
+"491","Treated","Bacteria","Acidobacteriota","Vicinamibacteria","Vicinamibacterales","Vicinamibacteraceae","Vicinamibacter",78,2,0.00706904476205292,0.0181257558001357
+"492","Treated","Bacteria","Firmicutes","Clostridia","Peptostreptococcales-Tissierellales","Peptostreptococcaceae","Romboutsia",60,2,0.00706621946944281,0.0181185114601098
+"493","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Dactylosporangium",66,2,0.00705863634456621,0.0180990675501698
+"494","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","ADurb.Bin118",36,2,0.00705422194458116,0.0180877485758491
+"495","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Xanthobacteraceae","Pseudorhodoplanes",83,2,0.00697069022948052,0.0178735646909757
+"496","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Methylobacterium-Methylorubrum",88,7,0.00692426402849242,0.0177545231499806
+"497","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Curtobacterium",103,2,0.0068719761739091,0.0176204517279721
+"498","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Micropepsales","Micropepsaceae","Rhizomicrobium",35,1,0.00680404354587869,0.0174462655022531
+"499","Treated","Bacteria","Gemmatimonadota","Longimicrobia","Longimicrobiales","Longimicrobiaceae","YC-ZSS-LKJ147",96,1,0.00678829019940602,0.0174058723061693
+"500","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Cellulomonadaceae","Cellulomonas",75,4,0.00667038669731742,0.0171035556341472
+"501","Treated","Bacteria","Verrucomicrobiota","Chlamydiae","Chlamydiales","Parachlamydiaceae","Neochlamydia",69,5,0.00641915239695933,0.0164593651204085
+"502","Treated","Bacteria","Acidobacteriota","Blastocatellia","Blastocatellales","Blastocatellaceae","Blastocatella",46,5,0.00624786721426702,0.0160201723442744
+"503","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Bosea",63,3,0.0060393124769022,0.0154854166074415
+"504","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Chitinophaga",65,5,0.00603272314732876,0.0154685208905866
+"505","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Roseococcus",58,2,0.00596899730955057,0.0153051213065399
+"506","Treated","Bacteria","Bdellovibrionota","Oligoflexia","Oligoflexales","Oligoflexaceae","Oligoflexus",78,5,0.00591064775681334,0.0151555070687522
+"507","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Sphingopyxis",53,3,0.00589135880547435,0.015106048219165
+"508","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Microscillaceae","Ohtaekwangia",99,2,0.00587554063702884,0.0150654888128945
+"509","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Salinisphaerales","Solimonadaceae","Nevskia",59,7,0.00586652274319754,0.0150423660081988
+"510","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Microscillaceae","Hassallia",71,4,0.00580088935820664,0.0148740752774529
+"511","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Caulobacteraceae","Brevundimonas",58,2,0.00578531117437958,0.0148341312163579
+"512","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Luteibacter",66,2,0.00551383771654215,0.0141380454270312
+"513","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Aquabacterium",78,3,0.0054699201483852,0.0140254362779108
+"514","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Micropepsales","Micropepsaceae","Micropepsis",43,2,0.00543485259639723,0.0139355194779416
+"515","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Ochrobactrum",41,1,0.00534480511015513,0.0137046284875773
+"516","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Lysinibacillus",48,1,0.00527298692738658,0.0135204793009912
+"517","Treated","Bacteria","Desulfobacterota","Desulfuromonadia","Geobacterales","Geobacteraceae","Geobacter",36,1,0.00518956321176301,0.0133065723378539
+"518","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Micrococcaceae","Paeniglutamicibacter",48,2,0.0051453236739313,0.0131931376254649
+"519","Treated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","G12-WMSP1",55,3,0.00509407221809285,0.0130617236361355
+"520","Treated","Bacteria","Bdellovibrionota","Oligoflexia","Silvanigrellales","Silvanigrellaceae","Silvanigrella",94,4,0.00497747523844087,0.0127627570216433
+"521","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","Undibacterium",52,4,0.00495145760736192,0.0126960451470818
+"522","Treated","Bacteria","Myxococcota","Polyangia","Polyangiales","Sandaracinaceae","Sandaracinus",46,6,0.00490348978443591,0.0125730507293228
+"523","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Neorhizobium",54,2,0.00489649450304686,0.0125551141103766
+"524","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Elsterales","Elsteraceae","Aliidongia",62,3,0.00480287308557823,0.0123150591937903
+"525","Treated","Bacteria","Actinobacteriota","Actinobacteria","Kineosporiales","Kineosporiaceae","Angustibacter",36,3,0.00479595085594994,0.0122973098870511
+"526","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Gammaproteobacteria Incertae Sedis","Unknown Family","Candidatus Berkiella",51,7,0.00469556875905191,0.0120399198950049
+"527","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Rhodoblastus",36,1,0.0046929996089167,0.0120333323305556
+"528","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Terriglobus",71,2,0.00464352279478827,0.0119064687045853
+"529","Treated","Bacteria","Planctomycetota","Planctomycetes","Planctomycetales","Rubinisphaeraceae","SH-PL14",45,5,0.00464266856842488,0.0119042783805766
+"530","Treated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Nocardiaceae","Nocardia",55,4,0.00458617216600452,0.011759415810268
+"531","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Heliimonas",55,4,0.00446720429111899,0.0114543699772282
+"532","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptomycetales","Streptomycetaceae","Kitasatospora",38,1,0.00441552405298629,0.0113218565461187
+"533","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Herbiconiux",63,1,0.00435534047701348,0.01116753968465
+"534","Treated","Bacteria","Myxococcota","Myxococcia","Myxococcales","Myxococcaceae","KD3-10",53,5,0.00433107800958829,0.0111053282297136
+"535","Treated","Bacteria","Bacteroidota","Bacteroidia","Flavobacteriales","Crocinitomicaceae","Fluviicola",39,3,0.00430899138271609,0.0110486958531182
+"536","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Polaromonas",47,2,0.00427362314837853,0.0109580080727655
+"537","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Rhodopila",57,4,0.00417759759561394,0.0107117887067024
+"538","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Burkholderiaceae","Robbsia",46,3,0.00414030647545881,0.0106161704498944
+"539","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Methylophilaceae","Methylotenera",36,2,0.00408219725269174,0.0104671724427993
+"540","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Diplorickettsiales","Diplorickettsiaceae","Rickettsiella",46,2,0.00406693253917554,0.0104280321517322
+"541","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Acidiphilium",50,5,0.00403814899561729,0.0103542281938905
+"542","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Acetobacterales","Acetobacteraceae","Roseomonas",58,1,0.00400967853439336,0.010281227011265
+"543","Treated","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Patulibacter",30,1,0.00391083300743058,0.0100277769421297
+"544","Treated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Pseudonocardia",29,1,0.0037804719071829,0.00969351771072537
+"545","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Burkholderiaceae","Limnobacter",48,3,0.00370418893119362,0.0094979203363939
+"546","Treated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Solitalea",33,3,0.00368127771884946,0.00943917363807554
+"547","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Hydrogenophaga",28,1,0.00365011080693521,0.00935925847932105
+"548","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Burkholderiaceae","Cupriavidus",55,2,0.00355607170898718,0.00911813258714661
+"549","Treated","Bacteria","Actinobacteriota","Actinobacteria","Kineosporiales","Kineosporiaceae","Kineosporia",47,2,0.00333601319552407,0.00855387998852325
+"550","Treated","Bacteria","Firmicutes","Clostridia","Clostridiales","Clostridiaceae","Clostridium sensu stricto 13",15,2,0.00332488756485778,0.00852535273040457
+"551","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Actinoplanes",35,3,0.00320107499928568,0.00820788461355304
+"552","Treated","Bacteria","Bdellovibrionota","Bdellovibrionia","Bacteriovoracales","Bacteriovoracaceae","Bacteriovorax",37,6,0.00319493091366173,0.00819213054785059
+"553","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Rhodocyclaceae","Georgfuchsia",45,1,0.00318313645044918,0.00816188833448507
+"554","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Rathayibacter",46,1,0.00318008987210508,0.00815407659514123
+"555","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Lysobacter",24,1,0.00312866640594447,0.00802222155370376
+"556","Treated","Bacteria","Firmicutes","Clostridia","Lachnospirales","Lachnospiraceae","Tyzzerella",21,5,0.00304907731553783,0.00781814696291751
+"557","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Steroidobacterales","Woeseiaceae","JTB255 marine benthic group",21,1,0.00302724520686176,0.00776216719708142
+"558","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhodospirillales","Magnetospirillaceae","Telmatospirillum",23,3,0.00295983716083373,0.00758932605341983
+"559","Treated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Kutzneria",52,2,0.00295343682313807,0.00757291493112325
+"560","Treated","Bacteria","Firmicutes","Bacilli","Thermoactinomycetales","Thermoactinomycetaceae","Thermoflavimicrobium",54,2,0.00288445148394751,0.00739602944601927
+"561","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Frondihabitans",18,1,0.00286761191652063,0.00735285106800162
+"562","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Chthoniobacterales","Chthoniobacteraceae","LD29",43,3,0.00276624150452202,0.00709292693467184
+"563","Treated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Saccharopolyspora",25,1,0.00274634735801384,0.00704191630259959
+"564","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Streptosporangiaceae","Streptosporangium",21,1,0.00273758310520141,0.00701944385949079
+"565","Treated","Bacteria","Chloroflexi","Ktedonobacteria","Ktedonobacterales","Ktedonobacteraceae","1921-2",31,1,0.00267726055790656,0.00686477066129886
+"566","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Moraxellaceae","Cavicella",42,2,0.00257039993464966,0.00659076906320426
+"567","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Streptosporangiaceae","Nonomuraea",23,1,0.00252663956937273,0.00647856299839163
+"568","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Verrucomicrobiales","Rubritaleaceae","Luteolibacter",19,1,0.00247686090470604,0.00635092539668214
+"569","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","SH3-11",33,5,0.00246382610091572,0.00631750282286081
+"570","Treated","Bacteria","Planctomycetota","Planctomycetes","Isosphaerales","Isosphaeraceae","Tundrisphaera",52,1,0.00246328754144955,0.00631612190115269
+"571","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Altererythrobacter",17,1,0.00245062707222142,0.00628365915954211
+"572","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Parasegetibacter",28,2,0.00244990336083586,0.00628180348932273
+"573","Treated","Bacteria","Firmicutes","Bacilli","Alicyclobacillales","Alicyclobacillaceae","Acidibacillus",34,4,0.0024346082791514,0.00624258533115743
+"574","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Alcaligenaceae","Achromobacter",18,1,0.00234649980445835,0.00601666616527782
+"575","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Thermomonosporaceae","Spirillospora",16,1,0.00230647253856134,0.00591403215015728
+"576","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Phytohabitans",32,1,0.00230182707524097,0.00590212070574608
+"577","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Gallionellaceae","Candidatus Nitrotoga",38,1,0.00213663199325274,0.00547854357244293
+"578","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Pleomorphomonadaceae","Chthonobacter",16,1,0.00208577760396298,0.00534814770246917
+"579","Treated","Bacteria","Verrucomicrobiota","Chlamydiae","Chlamydiales","Simkaniaceae","Ga0074140",20,2,0.00206201249038713,0.00528721151381317
+"580","Treated","Bacteria","Actinobacteriota","Acidimicrobiia","Microtrichales","Iamiaceae","Iamia",22,2,0.00203284778939487,0.00521243022921761
+"581","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Planococcaceae","Jeotgalibacillus",36,1,0.00202417767781839,0.0051901991738933
+"582","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Pedosphaerales","Pedosphaeraceae","DEV008",31,3,0.00201876926805033,0.0051763314565393
+"583","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Aurantisolimonas",24,2,0.00198072191158499,0.0050787741322692
+"584","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Frateuria",27,1,0.00194216659473457,0.00497991434547326
+"585","Treated","Bacteria","Bacteroidota","Bacteroidia","Sphingobacteriales","Sphingobacteriaceae","Pseudosphingobacterium",28,1,0.00193570687867266,0.00496335097095553
+"586","Treated","Bacteria","Firmicutes","Bacilli","Thermoactinomycetales","Thermoactinomycetaceae","Shimazuella",23,2,0.00189494014728745,0.00485882089048063
+"587","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","alphaI cluster",16,1,0.00185916802231002,0.0047670974931026
+"588","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Dinghuibacter",17,1,0.0018585328523013,0.00476546885205462
+"589","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Rhizobiaceae","Pseudorhizobium",26,1,0.00179744210162461,0.00460882590160157
+"590","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Spirosomaceae","Spirosoma",24,2,0.00174946207865199,0.00448580020167178
+"591","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Hymenobacteraceae","Hymenobacter",25,1,0.00172830971310059,0.00443156336692458
+"592","Treated","Bacteria","Desulfobacterota","Desulfuromonadia","Geobacterales","Geobacteraceae","Citrifermentans",21,1,0.00170912346382355,0.00438236785595783
+"593","Treated","Bacteria","Firmicutes","Desulfitobacteriia","Desulfitobacteriales","Desulfitobacteriaceae","Desulfitobacterium",23,1,0.00162705149971703,0.00417192692235137
+"594","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Salinisphaerales","Solimonadaceae","Polycyclovorans",19,2,0.0016184259484182,0.00414981012414923
+"595","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Thermomonosporaceae","Actinomadura",14,1,0.00153055646660107,0.00392450376051557
+"596","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Kaistiaceae","Kaistia",15,2,0.00152990654445468,0.00392283729347355
+"597","Treated","Bacteria","Verrucomicrobiota","Omnitrophia","Omnitrophales","Omnitrophaceae","Candidatus Omnitrophus",13,2,0.00147506950331626,0.00378222949568273
+"598","Treated","Bacteria","Abditibacteriota","Abditibacteria","Abditibacteriales","Abditibacteriaceae","Abditibacterium",20,3,0.00144070820700782,0.00369412360771235
+"599","Treated","Bacteria","Spirochaetota","Spirochaetia","Spirochaetales","Spirochaetaceae","Spirochaeta 2",20,1,0.00143864192202561,0.0036888254410913
+"600","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micromonosporales","Micromonosporaceae","Hamadaea",13,1,0.00142123100470099,0.00364418206333588
+"601","Treated","Bacteria","Firmicutes","Bacilli","Thermoactinomycetales","Thermoactinomycetaceae","Polycladomyces",12,1,0.00131824673184664,0.0033801198252478
+"602","Treated","Bacteria","Cyanobacteria","Vampirivibrionia","Vampirovibrionales","Vampirovibrionaceae","Vampirovibrio",18,1,0.00129477772982305,0.00331994289698217
+"603","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Alcaligenaceae","Pigmentiphaga",23,1,0.00129322462749508,0.00331596058332072
+"604","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","1174-901-12",17,2,0.00126553535898383,0.00324496245893289
+"605","Treated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Nocardiaceae","Rhodococcus",23,2,0.00126257106923115,0.00323736171597731
+"606","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Rhizorhapis",18,2,0.00125838153131871,0.00322661931107361
+"607","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Cytophagaceae","Siphonobacter",18,1,0.00124438299343242,0.0031907256241857
+"608","Treated","Bacteria","Bdellovibrionota","Bdellovibrionia","Bdellovibrionales","Bdellovibrionaceae","OM27 clade",17,2,0.00116825489792361,0.00299552537929131
+"609","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Filimonas",13,1,0.00116707065266182,0.00299248885297902
+"610","Treated","Bacteria","Actinobacteriota","Actinobacteria","Pseudonocardiales","Pseudonocardiaceae","Goodfellowiella",8,1,0.00115025161754134,0.00294936312190086
+"611","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Psychroglaciecola",12,1,0.00113058224985868,0.00289892884579148
+"612","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Comamonadaceae","Paucibacter",16,1,0.00110849383400305,0.0028422918820591
+"613","Treated","Bacteria","Firmicutes","Clostridia","Peptostreptococcales-Tissierellales","Peptostreptococcaceae","Paeniclostridium",10,1,0.00109853894320554,0.00281676652103984
+"614","Treated","Bacteria","Bdellovibrionota","Bdellovibrionia","Bacteriovoracales","Bacteriovoracaceae","Peredibacter",12,2,0.00104524510344634,0.0026801156498624
+"615","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Microbacteriaceae","Humibacter",12,1,0.00103635892564125,0.0026573305785673
+"616","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Sphingomonadales","Sphingomonadaceae","Qipengyuania",18,1,0.00101208883890919,0.00259509958694665
+"617","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rhizobiales","Beijerinckiaceae","Microvirga",14,1,0.00100704934541793,0.00258217780876391
+"618","Treated","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","JCM 18997",10,1,0.000990589400693413,0.0025399728222908
+"619","Treated","Bacteria","Acidobacteriota","Holophagae","Holophagales","Holophagaceae","Geothrix",14,2,0.00095660144716285,0.00245282422349449
+"620","Treated","Bacteria","Actinobacteriota","Thermoleophilia","Solirubrobacterales","Solirubrobacteraceae","Parviterribacter",13,1,0.000935117249316645,0.00239773653670935
+"621","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Rhodanobacteraceae","Ahniella",13,2,0.000931455029744242,0.00238834623011344
+"622","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Chitinibacteraceae","Andreprevotia",13,1,0.000919247631169566,0.00235704520812709
+"623","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rickettsiales","Rickettsiaceae","Candidatus Megaira",19,1,0.000900047370914259,0.00230781377157502
+"624","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Pseudomonadales","Spongiibacteraceae","BD1-7 clade",16,1,0.000899634523474838,0.00230675518839702
+"625","Treated","Bacteria","Planctomycetota","Planctomycetes","Planctomycetales","Schlesneriaceae","Schlesneria",10,2,0.0008976800173629,0.00230174363426385
+"626","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Enterobacterales","Enterobacteriaceae","Klebsiella",12,2,0.000873894289791528,0.00224075458920905
+"627","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Pseudoxanthomonas",12,1,0.000863185153215365,0.00221329526465478
+"628","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Nitrosomonadaceae","P3OB-51",19,1,0.000859923059515728,0.0022049309218352
+"629","Treated","Bacteria","Firmicutes","Desulfitobacteriia","Desulfitobacteriales","Desulfitobacteriaceae","Desulfosporosinus",9,3,0.000850938620283701,0.00218189389816334
+"630","Treated","Bacteria","Firmicutes","Bacilli","Paenibacillales","Paenibacillaceae","Oxalophagus",12,1,0.000848536274925753,0.00217573403827116
+"631","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Rhodocyclaceae","Ferribacterium",10,1,0.000813868316106454,0.00208684183617039
+"632","Treated","Bacteria","Spirochaetota","Brevinematia","Brevinematales","Brevinemataceae","Brevinema",8,1,0.00080742834073476,0.00207032907880708
+"633","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Xanthomonadales","Xanthomonadaceae","Luteimonas",14,1,0.000787180208040484,0.00201841078984739
+"634","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Diplosphaera",11,1,0.000760456273764259,0.00194988788144682
+"635","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Piscirickettsiales","Piscirickettsiaceae","Candidatus Endoecteinascidia",8,1,0.000758869284765699,0.00194581867888641
+"636","Treated","Bacteria","Verrucomicrobiota","Chlamydiae","Chlamydiales","Parachlamydiaceae","Candidatus Mesochlamydia",10,1,0.000748502994011976,0.00191923844618455
+"637","Treated","Bacteria","Myxococcota","Polyangia","Polyangiales","Polyangiaceae","Polyangium",7,1,0.000735525901019229,0.00188596384876725
+"638","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Chitinibacteraceae","Jeongeupia",7,1,0.000735525901019229,0.00188596384876725
+"639","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Spirosomaceae","Emticicia",5,1,0.000720772668300418,0.00184813504692415
+"640","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Intrasporangiaceae","Pedococcus-Phycicoccus",11,1,0.000700994137139944,0.00179742086446139
+"641","Treated","Bacteria","Actinobacteriota","Actinobacteria","Micrococcales","Promicromonosporaceae","Promicromonospora",10,1,0.000691323885240235,0.00177262534676983
+"642","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Oxalobacteraceae","[Aquaspirillum] arcticum group",9,1,0.000673652694610778,0.0017273146015661
+"643","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Caulobacterales","Hyphomonadaceae","UKL13-1",11,1,0.000618498734888951,0.00158589419202295
+"644","Treated","Bacteria","Acidobacteriota","Acidobacteriae","Acidobacteriales","Acidobacteriaceae (Subgroup 1)","Telmatobacter",8,1,0.000565890924524298,0.00145100237057512
+"645","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptomycetales","Streptomycetaceae","E1B-B3-114",10,1,0.000562271577171774,0.00144172199274814
+"646","Treated","Bacteria","Firmicutes","Clostridia","Peptostreptococcales-Tissierellales","Peptostreptococcaceae","Clostridioides",2,1,0.000534616412723871,0.00137081131467659
+"647","Treated","Bacteria","Proteobacteria","Gammaproteobacteria","Burkholderiales","Chitinibacteraceae","Chitinibacter",7,1,0.000494979493706689,0.00126917818899151
+"648","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Opitutales","Opitutaceae","Ereboglobus",7,1,0.000494979493706689,0.00126917818899151
+"649","Treated","Bacteria","Sumerlaeota","Sumerlaeia","Sumerlaeales","Sumerlaeaceae","Sumerlaea",4,1,0.000464792005577504,0.00119177437327565
+"650","Treated","Bacteria","Planctomycetota","Phycisphaerae","Phycisphaerales","Phycisphaeraceae","Phycisphaera",4,2,0.000457185275530451,0.00117226993725757
+"651","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Rickettsiales","Rickettsiaceae","Candidatus Trichorickettsia",7,1,0.000446087178179964,0.00114381327738452
+"652","Treated","Bacteria","Spirochaetota","Leptospirae","Leptospirales","Leptospiraceae","Turneriella",6,2,0.000444616419509817,0.00114004210130722
+"653","Treated","Bacteria","Firmicutes","Bacilli","Bacillales","Bacillaceae","Oceanobacillus",9,1,0.000426338228327807,0.00109317494443027
+"654","Treated","Bacteria","Proteobacteria","Alphaproteobacteria","Parvibaculales","Parvibaculaceae","Parvibaculum",9,1,0.000426338228327807,0.00109317494443027
+"655","Treated","Bacteria","Actinobacteriota","Actinobacteria","Corynebacteriales","Nocardiaceae","Smaragdicoccus",6,1,0.000424268137462877,0.00108786701913558
+"656","Treated","Bacteria","Verrucomicrobiota","Verrucomicrobiae","Verrucomicrobiales","Verrucomicrobiaceae","Verrucomicrobium",6,1,0.000414794331144141,0.0010635752080619
+"657","Treated","Bacteria","Actinobacteriota","Actinobacteria","Frankiales","Sporichthyaceae","Sporichthya",7,1,0.000331596399810516,0.000850247179001324
+"658","Treated","Bacteria","Bacteroidota","Bacteroidia","Chitinophagales","Chitinophagaceae","Parasediminibacterium",7,1,0.000331596399810516,0.000850247179001324
+"659","Treated","Bacteria","Spirochaetota","Spirochaetia","Spirochaetales","Spirochaetaceae","Spirochaeta",6,1,0.000271554650373388,0.000696293975316379
+"660","Treated","Bacteria","Actinobacteriota","Actinobacteria","Streptosporangiales","Streptosporangiaceae","Microbispora",2,1,0.000189717321191425,0.000486454669721602
+"661","Treated","Bacteria","Planctomycetota","Phycisphaerae","Phycisphaerales","Phycisphaeraceae","SM1A02",2,1,0.000162773663221291,0.000417368367234079
+"662","Treated","Bacteria","Bacteroidota","Bacteroidia","Cytophagales","Hymenobacteraceae","Adhaeribacter",2,1,0.000143864192202561,0.00036888254410913

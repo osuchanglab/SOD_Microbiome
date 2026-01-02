@@ -1,5 +1,1 @@
-# SOD_Microbiome
-
-A repository to store scripts, intermediate data, and files for the manuscript in preparation.
-
-More details to follow.
+Scripts prepared for analysis of the manuscript by Kurth et al. titled *Impacts of Sudden Oak Death Treatment and Wildfire on the Soil Microbial Communities of Mixed Conifer Forests*

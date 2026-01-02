@@ -2,11 +2,11 @@
 title: "RPS10 DADA2 Workflow"
 output: html_document
 date: "2024-06-26"
+---
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "~/SOD_DADS_microbiome/Data/RPS10")
-
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome_analysis/Data/RPS10")
 library(phyloseq); packageVersion("phyloseq")
 library(ggplot2); packageVersion("ggplot2")
 library(dada2); packageVersion("dada2")
@@ -22,7 +22,6 @@ list.files(path)
 fnFs <- sort(list.files(path, pattern="_R1.fastq.gz", full.names = TRUE))
 fnRs <- sort(list.files(path, pattern="_R2.fastq.gz", full.names = TRUE))
 
-#Extract sample names, assuming filenames have format: SAMPLENAME_XXX.fastq
 sample.names <- gsub("_R1.fastq.gz", "", basename(fnFs))
 
 #Set up directory structure of output files
@@ -170,10 +169,10 @@ write.table(track, file="dada2_outputs/rps10_trackreads.out",sep="\t",quote=F)
 ### If everything look good, let's assign taxonomy
 ``` {r assignTaxonomy}
 set.seed(1)
-oomycetedb.ref <- "metadata_dbs/rps10_reference_db.fa"  # CHANGE ME to location on your machine
+oomycetedb.ref <- "metadata_dbs/rps10_reference_db_unique.fa"  
 taxa <- assignTaxonomy(seqtab.nochim, oomycetedb.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = FALSE)
 
-taxa.print <- taxa  # Removing sequence rownames for display only
+taxa.print <- taxa  
 rownames(taxa.print) <- NULL
 
 write.table(taxa, file="dada2_outputs/rps10_taxa.out",sep="\t",quote=F)
@@ -182,10 +181,10 @@ write.table(taxa, file="dada2_outputs/rps10_taxa.out",sep="\t",quote=F)
 ### If everything look good, let's assign taxonomy but with tryRC option
 ``` {r assignTaxonomy with tryRC}
 set.seed(1)
-oomycetedb.ref <- "metadata_dbs/rps10_reference_db.fa"  # CHANGE ME to location on your machine
+oomycetedb.ref <- "metadata_dbs/rps10_reference_db_unique.fa"  
 taxa <- assignTaxonomy(seqtab.nochim, oomycetedb.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = TRUE)
 
-taxa.print <- taxa  # Removing sequence rownames for display only
+taxa.print <- taxa  
 rownames(taxa.print) <- NULL
 
 write.table(taxa, file="dada2_outputs/rps10_taxa_tryRC.out",sep="\t",quote=F)
@@ -194,10 +193,10 @@ write.table(taxa, file="dada2_outputs/rps10_taxa_tryRC.out",sep="\t",quote=F)
 ### If everything look good, let's assign taxonomy but with minBoot set to 60
 ``` {r assignTaxonomy with minboot at 60 no RC}
 set.seed(1)
-oomycetedb.ref <- "metadata_dbs/rps10_reference_db.fa"  # CHANGE ME to location on your machine
+oomycetedb.ref <- "metadata_dbs/rps10_reference_db_unique.fa"  
 taxa <- assignTaxonomy(seqtab.nochim, oomycetedb.ref, multithread = TRUE, minBoot = 0, verbose=TRUE, tryRC = FALSE)
 
-taxa.print <- taxa  # Removing sequence rownames for display only
+taxa.print <- taxa  
 rownames(taxa.print) <- NULL
 
 write.table(taxa, file="dada2_outputs/rps10_taxa_minboot60.out",sep="\t",quote=F)
@@ -206,10 +205,10 @@ write.table(taxa, file="dada2_outputs/rps10_taxa_minboot60.out",sep="\t",quote=F
 ### If everything look good, let's assign taxonomy but with minBoot set to 60, with RC set
 ``` {r assignTaxonomy with minboot at 60}
 set.seed(1)
-oomycetedb.ref <- "metadata_dbs/rps10_reference_db.fa"  # CHANGE ME to location on your machine
+oomycetedb.ref <- "metadata_dbs/rps10_reference_db_unique.fa"  
 taxa <- assignTaxonomy(seqtab.nochim, oomycetedb.ref, multithread = TRUE, minBoot = 60, verbose=TRUE, tryRC = TRUE)
 
-taxa.print <- taxa  # Removing sequence rownames for display only
+taxa.print <- taxa  
 rownames(taxa.print) <- NULL
 
 write.table(taxa, file="dada2_outputs/rps10_taxa_minboot60_RC.out",sep="\t",quote=F)
