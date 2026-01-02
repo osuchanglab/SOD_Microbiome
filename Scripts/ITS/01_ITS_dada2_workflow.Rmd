@@ -6,7 +6,7 @@ date: "2024-06-26"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome_analysis/Data/ITS")
+knitr::opts_knit$set(root.dir = "~/SOD_Microbiome/Data/ITS")
 library(phyloseq); packageVersion("phyloseq")
 library(ggplot2); packageVersion("ggplot2")
 library(dada2); packageVersion("dada2")
@@ -168,51 +168,7 @@ head(track)
 write.table(track, file="dada2_outputs/its_trackreads.out",sep="\t",quote=F)
 ```
 
-### If everything look good, let's assign taxonomy
-``` {r assignTaxonomy}
-itsdb.ref <- "metadata_dbs/sh_general_release_dynamic_all_04.04.2024.fasta"  
-taxa <- assignTaxonomy(seqtab.nochim, itsdb.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = FALSE)
-
-taxa.print <- taxa  
-rownames(taxa.print) <- NULL
-
-write.table(taxa, file="dada2_outputs/its_taxa.out",sep="\t",quote=F)
-```
-
-### If everything look good, let's assign taxonomy but with tryRC option
-``` {r assignTaxonomy with tryRC}
-itsdb.ref <- "metadata_dbs/sh_general_release_dynamic_all_04.04.2024.fasta"  
-taxa <- assignTaxonomy(seqtab.nochim, itsdb.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = TRUE)
-
-taxa.print <- taxa  
-rownames(taxa.print) <- NULL
-
-write.table(taxa, file="dada2_outputs/its_taxa_tryRC.out",sep="\t",quote=F)
-```
-
-### If everything look good, let's assign taxonomy but only fungidb
-``` {r assignTaxonomy only fungi db}
-itsdb_fung.ref <- "metadata_dbs/sh_general_release_dynamic_04.04.2024.fasta"  
-taxa <- assignTaxonomy(seqtab.nochim, itsdb_fung.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = FALSE)
-
-taxa.print <- taxa  
-rownames(taxa.print) <- NULL
-
-write.table(taxa, file="dada2_outputs/its_taxa_unitefungi.out",sep="\t",quote=F)
-```
-
-### If everything look good, let's assign taxonomy but only fungi db
-``` {r assignTaxonomy fungi db try rc}
-itsdb_fung.ref <- "metadata_dbs/sh_general_release_dynamic_04.04.2024.fasta"  
-taxa <- assignTaxonomy(seqtab.nochim, itsdb_fung.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = TRUE)
-
-taxa.print <- taxa  
-rownames(taxa.print) <- NULL
-
-write.table(taxa, file="dada2_outputs/its_taxa_unitefungi_RC.out",sep="\t",quote=F)
-```
-
-### Let's try earlier db
+### Let's try UNITE db
 ``` {r assignTaxonomy}
 itsdb.ref <- "metadata_dbs/sh_general_release_dynamic_all_25.07.2023.fasta"  
 taxa <- assignTaxonomy(seqtab.nochim, itsdb.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = FALSE)
@@ -222,8 +178,8 @@ rownames(taxa.print) <- NULL
 
 write.table(taxa, file="dada2_outputs/its_taxa_07_23db.out",sep="\t",quote=F)
 ```
-### If everything look good, let's assign taxonomy but with tryRC option
 
+### If everything look good, let's assign taxonomy but with tryRC option
 ``` {r assignTaxonomy with tryRC}
 itsdb.ref <- "metadata_dbs/sh_general_release_dynamic_all_25.07.2023.fasta"  
 taxa <- assignTaxonomy(seqtab.nochim, itsdb.ref, multithread = TRUE, minBoot = 0, outputBootstraps = TRUE, verbose=TRUE, tryRC = TRUE)

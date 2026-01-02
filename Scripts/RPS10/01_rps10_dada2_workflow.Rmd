@@ -6,7 +6,7 @@ date: "2024-06-26"
 
 ```{r setup, include=FALSE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome_analysis/Data/RPS10")
+knitr::opts_knit$set(root.dir = "~/SOD_Microbiome/Data/RPS10")
 library(phyloseq); packageVersion("phyloseq")
 library(ggplot2); packageVersion("ggplot2")
 library(dada2); packageVersion("dada2")
@@ -108,7 +108,7 @@ plotQualityProfile(cutRs[1:5])
 filtFs <- file.path(path.cut, "filtered", basename(cutFs))
 filtRs <- file.path(path.cut, "filtered", basename(cutRs))
 
-out <- filterAndTrim(cutFs, filtFs, cutRs, filtRs, maxN = 0, maxEE = c(5, 5), truncQ = 5,
+out <- filterAndTrim(cutFs, filtFs, cutRs, filtRs, maxN = 0, maxEE = c(5,5), truncQ = 5,
     minLen = 150, maxLen = Inf, rm.phix = TRUE, compress = TRUE, multithread = TRUE) 
 head(out)
 
