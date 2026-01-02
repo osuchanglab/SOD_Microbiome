@@ -52,6 +52,7 @@ sod_prunereads_5asv.ps@sam_data$Fire_Mod <- factor(sod_prunereads_5asv.ps@sam_da
                                               levels = c("untreated","SODtrt","wildfire"), 
                                                   labels=c("Untreated","Treated","Wildfire"))
 ```
+
 ### Bar plot agglomerated by order-facetted by fire factor
 ```{r barplot-Relative abundance-fire}
 RPS10data <- sod_prunereads_5asv.ps %>%
@@ -149,7 +150,6 @@ pdf("Figures/RPS10/top40_family_sod_wildfire_samples.pdf", width = 34, height = 
 plot_bar(ps.top40, x="Sample_nameRps10", fill="Family") + facet_wrap(~Treatuntreat_EP, scales="free_x")
 dev.off()
 ```
-
 
 ### Let's look top taxa at genus level
 ```{r Top taxa genus}

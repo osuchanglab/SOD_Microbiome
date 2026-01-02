@@ -201,6 +201,7 @@ rownames(taxa.print) <- NULL
 write.table(taxa, file="dada2_outputs/its_taxa_07_23db_fungi.out",sep="\t",quote=F)
 ```
 
+
 ### If everything look good, let's assign taxonomy but with tryRC option
 ``` {r assignTaxonomy with tryRC}
 itsdb.ref <- "metadata_dbs/sh_general_release_dynamic_18.07.2023.fasta"  

@@ -242,7 +242,6 @@ create_relabund_plot <- function(ps, rank = "Phylum", group_var,
     message("✓ Plot saved to: ", output_file)
   }
   
-  # Clean data summary with only essential columns, ordered by abundance
   data_summary <- df_detailed %>%
     arrange(across(all_of(group_var)), desc(Mean_Relative_Abundance)) %>%
     select(
