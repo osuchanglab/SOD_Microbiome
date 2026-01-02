@@ -8,7 +8,7 @@ date: "2025-11-17"
 
 ```{r setup}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_microbiome_analysis")
+knitr::opts_knit$set(root.dir = "~/SOD_Microbiome")
 library(phyloseq); packageVersion("phyloseq")
 library(ggplot2); packageVersion("ggplot2")
 library(readr); packageVersion("readr")
