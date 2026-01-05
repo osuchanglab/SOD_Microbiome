@@ -1,79 +1,79 @@
-"YrSinceTrt_BR","Species","Mean_Relative_Abundance","Standard_Deviation","Standard_Error","Sample_Size","Prevalence_Percent"
-"Unmitigated","Globisporangium_aquisylvae",0.13372398407926,0.260583261050899,0.0422721869305654,38,42.1052631578947
-"Unmitigated","Globisporangium_terrestre",0.119879511768068,0.261736965182415,0.0424593424543443,38,26.3157894736842
-"Unmitigated","Achlya_hypogyna",0.116713833917398,0.215557187444478,0.0349679932821934,38,36.8421052631579
-"Unmitigated","Phytopythium_helicoides",0.066769815781308,0.21744022256952,0.0352734619162169,38,15.7894736842105
-"Unmitigated","Phytophthora_ramorum",0.0496124206286221,0.189249320961548,0.0307002937944142,38,10.5263157894737
-"Unmitigated","Pythium_contiguanum",0.0493332648365436,0.131534935220192,0.0213377841197624,38,18.4210526315789
-"Unmitigated","Saprolegnia_parasitica",0.0490878214703952,0.174230799651464,0.0282639679242096,38,18.4210526315789
-"Unmitigated","Halophytophthora_kandeliae",0.0425645016899258,0.134029917191301,0.0217425236408113,38,13.1578947368421
-"Unmitigated","Lagenidium_sp.sinuatum",0.0415038144476052,0.165652096283602,0.0268723184724159,38,7.89473684210526
-"Unmitigated","Other",0.0390166039538023,NA,NA,NA,NA
-"Unmitigated","Globisporangium_nodosum",0.0326527632702325,0.0777375740253595,0.0126106997336517,38,50
-"Unmitigated","Pythium_monospermum",0.0293536794119,0.0967756792030873,0.0156990882112196,38,18.4210526315789
-"Unmitigated","Globisporangium_lucens",0.027841451828944,0.13769848396124,0.0223376437557438,38,7.89473684210526
-"Unmitigated","Elongisporangium_anandrum",0.0252125711714286,0.127504951456325,0.020684034426454,38,7.89473684210526
-"Unmitigated","Phytopythium_iriomotense",0.0239632054647627,0.094975238843121,0.0154070182173647,38,7.89473684210526
-"Unmitigated","Aphanomyces_stellatus",0.0216020486725227,0.063385620637632,0.0102825054590921,38,18.4210526315789
-"Unmitigated","Pythium_junctum",0.0185909461501459,0.0793716663205501,0.0128757845080363,38,15.7894736842105
-"Unmitigated","Globisporangium_acanthophoron",0.0184908741226471,0.0638587488710565,0.0103592569934953,38,15.7894736842105
-"Unmitigated","Pythium_brachiatum",0.0152995133890202,0.0736163790760964,0.0119421536322253,38,10.5263157894737
-"Unmitigated","Pythium_jasmonium",0.014355596580353,0.0402753302158108,0.00653352130411958,38,15.7894736842105
-"Unmitigated","Phytopythium_aichiense",0.0126575926864386,0.0695067948381561,0.01127549103689,38,7.89473684210526
-"Unmitigated","Phytophthora_nemorosa",0.0117960509794396,0.0383222218782599,0.00621668529397972,38,13.1578947368421
-"1 to 2","Globisporangium_aquisylvae",0.233736945333877,0.354778959420753,0.0793309870251443,20,45
-"1 to 2","Globisporangium_terrestre",0.077214259787841,0.183888000572179,0.0411186069525913,20,20
-"1 to 2","Globisporangium_attrantheridium",0.0604244025766715,0.178066052622949,0.0398167798149968,20,15
-"1 to 2","Saprolegnia_parasitica",0.054707192707201,0.155770347367794,0.0348313085593143,20,30
-"1 to 2","Elongisporangium_anandrum",0.0530997002752777,0.13441060710273,0.030055125437872,20,20
-"1 to 2","Phytopythium_helicoides",0.0510599378819787,0.12386423904695,0.0276968858490264,20,30
-"1 to 2","Other",0.0474716415574097,NA,NA,NA,NA
-"1 to 2","Phytophthora_nemorosa",0.0473572113249212,0.104832777046038,0.0234413215745022,20,20
-"1 to 2","Lagenidium_sp.sinuatum",0.0419246238814626,0.133180438550176,0.0297800513871428,20,15
-"1 to 2","Phytopythium_aichiense",0.0348546627535364,0.104561892365931,0.0233807499186239,20,15
-"1 to 2","Achlya_hypogyna",0.0340240422663366,0.099400596684055,0.0222266491189587,20,25
-"1 to 2","Pythium_brachiatum",0.0298023472627264,0.0962977256451342,0.0215328260621145,20,25
-"1 to 2","Pythium_insidiosum",0.0288583821125459,0.0544997813543355,0.012186521586717,20,35
-"1 to 2","Phytophthora_europaea",0.0288424174250946,0.128987211995872,0.0288424174250946,20,5
-"1 to 2","Pythium_dissotocum",0.0277679664452427,0.124182121136992,0.0277679664452427,20,5
-"1 to 2","Globisporangium_rostratifingens",0.0181477574825499,0.0602016012113126,0.0134614872662829,20,10
-"1 to 2","Phytopythium_iriomotense",0.0179709824440458,0.0802985058488729,0.0179552917569744,20,10
-"1 to 2","Pythium_contiguanum",0.0153186758012392,0.0413650250970374,0.00924950080079604,20,20
-"1 to 2","Globisporangium_iwayami",0.0149874397447213,0.0670258681557578,0.0149874397447213,20,5
-"1 to 2","Globisporangium_nodosum",0.014778339100078,0.0416998970462503,0.00932438044501583,20,35
-"1 to 2","Albugo_laibachii",0.0141698414649134,0.0633694574918829,0.0141698414649134,20,5
-"1 to 2","Saprolegnia_ferax",0.0121101457882819,0.0291766912014916,0.00652410648850553,20,25
-"1 to 2","Phytophthora_fragariae",0.0101670900918507,0.0454686091574855,0.0101670900918507,20,5
-"3 to 4","Thraustotheca_clavata",0.301199409633067,0.46521904576792,0.26859434130625,3,66.6666666666667
-"3 to 4","Globisporangium_selbyi",0.246498476324426,0.426947884982219,0.246498476324426,3,33.3333333333333
-"3 to 4","Achlya_hypogyna",0.186945681413754,0.258228557259071,0.149088327045973,3,66.6666666666667
-"3 to 4","Saprolegnia_parasitica",0.0867605565685356,0.140604798174963,0.0811782180756681,3,66.6666666666667
-"3 to 4","Aphanomyces_astaci",0.0698384689958625,0.114143574081302,0.0659008232221059,3,66.6666666666667
-"3 to 4","Pythium_brachiatum",0.0543297746144721,0.0941019299960315,0.0543297746144721,3,33.3333333333333
-"3 to 4","Globisporangium_rostratifingens",0.0311620956399437,0.0539743329187031,0.0311620956399437,3,33.3333333333333
-"3 to 4","Aphanomyces_stellatus",0.0199167966718669,0.0344969037596921,0.0199167966718669,3,33.3333333333333
-"3 to 4","Other",0.000715632000807458,NA,NA,NA,NA
-"5 to 8","Saprolegnia_parasitica",0.326885517200062,0.440621168352312,0.166539147692992,7,71.4285714285714
-"5 to 8","Globisporangium_aquisylvae",0.305815881974134,0.425381686454821,0.160779164948673,7,42.8571428571429
-"5 to 8","Globisporangium_rostratifingens",0.09559074726003,0.22338853657701,0.0844329305036323,7,28.5714285714286
-"5 to 8","Saprolegnia_ferax",0.0867196396328382,0.22943860025363,0.0867196396328382,7,14.2857142857143
-"5 to 8","Pythium_monospermum",0.07710235906012,0.203993667569485,0.07710235906012,7,14.2857142857143
-"5 to 8","Phytophthora_nemorosa",0.0573409032293708,0.147503735195048,0.0557511715398888,7,28.5714285714286
-"5 to 8","Other",0.0330534683096964,NA,NA,NA,NA
-"5 to 8","Thraustotheca_clavata",0.0162146307798482,0.0428998806442116,0.0162146307798482,7,14.2857142857143
-"10 to 12","Saprolegnia_parasitica",0.231259654270052,0.358432668126043,0.146329524008858,6,66.6666666666667
-"10 to 12","Achlya_hypogyna",0.179329046479802,0.401258679928972,0.163813170114789,6,66.6666666666667
-"10 to 12","Globisporangium_aquisylvae",0.129704634473636,0.282349438573973,0.115268675611256,6,33.3333333333333
-"10 to 12","Globisporangium_heterothallicum",0.0986747274584715,0.241702732781452,0.0986747274584716,6,16.6666666666667
-"10 to 12","Pythium_dissotocum",0.066438706759041,0.16274093073005,0.066438706759041,6,16.6666666666667
-"10 to 12","Globisporangium_terrestre",0.0460405469531524,0.0835139266038109,0.0340944177659303,6,33.3333333333333
-"10 to 12","Pythium_dissimile",0.0340111331189087,0.0833099217152002,0.0340111331189087,6,16.6666666666667
-"10 to 12","Phytopythium_helicoides",0.0307039062831253,0.0752089035038913,0.0307039062831253,6,16.6666666666667
-"10 to 12","Pythium_jasmonium",0.0281430943563945,0.0671675255243123,0.0274210274699884,6,33.3333333333333
-"10 to 12","Globisporangium_mamillatum",0.0269385520081899,0.0659857068294923,0.0269385520081899,6,16.6666666666667
-"10 to 12","Pythium_insidiosum",0.0252494048808853,0.0618481582671081,0.0252494048808853,6,16.6666666666667
-"10 to 12","Other",0.0239900486239422,NA,NA,NA,NA
-"10 to 12","Globisporangium_glomeratum",0.0220552220216354,0.0540240401168016,0.0220552220216354,6,16.6666666666667
-"10 to 12","Pythium_apleroticum",0.014538462602537,0.0356118150207511,0.014538462602537,6,16.6666666666667
-"10 to 12","Globisporangium_iwayami",0.0127758731519177,0.0312943702407214,0.0127758731519177,6,16.6666666666667
-"10 to 12","Globisporangium_attrantheridium",0.0124336356926886,0.0304560630947436,0.0124336356926886,6,16.6666666666667
+"YrSinceTrt_BR","Kingdom","Phylum","Class","Order","Family","Genus","Species","Mean_Relative_Abundance","Standard_Deviation","Standard_Error","Sample_Size","Prevalence_Percent"
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_aquisylvae",0.13372398407926,0.260583261050899,0.0422721869305654,38,42.1052631578947
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_terrestre",0.119879511768068,0.261736965182415,0.0424593424543443,38,26.3157894736842
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Achlya","Achlya_hypogyna",0.116713833917398,0.215557187444478,0.0349679932821934,38,36.8421052631579
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Phytopythium","Phytopythium_helicoides",0.066769815781308,0.21744022256952,0.0352734619162169,38,15.7894736842105
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Peronosporales","Peronosporaceae","Phytophthora","Phytophthora_ramorum",0.0496124206286221,0.189249320961548,0.0307002937944142,38,10.5263157894737
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_contiguanum",0.0493332648365436,0.131534935220192,0.0213377841197624,38,18.4210526315789
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Saprolegnia","Saprolegnia_parasitica",0.0490878214703952,0.174230799651464,0.0282639679242096,38,18.4210526315789
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Halophytophthora","Halophytophthora_kandeliae",0.0425645016899258,0.134029917191301,0.0217425236408113,38,13.1578947368421
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Lagenidiales","Lagenidiaceae","Lagenidium","Lagenidium_sp.sinuatum",0.0415038144476052,0.165652096283602,0.0268723184724159,38,7.89473684210526
+"Unmitigated","Other","Other","Other","Other","Other","Other","Other",0.0390166039538023,NA,NA,NA,NA
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_nodosum",0.0326527632702325,0.0777375740253595,0.0126106997336517,38,50
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_monospermum",0.0293536794119,0.0967756792030873,0.0156990882112196,38,18.4210526315789
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_lucens",0.027841451828944,0.13769848396124,0.0223376437557438,38,7.89473684210526
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Elongisporangium","Elongisporangium_anandrum",0.0252125711714286,0.127504951456325,0.020684034426454,38,7.89473684210526
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Phytopythium","Phytopythium_iriomotense",0.0239632054647627,0.094975238843121,0.0154070182173647,38,7.89473684210526
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Leptolegniaceae","Aphanomyces","Aphanomyces_stellatus",0.0216020486725227,0.063385620637632,0.0102825054590921,38,18.4210526315789
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_junctum",0.0185909461501459,0.0793716663205501,0.0128757845080363,38,15.7894736842105
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_acanthophoron",0.0184908741226471,0.0638587488710565,0.0103592569934953,38,15.7894736842105
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_brachiatum",0.0152995133890202,0.0736163790760964,0.0119421536322253,38,10.5263157894737
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_jasmonium",0.014355596580353,0.0402753302158108,0.00653352130411958,38,15.7894736842105
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Phytopythium","Phytopythium_aichiense",0.0126575926864386,0.0695067948381561,0.01127549103689,38,7.89473684210526
+"Unmitigated","Stramenopila","Oomycota","Oomycetes","Peronosporales","Peronosporaceae","Phytophthora","Phytophthora_nemorosa",0.0117960509794396,0.0383222218782599,0.00621668529397972,38,13.1578947368421
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_aquisylvae",0.233736945333877,0.354778959420753,0.0793309870251443,20,45
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_terrestre",0.077214259787841,0.183888000572179,0.0411186069525913,20,20
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_attrantheridium",0.0604244025766715,0.178066052622949,0.0398167798149968,20,15
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Saprolegnia","Saprolegnia_parasitica",0.054707192707201,0.155770347367794,0.0348313085593143,20,30
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Elongisporangium","Elongisporangium_anandrum",0.0530997002752777,0.13441060710273,0.030055125437872,20,20
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Phytopythium","Phytopythium_helicoides",0.0510599378819787,0.12386423904695,0.0276968858490264,20,30
+"1 to 2","Other","Other","Other","Other","Other","Other","Other",0.0474716415574097,NA,NA,NA,NA
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Peronosporales","Peronosporaceae","Phytophthora","Phytophthora_nemorosa",0.0473572113249212,0.104832777046038,0.0234413215745022,20,20
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Lagenidiales","Lagenidiaceae","Lagenidium","Lagenidium_sp.sinuatum",0.0419246238814626,0.133180438550176,0.0297800513871428,20,15
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Phytopythium","Phytopythium_aichiense",0.0348546627535364,0.104561892365931,0.0233807499186239,20,15
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Achlya","Achlya_hypogyna",0.0340240422663366,0.099400596684055,0.0222266491189587,20,25
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_brachiatum",0.0298023472627264,0.0962977256451342,0.0215328260621145,20,25
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_insidiosum",0.0288583821125459,0.0544997813543355,0.012186521586717,20,35
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Peronosporales","Peronosporaceae","Phytophthora","Phytophthora_europaea",0.0288424174250946,0.128987211995872,0.0288424174250946,20,5
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_dissotocum",0.0277679664452427,0.124182121136992,0.0277679664452427,20,5
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_rostratifingens",0.0181477574825499,0.0602016012113126,0.0134614872662829,20,10
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Phytopythium","Phytopythium_iriomotense",0.0179709824440458,0.0802985058488729,0.0179552917569744,20,10
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_contiguanum",0.0153186758012392,0.0413650250970374,0.00924950080079604,20,20
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_iwayami",0.0149874397447213,0.0670258681557578,0.0149874397447213,20,5
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_nodosum",0.014778339100078,0.0416998970462503,0.00932438044501583,20,35
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Albuginaceae","Albuginales","Albugo","Albugo_laibachii",0.0141698414649134,0.0633694574918829,0.0141698414649134,20,5
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Saprolegnia","Saprolegnia_ferax",0.0121101457882819,0.0291766912014916,0.00652410648850553,20,25
+"1 to 2","Stramenopila","Oomycota","Oomycetes","Peronosporales","Peronosporaceae","Phytophthora","Phytophthora_fragariae",0.0101670900918507,0.0454686091574855,0.0101670900918507,20,5
+"3 to 4","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Thraustotheca","Thraustotheca_clavata",0.301199409633067,0.46521904576792,0.26859434130625,3,66.6666666666667
+"3 to 4","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_selbyi",0.246498476324426,0.426947884982219,0.246498476324426,3,33.3333333333333
+"3 to 4","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Achlya","Achlya_hypogyna",0.186945681413754,0.258228557259071,0.149088327045973,3,66.6666666666667
+"3 to 4","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Saprolegnia","Saprolegnia_parasitica",0.0867605565685356,0.140604798174963,0.0811782180756681,3,66.6666666666667
+"3 to 4","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Leptolegniaceae","Aphanomyces","Aphanomyces_astaci",0.0698384689958625,0.114143574081302,0.0659008232221059,3,66.6666666666667
+"3 to 4","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_brachiatum",0.0543297746144721,0.0941019299960315,0.0543297746144721,3,33.3333333333333
+"3 to 4","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_rostratifingens",0.0311620956399437,0.0539743329187031,0.0311620956399437,3,33.3333333333333
+"3 to 4","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Leptolegniaceae","Aphanomyces","Aphanomyces_stellatus",0.0199167966718669,0.0344969037596921,0.0199167966718669,3,33.3333333333333
+"3 to 4","Other","Other","Other","Other","Other","Other","Other",0.000715632000807458,NA,NA,NA,NA
+"5 to 8","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Saprolegnia","Saprolegnia_parasitica",0.326885517200062,0.440621168352312,0.166539147692992,7,71.4285714285714
+"5 to 8","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_aquisylvae",0.305815881974134,0.425381686454821,0.160779164948673,7,42.8571428571429
+"5 to 8","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_rostratifingens",0.09559074726003,0.22338853657701,0.0844329305036323,7,28.5714285714286
+"5 to 8","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Saprolegnia","Saprolegnia_ferax",0.0867196396328382,0.22943860025363,0.0867196396328382,7,14.2857142857143
+"5 to 8","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_monospermum",0.07710235906012,0.203993667569485,0.07710235906012,7,14.2857142857143
+"5 to 8","Stramenopila","Oomycota","Oomycetes","Peronosporales","Peronosporaceae","Phytophthora","Phytophthora_nemorosa",0.0573409032293708,0.147503735195048,0.0557511715398888,7,28.5714285714286
+"5 to 8","Other","Other","Other","Other","Other","Other","Other",0.0330534683096964,NA,NA,NA,NA
+"5 to 8","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Thraustotheca","Thraustotheca_clavata",0.0162146307798482,0.0428998806442116,0.0162146307798482,7,14.2857142857143
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Saprolegnia","Saprolegnia_parasitica",0.231259654270052,0.358432668126043,0.146329524008858,6,66.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Saprolegniales","Saprolegniaceae","Achlya","Achlya_hypogyna",0.179329046479802,0.401258679928972,0.163813170114789,6,66.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_aquisylvae",0.129704634473636,0.282349438573973,0.115268675611256,6,33.3333333333333
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_heterothallicum",0.0986747274584715,0.241702732781452,0.0986747274584716,6,16.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_dissotocum",0.066438706759041,0.16274093073005,0.066438706759041,6,16.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_terrestre",0.0460405469531524,0.0835139266038109,0.0340944177659303,6,33.3333333333333
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_dissimile",0.0340111331189087,0.0833099217152002,0.0340111331189087,6,16.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Phytopythium","Phytopythium_helicoides",0.0307039062831253,0.0752089035038913,0.0307039062831253,6,16.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_jasmonium",0.0281430943563945,0.0671675255243123,0.0274210274699884,6,33.3333333333333
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_mamillatum",0.0269385520081899,0.0659857068294923,0.0269385520081899,6,16.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_insidiosum",0.0252494048808853,0.0618481582671081,0.0252494048808853,6,16.6666666666667
+"10 to 12","Other","Other","Other","Other","Other","Other","Other",0.0239900486239422,NA,NA,NA,NA
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_glomeratum",0.0220552220216354,0.0540240401168016,0.0220552220216354,6,16.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Pythium","Pythium_apleroticum",0.014538462602537,0.0356118150207511,0.014538462602537,6,16.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_iwayami",0.0127758731519177,0.0312943702407214,0.0127758731519177,6,16.6666666666667
+"10 to 12","Stramenopila","Oomycota","Oomycetes","Pythiales","Pythiaceae","Globisporangium","Globisporangium_attrantheridium",0.0124336356926886,0.0304560630947436,0.0124336356926886,6,16.6666666666667

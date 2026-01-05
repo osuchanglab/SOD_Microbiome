@@ -1,4 +1,4 @@
-"Fire_Mod","Phylum","Mean_Relative_Abundance","Standard_Deviation","Standard_Error","Sample_Size","Prevalence_Percent"
-"Unmitigated","Oomycota",1,0,0,38,100
-"Mitigated","Oomycota",1,0,0,36,100
-"Wildfire","Oomycota",1,0,0,13,100
+"Fire_Mod","Kingdom","Phylum","Mean_Relative_Abundance","Standard_Deviation","Standard_Error","Sample_Size","Prevalence_Percent"
+"Unmitigated","Stramenopila","Oomycota",1,0,0,38,100
+"Mitigated","Stramenopila","Oomycota",1,0,0,36,100
+"Wildfire","Stramenopila","Oomycota",1,0,0,13,100

@@ -98,13 +98,26 @@ prepare_phyloseq <- function(ps, rank = "Phylum", group_var,
   return(ps_filt)
 }
 
-export_genus_data <- function(ps, group_var, output_file) {
+export_genus_data <- function(ps, group_var, output_file, rank = "Genus") {
   
-  ps_genus <- tax_glom(ps, taxrank = "Genus", NArm = TRUE)
-  ps_rel <- transform_sample_counts(ps_genus, function(x) x / sum(x))
+  ps_agg <- tax_glom(ps, taxrank = rank, NArm = TRUE)
+  ps_rel <- transform_sample_counts(ps_agg, function(x) x / sum(x))
+  
+  all_ranks <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+  
+  available_ranks <- colnames(tax_table(ps_rel))
+  
+  rank_index <- which(all_ranks == rank)
+  ranks_to_include <- all_ranks[1:rank_index]
+  
+  ranks_to_include <- ranks_to_include[ranks_to_include %in% available_ranks]
+  
+  if (length(ranks_to_include) == 0) {
+    ranks_to_include <- rank
+  }
   
   data_summary <- psmelt(ps_rel) %>%
-    group_by(across(all_of(c(group_var, "Genus")))) %>%
+    group_by(across(all_of(c(group_var, ranks_to_include)))) %>%
     summarise(
       Mean_RelAbund = mean(Abundance),
       SD_RelAbund = sd(Abundance),
@@ -117,7 +130,8 @@ export_genus_data <- function(ps, group_var, output_file) {
     arrange(across(all_of(group_var)), desc(Mean_Relative_Abundance))
   
   write.csv(data_summary, output_file, row.names = FALSE)
-  message("✓ Genus data exported to: ", output_file)
+  message("✓ Data exported to: ", output_file)
+  message("  Taxonomic ranks included: ", paste(ranks_to_include, collapse = ", "))
   
   return(data_summary)
 }
@@ -128,6 +142,7 @@ create_relabund_plot <- function(ps, rank = "Phylum", group_var,
                                  collapse_other = TRUE,
                                  other_label = "Other",
                                  output_file = NULL,
+                                 output_data_file = NULL,
                                  width = 7.5, height = 8.5, dpi = 300) {
   
   ps_ready <- prepare_phyloseq(ps, rank = rank, group_var = group_var,
@@ -141,8 +156,21 @@ create_relabund_plot <- function(ps, rank = "Phylum", group_var,
                paste(colnames(df_plot), collapse = ", ")))
   }
   
+  all_ranks <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+  
+  available_ranks <- colnames(df_plot)
+  
+  rank_index <- which(all_ranks == rank)
+  ranks_to_include <- all_ranks[1:rank_index]
+  
+  ranks_to_include <- ranks_to_include[ranks_to_include %in% available_ranks]
+  
+  if (length(ranks_to_include) == 0) {
+    ranks_to_include <- rank
+  }
+  
   df_detailed <- df_plot %>%
-    group_by(across(all_of(c(group_var, rank)))) %>%
+    group_by(across(all_of(c(group_var, ranks_to_include)))) %>%
     summarise(
       Mean_Relative_Abundance = mean(Abundance, na.rm = TRUE),
       Standard_Deviation = sd(Abundance, na.rm = TRUE),
@@ -151,12 +179,14 @@ create_relabund_plot <- function(ps, rank = "Phylum", group_var,
       Prevalence_Percent = (sum(Abundance > 0, na.rm = TRUE) / n()) * 100,
       .groups = "drop"
     ) %>%
-    filter(!is.nan(Mean_Relative_Abundance))  # Remove NaN values
+    filter(!is.nan(Mean_Relative_Abundance))
   
   df_summary <- df_detailed %>%
     select(all_of(c(group_var, rank, "Mean_Relative_Abundance")))
   
   names(df_summary)[names(df_summary) == "Mean_Relative_Abundance"] <- "Abundance"
+  
+  ranks_in_detailed <- ranks_to_include[ranks_to_include %in% colnames(df_detailed)]
   
   if (collapse_other) {
     df_detailed_precollapse <- df_detailed
@@ -167,25 +197,32 @@ create_relabund_plot <- function(ps, rank = "Phylum", group_var,
              !!rank := if_else(prop < min_prop, other_label, .data[[rank]])) %>%
       group_by(across(all_of(c(group_var, rank)))) %>%
       summarise(Abundance = sum(Abundance), .groups = "drop")
-    
+
     df_detailed <- df_detailed %>%
       group_by(across(all_of(group_var))) %>%
       mutate(prop = Mean_Relative_Abundance / sum(Mean_Relative_Abundance),
-             !!rank := if_else(prop < min_prop, other_label, .data[[rank]])) %>%
-      group_by(across(all_of(c(group_var, rank)))) %>%
+             is_other = prop < min_prop) %>%
+      ungroup()
+    
+    for (tax_rank in ranks_in_detailed) {
+      df_detailed <- df_detailed %>%
+        mutate(!!tax_rank := if_else(is_other, other_label, .data[[tax_rank]]))
+    }
+    
+    df_detailed <- df_detailed %>%
+      group_by(across(all_of(c(group_var, ranks_in_detailed)))) %>%
       summarise(
         Mean_Relative_Abundance = sum(Mean_Relative_Abundance, na.rm = TRUE),
-        Standard_Deviation = sqrt(sum(Standard_Deviation^2, na.rm = TRUE)),  # Combined SD
+        Standard_Deviation = sqrt(sum(Standard_Deviation^2, na.rm = TRUE)),
         Sample_Size = sum(Sample_Size, na.rm = TRUE),
         Standard_Error = if_else(Sample_Size[1] > 1, Standard_Deviation / sqrt(Sample_Size[1]), NA_real_),
-        N_with_taxon = sum(Prevalence_Percent * Sample_Size / 100, na.rm = TRUE),  # Calculate from prevalence
+        N_with_taxon = sum(Prevalence_Percent * Sample_Size / 100, na.rm = TRUE),
         .groups = "drop"
       ) %>%
       mutate(
         Prevalence_Percent = (N_with_taxon / Sample_Size) * 100
       ) %>%
-      select(-N_with_taxon) %>%  # Remove temporary column
-      # Set all statistics to NA for "Other" category except Mean_Relative_Abundance
+      select(-N_with_taxon) %>%
       mutate(
         Standard_Deviation = if_else(.data[[rank]] == other_label, NA_real_, Standard_Deviation),
         Standard_Error = if_else(.data[[rank]] == other_label, NA_real_, Standard_Error),
@@ -239,20 +276,21 @@ create_relabund_plot <- function(ps, rank = "Phylum", group_var,
   
   if (!is.null(output_file)) {
     ggsave(output_file, p, width = width, height = height, dpi = dpi)
-    message("✓ Plot saved to: ", output_file)
   }
   
   data_summary <- df_detailed %>%
-    arrange(across(all_of(group_var)), desc(Mean_Relative_Abundance)) %>%
-    select(
-      all_of(group_var),
-      all_of(rank),
-      Mean_Relative_Abundance,
-      Standard_Deviation,
-      Standard_Error,
-      Sample_Size,
-      Prevalence_Percent
-    )
+    arrange(across(all_of(group_var)), desc(Mean_Relative_Abundance))
+
+  stat_cols <- c("Mean_Relative_Abundance", "Standard_Deviation", "Standard_Error", 
+                 "Sample_Size", "Prevalence_Percent")
+  col_order <- c(group_var, ranks_in_detailed, stat_cols)
+  data_summary <- data_summary %>% select(all_of(col_order))
+  
+  if (!is.null(output_data_file)) {
+    write.csv(data_summary, output_data_file, row.names = FALSE)
+    message("✓ Data exported to: ", output_data_file)
+    message("  Taxonomic ranks included: ", paste(ranks_in_detailed, collapse = ", "))
+  }
   
   return(list(plot = p, data = data_summary, ps = ps_ready))
 }
