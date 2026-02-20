@@ -103,38 +103,38 @@ HD4388-S1_S88,basetree_100plots,sample,1,1,post,1,EU1,2020,2019,1,<3,1to2,SODtrt
 HD4397-S1_S97,basetree_100plots,sample,1,1,post,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.331949,-124.402473,0,0,NA,NA,NA
 HD4398-S1_S98,basetree_100plots,sample,1,1,post,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.333081,-124.400605,0,0,NA,NA,NA
 HD4399-S1_S99,basetree_100plots,sample,1,1,post,1,EU1,2020,2019,1,<3,1to2,SODtrt,SODtrt,1,1,42.334215,-124.40015,0,0,NA,NA,NA
-10gEP114_S221,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+10gEP114_S221,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
 10gHD4371_S218,10g,sample,0,0,NA,0,uninfested,2019,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.49711,-124.29369,0,0,NA,NA,NA
-114-2152-PSME_2_S259,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2152-PSME_S215,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2164-PSME_2_S256,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2164-PSME_S212,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2170-4-NODE3_2_S255,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2170-4-NODE3_S211,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2177-1-NODE3_2_S253,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2177-1-NODE3_S209,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2191-1-ARME_2_S258,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2191-1-ARME_S214,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2203-1-NODE3_2_S252,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2203-1-NODE3_S208,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2211-2-NODE3_2_S251,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2211-2-NODE3_S207,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2228-2-ARME_2_S260,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2228-2-ARME_S216,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2237-PSME_2_S257,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2237-PSME_S213,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2277-NODE3_2_S254,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-2277-NODE3_S210,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-center-rebar_2_S250,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-center-rebar_S206,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-east-rebar_2_S247,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-east-rebar_S203,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-north-rebar_2_S246,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-north-rebar_S202,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-south-rebar_2_S248,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-south-rebar_S204,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-west-rebar_2_S249,ebba_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
-114-west-rebar_S205,ebba,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2152-PSME_2_S259,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2152-PSME_S215,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2164-PSME_2_S256,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2164-PSME_S212,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2170-4-NODE3_2_S255,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2170-4-NODE3_S211,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2177-1-NODE3_2_S253,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2177-1-NODE3_S209,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2191-1-ARME_2_S258,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2191-1-ARME_S214,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2203-1-NODE3_2_S252,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2203-1-NODE3_S208,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2211-2-NODE3_2_S251,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2211-2-NODE3_S207,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2228-2-ARME_2_S260,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2228-2-ARME_S216,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2237-PSME_2_S257,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2237-PSME_S213,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2277-NODE3_2_S254,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-2277-NODE3_S210,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-center-rebar_2_S250,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-center-rebar_S206,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-east-rebar_2_S247,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-east-rebar_S203,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-north-rebar_2_S246,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-north-rebar_S202,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-south-rebar_2_S248,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-south-rebar_S204,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-west-rebar_2_S249,EP_extra,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
+114-west-rebar_S205,EP,sample,0,0,NA,0,uninfested,2021,9999,untreated,NA, NA,unburned,untreated,0,unburned,42.151841,-124.281402,0,0,NA,NA,NA
 HD3901-S1_4401_S1,basetree_100plots,sample,1,0,NA,0,EU1,2020,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.332505,-124.399209,1,1,NA,NA,NA
 HD3902-S1_4400_S100,basetree_100plots,sample,1,0,NA,0,EU1,2020,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.41881,-124.349987,1,0,NA,NA,NA
 HD4301-S1_S2,basetree_100plots,sample,1,0,NA,0,NA1,2018,9999,untreated,untreated,untreated,unburned,untreated,0,unburned,42.19457,-124.3507,1,1,NA,NA,NA

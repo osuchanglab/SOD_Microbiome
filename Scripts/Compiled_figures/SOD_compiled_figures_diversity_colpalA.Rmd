@@ -218,7 +218,6 @@ print_anova_stats(tukey_results_ITS_nowf)
 ```
 
 ### Let's calculate alpha diversity metrics for 16S dataset
-
 ```{r, combine alpha diversity boxplots 16S}
 set.seed(1)
 
@@ -392,19 +391,6 @@ print_anova_stats(tukey_results_rps10_nowf)
 
 ### Let's make a more publication ready figure
 ```{r, combine all alpha trt box plots}
-# Okabe–Ito (color-blind safe) palette
-okabe_ito <- c(
-  oblack   = "#000000",
-  oorange  = "#E69F00",
-  oskyblue = "#56B4E9",
-  ogreen   = "#009E73",
-  oyellow  = "#F0E442",
-  oblue    = "#0072B2",
-  overmil  = "#D55E00",
-  opurple  = "#CC79A7"
-)
-
-
 colors_treatuntreat <- c(
   "SOD-UT" = "#0072B2",
   "SOD-T"  = "#D55E00"
@@ -546,8 +532,9 @@ facetted_figure_final <- plot_grid(
   plot_panel, ncol = 2, rel_widths = c(0.03, 1), align = "hv", axis = "tblr"
 )
 
-ggsave("Figures/Figure1_alpha_diversity_faceted_colorA.png", facetted_figure_final, width = 9, height = 9, dpi = 600)
-ggsave("Figures/Figure1_alpha_diversity_faceted_colorA.pdf", facetted_figure_final, width = 9, height = 9, dpi = 600)
+ggsave("Figures/Figure1_alpha_diversity_faceted_colorA.png", facetted_figure_final, width = 9, height = 9, dpi = 800)
+ggsave("Figures/Figure1_alpha_diversity_faceted_colorA.pdf", facetted_figure_final, width = 9, height = 9, dpi = 800)
+ggsave("Figures/Figure1_alpha_diversity_faceted_colorA.svg", facetted_figure_final, width = 9, height = 9, dpi = 800)
 
 facetted_figure_final
 ```
@@ -778,25 +765,13 @@ facetted_figure <- plot_grid(
 facetted_figure
 
 # Save the figure
-ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.svg", facetted_figure, width = 16, height = 12)
-ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.pdf", facetted_figure, width = 16, height = 12)
+#ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.svg", facetted_figure, width = 16, height = 12)
+#ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.pdf", facetted_figure, width = 16, height = 12)
 ```
 
 ### Revised figure
 
 ```{r revised figures}
-okabe_ito <- c(
-  oblack   = "#000000",
-  oorange  = "#E69F00",
-  oskyblue = "#56B4E9",
-  ogreen   = "#009E73",
-  oyellow  = "#F0E442",
-  oblue    = "#0072B2",
-  overmil  = "#D55E00",
-  opurple  = "#CC79A7"
-)
-
-
 colors_treatuntreat <- c(
   "SOD-UT" = "#0072B2",
   "SOD-T"  = "#D55E00"
@@ -919,8 +894,9 @@ plot_with_x_label <- plot_grid(plot_panel, x_axis_label, nrow = 2, rel_heights =
 facetted_figure_final <- plot_grid(y_axis_label, plot_with_x_label,
                                    ncol = 2, rel_widths = c(0.03, 1))
 
-ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorA.png", facetted_figure_final, width = 9, height = 9, dpi = 600)
-ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorA.pdf", facetted_figure_final, width = 9, height = 9, dpi = 600)
+ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorA.png", facetted_figure_final, width = 9, height = 9, dpi = 800)
+ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorA.pdf", facetted_figure_final, width = 9, height = 9, dpi = 800)
+ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorA.svg", facetted_figure_final, width = 9, height = 9, dpi = 800)
 
 facetted_figure_final
 ```

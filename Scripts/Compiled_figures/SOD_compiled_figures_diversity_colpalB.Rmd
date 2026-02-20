@@ -392,8 +392,6 @@ print_anova_stats(tukey_results_rps10_nowf)
 
 ### Let's make a more publication ready figure
 ```{r, combine all alpha trt box plots}
-# A) Treatment (2 groups)
-
 colors_treatuntreat <- c(
   "SOD-UT" = "#2271B2",  # deep blue
   "SOD-T"  = "#e69f00"   # rusty orange
@@ -413,6 +411,7 @@ colors_fire <- c(
   "SOD-T"    = "#e69f00", # rusty orange
   "Wildfire" = "#F8071D"  # pink/magenta
 )
+
 
 modify_plot <- function(plot, remove_y_title = FALSE, colors, x_var, tukey_result = NULL, ylim = NULL, panel_label = NULL) {
   p <- plot +
@@ -534,8 +533,9 @@ facetted_figure_final <- plot_grid(
   plot_panel, ncol = 2, rel_widths = c(0.03, 1), align = "hv", axis = "tblr"
 )
 
-ggsave("Figures/Figure1_alpha_diversity_faceted_colorB.png", facetted_figure_final, width = 9, height = 9, dpi = 600)
-ggsave("Figures/Figure1_alpha_diversity_faceted_colorB.pdf", facetted_figure_final, width = 9, height = 9, dpi = 600)
+ggsave("Figures/Figure1_alpha_diversity_faceted_colorB.png", facetted_figure_final, width = 9, height = 9, dpi = 800)
+ggsave("Figures/Figure1_alpha_diversity_faceted_colorB.pdf", facetted_figure_final, width = 9, height = 9, dpi = 800)
+ggsave("Figures/Figure1_alpha_diversity_faceted_colorB.svg", facetted_figure_final, width = 9, height = 9, dpi = 800)
 
 facetted_figure_final
 ```
@@ -657,7 +657,6 @@ plot_ellipses_16S_fire
 ```
 
 ### Let's proceed with ordination for the RPS10 dataset-NMDS
-
 ```{r, ordination plots rps10 NMDS}
 set.seed(1)
 strat_rel_sod_rps10_nowf.ps<-transform_sample_counts(sod_5asv_rps10_nowf.ps, function(x) x / sum(x))
@@ -766,12 +765,11 @@ facetted_figure <- plot_grid(
 facetted_figure
 
 # Save the figure
-ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.svg", facetted_figure, width = 16, height = 12)
-ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.pdf", facetted_figure, width = 16, height = 12)
+#ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.svg", facetted_figure, width = 16, height = 12)
+#ggsave("Figures/Figure2_beta_diversity_ordination_NMDS.pdf", facetted_figure, width = 16, height = 12)
 ```
 
 ### Revised figure
-
 ```{r revised figures}
 colors_treatuntreat <- c(
   "SOD-UT" = "#2271B2",  # deep blue
@@ -895,8 +893,9 @@ plot_with_x_label <- plot_grid(plot_panel, x_axis_label, nrow = 2, rel_heights =
 facetted_figure_final <- plot_grid(y_axis_label, plot_with_x_label,
                                    ncol = 2, rel_widths = c(0.03, 1))
 
-ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorB.png", facetted_figure_final, width = 9, height = 9, dpi = 600)
-ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorB.pdf", facetted_figure_final, width = 9, height = 9, dpi = 600)
+ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorB.png", facetted_figure_final, width = 9, height = 9, dpi = 800)
+ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorB.pdf", facetted_figure_final, width = 9, height = 9, dpi = 800)
+ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorB.svg", facetted_figure_final, width = 9, height = 9, dpi = 800)
 
 facetted_figure_final
 ```

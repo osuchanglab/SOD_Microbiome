@@ -39,56 +39,80 @@ set.seed(1)
 ### Compiled analysis
 ```{r workflow, include=TRUE}
 prepare_phyloseq <- function(ps, rank = "Phylum", group_var,
-                             reference_level = NULL, min_prop = 0) {
-  ps_agg <- tax_glom(ps, taxrank = rank, NArm = TRUE)
+                             reference_level = NULL, min_prop = 0.01) {
+  
+  ps_agg <- tax_glom(ps, taxrank = rank, NArm = TRUE) 
+  
   ps_rel <- transform_sample_counts(ps_agg, function(x) x / sum(x))
+
   original_tax_names <- as.character(tax_table(ps_rel)[, rank])
+  
   tax_table(ps_rel)[, rank] <- original_tax_names
-  ps_filt <- ps_rel
+  
+  df_temp <- psmelt(ps_rel) %>%
+    group_by(across(all_of(c(group_var, rank)))) %>%
+    summarise(Mean_Abund = mean(Abundance), .groups = "drop") %>%
+    group_by(across(all_of(group_var))) %>%
+    mutate(Prop = Mean_Abund / sum(Mean_Abund)) %>%
+    ungroup()
+  
+  keep_taxa_names <- df_temp %>%
+    filter(Prop >= min_prop) %>%
+    pull(!!sym(rank)) %>%
+    unique()
+  
+  if (length(keep_taxa_names) == 0 || min_prop == 0) {
+    keep_taxa_names <- unique(original_tax_names)
+  }
+  
+  keep_indices <- which(original_tax_names %in% keep_taxa_names)
+  
+  ps_filt <- prune_taxa(taxa_names(ps_rel)[keep_indices], ps_rel)
   
   if (!is.null(reference_level) && reference_level %in% sample_data(ps_filt)[[group_var]]) {
-    df_temp <- psmelt(ps_rel) %>%
-      dplyr::group_by(dplyr::across(all_of(c(group_var, rank)))) %>%
-      dplyr::summarise(Mean_Abund = mean(Abundance), .groups = "drop") %>%
-      dplyr::group_by(dplyr::across(all_of(group_var))) %>%
-      dplyr::mutate(Prop = Mean_Abund / sum(Mean_Abund)) %>%
-      dplyr::ungroup()
-    
+
     current_tax_names <- as.character(tax_table(ps_filt)[, rank])
-
+    
     ref_props <- df_temp %>%
-      dplyr::filter(.data[[group_var]] == reference_level) %>%
-      dplyr::arrange(Prop) %>%
-      dplyr::select(all_of(rank), Prop)
-
+      filter(.data[[group_var]] == reference_level, 
+             .data[[rank]] %in% keep_taxa_names) %>%
+      arrange(Prop) %>%
+      select(all_of(rank), Prop)
+    
     if (nrow(ref_props) > 0) {
       ref_taxa_ordered <- ref_props[[rank]]
-      other_taxa <- setdiff(unique(original_tax_names), ref_taxa_ordered)
+      other_taxa <- setdiff(keep_taxa_names, ref_taxa_ordered)
       taxa_order <- c(other_taxa, ref_taxa_ordered)
-
       otu_order <- character()
       for (taxon in taxa_order) {
         matching_otus <- taxa_names(ps_filt)[which(current_tax_names == taxon)]
         otu_order <- c(otu_order, matching_otus)
       }
+      
       otu_order <- unique(otu_order[!is.na(otu_order)])
       if (length(otu_order) > 0 && length(otu_order) == ntaxa(ps_filt)) {
         ps_filt <- prune_taxa(otu_order, ps_filt)
       }
     }
   }
-
+  
   return(ps_filt)
 }
 
 export_genus_data <- function(ps, group_var, output_file, rank = "Genus") {
+  
   ps_agg <- tax_glom(ps, taxrank = rank, NArm = TRUE)
   ps_rel <- transform_sample_counts(ps_agg, function(x) x / sum(x))
+  
   all_ranks <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+  
   available_ranks <- colnames(tax_table(ps_rel))
+  
   rank_index <- which(all_ranks == rank)
   ranks_to_include <- all_ranks[1:rank_index]
+  
   ranks_to_include <- ranks_to_include[ranks_to_include %in% available_ranks]
+  
   if (length(ranks_to_include) == 0) {
     ranks_to_include <- rank
   }
@@ -109,6 +133,7 @@ export_genus_data <- function(ps, group_var, output_file, rank = "Genus") {
   write.csv(data_summary, output_file, row.names = FALSE)
   message("✓ Data exported to: ", output_file)
   message("  Taxonomic ranks included: ", paste(ranks_to_include, collapse = ", "))
+  
   return(data_summary)
 }
 
@@ -117,130 +142,130 @@ create_relabund_plot <- function(ps, rank = "Phylum", group_var,
                                  min_prop = 0.01,
                                  collapse_other = TRUE,
                                  other_label = "Other",
-                                 det_thresh = 0,          # per-sample presence threshold
                                  output_file = NULL,
                                  output_data_file = NULL,
                                  width = 7.5, height = 8.5, dpi = 300) {
-
+  
   ps_ready <- prepare_phyloseq(ps, rank = rank, group_var = group_var,
                                reference_level = reference_level,
-                               min_prop = 0)  # keep-all
-
+                               min_prop = 0)
+  
   df_plot <- psmelt(ps_ready)
-
+  
   if (!rank %in% colnames(df_plot)) {
-    stop(paste(
-      "Rank", rank, "not found. Available columns in psmelt(ps):",
-      paste(colnames(df_plot), collapse = ", ")
-    ))
-  }
-
-  all_ranks <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
-
-  available_ranks_1 <- intersect(all_ranks, colnames(df_plot))
-  rank_index <- match(rank, all_ranks)
-  if (is.na(rank_index)) {
-    # If 'rank' not in all_ranks, just use the provided 'rank' as-is
-    ranks_to_include <- rank
-  } else {
-    candidate <- all_ranks[1:rank_index]
-    ranks_to_include <- intersect(candidate, available_ranks_1)
-    if (length(ranks_to_include) == 0) ranks_to_include <- rank
+    stop(paste("Rank", rank, "not found in phyloseq object. Available columns:", 
+               paste(colnames(df_plot), collapse = ", ")))
   }
   
-  df_mean_by_group <- df_plot %>%
-    dplyr::group_by(dplyr::across(all_of(c(group_var, rank)))) %>%
-    dplyr::summarise(mean_ra = mean(Abundance), .groups = "drop") %>%
-    dplyr::group_by(dplyr::across(all_of(group_var))) %>%
-    dplyr::mutate(prop = mean_ra / sum(mean_ra)) %>%
-    dplyr::ungroup() %>%
-    dplyr::mutate(is_small = prop < min_prop)
-
-  df_plot_flagged <- df_plot %>%
-    dplyr::left_join(
-      df_mean_by_group %>% dplyr::select(all_of(c(group_var, rank)), is_small),
-      by = c(group_var, rank)
-    ) %>%
-    dplyr::mutate(is_small = dplyr::coalesce(is_small, FALSE))
-
-  if (collapse_other && min_prop > 0) {
-    df_plot_flagged[[rank]] <- ifelse(df_plot_flagged$is_small, other_label, df_plot_flagged[[rank]])
+  all_ranks <- c("Kingdom", "Phylum", "Class", "Order", "Family", "Genus", "Species")
+  
+  available_ranks <- colnames(df_plot)
+  
+  rank_index <- which(all_ranks == rank)
+  ranks_to_include <- all_ranks[1:rank_index]
+  
+  ranks_to_include <- ranks_to_include[ranks_to_include %in% available_ranks]
+  
+  if (length(ranks_to_include) == 0) {
+    ranks_to_include <- rank
   }
-
-  df_sample_tax <- df_plot_flagged %>%
-    dplyr::group_by(Sample, dplyr::across(all_of(c(group_var, rank)))) %>%
-    dplyr::summarise(Abundance = sum(Abundance), .groups = "drop")
-
-  samples_in_group <- df_sample_tax %>% dplyr::distinct(Sample, .data[[group_var]])
-  taxa_levels     <- sort(unique(df_sample_tax[[rank]]), na.last = TRUE)
-
-  df_full <- tidyr::crossing(
-      samples_in_group,
-      !!rlang::sym(rank) := taxa_levels
-    ) %>%
-    dplyr::left_join(df_sample_tax,
-                     by = c("Sample", group_var, rank)) %>%
-    dplyr::mutate(Abundance = tidyr::replace_na(Abundance, 0))
-
-  available_ranks_2 <- intersect(all_ranks, colnames(df_full))
-  if (!is.na(rank_index)) {
-    candidate2 <- all_ranks[1:rank_index]
-    ranks_to_include <- intersect(candidate2, available_ranks_2)
-    if (length(ranks_to_include) == 0) ranks_to_include <- rank
-  } else {
-    ranks_to_include <- intersect(rank, colnames(df_full))
-    if (length(ranks_to_include) == 0) ranks_to_include <- rank
-  }
-
-  df_detailed <- df_full %>%
-    dplyr::group_by(dplyr::across(all_of(c(group_var, ranks_to_include)))) %>%
-    dplyr::summarise(
+  
+  df_detailed <- df_plot %>%
+    group_by(across(all_of(c(group_var, ranks_to_include)))) %>%
+    summarise(
       Mean_Relative_Abundance = mean(Abundance, na.rm = TRUE),
-      Standard_Deviation      = sd(Abundance,   na.rm = TRUE),
-      Sample_Size             = dplyr::n_distinct(Sample),
-      Standard_Error          = dplyr::if_else(Sample_Size > 1,
-                                               Standard_Deviation / sqrt(Sample_Size),
-                                               NA_real_),
-      Prevalence_Percent      = mean(Abundance > det_thresh, na.rm = TRUE) * 100,
+      Standard_Deviation = sd(Abundance, na.rm = TRUE),
+      Standard_Error = if_else(n() > 1, sd(Abundance, na.rm = TRUE) / sqrt(n()), NA_real_),
+      Sample_Size = n(),
+      Prevalence_Percent = (sum(Abundance > 0, na.rm = TRUE) / n()) * 100,
       .groups = "drop"
     ) %>%
-    dplyr::filter(!is.nan(Mean_Relative_Abundance))
-
+    filter(!is.nan(Mean_Relative_Abundance))
+  
   df_summary <- df_detailed %>%
-    dplyr::select(all_of(c(group_var, rank, "Mean_Relative_Abundance"))) %>%
-    dplyr::rename(Abundance = Mean_Relative_Abundance)
+    select(all_of(c(group_var, rank, "Mean_Relative_Abundance")))
+  
+  names(df_summary)[names(df_summary) == "Mean_Relative_Abundance"] <- "Abundance"
+  
+  ranks_in_detailed <- ranks_to_include[ranks_to_include %in% colnames(df_detailed)]
+  
+  if (collapse_other) {
+    df_detailed_precollapse <- df_detailed
+    
+    df_summary <- df_summary %>%
+      group_by(across(all_of(group_var))) %>%
+      mutate(prop = Abundance / sum(Abundance),
+             !!rank := if_else(prop < min_prop, other_label, .data[[rank]])) %>%
+      group_by(across(all_of(c(group_var, rank)))) %>%
+      summarise(Abundance = sum(Abundance), .groups = "drop")
 
+    df_detailed <- df_detailed %>%
+      group_by(across(all_of(group_var))) %>%
+      mutate(prop = Mean_Relative_Abundance / sum(Mean_Relative_Abundance),
+             is_other = prop < min_prop) %>%
+      ungroup()
+    
+    for (tax_rank in ranks_in_detailed) {
+      df_detailed <- df_detailed %>%
+        mutate(!!tax_rank := if_else(is_other, other_label, .data[[tax_rank]]))
+    }
+    
+    df_detailed <- df_detailed %>%
+      group_by(across(all_of(c(group_var, ranks_in_detailed)))) %>%
+      summarise(
+        Mean_Relative_Abundance = sum(Mean_Relative_Abundance, na.rm = TRUE),
+        Standard_Deviation = sqrt(sum(Standard_Deviation^2, na.rm = TRUE)),
+        Sample_Size = sum(Sample_Size, na.rm = TRUE),
+        Standard_Error = if_else(Sample_Size[1] > 1, Standard_Deviation / sqrt(Sample_Size[1]), NA_real_),
+        N_with_taxon = sum(Prevalence_Percent * Sample_Size / 100, na.rm = TRUE),
+        .groups = "drop"
+      ) %>%
+      mutate(
+        Prevalence_Percent = (N_with_taxon / Sample_Size) * 100
+      ) %>%
+      select(-N_with_taxon) %>%
+      mutate(
+        Standard_Deviation = if_else(.data[[rank]] == other_label, NA_real_, Standard_Deviation),
+        Standard_Error = if_else(.data[[rank]] == other_label, NA_real_, Standard_Error),
+        Sample_Size = if_else(.data[[rank]] == other_label, NA_real_, Sample_Size),
+        Prevalence_Percent = if_else(.data[[rank]] == other_label, NA_real_, Prevalence_Percent)
+      )
+  }
+  
   taxa_names <- unique(df_summary[[rank]])
-
+  
   if (!is.null(reference_level)) {
     ref_taxa <- df_summary %>%
-      dplyr::filter(.data[[group_var]] == reference_level) %>%
-      dplyr::arrange(Abundance) %>%
-      dplyr::pull(!!rlang::sym(rank)) %>%
+      filter(.data[[group_var]] == reference_level) %>%
+      arrange(Abundance) %>%
+      pull(!!sym(rank)) %>%
       unique()
+    
     taxa_order <- unique(c(setdiff(taxa_names, c(ref_taxa, other_label)), ref_taxa))
-    if (other_label %in% taxa_names) taxa_order <- unique(c(taxa_order, other_label))
+    if (other_label %in% taxa_names) {
+      taxa_order <- unique(c(taxa_order, other_label))
+    }
   } else {
     taxa_order <- df_summary %>%
-      dplyr::group_by(.data[[rank]]) %>%
-      dplyr::summarise(total = sum(Abundance), .groups = "drop") %>%
-      dplyr::arrange(total) %>%
-      dplyr::pull(.data[[rank]]) %>%
+      group_by(.data[[rank]]) %>%
+      summarise(total = sum(Abundance), .groups = "drop") %>%
+      arrange(total) %>%
+      pull(.data[[rank]]) %>%
       unique()
   }
-
+  
   taxa_order <- unique(taxa_order)
-  df_summary[[rank]]  <- factor(df_summary[[rank]], levels = taxa_order)
-  df_detailed[[rank]] <- factor(df_detailed[[rank]], levels = taxa_order)
-
-  n_taxa      <- length(levels(df_summary[[rank]]))
+  
+  df_summary[[rank]] <- factor(df_summary[[rank]], levels = taxa_order)
+  
+  n_taxa <- length(unique(df_summary[[rank]]))
   legend_ncol <- if (rank == "Genus" && n_taxa > 12) 6 else 4
   legend_size <- if (rank == "Genus" && n_taxa > 15) 7 else 9
-
-  p <- ggplot2::ggplot(df_summary, aes(x = .data[[group_var]], y = Abundance, fill = .data[[rank]])) +
+  
+  p <- ggplot(df_summary, aes(x = .data[[group_var]], y = Abundance, fill = .data[[rank]])) +
     geom_col(color = "black", linewidth = 0.2) +
     scale_fill_viridis_d(option = "H", direction = -1) +
-    scale_y_continuous(labels = scales::percent_format(accuracy = 1), limit = c(0, 1)) +
+    scale_y_continuous(labels = scales::percent_format(accuracy = 1), limits = c(0, 1)) +
     labs(y = "Relative Abundance (%)", x = NULL, fill = rank) +
     theme_minimal() +
     theme(
@@ -249,25 +274,25 @@ create_relabund_plot <- function(ps, rank = "Phylum", group_var,
       legend.text = element_text(size = legend_size)
     ) +
     guides(fill = guide_legend(reverse = TRUE, ncol = legend_ncol))
-
+  
   if (!is.null(output_file)) {
     ggsave(output_file, p, width = width, height = height, dpi = dpi)
   }
-
-  stat_cols  <- c("Mean_Relative_Abundance", "Standard_Deviation", "Standard_Error",
-                  "Sample_Size", "Prevalence_Percent")
-  col_order  <- c(group_var, ranks_to_include, stat_cols)
+  
   data_summary <- df_detailed %>%
-    dplyr::arrange(dplyr::across(all_of(group_var)),
-                   dplyr::desc(Mean_Relative_Abundance)) %>%
-    dplyr::select(all_of(col_order))
+    arrange(across(all_of(group_var)), desc(Mean_Relative_Abundance))
 
+  stat_cols <- c("Mean_Relative_Abundance", "Standard_Deviation", "Standard_Error", 
+                 "Sample_Size", "Prevalence_Percent")
+  col_order <- c(group_var, ranks_in_detailed, stat_cols)
+  data_summary <- data_summary %>% select(all_of(col_order))
+  
   if (!is.null(output_data_file)) {
     write.csv(data_summary, output_data_file, row.names = FALSE)
     message("✓ Data exported to: ", output_data_file)
-    message("  Taxonomic ranks included: ", paste(ranks_to_include, collapse = ", "))
+    message("  Taxonomic ranks included: ", paste(ranks_in_detailed, collapse = ", "))
   }
-
+  
   return(list(plot = p, data = data_summary, ps = ps_ready))
 }
 ```
@@ -638,9 +663,7 @@ write.csv(result_RPS10_fire_species$data,
 
 # Combined plot
 ```{r combined plots 2}
-# --------------------- Combined plot (reverted logic) ---------------------
 combined_df <- dplyr::bind_rows(
-  # 16S — Phylum
   result_16S_trt$data %>%
     dplyr::mutate(Factor = Treatuntreat_EP, Barcode = "16S") %>%
     dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
@@ -656,7 +679,6 @@ combined_df <- dplyr::bind_rows(
     dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
     dplyr::mutate(Dataset = "Chetco Bar Fire"),
 
-  # ITS — Phylum
   result_ITS_trt$data %>%
     dplyr::mutate(Factor = Treatuntreat_EP, Barcode = "ITS") %>%
     dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
@@ -672,7 +694,6 @@ combined_df <- dplyr::bind_rows(
     dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
     dplyr::mutate(Dataset = "Chetco Bar Fire"),
 
-  # rps10 — Genus
   result_RPS10_trt_genus$data %>%
     dplyr::mutate(Factor = Treatuntreat_EP, Barcode = "rps10") %>%
     dplyr::select(Factor, Genus, Mean_Relative_Abundance, Barcode) %>%
@@ -689,22 +710,106 @@ combined_df <- dplyr::bind_rows(
     dplyr::mutate(Dataset = "Chetco Bar Fire")
 )
 
+
 combined_16S   <- combined_df %>% dplyr::filter(Barcode == "16S")
 combined_ITS   <- combined_df %>% dplyr::filter(Barcode == "ITS")
 combined_rps10 <- combined_df %>% dplyr::filter(Barcode == "rps10")
 
-
-combined_16S$Phylum <- as.character(combined_16S$Phylum)
-combined_ITS$Phylum <- as.character(combined_ITS$Phylum)
+combined_16S$Phylum  <- as.character(combined_16S$Phylum)
+combined_ITS$Phylum  <- as.character(combined_ITS$Phylum)
 combined_rps10$Genus <- as.character(combined_rps10$Genus)
 
+combined_16S$Phylum  <- trimws(combined_16S$Phylum)
+combined_ITS$Phylum  <- trimws(combined_ITS$Phylum)
+combined_rps10$Genus <- trimws(combined_rps10$Genus)
+
+combined_16S$Phylum [tolower(combined_16S$Phylum)  %in% c("other","others")] <- "Other"
+combined_ITS$Phylum [tolower(combined_ITS$Phylum)  %in% c("other","others")] <- "Other"
+combined_rps10$Genus[tolower(combined_rps10$Genus) %in% c("other","others")] <- "Other"
+
+# ---- NEW: helper to guarantee 'Other' exists and bars sum to exactly 1
+ensure_other_present <- function(df, facet_var = "Dataset", rank = "Phylum", other_label = "Other") {
+  df %>%
+    dplyr::group_by(.data[[facet_var]], Factor) %>%
+    dplyr::group_modify(~{
+      block <- .x
+
+      # Sum of taxa excluding 'Other'
+      sum_known <- block %>%
+        dplyr::filter(.data[[rank]] != other_label) %>%
+        dplyr::summarise(s = sum(Mean_Relative_Abundance, na.rm = TRUE)) %>%
+        dplyr::pull(s)
+      if (length(sum_known) == 0) sum_known <- 0
+
+      # Current 'Other' amount (0 if missing)
+      other_amt <- block %>%
+        dplyr::filter(.data[[rank]] == other_label) %>%
+        dplyr::summarise(s = sum(Mean_Relative_Abundance, na.rm = TRUE)) %>%
+        dplyr::pull(s)
+      if (length(other_amt) == 0) other_amt <- 0
+
+      residual <- 1 - (sum_known + other_amt)
+
+      if (residual > 0) {
+        if (other_amt > 0) {
+          block <- block %>%
+            dplyr::mutate(
+              Mean_Relative_Abundance = dplyr::if_else(
+                .data[[rank]] == other_label,
+                Mean_Relative_Abundance + residual,
+                Mean_Relative_Abundance
+              )
+            )
+        } else {
+          other_row <- block[1, , drop = FALSE]
+          other_row[[rank]] <- other_label
+          other_row$Mean_Relative_Abundance <- residual
+          block <- dplyr::bind_rows(block, other_row)
+        }
+      }
+      block
+    }) %>%
+    dplyr::ungroup()
+}
+
+# ---- Display-only helper to enforce a visible minimum height for 'Other' while keeping total = 1
+force_other_min_display <- function(df,
+                                    facet_var = "Dataset",
+                                    rank = "Phylum",
+                                    other_label = "Other",
+                                    min_display = 0.0001) {
+  df %>%
+    dplyr::group_by(.data[[facet_var]], Factor) %>%
+    dplyr::group_modify(~{
+      block <- .x
+      if (!any(block[[rank]] == other_label)) return(block)
+
+      other_idx <- which(block[[rank]] == other_label)
+      other_val <- block$Mean_Relative_Abundance[other_idx]
+      if (length(other_val) == 0) other_val <- 0
+      if (other_val > 0 && other_val < min_display) {
+        deficit <- min_display - other_val
+        non_other_idx <- setdiff(seq_len(nrow(block)), other_idx)
+        non_other_sum <- sum(block$Mean_Relative_Abundance[non_other_idx], na.rm = TRUE)
+        if (non_other_sum > 0) {
+          scale_factor <- (non_other_sum - deficit) / non_other_sum
+          block$Mean_Relative_Abundance[non_other_idx] <- block$Mean_Relative_Abundance[non_other_idx] * scale_factor
+          block$Mean_Relative_Abundance[other_idx] <- min_display
+        } else {
+          block$Mean_Relative_Abundance[other_idx] <- 1
+        }
+      }
+      block
+    }) %>%
+    dplyr::ungroup()
+}
 
 plot_combined_facets <- function(df,
                                  rank = "Phylum",
                                  facet_var = "Dataset",
                                  dataset_order = c("SOD Treatment", "Years Since SOD Treatment", "Chetco Bar Fire"),
                                  reference_level = "SOD-UT",
-                                 collapse_other = FALSE,          # keep FALSE to avoid duplicate collapsing
+                                 collapse_other = FALSE,
                                  min_prop = 0.01,                 # ignored when collapse_other=FALSE
                                  other_label = "Other",
                                  ncol = 3,
@@ -712,9 +817,17 @@ plot_combined_facets <- function(df,
                                  show_ylab = TRUE,
                                  show_strip = TRUE,
                                  custom_taxa_order = NULL,
-                                 legend_label = "Phylum") {
+                                 legend_label = "Phylum",
+                                 # ---- NEW: display-only control
+                                 force_min_display_for_other = TRUE,
+                                 min_display_for_other = 0.007) {
 
-  df[[rank]] <- as.character(df[[rank]])
+  # --- Normalize strings to avoid label mismatches that drop slices from legend/layers
+  df[[rank]]     <- as.character(df[[rank]])
+  df[[rank]]     <- trimws(df[[rank]])
+  df$Factor <- factor(trimws(df$Factor), levels = levels(df$Factor))
+  df[[facet_var]]<- trimws(as.character(df[[facet_var]]))
+  df[[rank]][tolower(df[[rank]]) %in% c("other","others")] <- other_label
 
   df <- df %>%
     dplyr::group_by(.data[[facet_var]], Factor, .data[[rank]]) %>%
@@ -724,17 +837,30 @@ plot_combined_facets <- function(df,
     dplyr::ungroup() %>%
     dplyr::mutate(Mean_Relative_Abundance = pmax(0, pmin(1, Mean_Relative_Abundance)))
 
+  # Ensure 'Other' exists and totals are exactly 1
+  df <- ensure_other_present(df, facet_var = facet_var, rank = rank, other_label = other_label)
+
   if (collapse_other && min_prop > 0) {
     df <- df %>%
       dplyr::group_by(.data[[facet_var]], Factor) %>%
-      dplyr::mutate(prop = Mean_Relative_Abundance,
-                    !!rank := dplyr::if_else(prop < min_prop, other_label, .data[[rank]])) %>%
+      dplyr::mutate(
+        prop = Mean_Relative_Abundance,
+        !!rank := dplyr::if_else(prop < min_prop, other_label, .data[[rank]])
+      ) %>%
       dplyr::ungroup() %>%
       dplyr::group_by(.data[[facet_var]], Factor, .data[[rank]]) %>%
       dplyr::summarise(Mean_Relative_Abundance = sum(Mean_Relative_Abundance, na.rm = TRUE), .groups = "drop") %>%
       dplyr::group_by(.data[[facet_var]], Factor) %>%
       dplyr::mutate(Mean_Relative_Abundance = Mean_Relative_Abundance / sum(Mean_Relative_Abundance, na.rm = TRUE)) %>%
       dplyr::ungroup()
+
+    df <- ensure_other_present(df, facet_var = facet_var, rank = rank, other_label = other_label)
+  }
+
+  # Enforce a minimum visible height for 'Other' (display-only)
+  if (force_min_display_for_other && min_display_for_other > 0) {
+    df <- force_other_min_display(df, facet_var = facet_var, rank = rank,
+                                  other_label = other_label, min_display = min_display_for_other)
   }
 
   df[[facet_var]] <- factor(df[[facet_var]], levels = dataset_order)
@@ -772,7 +898,7 @@ plot_combined_facets <- function(df,
     all_palette_colors <- viridisLite::viridis(n_colors_to_generate, option = "H", direction = -1)
   } else {
     base_colors  <- viridisLite::viridis(10, option = "H", direction = -1)
-    extra_colors <- c("#D6B4FC","#FF8DA1","#83358F")
+    extra_colors <- c("#83358F", "#D6B4FC", "#FF8DA1")
     n_extra_needed <- n_taxa - 10
     all_palette_colors <- c(base_colors, extra_colors[seq_len(n_extra_needed)])
   }
@@ -790,13 +916,22 @@ plot_combined_facets <- function(df,
     df,
     ggplot2::aes(x = Factor, y = Mean_Relative_Abundance, fill = .data[[rank]])
   ) +
-    ggplot2::geom_col(color = "black", linewidth = 0.2,
-                      position = ggplot2::position_stack(reverse = TRUE), width = 0.7) +
+    ggplot2::geom_col(
+      color = "black", 
+      linewidth = 0.1,
+      width = 0.60, 
+      position = ggplot2::position_stack(reverse = TRUE)
+    ) +
     ggplot2::scale_fill_manual(values = palette_colors,
                                breaks = legend_order, limits = legend_order, drop = FALSE) +
-    ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1),
-                                limits = c(0, 1), expand = c(0, 0)) +
-    ggplot2::scale_x_discrete(drop = TRUE, expand = c(0.02, 0.02)) +
+    # Keep % ticks, but avoid top-edge clipping with a tiny headroom
+    ggplot2::scale_y_continuous(
+      labels = scales::percent_format(accuracy = 1),
+      breaks = seq(0, 1, 0.25),
+      expand = c(0, 0)
+    ) +
+    ggplot2::coord_cartesian(ylim = c(0, 1.01), clip = "off") +
+    ggplot2::scale_x_discrete(drop = TRUE, expand = c(0.01, 0.005)) +
     ggplot2::labs(y = ylab_text, x = NULL, fill = legend_label)
 
   if (requireNamespace("ggh4x", quietly = TRUE)) {
@@ -831,7 +966,7 @@ plot_combined_facets <- function(df,
       legend.box.margin   = ggplot2::margin(t = 2, r = 0, b = 0, l = 0),
       strip.text          = if (show_strip) ggplot2::element_text(size = 12, face = "bold", margin = ggplot2::margin(b = 4, t = 2)) else ggplot2::element_blank(),
       strip.background    = ggplot2::element_blank(),
-      panel.spacing.x     = grid::unit(1.2, "lines"),
+      panel.spacing.x     = grid::unit(2.8, "lines"),
       panel.grid          = ggplot2::element_blank(),
       panel.border        = ggplot2::element_blank(),
       panel.background    = ggplot2::element_blank(),
@@ -839,13 +974,12 @@ plot_combined_facets <- function(df,
       plot.margin         = ggplot2::margin(t = 3, r = 5, b = 3, l = 5)
     ) +
     ggplot2::guides(fill = ggplot2::guide_legend(ncol = 6, byrow = TRUE, reverse = FALSE))
-
   return(p)
 }
 
-all_16S_phyla   <- combined_16S   %>% dplyr::filter(Phylum != "Other") %>% dplyr::pull(Phylum) %>% unique()
-all_ITS_phyla   <- combined_ITS   %>% dplyr::filter(Phylum != "Other") %>% dplyr::pull(Phylum) %>% unique()
-all_rps10_genera<- combined_rps10 %>% dplyr::filter(Genus  != "Other") %>% dplyr::pull(Genus)  %>% unique()
+all_16S_phyla    <- combined_16S   %>% dplyr::filter(Phylum != "Other") %>% dplyr::pull(Phylum) %>% unique()
+all_ITS_phyla    <- combined_ITS   %>% dplyr::filter(Phylum != "Other") %>% dplyr::pull(Phylum) %>% unique()
+all_rps10_genera <- combined_rps10 %>% dplyr::filter(Genus  != "Other") %>% dplyr::pull(Genus)  %>% unique()
 
 taxa_order_16S_ref <- combined_16S %>%
   dplyr::filter(Factor == "SOD-UT", Phylum != "Other") %>%
@@ -876,7 +1010,7 @@ p_16S <- plot_combined_facets(
   combined_16S, rank = "Phylum", reference_level = "SOD-UT",
   panel_labels = c("A", "B", "C"),
   min_prop = 0.01, show_ylab = FALSE, show_strip = TRUE,
-  collapse_other = FALSE,                    # <- no duplicate filtering
+  collapse_other = FALSE,
   custom_taxa_order = taxa_order_16S,
   legend_label = "Phylum"
 )
@@ -885,7 +1019,7 @@ p_ITS <- plot_combined_facets(
   combined_ITS, rank = "Phylum", reference_level = "SOD-UT",
   panel_labels = c("D", "E", "F"),
   min_prop = 0.01, show_ylab = TRUE, show_strip = FALSE,
-  collapse_other = FALSE,                    # <- no duplicate filtering
+  collapse_other = FALSE,
   custom_taxa_order = taxa_order_ITS,
   legend_label = "Phylum"
 )
@@ -894,20 +1028,16 @@ p_rps10 <- plot_combined_facets(
   combined_rps10, rank = "Genus", reference_level = "SOD-UT",
   panel_labels = c("G", "H", "I"),
   min_prop = 0.01, show_ylab = FALSE, show_strip = FALSE,
-  collapse_other = FALSE,                    # <- no duplicate filtering
+  collapse_other = FALSE,
   custom_taxa_order = taxa_order_RPS10,
   legend_label = "Genus"
 )
 
-
 add_panel_labels <- function(plot, labels, has_yaxis = FALSE) {
   g <- ggplotGrob(plot)
-  
   panels <- grep("panel", g$layout$name)
-  
   for (i in seq_along(panels)) {
     panel_pos <- g$layout[panels[i], ]
-    
     if (i == 1) {
       if (has_yaxis) {
         x_pos <- unit(-44, "pt")
@@ -917,27 +1047,24 @@ add_panel_labels <- function(plot, labels, has_yaxis = FALSE) {
     } else {
       x_pos <- unit(-10, "pt")
     }
-    
     label_grob <- textGrob(
       labels[i],
       x = x_pos,
-      y = unit(1, "npc") - unit(-2, "pt"),  
+      y = unit(1, "npc") - unit(-2, "pt"),
       just = c("left", "top"),
       gp = gpar(fontsize = 13, fontface = "bold")
     )
-    
     g <- gtable_add_grob(g, label_grob,
                          t = panel_pos$t, l = panel_pos$l,
                          clip = "off",
                          name = paste0("panel-label-", i))
   }
-  
   return(g)
 }
 
-p_16S_labeled <- add_panel_labels(p_16S, c("A", "B", "C"), has_yaxis = FALSE)
-p_ITS_labeled <- add_panel_labels(p_ITS, c("D", "E", "F"), has_yaxis = TRUE)
-p_rps10_labeled <- add_panel_labels(p_rps10, c("G", "H", "I"), has_yaxis = FALSE)
+p_16S_labeled  <- add_panel_labels(p_16S,  c("A", "B", "C"), has_yaxis = FALSE)
+p_ITS_labeled  <- add_panel_labels(p_ITS,  c("D", "E", "F"), has_yaxis = TRUE)
+p_rps10_labeled<- add_panel_labels(p_rps10,c("G", "H", "I"), has_yaxis = FALSE)
 
 white_spacer <- function() {
   grid::rectGrob(gp = grid::gpar(fill = "white", col = NA))
@@ -945,18 +1072,20 @@ white_spacer <- function() {
 
 final_plot <- cowplot::plot_grid(
   p_16S_labeled,
-  white_spacer(),  
+  white_spacer(),
   p_ITS_labeled,
-  white_spacer(), 
+  white_spacer(),
   p_rps10_labeled,
   ncol = 1,
   rel_heights = c(1.15, 0.08, 1.15, 0.08, 1.15)
 )
 
 ggsave("Figures/Figure3_Relabundance_faceted.pdf", final_plot, 
-       width = 8, height = 10.5, dpi = 600, bg = "white")
+       width = 8.5, height = 11, dpi = 800, bg = "white")
 ggsave("Figures/Figure3_Relabundance_faceted.png", final_plot, 
-       width = 8, height = 10.5, dpi = 600, bg = "white")
+       width = 8.5, height = 11, dpi = 800, bg = "white")
+ggsave("Figures/Figure3_Relabundance_faceted.svg", final_plot, 
+       width = 8.5, height = 11, dpi = 800, bg = "white")
 ```
 
 

@@ -1,0 +1,52 @@
+Treatuntreat_EP,Kingdom,Phylum,Class,Order,Family,Genus,Mean_Relative_Abundance,Standard_Deviation,Standard_Error,Sample_Size,Prevalence_Percent
+SOD-UT,Other,Other,Other,Other,Other,Other,0.25889997922790586,NA,NA,NA,NA
+SOD-UT,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Chthoniobacterales,Chthoniobacteraceae,Candidatus Udaeobacter,0.17283346751635684,0.12169147199543356,0.018140693577586763,45,95.55555555555556
+SOD-UT,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Xanthobacteraceae,Pseudolabrys,0.055163373489137316,0.04663245245957041,0.0069515555771417796,45,93.33333333333333
+SOD-UT,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Beijerinckiaceae,Methylocapsa,0.05070826632976478,0.041579484140163485,0.00619830353378533,45,97.77777777777777
+SOD-UT,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Xanthobacteraceae,Bradyrhizobium,0.045073728636215754,0.012701934715174725,0.0018934926312596742,45,100
+SOD-UT,Bacteria,Actinobacteriota,Actinobacteria,Frankiales,Acidothermaceae,Acidothermus,0.041463632360169034,0.03587399472964126,0.005347779389329803,45,100
+SOD-UT,Bacteria,Proteobacteria,Gammaproteobacteria,Gammaproteobacteria Incertae Sedis,Unknown Family,Acidibacter,0.03615928884086782,0.01685393260372946,0.00251243593267594,45,100
+SOD-UT,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Chthoniobacterales,Xiphinematobacteraceae,Candidatus Xiphinematobacter,0.03574402150446413,0.022345261609065446,0.003331034928859111,45,100
+SOD-UT,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Beijerinckiaceae,Roseiarcus,0.03277223771761984,0.024316113812231765,0.0036248322288514523,45,97.77777777777777
+SOD-UT,Bacteria,Acidobacteriota,Acidobacteriae,Bryobacterales,Bryobacteraceae,Bryobacter,0.031906667645896364,0.020486660643895052,0.0030539710554479296,45,100
+SOD-UT,Bacteria,Acidobacteriota,Acidobacteriae,Acidobacteriales,Acidobacteriaceae (Subgroup 1),Granulicella,0.02489431288211955,0.01919838309927511,0.0028619259778708155,45,95.55555555555556
+SOD-UT,Bacteria,Actinobacteriota,Actinobacteria,Corynebacteriales,Mycobacteriaceae,Mycobacterium,0.02281886983834188,0.031683385419521926,0.004723080237025114,45,91.11111111111111
+SOD-UT,Bacteria,Bacteroidota,Bacteroidia,Chitinophagales,Chitinophagaceae,Puia,0.022416897003086078,0.011809934470673408,0.0017605210857495823,45,100
+SOD-UT,Bacteria,Actinobacteriota,Thermoleophilia,Solirubrobacterales,Solirubrobacteraceae,Conexibacter,0.01994581914743068,0.0172169281581713,0.0025665481150267517,45,95.55555555555556
+SOD-UT,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Pedosphaerales,Pedosphaeraceae,ADurb.Bin063-1,0.01915367539051497,0.01371717944140658,0.0020448363793698467,45,91.11111111111111
+SOD-UT,Bacteria,Acidobacteriota,Acidobacteriae,Acidobacteriales,Acidobacteriaceae (Subgroup 1),Acidipila-Silvibacterium,0.019096254044835465,0.025188322440995194,0.0037548534144832457,45,86.66666666666667
+SOD-UT,Bacteria,Proteobacteria,Gammaproteobacteria,Burkholderiales,Burkholderiaceae,Burkholderia-Caballeronia-Paraburkholderia,0.017593556132333828,0.01822863103529188,0.0027173638754450003,45,95.55555555555556
+SOD-UT,Bacteria,Acidobacteriota,Acidobacteriae,Solibacterales,Solibacteraceae,Candidatus Solibacter,0.015790585746226753,0.009589493047768806,0.001429517221638179,45,97.77777777777777
+SOD-UT,Bacteria,Myxococcota,Polyangia,Haliangiales,Haliangiaceae,Haliangium,0.014351519475059712,0.013997747306781903,0.0020866609673219293,45,97.77777777777777
+SOD-UT,Bacteria,Firmicutes,Bacilli,Alicyclobacillales,Alicyclobacillaceae,Alicyclobacillus,0.014100450419681028,0.025816058924256598,0.0038484308443851897,45,73.33333333333333
+SOD-UT,Bacteria,Planctomycetota,Planctomycetes,Isosphaerales,Isosphaeraceae,Aquisphaera,0.014009892939245075,0.009346019082977029,0.0013932222659031254,45,100
+SOD-UT,Bacteria,Acidobacteriota,Acidobacteriae,Acidobacteriales,Koribacteraceae,Candidatus Koribacter,0.012882046338095272,0.012649696616539658,0.0018857054352887843,45,88.88888888888889
+SOD-UT,Bacteria,Proteobacteria,Alphaproteobacteria,Reyranellales,Reyranellaceae,Reyranella,0.011651485981199187,0.005622467298061077,8.381479386489426e-4,45,97.77777777777777
+SOD-UT,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Xanthobacteraceae,Rhodoplanes,0.010569971393432865,0.010341583584239103,0.0015416322592903037,45,82.22222222222221
+SOD-T,Other,Other,Other,Other,Other,Other,0.31610251035702447,NA,NA,NA,NA
+SOD-T,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Chthoniobacterales,Chthoniobacteraceae,Candidatus Udaeobacter,0.14308768726892537,0.10348066280002793,0.01657016748869523,39,100
+SOD-T,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Xanthobacteraceae,Pseudolabrys,0.042325923856156335,0.054430379808857454,0.008715836229702036,39,94.87179487179486
+SOD-T,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Xanthobacteraceae,Bradyrhizobium,0.040357751780649646,0.017680685024647206,0.0028311754510060086,39,100
+SOD-T,Bacteria,Actinobacteriota,Actinobacteria,Frankiales,Acidothermaceae,Acidothermus,0.03780977448354967,0.030684878726242055,0.004913512980166134,39,97.43589743589743
+SOD-T,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Chthoniobacterales,Xiphinematobacteraceae,Candidatus Xiphinematobacter,0.030390436134096553,0.021233967882948096,0.003400156075052993,39,97.43589743589743
+SOD-T,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Beijerinckiaceae,Methylocapsa,0.029850137514103113,0.025875445454474417,0.004143387309509222,39,97.43589743589743
+SOD-T,Bacteria,Proteobacteria,Gammaproteobacteria,Gammaproteobacteria Incertae Sedis,Unknown Family,Acidibacter,0.02945555302412399,0.01816310526107739,0.002908424512823788,39,100
+SOD-T,Bacteria,Acidobacteriota,Acidobacteriae,Bryobacterales,Bryobacteraceae,Bryobacter,0.02583905949247451,0.015970518026556493,0.0025573295669033547,39,100
+SOD-T,Bacteria,Bacteroidota,Bacteroidia,Sphingobacteriales,Sphingobacteriaceae,Mucilaginibacter,0.02419858902765972,0.028205416608599345,0.004516481288838355,39,89.74358974358975
+SOD-T,Bacteria,Actinobacteriota,Thermoleophilia,Solirubrobacterales,Solirubrobacteraceae,Conexibacter,0.024027094482495476,0.025195480218509852,0.004034505731622576,39,92.3076923076923
+SOD-T,Bacteria,Proteobacteria,Alphaproteobacteria,Rhizobiales,Beijerinckiaceae,Roseiarcus,0.02368449694187224,0.018175818532038344,0.0029104602654315887,39,94.87179487179486
+SOD-T,Bacteria,Bacteroidota,Bacteroidia,Chitinophagales,Chitinophagaceae,Puia,0.022313566993157622,0.012411802168307175,0.0019874789666050052,39,100
+SOD-T,Bacteria,Acidobacteriota,Acidobacteriae,Acidobacteriales,Acidobacteriaceae (Subgroup 1),Granulicella,0.022203947573854903,0.01668853688241466,0.0026723046006891637,39,94.87179487179486
+SOD-T,Bacteria,Actinobacteriota,Actinobacteria,Corynebacteriales,Mycobacteriaceae,Mycobacterium,0.020067239058351023,0.019578647701615947,0.003135092710459974,39,100
+SOD-T,Bacteria,Firmicutes,Bacilli,Alicyclobacillales,Alicyclobacillaceae,Alicyclobacillus,0.01803502023578609,0.02913170068628269,0.004664805448096837,39,82.05128205128204
+SOD-T,Bacteria,Proteobacteria,Gammaproteobacteria,Burkholderiales,Burkholderiaceae,Burkholderia-Caballeronia-Paraburkholderia,0.017676327618059425,0.01843736365283892,0.0029523410027621137,39,94.87179487179486
+SOD-T,Bacteria,Acidobacteriota,Acidobacteriae,Solibacterales,Solibacteraceae,Candidatus Solibacter,0.01758154780800258,0.010305794340072689,0.001650247821170756,39,100
+SOD-T,Bacteria,Myxococcota,Polyangia,Haliangiales,Haliangiaceae,Haliangium,0.01656907284956705,0.011640807508476252,0.0018640210151326985,39,100
+SOD-T,Bacteria,Acidobacteriota,Acidobacteriae,Acidobacteriales,Acidobacteriaceae (Subgroup 1),Acidipila-Silvibacterium,0.015202276483149627,0.01620137202221222,0.002594295791026234,39,87.17948717948718
+SOD-T,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Pedosphaerales,Pedosphaeraceae,ADurb.Bin063-1,0.015134617987463685,0.013716511356360948,0.00219639964014059,39,89.74358974358975
+SOD-T,Bacteria,Acidobacteriota,Acidobacteriae,Acidobacteriales,Koribacteraceae,Candidatus Koribacter,0.013302912186482729,0.012803534730922436,0.0020502063786419227,39,89.74358974358975
+SOD-T,Bacteria,Proteobacteria,Gammaproteobacteria,Pseudomonadales,Pseudomonadaceae,Pseudomonas,0.011586018401737775,0.05101917385660791,0.008169606118319392,39,74.35897435897436
+SOD-T,Bacteria,Proteobacteria,Alphaproteobacteria,Reyranellales,Reyranellaceae,Reyranella,0.011240660102098244,0.006871187870843034,0.0011002706282060026,39,94.87179487179486
+SOD-T,Bacteria,Planctomycetota,Planctomycetes,Isosphaerales,Isosphaeraceae,Aquisphaera,0.010977237402959517,0.007999055608168638,0.0012808740067202725,39,87.17948717948718
+SOD-T,Bacteria,Verrucomicrobiota,Verrucomicrobiae,Chthoniobacterales,Chthoniobacteraceae,Chthoniobacter,0.010700868158497976,0.009589029485227997,0.0015354735882521042,39,94.87179487179486
+SOD-T,Bacteria,Proteobacteria,Gammaproteobacteria,Burkholderiales,Oxalobacteraceae,Massilia,0.010279672777700593,0.013100706560612095,0.0020977919550930076,39,87.17948717948718
