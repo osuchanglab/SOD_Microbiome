@@ -66,7 +66,6 @@ sod_16S_nowf.ps@sam_data$Fire_Mod <- factor(sod_16S_nowf.ps@sam_data$Fire_Mod,
 ```
 
 ### Load data ITS
-
 ```{r subset data ITS, include=TRUE}
 load("Data/ITS/filtered_data/sod_5asv_nowildfire.RData")
 sod_5asv_its_nowf.ps<-sod_5asv_nowildfire.ps
@@ -411,8 +410,9 @@ colors_yrsince <- c(
 colors_fire <- c(
   "SOD-UT"  = "#0072B2",
   "SOD-T"   = "#D55E00",
-  "Wildfire"= "#F0E442"
+  "Wildfire"= "#332288"
 )
+
 
 
 modify_plot <- function(plot, remove_y_title = FALSE, colors, x_var, tukey_result = NULL, ylim = NULL, panel_label = NULL) {
@@ -786,7 +786,7 @@ colors_yrsince <- c(
 colors_fire <- c(
   "SOD-UT"   = "#0072B2",
   "SOD-T"    = "#D55E00",
-  "Wildfire" = "#F0E442"
+  "Wildfire" = "#332288"
 )
 
 create_header <- function(text) {
@@ -876,6 +876,54 @@ plot_rps10_trt_mod   <- modify_ordination_plot(plot_rps10_trt,   colors_treatunt
 plot_rps10_yrtrt_mod <- modify_ordination_plot(plot_rps10_yrtrt, colors_yrsince,      TRUE, TRUE, FALSE, panel_label = "H")
 plot_rps10_fire_mod  <- modify_ordination_plot(plot_rps10_fire,  colors_fire,         TRUE, TRUE, FALSE, panel_label = "I")
 
+# --- 16S ---
+plot_16S_trt_mod   <- plot_16S_trt_mod +
+  geom_point(aes(fill = Treatuntreat_EP), shape = 21, color = "black", stroke = 0.35, size = 1.9, alpha = 0.95) +
+  scale_fill_manual(values = colors_treatuntreat) +
+  guides(color = "none")
+
+plot_16S_yrtrt_mod <- plot_16S_yrtrt_mod +
+  geom_point(aes(fill = YrSinceTrt_BR), shape = 21, color = "black", stroke = 0.35, size = 1.9, alpha = 0.95) +
+  scale_fill_manual(values = colors_yrsince) +
+  guides(color = "none")
+
+plot_16S_fire_mod  <- plot_16S_fire_mod +
+  geom_point(aes(fill = Fire_Mod), shape = 21, color = "black", stroke = 0.35, size = 1.9, alpha = 0.95) +
+  scale_fill_manual(values = colors_fire) +
+  guides(color = "none")
+
+# --- ITS ---
+plot_its_trt_mod   <- plot_its_trt_mod +
+  geom_point(aes(fill = Treatuntreat_EP), shape = 21, color = "black", stroke = 0.35, size = 1.9, alpha = 0.95) +
+  scale_fill_manual(values = colors_treatuntreat) +
+  guides(color = "none")
+
+plot_its_yrtrt_mod <- plot_its_yrtrt_mod +
+  geom_point(aes(fill = YrSinceTrt_BR), shape = 21, color = "black", stroke = 0.35, size = 1.9, alpha = 0.95) +
+  scale_fill_manual(values = colors_yrsince) +
+  guides(color = "none")
+
+plot_its_fire_mod  <- plot_its_fire_mod +
+  geom_point(aes(fill = Fire_Mod), shape = 21, color = "black", stroke = 0.35, size = 1.9, alpha = 0.95) +
+  scale_fill_manual(values = colors_fire) +
+  guides(color = "none")
+
+# --- RPS10 ---
+plot_rps10_trt_mod <- plot_rps10_trt_mod +
+  geom_point(aes(fill = Treatuntreat_EP), shape = 21, color = "black", stroke = 0.35, size = 1.9, alpha = 0.95) +
+  scale_fill_manual(values = colors_treatuntreat) +
+  guides(color = "none")
+
+plot_rps10_yrtrt_mod <- plot_rps10_yrtrt_mod +
+  geom_point(aes(fill = YrSinceTrt_BR), shape = 21, color = "black", stroke = 0.35, size = 1.9, alpha = 0.95) +
+  scale_fill_manual(values = colors_yrsince) +
+  guides(color = "none")
+
+plot_rps10_fire_mod <- plot_rps10_fire_mod +
+  geom_point(aes(fill = Fire_Mod), shape = 21, color = "black", stroke = 0.35, size = 1.9, alpha = 0.95) +
+  scale_fill_manual(values = colors_fire) +
+  guides(color = "none")
+
 panel_w <- grid::unit(60, "mm")
 panel_h <- grid::unit(60, "mm")
 
@@ -948,6 +996,7 @@ facetted_figure_final <- plot_grid(
   align = "hv",
   axis = "tblr"
 )
+
 
 ggsave("Figures/Figure2_beta_diversity_NMDS_faceted_colorA_rev_axes.png",
        facetted_figure_final, width = 9.5, height = 9.5, dpi = 800)
