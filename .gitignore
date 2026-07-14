@@ -3,3 +3,7 @@
 .RData
 .Ruserdata
 .gitignore
+Data/.DS_Store
+Figures/.DS_Store
+Results/.DS_Store
+Results/.Rapp.history
