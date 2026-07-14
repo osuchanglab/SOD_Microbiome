@@ -6,7 +6,7 @@ date: "2024-05-21"
 
 ```{r setup, include=TRUE}
 knitr::opts_chunk$set(echo = TRUE)
-knitr::opts_knit$set(root.dir = "~/SOD_Microbiome")
+knitr::opts_knit$set(root.dir = "~/Documents/Postdoc/SOD_Microbiome")
 library(phyloseq); packageVersion("phyloseq")
 library(ggplot2); packageVersion("ggplot2")
 library(readr); packageVersion("readr")
@@ -738,6 +738,58 @@ pdf("Figures/ITS/rarefaction_curve_yrsincetrt_nowildfire.pdf", width = 10, heigh
 rarecurve(otu_data, step = 10, sample = raremax, col = colors, cex = 0.6, label = FALSE, xlab = "Sequencing Depth", ylab = "Number of ASVs")
 legend("topright", legend = levels(sample_data$YrSinceTrt_BR), col = c("lightblue", "red", "green", "orange", "purple"), lty = 1, title = "YrSinceTrt_BR")
 dev.off()
+```
+
+### Let's also perform Kruskal-Wallis and Dunn's Post-hoc tests in case our data violates key ANOVA assumptions
+```{r alpha diversity kruskal-wallis}
+set.seed(1)
+variables <- c("Treatuntreat_EP", "YrSinceTrt_BR", "YrSinceTrt_Range")
+measures <- c("Observed", "InvSimpson", "Shannon")
+
+final_kw_table <- data.table(factor_name = character(), alpha_index = character(),
+                              chi_squared = numeric(), df = numeric(), pvalue = numeric())
+
+final_dunn_table <- data.table(factor_name = character(), alpha_index = character(),
+                                Comparison = character(), Z = numeric(),
+                                P.unadj = numeric(), P.adj = numeric())
+
+for (variable in variables) {
+  for (measure in measures) {
+    data_subset <- AD[, c(variable, measure)]
+    formula <- as.formula(paste(measure, "~", variable))
+
+    cat("\n=====", measure, "by", variable, "=====\n")
+    kw_res <- kruskal.test(formula, data = data_subset)
+    print(kw_res)
+
+    final_kw_table <- rbind(final_kw_table, data.table(
+      factor_name = variable, alpha_index = measure,
+      chi_squared = unname(kw_res$statistic), df = unname(kw_res$parameter),
+      pvalue = kw_res$p.value
+    ))
+
+    n_groups <- nlevels(droplevels(data_subset[[variable]]))
+    if (n_groups == 2) {
+      cat("(2 groups -- Dunn's post-hoc skipped as not applicable)\n")
+    } else {
+      dunn_res <- FSA::dunnTest(formula, data = data_subset, method = "bh")
+      print(dunn_res)
+
+      dunn_table_sub <- dunn_res$res
+      dunn_table_sub$factor_name <- variable
+      dunn_table_sub$alpha_index <- measure
+      dunn_table_sub <- dunn_table_sub[, c("factor_name", "alpha_index", "Comparison", "Z", "P.unadj", "P.adj")]
+
+      final_dunn_table <- rbind(final_dunn_table, dunn_table_sub)
+    }
+  }
+}
+
+print(knitr::kable(final_kw_table, format = "markdown"))
+write.csv(final_kw_table, "Results/ITS/final_kruskalwallis_table_sod_nowildfire.csv", row.names = FALSE)
+
+print(knitr::kable(final_dunn_table, format = "markdown"))
+write.csv(final_dunn_table, "Results/ITS/final_dunns_posthoc_table_sod_nowildfire.csv", row.names = FALSE)
 ```
 
 ### Beta diversity-PERMANOVA analyses-ASV counts transformed (rel. abundance)

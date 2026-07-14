@@ -31,13 +31,14 @@ library(forcats); packageVersion("forcats")
 library(cowplot); packageVersion("cowplot")
 library(grid); packageVersion("grid")
 library(gtable); packageVersion("gtable")
+library(tidyr); packageVersion("tidyr")
 
 set.seed(1)
 ```
 
 ### Compiled analysis
 ```{r workflow, include=TRUE}
-prepare_phyloseq <- function(ps, rank = "Phylum", group_var, 
+prepare_phyloseq <- function(ps, rank = "Phylum", group_var,
                              reference_level = NULL, min_prop = 0.01) {
   
   ps_agg <- tax_glom(ps, taxrank = rank, NArm = TRUE) 
@@ -147,7 +148,7 @@ create_relabund_plot <- function(ps, rank = "Phylum", group_var,
   
   ps_ready <- prepare_phyloseq(ps, rank = rank, group_var = group_var,
                                reference_level = reference_level,
-                               min_prop = min_prop)
+                               min_prop = 0)
   
   df_plot <- psmelt(ps_ready)
   
@@ -304,20 +305,20 @@ sod_5asv_16S_nowf.ps <- sod_5asv_nowildfire.ps
 sod_5asv_16S_nowf.ps@sam_data$Treatuntreat_EP <- factor(
   sod_5asv_16S_nowf.ps@sam_data$Treatuntreat_EP, 
   levels = c("untreated", "treated"),
-  labels = c("Unmitigated", "Mitigated")
+  labels = c("SOD-UT", "SOD-T")
 )
 
 sod_5asv_16S_nowf.ps@sam_data$YrSinceTrt_BR <- factor(
   sod_5asv_16S_nowf.ps@sam_data$YrSinceTrt_BR,
   levels = c("untreated", "1to2", "3to4", "5to8", "10to12"),
-  labels = c("Unmitigated", "1 to 2", "3 to 4", "5 to 8", "10 to 12")
+  labels = c("SOD-UT", "1-2 PT", "3-4 PT", "5-8 PT", "10-12 PT")
 )
 
 result_16S_trt <- create_relabund_plot(
   ps = sod_5asv_16S_nowf.ps,
   rank = "Phylum",
   group_var = "Treatuntreat_EP",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/16S/relabundance_plot_16S_treatment_phylum_nowildfire.pdf"
 )
@@ -330,7 +331,7 @@ result_16S_trt_genus <- create_relabund_plot(
   ps = sod_5asv_16S_nowf.ps,
   rank = "Genus",
   group_var = "Treatuntreat_EP",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/16S/relabundance_plot_16S_treatment_genus_nowildfire.pdf"
 )
@@ -343,7 +344,7 @@ result_16S_yrs <- create_relabund_plot(
   ps = sod_5asv_16S_nowf.ps,
   rank = "Phylum",
   group_var = "YrSinceTrt_BR",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/16S/relabundance_plot_16S_YrSinceTrtBR_phylum_nowildfire.pdf"
 )
@@ -353,16 +354,16 @@ write.csv(result_16S_yrs$data,
           row.names = FALSE)
 
 
-result_16S_yrsincetrt_genus <- create_relabund_plot(
+result_16S_yrs_genus <- create_relabund_plot(
   ps = sod_5asv_16S_nowf.ps,
   rank = "Genus",
   group_var = "YrSinceTrt_BR",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/16S/relabundance_plot_16S_YrSinceTrtBR_genus_nowildfire.pdf"
 )
 
-write.csv(result_16S_yrsincetrt_genus$data, 
+write.csv(result_16S_yrs_genus$data, 
           "Results/16S/relabundance_table_16S_YrSinceTrtBR_genus_nowildfire.csv",
           row.names = FALSE)
 
@@ -373,14 +374,14 @@ sod_5asv_16S.ps <- sod_5asv.ps
 sod_5asv_16S.ps@sam_data$Fire_Mod <- factor(
   sod_5asv_16S.ps@sam_data$Fire_Mod,
   levels = c("untreated", "SODtrt", "wildfire"),
-  labels = c("Unmitigated", "Mitigated", "Wildfire")
+  labels = c("SOD-UT", "SOD-T", "Wildfire")
 )
 
 result_16S_fire <- create_relabund_plot(
   ps = sod_5asv_16S.ps,
   rank = "Phylum",
   group_var = "Fire_Mod",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/16S/relabundance_plot_16S_fire_phylum.pdf"
 )
@@ -393,7 +394,7 @@ result_16S_fire_genus <- create_relabund_plot(
   ps = sod_5asv_16S.ps,
   rank = "Genus",
   group_var = "Fire_Mod",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/16S/relabundance_plot_16S_fire_genus.pdf"
 )
@@ -411,20 +412,20 @@ sod_5asv_ITS_nowf.ps <- sod_5asv_nowildfire.ps
 sod_5asv_ITS_nowf.ps@sam_data$Treatuntreat_EP <- factor(
   sod_5asv_ITS_nowf.ps@sam_data$Treatuntreat_EP, 
   levels = c("untreated", "treated"),
-  labels = c("Unmitigated", "Mitigated")
+  labels = c("SOD-UT", "SOD-T")
 )
 
 sod_5asv_ITS_nowf.ps@sam_data$YrSinceTrt_BR <- factor(
   sod_5asv_ITS_nowf.ps@sam_data$YrSinceTrt_BR,
   levels = c("untreated", "1to2", "3to4", "5to8", "10to12"),
-  labels = c("Unmitigated", "1 to 2", "3 to 4", "5 to 8", "10 to 12")
+  labels = c("SOD-UT", "1-2 PT", "3-4 PT", "5-8 PT", "10-12 PT")
 )
 
 result_ITS_trt <- create_relabund_plot(
   ps = sod_5asv_ITS_nowf.ps,
   rank = "Phylum",
   group_var = "Treatuntreat_EP",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/ITS/relabundance_plot_ITS_treatment_phylum_nowildfire.pdf"
 )
@@ -437,7 +438,7 @@ result_ITS_trt_genus <- create_relabund_plot(
   ps = sod_5asv_ITS_nowf.ps,
   rank = "Genus",
   group_var = "Treatuntreat_EP",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/ITS/relabundance_plot_ITS_treatment_genus_nowildfire.pdf"
 )
@@ -450,7 +451,7 @@ result_ITS_yrs <- create_relabund_plot(
   ps = sod_5asv_ITS_nowf.ps,
   rank = "Phylum",
   group_var = "YrSinceTrt_BR",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/ITS/relabundance_plot_ITS_YrSinceTrtBR_phylum_nowildfire.pdf"
 )
@@ -460,16 +461,16 @@ write.csv(result_ITS_yrs$data,
           row.names = FALSE)
 
 
-result_ITS_yrsincetrt_genus <- create_relabund_plot(
+result_ITS_yrs_genus <- create_relabund_plot(
   ps = sod_5asv_ITS_nowf.ps,
   rank = "Genus",
   group_var = "YrSinceTrt_BR",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/ITS/relabundance_plot_ITS_YrSinceTrtBR_genus_nowildfire.pdf"
 )
 
-write.csv(result_ITS_yrsincetrt_genus$data, 
+write.csv(result_ITS_yrs_genus$data, 
           "Results/ITS/relabundance_table_ITS_YrSinceTrtBR_genus_nowildfire.csv",
           row.names = FALSE)
 
@@ -480,14 +481,14 @@ sod_5asv_ITS.ps <- sod_5asv.ps
 sod_5asv_ITS.ps@sam_data$Fire_Mod <- factor(
   sod_5asv_ITS.ps@sam_data$Fire_Mod,
   levels = c("untreated", "SODtrt", "wildfire"),
-  labels = c("Unmitigated", "Mitigated", "Wildfire")
+  labels = c("SOD-UT", "SOD-T", "Wildfire")
 )
 
 result_ITS_fire <- create_relabund_plot(
   ps = sod_5asv_ITS.ps,
   rank = "Phylum",
   group_var = "Fire_Mod",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/ITS/relabundance_plot_ITS_fire_phylum.pdf"
 )
@@ -500,7 +501,7 @@ result_ITS_fire_genus <- create_relabund_plot(
   ps = sod_5asv_ITS.ps,
   rank = "Genus",
   group_var = "Fire_Mod",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/ITS/relabundance_plot_ITS_fire_genus.pdf"
 )
@@ -518,13 +519,13 @@ sod_5asv_rps10_nowf.ps <- sod_5asv_nowildfire.ps
 sod_5asv_rps10_nowf.ps@sam_data$Treatuntreat_EP <- factor(
   sod_5asv_rps10_nowf.ps@sam_data$Treatuntreat_EP, 
   levels = c("untreated", "treated"),
-  labels = c("Unmitigated", "Mitigated")
+  labels = c("SOD-UT", "SOD-T")
 )
 
 sod_5asv_rps10_nowf.ps@sam_data$YrSinceTrt_BR <- factor(
   sod_5asv_rps10_nowf.ps@sam_data$YrSinceTrt_BR,
   levels = c("untreated", "1to2", "3to4", "5to8", "10to12"),
-  labels = c("Unmitigated", "1 to 2", "3 to 4", "5 to 8", "10 to 12")
+  labels = c("SOD-UT", "1-2 PT", "3-4 PT", "5-8 PT", "10-12 PT")
 )
 
 # Phylum plots
@@ -532,7 +533,7 @@ result_RPS10_trt <- create_relabund_plot(
   ps = sod_5asv_rps10_nowf.ps,
   rank = "Phylum",
   group_var = "Treatuntreat_EP",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/RPS10/relabundance_plot_RPS10_treatment_phylum_nowildfire.pdf"
 )
@@ -545,7 +546,7 @@ result_RPS10_yrs <- create_relabund_plot(
   ps = sod_5asv_rps10_nowf.ps,
   rank = "Phylum",
   group_var = "YrSinceTrt_BR",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/RPS10/relabundance_plot_RPS10_YrSinceTrtBR_phylum_nowildfire.pdf"
 )
@@ -559,7 +560,7 @@ result_RPS10_trt_genus <- create_relabund_plot(
   ps = sod_5asv_rps10_nowf.ps,
   rank = "Genus",
   group_var = "Treatuntreat_EP",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/RPS10/relabundance_plot_RPS10_treatment_genus_nowildfire.pdf"
 )
@@ -573,7 +574,7 @@ result_RPS10_yrs_genus <- create_relabund_plot(
   ps = sod_5asv_rps10_nowf.ps,
   rank = "Genus",
   group_var = "YrSinceTrt_BR",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/RPS10/relabundance_plot_RPS10_YrSinceTrtBR_genus_nowildfire.pdf"
 )
@@ -587,7 +588,7 @@ result_RPS10_trt_species <- create_relabund_plot(
   ps = sod_5asv_rps10_nowf.ps,
   rank = "Species",
   group_var = "Treatuntreat_EP",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/RPS10/relabundance_plot_RPS10_treatment_species_nowildfire.pdf"
 )
@@ -600,7 +601,7 @@ result_RPS10_yrs_species <- create_relabund_plot(
   ps = sod_5asv_rps10_nowf.ps,
   rank = "Species",
   group_var = "YrSinceTrt_BR",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/RPS10/relabundance_plot_RPS10_YrSinceTrtBR_species_nowildfire.pdf"
 )
@@ -615,14 +616,14 @@ sod_5asv_rps10.ps <- sod_prunereads_5asv.ps
 sod_5asv_rps10.ps@sam_data$Fire_Mod <- factor(
   sod_5asv_rps10.ps@sam_data$Fire_Mod,
   levels = c("untreated", "SODtrt", "wildfire"),
-  labels = c("Unmitigated", "Mitigated", "Wildfire")
+  labels = c("SOD-UT", "SOD-T", "Wildfire")
 )
 
 result_RPS10_fire <- create_relabund_plot(
   ps = sod_5asv_rps10.ps,
   rank = "Phylum",
   group_var = "Fire_Mod",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/RPS10/relabundance_plot_RPS10_fire_phylum.pdf"
 )
@@ -635,7 +636,7 @@ result_RPS10_fire_genus <- create_relabund_plot(
   ps = sod_5asv_rps10.ps,
   rank = "Genus",
   group_var = "Fire_Mod",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/RPS10/relabundance_plot_RPS10_fire_genus.pdf"
 )
@@ -649,7 +650,7 @@ result_RPS10_fire_species <- create_relabund_plot(
   ps = sod_5asv_rps10.ps,
   rank = "Species",
   group_var = "Fire_Mod",
-  reference_level = "Unmitigated",
+  reference_level = "SOD-UT",
   min_prop = 0.01,
   output_file = "Figures/RPS10/relabundance_plot_RPS10_fire_species.pdf"
 )
@@ -662,62 +663,167 @@ write.csv(result_RPS10_fire_species$data,
 
 # Combined plot
 ```{r combined plots 2}
-combined_df <- bind_rows(
-  result_16S_trt$data %>%
-    mutate(Factor = Treatuntreat_EP, Barcode = "16S") %>%
-    select(Factor, Phylum, Mean_Relative_Abundance, Mean_Relative_Abundance, Barcode) %>%
-    mutate(Dataset = "SOD Mitigation"),
-  
-  result_16S_yrs$data %>%
-    mutate(Factor = YrSinceTrt_BR, Barcode = "16S") %>%
-    select(Factor, Phylum, Mean_Relative_Abundance, Mean_Relative_Abundance, Barcode) %>%
-    mutate(Dataset = "Years Since SOD Mitigation"),
-  
-  result_16S_fire$data %>%
-    mutate(Factor = Fire_Mod, Barcode = "16S") %>%
-    select(Factor, Phylum, Mean_Relative_Abundance, Mean_Relative_Abundance, Barcode) %>%
-    mutate(Dataset = "Chetco Bar Fire"),
-  
-  result_ITS_trt$data %>%
-    mutate(Factor = Treatuntreat_EP, Barcode = "ITS") %>%
-    select(Factor, Phylum, Mean_Relative_Abundance, Mean_Relative_Abundance, Barcode) %>%
-    mutate(Dataset = "SOD Mitigation"),
-  
-  result_ITS_yrs$data %>%
-    mutate(Factor = YrSinceTrt_BR, Barcode = "ITS") %>%
-    select(Factor, Phylum, Mean_Relative_Abundance, Mean_Relative_Abundance, Barcode) %>%
-    mutate(Dataset = "Years Since SOD Mitigation"),
-  
-  result_ITS_fire$data %>%
-    mutate(Factor = Fire_Mod, Barcode = "ITS") %>%
-    select(Factor, Phylum, Mean_Relative_Abundance, Mean_Relative_Abundance, Barcode) %>%
-    mutate(Dataset = "Chetco Bar Fire"),
-  
-  result_RPS10_trt_genus$data %>%
-    mutate(Factor = Treatuntreat_EP, Barcode = "rps10") %>%
-    select(Factor, Genus, Mean_Relative_Abundance, Mean_Relative_Abundance, Barcode) %>%
-    mutate(Dataset = "SOD Mitigation"),
-  
-  result_RPS10_yrs_genus$data %>%
-    mutate(Factor = YrSinceTrt_BR, Barcode = "rps10") %>%
-    select(Factor, Genus, Mean_Relative_Abundance, Mean_Relative_Abundance, Barcode) %>%
-    mutate(Dataset = "Years Since SOD Mitigation"),
-  
-  result_RPS10_fire_genus$data %>%
-    mutate(Factor = Fire_Mod, Barcode = "rps10") %>%
-    select(Factor, Genus, Mean_Relative_Abundance, Mean_Relative_Abundance, Barcode) %>%
-    mutate(Dataset = "Chetco Bar Fire")
+mk_deuteranopia_14 <- c(
+  "#68023F", 
+  "#F60239", 
+  "#FFA035",
+  "#FFDC3D", 
+  "#9BFF2D",
+  "#008607",
+  "#00DCB5",
+  "#7CFFFA",
+  "#009FFA",
+  "#003C86",
+  "#FFCFE2",
+  "#9400E6",
+  "#FF71FD",
+  "#5B5B5B"  
 )
 
-combined_16S   <- combined_df %>% filter(Barcode == "16S")
-combined_ITS   <- combined_df %>% filter(Barcode == "ITS")
-combined_rps10 <- combined_df %>% filter(Barcode == "rps10")
+fixed_palette <- mk_deuteranopia_14
+other_color   <- "#6E6E6E"
+
+combined_df <- dplyr::bind_rows(
+  # 16S — Phylum
+  result_16S_trt$data %>%
+    dplyr::mutate(Factor = Treatuntreat_EP, Barcode = "16S") %>%
+    dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
+    dplyr::mutate(Dataset = "SOD Treatment"),
+
+  result_16S_yrs$data %>%
+    dplyr::mutate(Factor = YrSinceTrt_BR, Barcode = "16S") %>%
+    dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
+    dplyr::mutate(Dataset = "Years Since SOD Treatment"),
+
+  result_16S_fire$data %>%
+    dplyr::mutate(Factor = Fire_Mod, Barcode = "16S") %>%
+    dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
+    dplyr::mutate(Dataset = "Chetco Bar Fire"),
+
+  # ITS — Phylum
+  result_ITS_trt$data %>%
+    dplyr::mutate(Factor = Treatuntreat_EP, Barcode = "ITS") %>%
+    dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
+    dplyr::mutate(Dataset = "SOD Treatment"),
+
+  result_ITS_yrs$data %>%
+    dplyr::mutate(Factor = YrSinceTrt_BR, Barcode = "ITS") %>%
+    dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
+    dplyr::mutate(Dataset = "Years Since SOD Treatment"),
+
+  result_ITS_fire$data %>%
+    dplyr::mutate(Factor = Fire_Mod, Barcode = "ITS") %>%
+    dplyr::select(Factor, Phylum, Mean_Relative_Abundance, Barcode) %>%
+    dplyr::mutate(Dataset = "Chetco Bar Fire"),
+
+  # rps10 — Genus
+  result_RPS10_trt_genus$data %>%
+    dplyr::mutate(Factor = Treatuntreat_EP, Barcode = "rps10") %>%
+    dplyr::select(Factor, Genus, Mean_Relative_Abundance, Barcode) %>%
+    dplyr::mutate(Dataset = "SOD Treatment"),
+
+  result_RPS10_yrs_genus$data %>%
+    dplyr::mutate(Factor = YrSinceTrt_BR, Barcode = "rps10") %>%
+    dplyr::select(Factor, Genus, Mean_Relative_Abundance, Barcode) %>%
+    dplyr::mutate(Dataset = "Years Since SOD Treatment"),
+
+  result_RPS10_fire_genus$data %>%
+    dplyr::mutate(Factor = Fire_Mod, Barcode = "rps10") %>%
+    dplyr::select(Factor, Genus, Mean_Relative_Abundance, Barcode) %>%
+    dplyr::mutate(Dataset = "Chetco Bar Fire")
+)
+
+combined_16S   <- combined_df %>% dplyr::filter(Barcode == "16S")
+combined_ITS   <- combined_df %>% dplyr::filter(Barcode == "ITS")
+combined_rps10 <- combined_df %>% dplyr::filter(Barcode == "rps10")
+
+# Normalize taxa strings & canonicalize "Other"
+combined_16S$Phylum  <- trimws(as.character(combined_16S$Phylum))
+combined_ITS$Phylum  <- trimws(as.character(combined_ITS$Phylum))
+combined_rps10$Genus <- trimws(as.character(combined_rps10$Genus))
+combined_16S$Phylum [tolower(combined_16S$Phylum)  %in% c("other","others")] <- "Other"
+combined_ITS$Phylum [tolower(combined_ITS$Phylum)  %in% c("other","others")] <- "Other"
+combined_rps10$Genus[tolower(combined_rps10$Genus) %in% c("other","others")] <- "Other"
+
+ensure_other_present <- function(df, facet_var = "Dataset", rank = "Phylum", other_label = "Other") {
+  df %>%
+    dplyr::group_by(.data[[facet_var]], Factor) %>%
+    dplyr::group_modify(~{
+      block <- .x
+
+      sum_known <- block %>%
+        dplyr::filter(.data[[rank]] != other_label) %>%
+        dplyr::summarise(s = sum(Mean_Relative_Abundance, na.rm = TRUE)) %>%
+        dplyr::pull(s)
+      if (length(sum_known) == 0) sum_known <- 0
+
+      other_amt <- block %>%
+        dplyr::filter(.data[[rank]] == other_label) %>%
+        dplyr::summarise(s = sum(Mean_Relative_Abundance, na.rm = TRUE)) %>%
+        dplyr::pull(s)
+      if (length(other_amt) == 0) other_amt <- 0
+
+      residual <- 1 - (sum_known + other_amt)
+
+      if (residual > 0) {
+        if (other_amt > 0) {
+          block <- block %>%
+            dplyr::mutate(
+              Mean_Relative_Abundance = dplyr::if_else(
+                .data[[rank]] == other_label,
+                Mean_Relative_Abundance + residual,
+                Mean_Relative_Abundance
+              )
+            )
+        } else {
+          other_row <- block[1, , drop = FALSE]
+          other_row[[rank]] <- other_label
+          other_row$Mean_Relative_Abundance <- residual
+          block <- dplyr::bind_rows(block, other_row)
+        }
+      }
+      block
+    }) %>%
+    dplyr::ungroup()
+}
+
+force_other_min_display <- function(df,
+                                    facet_var = "Dataset",
+                                    rank = "Phylum",
+                                    other_label = "Other",
+                                    min_display = 0.0001) {
+  df %>%
+    dplyr::group_by(.data[[facet_var]], Factor) %>%
+    dplyr::group_modify(~{
+      block <- .x
+      if (!any(block[[rank]] == other_label)) return(block)
+
+      other_idx <- which(block[[rank]] == other_label)
+      other_val <- block$Mean_Relative_Abundance[other_idx]
+      if (length(other_val) == 0) other_val <- 0
+
+      if (other_val > 0 && other_val < min_display) {
+        deficit <- min_display - other_val
+        non_other_idx <- setdiff(seq_len(nrow(block)), other_idx)
+        non_other_sum <- sum(block$Mean_Relative_Abundance[non_other_idx], na.rm = TRUE)
+        if (non_other_sum > 0) {
+          scale_factor <- (non_other_sum - deficit) / non_other_sum
+          block$Mean_Relative_Abundance[non_other_idx] <- block$Mean_Relative_Abundance[non_other_idx] * scale_factor
+          block$Mean_Relative_Abundance[other_idx] <- min_display
+        } else {
+          block$Mean_Relative_Abundance[other_idx] <- 1
+        }
+      }
+      block
+    }) %>%
+    dplyr::ungroup()
+}
 
 plot_combined_facets <- function(df,
                                  rank = "Phylum",
                                  facet_var = "Dataset",
-                                 dataset_order = c("SOD Mitigation", "Years Since SOD Mitigation", "Chetco Bar Fire"),
-                                 reference_level = "Unmitigated",
+                                 dataset_order = c("SOD Treatment", "Years Since SOD Treatment", "Chetco Bar Fire"),
+                                 reference_level = "SOD-UT",
                                  collapse_other = FALSE,
                                  min_prop = 0.01,
                                  other_label = "Other",
@@ -726,42 +832,47 @@ plot_combined_facets <- function(df,
                                  show_ylab = TRUE,
                                  show_strip = TRUE,
                                  custom_taxa_order = NULL,
-                                 legend_label = "Phylum") {
+                                 legend_label = "Phylum",
+                                 force_min_display_for_other = TRUE,
+                                 min_display_for_other = 0.007,
+                                 fixed_palette = fixed_palette,
+                                 other_hex = other_color) {
 
-  df[[rank]] <- ifelse(
-    is.na(df[[rank]]) | df[[rank]] == "" | df[[rank]] == "NA" | grepl("^Unclassified", df[[rank]]),
-    other_label, df[[rank]]
-  )
+  df[[rank]]      <- trimws(as.character(df[[rank]]))
+  df$Factor       <- factor(trimws(df$Factor), levels = levels(df$Factor))
+  df[[facet_var]] <- trimws(as.character(df[[facet_var]]))
+  df[[rank]][tolower(df[[rank]]) %in% c("other","others")] <- other_label
 
   df <- df %>%
-    dplyr::group_by(Dataset, Factor, .data[[rank]]) %>%
+    dplyr::group_by(.data[[facet_var]], Factor, .data[[rank]]) %>%
     dplyr::summarise(Mean_Relative_Abundance = sum(Mean_Relative_Abundance, na.rm = TRUE), .groups = "drop") %>%
-    dplyr::group_by(Dataset, Factor) %>%
+    dplyr::group_by(.data[[facet_var]], Factor) %>%
     dplyr::mutate(Mean_Relative_Abundance = Mean_Relative_Abundance / sum(Mean_Relative_Abundance, na.rm = TRUE)) %>%
-    dplyr::ungroup()
+    dplyr::ungroup() %>%
+    dplyr::mutate(Mean_Relative_Abundance = pmax(0, pmin(1, Mean_Relative_Abundance)))
+
+  df <- ensure_other_present(df, facet_var = facet_var, rank = rank, other_label = other_label)
 
   if (collapse_other && min_prop > 0) {
     df <- df %>%
-      dplyr::group_by(Dataset, Factor) %>%
-      dplyr::mutate(prop = Mean_Relative_Abundance,
-                    !!rlang::sym(rank) := dplyr::if_else(prop < min_prop, other_label, .data[[rank]])) %>%
+      dplyr::group_by(.data[[facet_var]], Factor) %>%
+      dplyr::mutate(
+        prop = Mean_Relative_Abundance,
+        !!rank := dplyr::if_else(prop < min_prop, other_label, .data[[rank]])
+      ) %>%
       dplyr::ungroup() %>%
-      dplyr::group_by(Dataset, Factor, .data[[rank]]) %>%
+      dplyr::group_by(.data[[facet_var]], Factor, .data[[rank]]) %>%
       dplyr::summarise(Mean_Relative_Abundance = sum(Mean_Relative_Abundance, na.rm = TRUE), .groups = "drop") %>%
-      dplyr::group_by(Dataset, Factor) %>%
+      dplyr::group_by(.data[[facet_var]], Factor) %>%
       dplyr::mutate(Mean_Relative_Abundance = Mean_Relative_Abundance / sum(Mean_Relative_Abundance, na.rm = TRUE)) %>%
       dplyr::ungroup()
+
+    df <- ensure_other_present(df, facet_var = facet_var, rank = rank, other_label = other_label)
   }
 
-  df <- df %>% dplyr::mutate(Mean_Relative_Abundance = pmax(0, pmin(1, Mean_Relative_Abundance)))
-
-  check_sums <- df %>%
-    dplyr::group_by(Dataset, Factor) %>%
-    dplyr::summarise(total = sum(Mean_Relative_Abundance), .groups = "drop")
-
-  if (any(abs(check_sums$total - 1.0) > 1e-10 & check_sums$total > 0)) {
-    warning("Some groups do not sum to exactly 1.0:")
-    print(check_sums %>% dplyr::filter(abs(total - 1.0) > 1e-10 & total > 0))
+  if (force_min_display_for_other && min_display_for_other > 0) {
+    df <- force_other_min_display(df, facet_var = facet_var, rank = rank,
+                                  other_label = other_label, min_display = min_display_for_other)
   }
 
   df[[facet_var]] <- factor(df[[facet_var]], levels = dataset_order)
@@ -778,34 +889,22 @@ plot_combined_facets <- function(df,
       dplyr::pull(.data[[rank]])
     if (length(ref_order_data) == 0) {
       ref_order_data <- df %>%
-        dplyr::filter(Mean_Relative_Abundance > 0) %>%
+        dplyr::filter(.data[[rank]] != other_label, Mean_Relative_Abundance > 0) %>%
         dplyr::group_by(.data[[rank]]) %>%
         dplyr::summarise(total = sum(Mean_Relative_Abundance), .groups = "drop") %>%
         dplyr::arrange(dplyr::desc(total)) %>%
         dplyr::pull(.data[[rank]])
     }
-    ref_order_data <- unique(ref_order_data[ref_order_data != other_label])
   }
+  ref_order_data <- as.character(ref_order_data)
+  legend_order   <- unique(c(ref_order_data, other_label))
 
-  has_other    <- other_label %in% df[[rank]]
-  legend_order <- if (has_other) c(ref_order_data, other_label) else ref_order_data
-  df[[rank]]   <- factor(df[[rank]], levels = legend_order)
+  n_needed <- length(ref_order_data)
+  palette_colors <- fixed_palette[seq_len(n_needed)]
+  names(palette_colors) <- ref_order_data
+  palette_colors[other_label] <- other_hex
 
-  n_taxa <- length(ref_order_data)
-  n_colors_to_generate <- max(n_taxa, 10)
-
-  if (n_taxa <= 10) {
-    all_palette_colors <- viridisLite::viridis(n_colors_to_generate, option = "H", direction = -1)
-  } else {
-    base_colors  <- viridisLite::viridis(10, option = "H", direction = -1)
-    extra_colors <- c("#83358F", "#D6B4FC", "#FF8DA1")
-    n_extra_needed <- n_taxa - 10
-    all_palette_colors <- c(base_colors, extra_colors[seq_len(n_extra_needed)])
-  }
-
-  palette_colors <- all_palette_colors[seq_len(length(ref_order_data))]
-  palette_colors <- stats::setNames(palette_colors, ref_order_data)
-  if (has_other) palette_colors[other_label] <- "#6E6E6E"
+  df[[rank]] <- factor(df[[rank]], levels = legend_order)
 
   if (!is.factor(df$Factor)) {
     factor_levels <- df %>% dplyr::distinct(Factor) %>% dplyr::pull(Factor)
@@ -813,18 +912,26 @@ plot_combined_facets <- function(df,
   }
 
   ylab_text <- if (show_ylab) "Mean Relative Abundance (%)" else " "
-
   p <- ggplot2::ggplot(
     df,
     ggplot2::aes(x = Factor, y = Mean_Relative_Abundance, fill = .data[[rank]])
   ) +
-    ggplot2::geom_col(color = "black", linewidth = 0.2,
-                      position = ggplot2::position_stack(reverse = TRUE), width = 0.7) +
+    ggplot2::geom_col(
+      color = "black",
+      linewidth = 0.1,    
+      size = 0.1,        
+      width = 0.60,
+      position = ggplot2::position_stack(reverse = TRUE)
+    ) +
     ggplot2::scale_fill_manual(values = palette_colors,
                                breaks = legend_order, limits = legend_order, drop = FALSE) +
-    ggplot2::scale_y_continuous(labels = scales::percent_format(accuracy = 1),
-                                limits = c(0, 1), expand = c(0, 0)) +
-    ggplot2::scale_x_discrete(drop = TRUE, expand = c(0.02, 0.02)) +
+    ggplot2::scale_y_continuous(
+      labels = scales::percent_format(accuracy = 1),
+      breaks = seq(0, 1, 0.25),
+      expand = c(0, 0)
+    ) +
+    ggplot2::coord_cartesian(ylim = c(0, 1.01), clip = "off") +
+    ggplot2::scale_x_discrete(drop = TRUE, expand = c(0.01, 0.005)) +
     ggplot2::labs(y = ylab_text, x = NULL, fill = legend_label)
 
   if (requireNamespace("ggh4x", quietly = TRUE)) {
@@ -858,12 +965,12 @@ plot_combined_facets <- function(df,
       legend.key.size     = grid::unit(0.35, "cm"),
       legend.box.margin   = ggplot2::margin(t = 2, r = 0, b = 0, l = 0),
       strip.text          = if (show_strip) ggplot2::element_text(size = 12, face = "bold", margin = ggplot2::margin(b = 4, t = 2)) else ggplot2::element_blank(),
-      strip.background    = ggplot2::element_blank(),  
-      panel.spacing.x     = grid::unit(1.2, "lines"), 
-      panel.grid          = ggplot2::element_blank(), 
-      panel.border        = ggplot2::element_blank(),  
-      panel.background    = ggplot2::element_blank(),  
-      plot.background     = ggplot2::element_blank(),  
+      strip.background    = ggplot2::element_blank(),
+      panel.spacing.x     = grid::unit(2.8, "lines"),
+      panel.grid          = ggplot2::element_blank(),
+      panel.border        = ggplot2::element_blank(),
+      panel.background    = ggplot2::element_blank(),
+      plot.background     = ggplot2::element_blank(),
       plot.margin         = ggplot2::margin(t = 3, r = 5, b = 3, l = 5)
     ) +
     ggplot2::guides(fill = ggplot2::guide_legend(ncol = 6, byrow = TRUE, reverse = FALSE))
@@ -871,113 +978,93 @@ plot_combined_facets <- function(df,
   return(p)
 }
 
-all_16S_phyla <- combined_16S %>% filter(Phylum != "Other") %>% pull(Phylum) %>% unique()
-all_ITS_phyla <- combined_ITS %>% filter(Phylum != "Other") %>% pull(Phylum) %>% unique()
-all_rps10_genera <- combined_rps10 %>% filter(Genus != "Other") %>% pull(Genus) %>% unique()
+all_16S_phyla    <- combined_16S   %>% dplyr::filter(Phylum != "Other") %>% dplyr::pull(Phylum) %>% unique()
+all_ITS_phyla    <- combined_ITS   %>% dplyr::filter(Phylum != "Other") %>% dplyr::pull(Phylum) %>% unique()
+all_rps10_genera <- combined_rps10 %>% dplyr::filter(Genus  != "Other") %>% dplyr::pull(Genus)  %>% unique()
 
 taxa_order_16S_ref <- combined_16S %>%
-  filter(Factor == "Unmitigated", Phylum != "Other") %>%
-  group_by(Phylum) %>%
-  summarise(total = sum(Mean_Relative_Abundance), .groups = "drop") %>%
-  arrange(desc(total)) %>%
-  pull(Phylum)
+  dplyr::filter(Factor == "SOD-UT", Phylum != "Other") %>%
+  dplyr::group_by(Phylum) %>%
+  dplyr::summarise(total = sum(Mean_Relative_Abundance), .groups = "drop") %>%
+  dplyr::arrange(dplyr::desc(total)) %>%
+  dplyr::pull(Phylum)
 
 taxa_order_ITS_ref <- combined_ITS %>%
-  filter(Factor == "Unmitigated", Phylum != "Other") %>%
-  group_by(Phylum) %>%
-  summarise(total = sum(Mean_Relative_Abundance), .groups = "drop") %>%
-  arrange(desc(total)) %>%
-  pull(Phylum)
+  dplyr::filter(Factor == "SOD-UT", Phylum != "Other") %>%
+  dplyr::group_by(Phylum) %>%
+  dplyr::summarise(total = sum(Mean_Relative_Abundance), .groups = "drop") %>%
+  dplyr::arrange(dplyr::desc(total)) %>%
+  dplyr::pull(Phylum)
 
 taxa_order_RPS10_ref <- combined_rps10 %>%
-  filter(Factor == "Unmitigated", Genus != "Other") %>%
-  group_by(Genus) %>%
-  summarise(total = sum(Mean_Relative_Abundance), .groups = "drop") %>%
-  arrange(desc(total)) %>%
-  pull(Genus)
+  dplyr::filter(Factor == "SOD-UT", Genus != "Other") %>%
+  dplyr::group_by(Genus) %>%
+  dplyr::summarise(total = sum(Mean_Relative_Abundance), .groups = "drop") %>%
+  dplyr::arrange(dplyr::desc(total)) %>%
+  dplyr::pull(Genus)
 
-taxa_not_in_ref_16S   <- setdiff(all_16S_phyla, taxa_order_16S_ref)
-taxa_not_in_ref_ITS   <- setdiff(all_ITS_phyla, taxa_order_ITS_ref)
-taxa_not_in_ref_RPS10 <- setdiff(all_rps10_genera, taxa_order_RPS10_ref)
-
-taxa_order_16S  <- c(taxa_order_16S_ref, taxa_not_in_ref_16S)
-taxa_order_ITS  <- c(taxa_order_ITS_ref, taxa_not_in_ref_ITS)
-taxa_order_RPS10<- c(taxa_order_RPS10_ref, taxa_not_in_ref_RPS10)
+taxa_order_16S   <- c(taxa_order_16S_ref,   setdiff(all_16S_phyla, taxa_order_16S_ref))
+taxa_order_ITS   <- c(taxa_order_ITS_ref,   setdiff(all_ITS_phyla, taxa_order_ITS_ref))
+taxa_order_RPS10 <- c(taxa_order_RPS10_ref, setdiff(all_rps10_genera, taxa_order_RPS10_ref))
 
 p_16S <- plot_combined_facets(
-  combined_16S, rank = "Phylum", reference_level = "Unmitigated",
+  combined_16S, rank = "Phylum", reference_level = "SOD-UT",
   panel_labels = c("A", "B", "C"),
-  min_prop = 0.01, show_ylab = FALSE, 
-  show_strip = TRUE,
+  min_prop = 0.01, show_ylab = FALSE, show_strip = TRUE,
   collapse_other = FALSE,
   custom_taxa_order = taxa_order_16S,
-  legend_label = "Phylum"
+  legend_label = "Phylum",
+  fixed_palette = fixed_palette, other_hex = other_color
 )
 
 p_ITS <- plot_combined_facets(
-  combined_ITS, rank = "Phylum", reference_level = "Unmitigated",
+  combined_ITS, rank = "Phylum", reference_level = "SOD-UT",
   panel_labels = c("D", "E", "F"),
-  min_prop = 0.01, show_ylab = TRUE, 
-  show_strip = FALSE,
+  min_prop = 0.01, show_ylab = TRUE, show_strip = FALSE,
   collapse_other = FALSE,
   custom_taxa_order = taxa_order_ITS,
-  legend_label = "Phylum"
+  legend_label = "Phylum",
+  fixed_palette = fixed_palette, other_hex = other_color
 )
 
 p_rps10 <- plot_combined_facets(
-  combined_rps10, rank = "Genus", reference_level = "Unmitigated",
+  combined_rps10, rank = "Genus", reference_level = "SOD-UT",
   panel_labels = c("G", "H", "I"),
-  min_prop = 0.01, show_ylab = FALSE, 
-  show_strip = FALSE,
-  custom_taxa_order = taxa_order_RPS10,
+  min_prop = 0.01, show_ylab = FALSE, show_strip = FALSE,
   collapse_other = FALSE,
-  legend_label = "Genus"
+  custom_taxa_order = taxa_order_RPS10,
+  legend_label = "Genus",
+  fixed_palette = fixed_palette, other_hex = other_color
 )
 
 add_panel_labels <- function(plot, labels, has_yaxis = FALSE) {
   g <- ggplotGrob(plot)
-  
   panels <- grep("panel", g$layout$name)
-  
   for (i in seq_along(panels)) {
     panel_pos <- g$layout[panels[i], ]
-    
-    # Adjust x position: first panel of each row gets special treatment
     if (i == 1) {
-      if (has_yaxis) {
-        # D label - has y-axis text, needs most space
-        x_pos <- unit(-44, "pt")
-      } else {
-        # A and G labels - no y-axis text but should still be left
-        x_pos <- unit(-44, "pt")
-      }
+      x_pos <- unit(-44, "pt")
     } else {
-      # B, C, E, F, H, I - other panels
       x_pos <- unit(-10, "pt")
     }
-    
     label_grob <- textGrob(
       labels[i],
       x = x_pos,
-      y = unit(1, "npc") - unit(-2, "pt"),  
+      y = unit(1, "npc") - unit(-2, "pt"),
       just = c("left", "top"),
       gp = gpar(fontsize = 13, fontface = "bold")
     )
-    
     g <- gtable_add_grob(g, label_grob,
                          t = panel_pos$t, l = panel_pos$l,
                          clip = "off",
                          name = paste0("panel-label-", i))
   }
-  
   return(g)
 }
 
-p_16S_labeled <- add_panel_labels(p_16S, c("A", "B", "C"), has_yaxis = FALSE)
-p_ITS_labeled <- add_panel_labels(p_ITS, c("D", "E", "F"), has_yaxis = TRUE)
-p_rps10_labeled <- add_panel_labels(p_rps10, c("G", "H", "I"), has_yaxis = FALSE)
-
-library(grid)
+p_16S_labeled  <- add_panel_labels(p_16S,  c("A", "B", "C"), has_yaxis = FALSE)
+p_ITS_labeled  <- add_panel_labels(p_ITS,  c("D", "E", "F"), has_yaxis = TRUE)
+p_rps10_labeled<- add_panel_labels(p_rps10, c("G", "H", "I"), has_yaxis = FALSE)
 
 white_spacer <- function() {
   grid::rectGrob(gp = grid::gpar(fill = "white", col = NA))
@@ -985,18 +1072,57 @@ white_spacer <- function() {
 
 final_plot <- cowplot::plot_grid(
   p_16S_labeled,
-  white_spacer(),  
+  white_spacer(),
   p_ITS_labeled,
-  white_spacer(), 
+  white_spacer(),
   p_rps10_labeled,
   ncol = 1,
   rel_heights = c(1.15, 0.08, 1.15, 0.08, 1.15)
 )
 
-ggsave("Figures/Figure3_Relabundance_faceted.pdf", final_plot, 
-       width = 8, height = 10.5, dpi = 600, bg = "white")
-ggsave("Figures/Figure3_Relabundance_faceted.png", final_plot, 
-       width = 8, height = 10.5, dpi = 600, bg = "white")
+ggsave("Figures/Figure3_Relabundance_faceted_colorblind_palette.pdf", final_plot, 
+       width = 8.5, height = 11, dpi = 800, bg = "white")
+ggsave("Figures/Figure3_Relabundance_faceted_colorblind_palette.png", final_plot, 
+       width = 8.5, height = 11, dpi = 800, bg = "white")
+ggsave("Figures/Figure3_Relabundance_faceted_colorblind_palette.svg", final_plot, 
+       width = 8.5, height = 11, dpi = 800, bg = "white")
+```
+
+
+### Save finalized tables with min abund > 0
+```{r final tables}
+write_nonzero <- function(result_obj, path, min_abund = 0) {
+   result_obj$data %>%
+    dplyr::filter(Mean_Relative_Abundance > min_abund) %>%
+    readr::write_csv(path)
+}
+ 
+write_nonzero(result_RPS10_trt_species,"Results/RPS10/relabundance_table_RPS10_treatment_species_nowildfire_nonzero.csv")
+write_nonzero(result_RPS10_trt_genus,"Results/RPS10/relabundance_table_RPS10_treatment_genus_nowildfire_nonzero.csv")
+
+write_nonzero(result_RPS10_yrs_species,"Results/RPS10/relabundance_table_RPS10_YrSinceTrtBR_species_nowildfire_nonzero.csv")
+write_nonzero(result_RPS10_yrs_genus,"Results/RPS10/relabundance_table_RPS10_YrSinceTrtBR_genus_nowildfire_nonzero.csv")
+
+write_nonzero(result_RPS10_fire_species,"Results/RPS10/relabundance_table_RPS10_fire_species_nonzero.csv")
+write_nonzero(result_RPS10_fire_genus,"Results/RPS10/relabundance_table_RPS10_fire_genus_nonzero.csv")
+
+write_nonzero(result_ITS_trt_genus,"Results/ITS/relabundance_table_ITS_treatment_genus_nowildfire_nonzero.csv")
+write_nonzero(result_ITS_trt,"Results/ITS/relabundance_table_ITS_treatment_phylum_nowildfire_nonzero.csv")
+
+write_nonzero(result_ITS_yrs_genus,"Results/ITS/relabundance_table_ITS_YrSinceTrtBR_genus_nonzero.csv")
+write_nonzero(result_ITS_yrs,"Results/ITS/relabundance_table_ITS_YrSinceTrtBR_phylum_nowildfire_nonzero.csv")
+
+write_nonzero(result_ITS_fire_genus,"Results/ITS/relabundance_table_ITS_fire_genus_nowildfire_nonzero.csv")
+write_nonzero(result_ITS_fire,"Results/ITS/relabundance_table_ITS_fire_phylum_nowildfire_nonzero.csv")
+
+write_nonzero(result_16S_trt_genus,"Results/16S/relabundance_table_16S_treatment_genus_nowildfire_nonzero.csv")
+write_nonzero(result_16S_trt,"Results/16S/relabundance_table_16S_treatment_phylum_nowildfire_nonzero.csv")
+
+write_nonzero(result_16S_yrs_genus,"Results/16S/relabundance_table_16S_YrSinceTrtBR_genus_nonzero.csv")
+write_nonzero(result_16S_yrs,"Results/16S/relabundance_table_16S_YrSinceTrtBR_phylum_nowildfire_nonzero.csv")
+
+write_nonzero(result_16S_fire_genus,"Results/16S/relabundance_table_16S_fire_genus_nowildfire_nonzero.csv")
+write_nonzero(result_16S_fire,"Results/16S/relabundance_table_16S_fire_phylum_nowildfire_nonzero.csv")
 ```
 
 ### Software used
